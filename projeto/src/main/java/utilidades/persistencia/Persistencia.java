@@ -18,7 +18,7 @@ import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
-import repositorio.CentralDeInformacoes;
+import projeto.repositorio.CentralDeInformacoes;
 
 public class Persistencia {
 
