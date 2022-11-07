@@ -1,4 +1,4 @@
-package projeto.telas;
+package projeto.telas.usuario;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,15 +12,16 @@ import javax.swing.JTextField;
 
 import utilidades.Imagens;
 
-public class TelaLogin extends JFrame {
+public class TelaCadastroUsuario extends JFrame {
 
+  private JTextField txtNome;
+  private JTextField txtEmail;
   private JTextField txtLogin;
   private JPasswordField txtSenha;
   private JLabel background;
-  private JButton btnResetSenha;
-  private JButton btnEntrar;
+  private JButton btnCadastrar;
 
-  public TelaLogin() {
+  public TelaCadastroUsuario() {
     configurarTela();
     configImagemFundo();
     configFormLogin();
@@ -51,55 +52,82 @@ public class TelaLogin extends JFrame {
     menu.setLayout(null);
     menu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
+    JLabel lblNome = new JLabel("Nome");
+    lblNome.setBounds(20, 5, 460, 40);
+    lblNome.setForeground(new Color(247, 247, 247));
+    lblNome.setFont(new Font("Arial", 1, 25));
+
+    JLabel lblEmail = new JLabel("Email");
+    lblEmail.setBounds(20, 80, 460, 40);
+    lblEmail.setForeground(new Color(247, 247, 247));
+    lblEmail.setFont(new Font("Arial", 1, 25));
+
     JLabel lblLogin = new JLabel("Login");
-    lblLogin.setBounds(20, 60, 460, 40);
+    lblLogin.setBounds(20, 155, 460, 40);
     lblLogin.setForeground(new Color(247, 247, 247));
     lblLogin.setFont(new Font("Arial", 1, 25));
 
     JLabel lblSenha = new JLabel("Senha");
-    lblSenha.setBounds(20, 160, 460, 40);
+    lblSenha.setBounds(20, 230, 460, 40);
     lblSenha.setForeground(new Color(247, 247, 247));
     lblSenha.setFont(new Font("Arial", 1, 25));
 
+    txtNome = new JTextField();
+    txtNome.setBounds(20, 40, 460, 40);
+    txtNome.setBackground(new Color(28, 28, 30));
+    txtNome.setForeground(new Color(179, 177, 177));
+    txtNome.setBorder(null);
+    txtNome.setFont(new Font("Arial", 1, 16));
+
+    txtEmail = new JTextField();
+    txtEmail.setBounds(20, 115, 460, 40);
+    txtEmail.setBackground(new Color(28, 28, 30));
+    txtEmail.setForeground(new Color(179, 177, 177));
+    txtEmail.setBorder(null);
+    txtEmail.setFont(new Font("Arial", 1, 16));
+
     txtLogin = new JTextField();
-    txtLogin.setBounds(20, 95, 460, 40);
+    txtLogin.setBounds(20, 190, 460, 40);
     txtLogin.setBackground(new Color(28, 28, 30));
     txtLogin.setForeground(new Color(179, 177, 177));
     txtLogin.setBorder(null);
     txtLogin.setFont(new Font("Arial", 1, 16));
 
     txtSenha = new JPasswordField();
-    txtSenha.setBounds(20, 195, 460, 40);
+    txtSenha.setBounds(20, 265, 460, 40);
     txtSenha.setBackground(new Color(28, 28, 30));
     txtSenha.setForeground(new Color(179, 177, 177));
     txtSenha.setBorder(null);
     txtSenha.setFont(new Font("Arial", 1, 20));
 
-    btnResetSenha = new JButton("Esqueceu a senha?");
-    btnResetSenha.setBounds(10, 360, 120, 30);
-    btnResetSenha.setFont(new Font("Arial", 1, 12));
-    btnResetSenha.setBackground(new Color(28, 28, 20));
-    btnResetSenha.setForeground(new Color(179, 177, 177));
-    btnResetSenha.setFocusable(false);
-    btnResetSenha.setBorder(null);
+    btnCadastrar = new JButton("Cadastrar");
+    btnCadastrar.setBounds(170, 330, 150, 45);
+    btnCadastrar.setFont(new Font("Arial", 1, 30));
+    btnCadastrar.setBackground(new Color(28, 28, 20));
+    btnCadastrar.setForeground(new Color(179, 177, 177));
+    btnCadastrar.setFocusable(false);
+    btnCadastrar.setBorder(null);
+    btnCadastrar.setOpaque(true);
 
-    btnEntrar = new JButton("Entrar");
-    btnEntrar.setBounds(180, 270, 120, 45);
-    btnEntrar.setFont(new Font("Arial", 1, 30));
-    btnEntrar.setBackground(new Color(28, 28, 20));
-    btnEntrar.setForeground(new Color(179, 177, 177));
-    btnEntrar.setFocusable(false);
-    btnEntrar.setBorder(null);
-    btnEntrar.setOpaque(true);
-
-    menu.add(txtLogin);
+    menu.add(lblNome);
+    menu.add(txtNome);
+    menu.add(lblEmail);
+    menu.add(txtEmail);
     menu.add(lblLogin);
-    menu.add(txtSenha);
+    menu.add(txtLogin);
     menu.add(lblSenha);
-    menu.add(btnEntrar);
-    menu.add(btnResetSenha);
+    menu.add(txtSenha);
+    menu.add(btnCadastrar);
 
     background.add(menu);
+  }
+
+  public JTextField getTxtNome() {
+    return txtNome;
+  }
+
+  public JTextField getTxtEmail() {
+    return txtEmail;
   }
 
   public JTextField getTxtLogin() {
@@ -110,12 +138,8 @@ public class TelaLogin extends JFrame {
     return txtSenha;
   }
 
-  public JButton getBtnResetSenha() {
-    return btnResetSenha;
-  }
-
-  public JButton getBtnEntrar() {
-    return btnEntrar;
+  public JButton getBtnCadastrar() {
+    return btnCadastrar;
   }
 
 }
