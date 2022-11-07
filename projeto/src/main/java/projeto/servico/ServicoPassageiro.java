@@ -1,9 +1,7 @@
 package projeto.servico;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
@@ -41,11 +39,23 @@ public class ServicoPassageiro {
 	  }
 
 	  private boolean idadeValida(Passageiro passageiro) {
-	    int anoAtual = LocalDate.now().getYear();
-	    Date date = passageiro.getDataNascimento();
-	    int anoNascimento = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear();
-	    return ((anoAtual - anoNascimento) >= 18);
-	  }
+			int anoNascimento = passageiro.getDataNascimento().getYear();
+			int anoAtual = LocalDate.now().getYear();
+			boolean anoValido = (anoAtual - anoNascimento) >= 18;
+
+			int mesNasc = passageiro.getDataNascimento().getMonthValue();
+			int mesAtual = LocalDate.now().getMonthValue();
+			boolean mesValido = mesAtual >= mesNasc;
+
+			int diaNasc = passageiro.getDataNascimento().getDayOfMonth();
+			int diaAtual = LocalDate.now().getDayOfMonth();
+			boolean diaValido = diaAtual >= diaNasc;
+
+			if (!mesValido)
+				diaValido = false;
+
+			return (anoValido && mesValido && diaValido);
+		}
 
 	  public CentralDeInformacoes getCentral() {
 	    return central;
@@ -54,5 +64,5 @@ public class ServicoPassageiro {
 	  public ArrayList<Passageiro> getPassageiros() {
 	    return passageiros;
 	  }
-	  
+
 }

@@ -1,6 +1,6 @@
 package projeto.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import projeto.modelo.enuns.Sexo;
 
@@ -8,9 +8,9 @@ public class Passageiro extends Usuario {
 
 	private String nome;
 	private Sexo sexo;
-	private Date dataNascimento;
+	private LocalDate dataNascimento;
 
-	public Passageiro(String nome, Sexo sexo, Date dataNascimento, String email,
+	public Passageiro(String nome, Sexo sexo, LocalDate dataNascimento, String email,
 			String senha,boolean estaAtivo) {
 		super(email, senha, estaAtivo);
 		this.nome = nome;
@@ -45,11 +45,11 @@ public class Passageiro extends Usuario {
 		this.sexo = sexo;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
