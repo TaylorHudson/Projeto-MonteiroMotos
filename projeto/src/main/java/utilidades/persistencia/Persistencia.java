@@ -76,4 +76,5 @@ public class Persistencia {
 		}
 		return new CentralDeInformacoes();
 	}
+	
 }

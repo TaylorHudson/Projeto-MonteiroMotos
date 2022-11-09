@@ -2,13 +2,15 @@ package projeto.modelo;
 
 public class Usuario {
 
+	private String nome;
 	private String email;
 	private String senha;
 	private boolean estaAtivo;
 	
 	public Usuario() {}
 
-	public Usuario(String email, String senha, boolean estaAtivo) {
+	public Usuario(String nome, String email, String senha, boolean estaAtivo) {
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.estaAtivo = estaAtivo;
@@ -44,6 +46,14 @@ public class Usuario {
 
 	public void setEstaAtivo(boolean estaAtivo) {
 		this.estaAtivo = estaAtivo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 
+import projeto.telas.usuario.ouvintes.OuvinteTelaCadastroUsuario;
 import utilidades.Imagens;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -18,7 +18,6 @@ public class TelaCadastroUsuario extends JFrame {
 
 	private JTextField txtNome;
 	private JTextField txtEmail;
-	private JTextField txtLogin;
 	private JPasswordField txtSenha;
 	private JLabel background;
 	private JButton btnCadastrar;
@@ -36,7 +35,7 @@ public class TelaCadastroUsuario extends JFrame {
 		setLayout(null);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setTitle("Login");
+		setTitle("Cadastro");
 	}
 
 	private void configImagemFundo() {
@@ -48,23 +47,22 @@ public class TelaCadastroUsuario extends JFrame {
 		JLabel menu = FabricaJLabel.criarJLabel(180, 200, 500, 400, Color.BLACK, 4);
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome", 20, 5, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 80, 460, 40, new Color(247, 247, 247), 25);
-		JLabel lblLogin = FabricaJLabel.criarJLabel("Login", 20, 155, 460, 40, new Color(247, 247, 247), 25);
-		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 230, 460, 40, new Color(247, 247, 247), 25);
+		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 155, 460, 40, new Color(247, 247, 247), 25);
 
 		txtNome = FabricaJText.criarJTextField(20, 40, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
 		txtEmail = FabricaJText.criarJTextField(20, 115, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
-		txtLogin = FabricaJText.criarJTextField(20, 190, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
-		txtSenha = FabricaJText.criarJPasswordField(20, 265, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177),20);
+		txtSenha = FabricaJText.criarJPasswordField(20, 190, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177),20);
 
+		OuvinteTelaCadastroUsuario ouvinte = new OuvinteTelaCadastroUsuario(this);
+		
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 330, 150, 45, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
+		btnCadastrar.addMouseListener(ouvinte);
 
 		menu.add(lblNome);
 		menu.add(txtNome);
 		menu.add(lblEmail);
 		menu.add(txtEmail);
-		menu.add(lblLogin);
-		menu.add(txtLogin);
 		menu.add(lblSenha);
 		menu.add(txtSenha);
 		menu.add(btnCadastrar);
@@ -80,10 +78,6 @@ public class TelaCadastroUsuario extends JFrame {
 		return txtEmail;
 	}
 
-	public JTextField getTxtLogin() {
-		return txtLogin;
-	}
-
 	public JPasswordField getTxtSenha() {
 		return txtSenha;
 	}
@@ -92,7 +86,4 @@ public class TelaCadastroUsuario extends JFrame {
 		return btnCadastrar;
 	}
 
-	public static void main(String[] args) {
-		new TelaCadastroUsuario();
-	}
 }

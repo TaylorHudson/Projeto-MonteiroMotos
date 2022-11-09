@@ -78,7 +78,4 @@ public class TelaLogin extends JFrame {
 		return btnEntrar;
 	}
 
-	public static void main(String[] args) {
-		new TelaLogin();
-	}
 }
