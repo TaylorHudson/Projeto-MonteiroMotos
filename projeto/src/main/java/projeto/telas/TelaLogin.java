@@ -15,7 +15,7 @@ import utilidades.fabricas.FabricaJText;
 
 public class TelaLogin extends JFrame {
 
-	private JTextField txtLogin;
+	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JLabel background;
 	private JButton btnResetSenha;
@@ -44,15 +44,20 @@ public class TelaLogin extends JFrame {
 
 	private void configFormLogin() {
 		JLabel menu = FabricaJLabel.criarJLabel(180, 200, 500, 400, Color.BLACK, 4);
-		JLabel lblLogin = FabricaJLabel.criarJLabel("Login", 20, 60, 460, 40, new Color(247, 247, 247), 25);
+		JLabel lblLogin = FabricaJLabel.criarJLabel("Email", 20, 60, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 160, 460, 40, new Color(247, 247, 247), 25);
 
-		txtLogin = FabricaJText.criarJTextField(20, 95, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
+		txtEmail = FabricaJText.criarJTextField(20, 95, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
 		txtSenha = FabricaJText.criarJPasswordField(20, 195, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177),20);
+		
+		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
+		
 		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 10, 360, 120, 30, new Color(28, 28, 20),new Color(179, 177, 177), 12);
+		btnResetSenha.addMouseListener(ouvinte);
 		btnEntrar = FabricaJButton.criarJButton("Entrar", 180, 270, 120, 45, new Color(28, 28, 20),new Color(179, 177, 177), 30);
-
-		menu.add(txtLogin);
+		btnEntrar.addMouseListener(ouvinte);
+		
+		menu.add(txtEmail);
 		menu.add(lblLogin);
 		menu.add(txtSenha);
 		menu.add(lblSenha);
@@ -62,8 +67,8 @@ public class TelaLogin extends JFrame {
 		background.add(menu);
 	}
 
-	public JTextField getTxtLogin() {
-		return txtLogin;
+	public JTextField getTxtEmail() {
+		return txtEmail;
 	}
 
 	public JPasswordField getTxtSenha() {

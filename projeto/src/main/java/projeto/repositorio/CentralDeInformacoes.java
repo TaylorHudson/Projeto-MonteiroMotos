@@ -3,6 +3,7 @@ package projeto.repositorio;
 import java.util.ArrayList;
 
 import projeto.excecoes.usuario.UsuarioJaExisteException;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
@@ -31,7 +32,12 @@ public class CentralDeInformacoes {
 	}
 	
 	public Usuario recuperarUsuarioPeloEmail(String email) {
-		return servicoUsuario.recuperarUsuarioPeloEmail(email);
+		try {
+			return servicoUsuario.recuperarUsuarioPeloEmail(email);
+		} catch (UsuarioNaoExisteException e) {
+			FabricaJOptionPane.criarMsgErro(e.getMessage());
+			return null;
+		}
 	}
 	
 	public boolean adicionarPassageiro(Passageiro passageiro) {

@@ -3,6 +3,7 @@ package projeto.servico;
 import java.util.ArrayList;
 
 import projeto.excecoes.usuario.UsuarioJaExisteException;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import utilidades.persistencia.Persistencia;
@@ -30,7 +31,7 @@ public class ServicoUsuario {
 			if (u.getEmail().equals(email))
 				return u;
 		}
-		return null;
+		throw new UsuarioNaoExisteException();
 	}
 
 }
