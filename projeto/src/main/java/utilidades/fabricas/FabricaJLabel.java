@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 import utilidades.Imagens;
 
-public class FabricaJLabel {
+public abstract class FabricaJLabel {
 
 	public static JLabel criarJLabel(String texto, int x, int y,int largura, int altura,
 			Color corFundo, Color corLetra, int tamanhoLetra) {
