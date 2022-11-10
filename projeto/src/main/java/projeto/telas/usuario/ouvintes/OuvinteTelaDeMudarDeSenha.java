@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import projeto.excecoes.usuario.CamposDiferentesException;
+import projeto.excecoes.usuario.ConfirmacaoSenhaVaziaException;
 import projeto.excecoes.usuario.SenhaInvalidaException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
@@ -31,16 +33,19 @@ public class OuvinteTelaDeMudarDeSenha implements MouseListener {
 		String confirmacaoSenha = tela.getTxtConfirmarSenha().getText();
 
 		String senhaAntiga = usuario.getSenha();
-		if (novaSenha.equals(confirmacaoSenha) && !novaSenha.equals(senhaAntiga)) {
-			try {
+		try {
+			if (novaSenha.isEmpty() || confirmacaoSenha.isEmpty()) {
+				throw new ConfirmacaoSenhaVaziaException();
+			} else if (novaSenha.equals(confirmacaoSenha) && !novaSenha.equals(senhaAntiga)) {
 				Validador.validarSenha(novaSenha);
 				usuario.setSenha(novaSenha);
 				persistencia.salvarCentral(central, "central");
-			} catch (SenhaInvalidaException erro) {
-				FabricaJOptionPane.criarMsgErro(erro.getMessage());
+			} else if (!novaSenha.equals(confirmacaoSenha)) {
+				throw new CamposDiferentesException();
 			}
-		} else {
-			System.out.println("eretfshgdz");
+		} catch (SenhaInvalidaException | ConfirmacaoSenhaVaziaException |
+				CamposDiferentesException erro) {
+			FabricaJOptionPane.criarMsgErro(erro.getMessage());
 		}
 	}
 
