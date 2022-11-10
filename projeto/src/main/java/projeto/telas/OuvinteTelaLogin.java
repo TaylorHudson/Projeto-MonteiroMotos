@@ -7,9 +7,12 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+import projeto.excecoes.usuario.CodigoInvalidoException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.telas.usuario.TelaDeMudarDeSenha;
 import utilidades.email.Mensageiro;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaLogin implements MouseListener {
@@ -24,20 +27,34 @@ public class OuvinteTelaLogin implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		String email = tela.getTxtEmail().getText().trim();
-		String senha = String.valueOf(tela.getTxtSenha().getPassword()).trim();
-		Usuario usuario = central.recuperarUsuarioPeloEmail(email);
+		if (e.getSource() == tela.getBtnResetSenha()) {
+			Usuario usuario = central.getUsuarios().get(0);
+			int codigo = Mensageiro.enviarEmailComCodigoDeVerificacao(usuario);
+			String codigoEmString = JOptionPane.showInputDialog("Digite o código enviado por email");
+			
+			if (String.valueOf(codigo).equals(codigoEmString)) {
+				tela.dispose();
+				new TelaDeMudarDeSenha();
+			}else {
+				try {
+					throw new CodigoInvalidoException();
+				} catch (CodigoInvalidoException erro) {
+					FabricaJOptionPane.criarMsgErro(erro.getMessage());
+				}
+			}
+			
+		}
 		
-		if (e.getSource() == tela.getBtnEntrar()) {
+		else if (e.getSource() == tela.getBtnEntrar()) {
+			String email = tela.getTxtEmail().getText().trim();
+			String senha = String.valueOf(tela.getTxtSenha().getPassword()).trim();
+			Usuario usuario = central.recuperarUsuarioPeloEmail(email);
 			if (usuario != null && usuario.getSenha().equals(senha))
 				System.out.println("Logado");
 			else
 				System.out.println("Senha incorreta");
 		}
-		if(e.getSource() == tela.getBtnResetSenha()) {
-			int codigo = Mensageiro.enviarEmailComCodigoDeVerificacao(usuario);
-			JOptionPane.showInputDialog("Digite o código que foi enviado para seu email:");
-		}
+		
 	}
 
 	public void mouseEntered(MouseEvent e) {
