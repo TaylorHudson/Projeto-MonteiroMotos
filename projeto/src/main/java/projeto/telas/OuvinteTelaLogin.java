@@ -1,6 +1,7 @@
 package projeto.telas;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -25,28 +26,19 @@ public class OuvinteTelaLogin implements MouseListener {
 			String senha = String.valueOf(tela.getTxtSenha().getPassword()).trim();
 			Usuario usuario = central.recuperarUsuarioPeloEmail(email);
 
-			if (usuario != null) {
-				if (usuario.getSenha().equals(senha))
-					System.out.println("Logado");
-				else {
-					System.out.println("Senha incorreta");
-				}
-			}
+			if (usuario != null && usuario.getSenha().equals(senha))
+				System.out.println("Logado");
+			else
+				System.out.println("Senha incorreta");
 		}
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		if (e.getSource() == tela.getBtnEntrar())
-			tela.getBtnEntrar().setForeground(new Color(255, 255, 255));
-		if (e.getSource() == tela.getBtnResetSenha())
-			tela.getBtnResetSenha().setForeground(new Color(255, 255, 255));
+		e.getComponent().setForeground(new Color(255, 255, 255));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		if (e.getSource() == tela.getBtnEntrar())
-			tela.getBtnEntrar().setForeground(new Color(179, 177, 177));
-		if (e.getSource() == tela.getBtnResetSenha())
-			tela.getBtnResetSenha().setForeground(new Color(179, 177, 177));
+		e.getComponent().setForeground(new Color(179, 177, 177));
 	}
 
 	public void mousePressed(MouseEvent e) {

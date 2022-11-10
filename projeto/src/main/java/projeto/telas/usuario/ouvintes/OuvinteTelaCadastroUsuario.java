@@ -11,6 +11,7 @@ import projeto.excecoes.usuario.NomeInvalidoException;
 import projeto.excecoes.usuario.SenhaInvalidaException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.telas.TelaLogin;
 import projeto.telas.usuario.TelaCadastroUsuario;
 import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
@@ -37,6 +38,7 @@ public class OuvinteTelaCadastroUsuario implements MouseListener{
 			Usuario usuario = new Usuario(nome, email, senha, true);
 			central.adicionarUsuario(usuario);
 			tela.dispose();
+			new TelaLogin();
 		} catch (NomeInvalidoException | EmailSemCaracterException |
 				EmailInvalidoException | SenhaInvalidaException    |
 				LoginInvalidoException erro) {
@@ -45,10 +47,10 @@ public class OuvinteTelaCadastroUsuario implements MouseListener{
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		tela.getBtnCadastrar().setForeground(new Color(255, 255, 255));
+		e.getComponent().setForeground(new Color(255, 255, 255));
 	}
 	public void mouseExited(MouseEvent e) {
-		tela.getBtnCadastrar().setForeground(new Color(179, 177, 177));
+		e.getComponent().setForeground(new Color(179, 177, 177));
 	}
 
 	

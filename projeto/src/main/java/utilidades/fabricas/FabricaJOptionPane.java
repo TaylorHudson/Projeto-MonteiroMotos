@@ -11,4 +11,5 @@ public abstract class FabricaJOptionPane {
 	public static void criarMsgAtencao(String msg) {
 		JOptionPane.showMessageDialog(null, msg, "Atenção", JOptionPane.WARNING_MESSAGE);
 	}
+	
 }
