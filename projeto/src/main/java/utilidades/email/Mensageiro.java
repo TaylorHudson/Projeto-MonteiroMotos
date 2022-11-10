@@ -71,4 +71,10 @@ public class Mensageiro {
 		return 0;
 	}
 
+	public static void main(String[] args) {
+		int c = Mensageiro.enviarEmailComCodigoDeVerificacao(new Usuario("teste", "taylorhudsonsantos@gmail.com","12345",true));
+		System.out.println(c);
+	}
 }
+
+

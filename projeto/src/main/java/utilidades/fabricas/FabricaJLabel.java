@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -46,13 +47,11 @@ public abstract class FabricaJLabel {
 	}
 	
 	public static JLabel criarJLabel(int x, int y,int largura, int altura,ImageIcon imagem) {
-			JLabel bg = new JLabel();
-			bg.setBounds(x, y, largura, altura);
-			bg.setLayout(null);
-			bg.setIcon(Imagens.BACKGROUND);
-		    
-			return bg;
-		}
-	
-	
+		JLabel bg = new JLabel();
+		bg.setBounds(x, y, largura, altura);
+		bg.setLayout(null);
+		bg.setIcon(imagem);
+	    
+		return bg;
+	}
 }

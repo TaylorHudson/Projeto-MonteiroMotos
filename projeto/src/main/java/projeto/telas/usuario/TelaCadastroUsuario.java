@@ -2,6 +2,7 @@ package projeto.telas.usuario;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +21,6 @@ public class TelaCadastroUsuario extends JFrame {
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JLabel background;
-	private JButton btnCadastrar;
 
 	public TelaCadastroUsuario() {
 		configurarTela();
@@ -39,7 +39,7 @@ public class TelaCadastroUsuario extends JFrame {
 	}
 
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
+		background = FabricaJLabel.criarJLabel(0, 0, 900, 800,Imagens.BACKGROUND);
 		add(background);
 	}
 
@@ -55,7 +55,7 @@ public class TelaCadastroUsuario extends JFrame {
 
 		OuvinteTelaCadastroUsuario ouvinte = new OuvinteTelaCadastroUsuario(this);
 		
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 330, 150, 45, new Color(28, 28, 20),
+		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 330, 150, 45, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
 		btnCadastrar.addMouseListener(ouvinte);
 
@@ -80,10 +80,6 @@ public class TelaCadastroUsuario extends JFrame {
 
 	public JPasswordField getTxtSenha() {
 		return txtSenha;
-	}
-
-	public JButton getBtnCadastrar() {
-		return btnCadastrar;
 	}
 
 }

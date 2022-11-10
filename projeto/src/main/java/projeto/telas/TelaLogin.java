@@ -38,7 +38,7 @@ public class TelaLogin extends JFrame {
 	}
 
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
+		background = FabricaJLabel.criarJLabel(0, 0, 900, 800,Imagens.BACKGROUND);
 		add(background);
 	}
 
