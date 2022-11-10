@@ -29,14 +29,24 @@ public class OuvinteTelaLogin implements MouseListener {
 		Usuario usuario = central.recuperarUsuarioPeloEmail(email);
 		
 		if (e.getSource() == tela.getBtnEntrar()) {
+<<<<<<< HEAD
+=======
+			String email = tela.getTxtEmail().getText().trim();
+			String senha = String.valueOf(tela.getTxtSenha().getPassword()).trim();
+			Usuario usuario = central.recuperarUsuarioPeloEmail(email);
+
+>>>>>>> a3ad065de1df864d7c5d3241197c7284ed6dc752
 			if (usuario != null && usuario.getSenha().equals(senha))
 				System.out.println("Logado");
 			else
 				System.out.println("Senha incorreta");
+<<<<<<< HEAD
 		}
 		if(e.getSource() == tela.getBtnResetSenha()) {
 			int codigo = Mensageiro.enviarEmailComCodigoDeVerificacao(usuario);
 			JOptionPane.showInputDialog("Digite o código que foi enviado para seu email:");
+=======
+>>>>>>> a3ad065de1df864d7c5d3241197c7284ed6dc752
 		}
 	}
 
