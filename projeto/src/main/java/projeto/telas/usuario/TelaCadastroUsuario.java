@@ -2,7 +2,6 @@ package projeto.telas.usuario;
 
 import java.awt.Color;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -82,4 +81,7 @@ public class TelaCadastroUsuario extends JFrame {
 		return txtSenha;
 	}
 
+	public static void main(String[] args) {
+		new TelaCadastroUsuario();
+	}
 }
