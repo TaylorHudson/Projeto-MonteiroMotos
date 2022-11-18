@@ -1,5 +1,7 @@
 package projeto.programa;
 
+import javax.swing.JOptionPane;
+
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.TelaLogin;
 import projeto.telas.usuario.TelaCadastroUsuario;
@@ -16,5 +18,4 @@ public class Main {
 		else
 			new TelaCadastroUsuario();
 	}
-	
 }
