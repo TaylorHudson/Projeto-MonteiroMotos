@@ -12,4 +12,8 @@ public abstract class FabricaJOptionPane {
 		JOptionPane.showMessageDialog(null, msg, "Atenção", JOptionPane.WARNING_MESSAGE);
 	}
 	
+	public static int criarInput(String titulo, String msg) {
+		int opc = JOptionPane.showConfirmDialog(null, msg, titulo,JOptionPane.YES_NO_OPTION);
+		return opc;
+	}
 }
