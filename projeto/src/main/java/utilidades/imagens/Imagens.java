@@ -1,4 +1,4 @@
-package utilidades;
+package utilidades.imagens;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -14,4 +14,5 @@ public class Imagens {
   }
  
   public static final ImageIcon BACKGROUND = (ImageIcon) Imagens.importarImagem("/utilidades/imagens/background.jpg");
+  public static final ImageIcon MOTOTAXISTA	 = (ImageIcon) Imagens.importarImagem("/utilidades/imagens/mototaxista.jpg");
 }

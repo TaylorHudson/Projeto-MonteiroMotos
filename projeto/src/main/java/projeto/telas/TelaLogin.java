@@ -13,10 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import utilidades.Imagens;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
+import utilidades.imagens.Imagens;
 
 public class TelaLogin extends JFrame {
 

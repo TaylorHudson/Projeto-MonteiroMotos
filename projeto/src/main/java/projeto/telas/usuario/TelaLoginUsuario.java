@@ -9,10 +9,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import projeto.telas.TelaPadrao;
-import utilidades.Imagens;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
+import utilidades.imagens.Imagens;
 
 public class TelaLoginUsuario extends TelaPadrao {
 

@@ -8,7 +8,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import utilidades.Imagens;
+import utilidades.imagens.Imagens;
 
 public abstract class FabricaJLabel {
 

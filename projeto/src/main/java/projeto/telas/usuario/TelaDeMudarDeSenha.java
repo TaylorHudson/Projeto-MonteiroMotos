@@ -8,10 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import projeto.telas.usuario.ouvintes.OuvinteTelaDeMudarDeSenha;
-import utilidades.Imagens;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
+import utilidades.imagens.Imagens;
 
 public class TelaDeMudarDeSenha extends JFrame {
 	
