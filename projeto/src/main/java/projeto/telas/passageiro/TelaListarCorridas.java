@@ -70,17 +70,13 @@ public class TelaListarCorridas extends JFrame {
 
 		background.add(scrol);
 	}
-
 	public JButton getBtnOrdenar() {
 		return btnOrdenar;
 	}
-
 	public JButton getBtnDetalhes() {
 		return btnDetalhes;
 	}
-
 	public static void main(String[] args) {
 		new TelaListarCorridas();
 	}
-
 }

@@ -11,7 +11,6 @@ import projeto.excecoes.usuario.NomeInvalidoException;
 import projeto.excecoes.usuario.SenhaInvalidaException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
-import projeto.telas.TelaLogin;
 import projeto.telas.usuario.TelaCadastroUsuario;
 import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
@@ -38,7 +37,7 @@ public class OuvinteTelaCadastroUsuario implements MouseListener{
 			Usuario usuario = new Usuario(nome, email, senha, true);
 			central.adicionarUsuario(usuario);
 			tela.dispose();
-			new TelaLogin();
+			new TelaCadastroUsuario();
 		} catch (NomeInvalidoException | EmailSemCaracterException |
 				EmailInvalidoException | SenhaInvalidaException    |
 				LoginInvalidoException erro) {

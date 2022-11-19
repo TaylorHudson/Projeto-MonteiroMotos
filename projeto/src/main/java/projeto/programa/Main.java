@@ -1,10 +1,7 @@
 package projeto.programa;
 
-import javax.swing.JOptionPane;
-
 import projeto.repositorio.CentralDeInformacoes;
-import projeto.telas.TelaLogin;
-import projeto.telas.usuario.TelaCadastroUsuario;
+import projeto.tela.ADM.TelaCadastroADM;
 import utilidades.persistencia.Persistencia;
 
 public class Main {
@@ -14,8 +11,7 @@ public class Main {
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		
 		if (central.getUsuarios().size() != 0)
-			new TelaLogin();
-		else
-			new TelaCadastroUsuario();
+			new TelaCadastroADM();
+
 	}
 }

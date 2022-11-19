@@ -9,7 +9,6 @@ import projeto.excecoes.usuario.ConfirmacaoSenhaVaziaException;
 import projeto.excecoes.usuario.SenhaInvalidaException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
-import projeto.telas.TelaLogin;
 import projeto.telas.usuario.TelaDeMudarDeSenha;
 import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;

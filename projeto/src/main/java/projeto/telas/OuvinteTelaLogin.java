@@ -18,11 +18,11 @@ import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaLogin implements MouseListener {
 
-	private TelaLogin tela;
+	private TelaCadastroUsuario tela;
 	private CentralDeInformacoes central;
 	private Persistencia persistencia = new Persistencia();
 
-	public OuvinteTelaLogin(TelaLogin tela) {
+	public OuvinteTelaLogin(TelaCadastroUsuario tela) {
 		this.tela = tela;
 		central = persistencia.recuperarCentral("central");
 	}
@@ -31,7 +31,7 @@ public class OuvinteTelaLogin implements MouseListener {
 		if (e.getSource() == tela.getBtnResetSenha()) {
 			Usuario usuario = central.getUsuarios().get(0);
 			int codigo = Mensageiro.enviarEmailComCodigoDeVerificacao(usuario);
-			String codigoEmString = JOptionPane.showInputDialog("Digite o código enviado por email");
+			String codigoEmString = JOptionPane.showInputDialog("Digite o cï¿½digo enviado por email");
 			
 			if (String.valueOf(codigo).equals(codigoEmString)) {
 				tela.dispose();

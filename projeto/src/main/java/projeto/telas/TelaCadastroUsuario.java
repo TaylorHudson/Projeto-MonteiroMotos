@@ -2,10 +2,7 @@ package projeto.telas;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,7 +15,7 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaLogin extends JFrame {
+public class TelaCadastroUsuario extends JFrame {
 
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
@@ -27,7 +24,8 @@ public class TelaLogin extends JFrame {
 	private JButton btnResetSenha;
 	private JButton btnEntrar;
 
-	public TelaLogin() {
+
+	public TelaCadastroUsuario() {
 		configurarTela();
 		configImagemFundo();
 		configFormLogin();
@@ -50,19 +48,19 @@ public class TelaLogin extends JFrame {
 
 	private void configFormLogin() {
 		JLabel menu = FabricaJLabel.criarJLabel(180, 200, 500, 400, Color.BLACK, 4);
-		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuário",20, 20, 460, 40,new Color(247, 247, 247), 25);
+		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario",20, 20, 460, 40,new Color(247, 247, 247), 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 100, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 180, 460, 40, new Color(247, 247, 247), 25);
 
 		txtEmail = FabricaJText.criarJTextField(20, 135, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
 		txtSenha = FabricaJText.criarJPasswordField(20, 220, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177),20);
+
 		
 		box = new JComboBox<String>(new String[] {"Mototaxista","Passageiro"});
 		box.setBounds(20, 60, 460, 40);
 		box.setFont(new Font("Arial", 1, 20));
 		box.setForeground(Color.white);
-		box.setBackground(new Color(28, 28, 30));
-		
+		box.setBackground(new Color(28, 28, 30));	
 		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
 		
 		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 10, 360, 120, 30, new Color(28, 28, 20),new Color(179, 177, 177), 12);
@@ -103,6 +101,6 @@ public class TelaLogin extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new TelaLogin();
+		new TelaCadastroUsuario();
 	}
 }
