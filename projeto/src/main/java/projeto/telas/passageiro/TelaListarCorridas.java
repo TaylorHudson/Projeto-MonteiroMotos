@@ -1,13 +1,14 @@
 package projeto.telas.passageiro;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -16,14 +17,13 @@ import utilidades.imagens.Imagens;
 public class TelaListarCorridas extends JFrame {
 
 	private JLabel background;
-	private JMenuItem itemSair;
-	private JMenuItem itemDeletar;
-	private JMenuItem itemEditar;
+	private JTable tabelaCorridas;
 
 	public TelaListarCorridas() {
 		configImagemFundo();
 		ConfigTela();
 		configButton();
+		configTabelaCorridas();
 		setVisible(true);
 	}
 
@@ -36,17 +36,13 @@ public class TelaListarCorridas extends JFrame {
 		setTitle("Listar Corridas");
 	}
 
-	public static void main(String[] args) {
-		new TelaListarCorridas();
-	}
-
 	private void configImagemFundo() {
 		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUNDHOME);
 		add(background);
 	}
 
 	private void configButton() {
-		JButton btnOrdenar = FabricaJButton.criarJButton("Ordenar", 620, 180, 180, 50, new Color(28, 28, 20),
+		JButton btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
 		btnOrdenar.addMouseListener(null);
 		JButton btnDetalhes = FabricaJButton.criarJButton("Detalhes", 50, 650, 180, 50, new Color(28, 28, 20),
@@ -57,8 +53,21 @@ public class TelaListarCorridas extends JFrame {
 		background.add(btnOrdenar);
 	}
 
-	public JMenuItem getItemSair() {
-		return itemSair;
+	private void configTabelaCorridas() {
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.setColumnIdentifiers(new String[] { "NOME", "STATUS", "DATA", "HORA" });
+		tabelaCorridas = new JTable(modelo);
+		tabelaCorridas.setFont(new Font("Arial", 1, 15));
+
+		JScrollPane scrol = new JScrollPane(tabelaCorridas);
+		scrol.getViewport().setBackground(new Color(124, 68, 2));
+		scrol.setBounds(2, 240, 885, 400);
+
+		background.add(scrol);
+	}
+
+	public static void main(String[] args) {
+		new TelaListarCorridas();
 	}
 
 }
