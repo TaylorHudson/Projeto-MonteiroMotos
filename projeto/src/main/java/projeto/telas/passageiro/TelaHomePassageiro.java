@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -14,11 +15,10 @@ import utilidades.imagens.Imagens;
 
 public class TelaHomePassageiro extends JFrame {
 
-	private JLabel background;
+	private JMenuItem itemEditar;
+	private JMenuItem itemDeletar;
 
-	private JMenuBar menu = new JMenuBar();
-	private JMenu deletar = new JMenu("Deletar");
-	private JMenu editar = new JMenu("editar");
+	private JLabel background;
 
 	public TelaHomePassageiro() {
 		configImagemFundo();
@@ -38,11 +38,20 @@ public class TelaHomePassageiro extends JFrame {
 	}
 
 	private void configMenu() {
-		setBounds(20, 30, 500, 500);
-		menu.setLayout(null);
-		menu.add(deletar);
-		menu.add(editar);
-		this.setJMenuBar(menu);
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menuOpcoes = new JMenu("Opções");
+		itemEditar = new JMenuItem("Editar Perfil");
+		itemDeletar = new JMenuItem("Deletar Perfil");
+
+		OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
+		itemDeletar.addActionListener(ouvinte);
+		itemEditar.addActionListener(ouvinte);
+
+		menuBar.add(menuOpcoes);
+		menuOpcoes.add(itemEditar);
+		menuOpcoes.add(itemDeletar);
+		setJMenuBar(menuBar);
+
 	}
 
 	private void configImagemFundo() {
@@ -66,4 +75,13 @@ public class TelaHomePassageiro extends JFrame {
 	public static void main(String[] args) {
 		new TelaHomePassageiro();
 	}
+
+	public JMenuItem getItemEditar() {
+		return itemEditar;
+	}
+
+	public JMenuItem getItemDeletar() {
+		return itemDeletar;
+	}
+
 }
