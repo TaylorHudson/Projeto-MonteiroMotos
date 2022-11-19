@@ -18,6 +18,8 @@ public class TelaListarCorridas extends JFrame {
 
 	private JLabel background;
 	private JTable tabelaCorridas;
+	private JButton btnOrdenar;
+	private JButton btnDetalhes;
 
 	public TelaListarCorridas() {
 		configImagemFundo();
@@ -42,12 +44,14 @@ public class TelaListarCorridas extends JFrame {
 	}
 
 	private void configButton() {
-		JButton btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20),
+		OuvinteTelaListarCorrida ouvinte = new OuvinteTelaListarCorrida(this);
+
+		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
-		btnOrdenar.addMouseListener(null);
-		JButton btnDetalhes = FabricaJButton.criarJButton("Detalhes", 50, 650, 180, 50, new Color(28, 28, 20),
+		btnOrdenar.addActionListener(ouvinte);
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 50, 650, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
-		btnDetalhes.addMouseListener(null);
+		btnDetalhes.addActionListener(ouvinte);
 
 		background.add(btnDetalhes);
 		background.add(btnOrdenar);
@@ -64,6 +68,14 @@ public class TelaListarCorridas extends JFrame {
 		scrol.setBounds(2, 240, 885, 400);
 
 		background.add(scrol);
+	}
+
+	public JButton getBtnOrdenar() {
+		return btnOrdenar;
+	}
+
+	public JButton getBtnDetalhes() {
+		return btnDetalhes;
 	}
 
 	public static void main(String[] args) {

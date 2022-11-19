@@ -11,13 +11,15 @@ public class OuvinteTelaListarCorrida implements ActionListener {
 
 	public OuvinteTelaListarCorrida(TelaListarCorridas tela) {
 		this.tela = tela;
-		
+
 	}
+
 	public void actionPerformed(ActionEvent evento) {
-		if(evento.getSource() ==  tela.getItemSair()) {
-			int opc = FabricaJOptionPane.criarInput("Atenção", "Tem certeza que deseja sair?");
+		if(evento.getSource() == tela.getBtnDetalhes()){
+			System.out.println("Teste detalhes");
+		}else if(evento.getSource() == tela.getBtnOrdenar()) {
+			System.out.println("teste ordenar");
 		}
-		
 		
 	}
 
