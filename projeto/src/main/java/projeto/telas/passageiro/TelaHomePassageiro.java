@@ -17,6 +17,7 @@ public class TelaHomePassageiro extends JFrame {
 
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
+	private JMenuItem itemSair;
 
 	private JLabel background;
 
@@ -36,29 +37,28 @@ public class TelaHomePassageiro extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle("Home");
 	}
-
 	private void configMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuOpcoes = new JMenu("Opções");
 		itemEditar = new JMenuItem("Editar Perfil");
 		itemDeletar = new JMenuItem("Deletar Perfil");
+		itemSair = new JMenuItem("Sair");
 
 		OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
 		itemDeletar.addActionListener(ouvinte);
 		itemEditar.addActionListener(ouvinte);
+		itemSair.addActionListener(ouvinte);
 
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemEditar);
 		menuOpcoes.add(itemDeletar);
+		menuOpcoes.add(itemSair);
 		setJMenuBar(menuBar);
-
 	}
-
 	private void configImagemFundo() {
 		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUNDHOME);
 		add(background);
 	}
-
 	private void configButton() {
 		JButton btnListarCorrida = FabricaJButton.criarJButton("Listar Corrida", 270, 190, 380, 240,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
@@ -69,19 +69,17 @@ public class TelaHomePassageiro extends JFrame {
 
 		background.add(btnCadastrarCorrida);
 		background.add(btnListarCorrida);
-
 	}
-
 	public static void main(String[] args) {
 		new TelaHomePassageiro();
 	}
-
 	public JMenuItem getItemEditar() {
 		return itemEditar;
 	}
-
 	public JMenuItem getItemDeletar() {
 		return itemDeletar;
 	}
-
+	public JMenuItem getItemSair() {
+		return itemSair;
+	}
 }
