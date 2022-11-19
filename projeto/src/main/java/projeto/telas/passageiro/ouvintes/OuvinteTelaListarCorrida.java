@@ -1,8 +1,9 @@
-package projeto.telas.passageiro;
+package projeto.telas.passageiro.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import projeto.telas.passageiro.TelaListarCorridas;
 import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteTelaListarCorrida implements ActionListener {

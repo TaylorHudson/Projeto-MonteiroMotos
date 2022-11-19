@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import projeto.telas.passageiro.ouvintes.OuvinteTelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;

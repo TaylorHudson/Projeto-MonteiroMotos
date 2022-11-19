@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.telas.passageiro.ouvintes.OuvinteTelaListarCorrida;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
