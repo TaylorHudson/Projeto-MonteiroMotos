@@ -14,6 +14,7 @@ public class Imagens {
   }
  
   public static final ImageIcon BACKGROUND = (ImageIcon) Imagens.importarImagem("/utilidades/imagens/background.jpg");
+  public static final ImageIcon BACKGROUND_2 = (ImageIcon) Imagens.importarImagem("/utilidades/imagens/background_2.jpg");
   public static final ImageIcon MOTOTAXISTA	 = (ImageIcon) Imagens.importarImagem("/utilidades/imagens/mototaxista.jpg");
   public static final ImageIcon BACKGROUNDHOME = (ImageIcon) Imagens.importarImagem("/utilidades/imagens/Home.jpg");
 }
