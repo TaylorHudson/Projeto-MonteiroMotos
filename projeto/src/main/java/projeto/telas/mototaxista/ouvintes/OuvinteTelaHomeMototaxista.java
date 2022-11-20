@@ -3,10 +3,9 @@ package projeto.telas.mototaxista.ouvintes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
+import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
+import projeto.telas.usuario.TelaLoginUsuario;
 import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteTelaHomeMototaxista implements ActionListener {
@@ -20,10 +19,16 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			case "Deletar Perfil":
-				int opc = FabricaJOptionPane.criarInput("Escolha uma opção", "Deseja deletar sua conta?");
+				int opc = FabricaJOptionPane.criarInput("Escolha uma opÃ§Ã£o", "Deseja deletar sua conta?");
 				System.out.println(opc);
+				break;
 			case "Editar Perfil":
 				tela.dispose();
+				new TelaEdicaoPerfil();
+				break;
+			case "Sair":
+				new TelaLoginUsuario();
+				break;
 		}
 	}
 }

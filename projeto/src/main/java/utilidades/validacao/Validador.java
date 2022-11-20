@@ -48,7 +48,7 @@ public abstract class Validador {
 		boolean temCaracterEspecial = matcher.matches();
 
 		if (senha.equals(null) || senha.isEmpty())
-			throw new SenhaInvalidaException("A senha não pode ser vazia");
+			throw new SenhaInvalidaException("A senha nï¿½o pode ser vazia");
 		else if (senha.length() < 6)
 			throw new SenhaInvalidaException();
 		else if (!temCaracterEspecial)

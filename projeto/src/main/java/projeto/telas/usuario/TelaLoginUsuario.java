@@ -21,6 +21,10 @@ public class TelaLoginUsuario extends TelaPadrao {
 	private JButton btnResetSenha;
 	private JButton btnEntrar;
 	
+	public TelaLoginUsuario() {
+		super("Login");
+	}
+
 	public TelaLoginUsuario(String titulo) {
 		super(titulo);
 	}
@@ -57,7 +61,7 @@ public class TelaLoginUsuario extends TelaPadrao {
 	}
 	
 	public static void main(String[] args) {
-		new TelaLoginUsuario("Login do Usuário");
+		new TelaLoginUsuario("Login do Usuï¿½rio");
 	}
 
 	public JTextField getTxtEmail() {

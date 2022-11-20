@@ -19,6 +19,7 @@ public class TelaHomeMototaxista extends JFrame{
 	
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
+	private JMenuItem itemSair;
 	private JButton btnListarCorridas;
 	private JButton btnComprarCreditos;
 	private JLabel background;
@@ -44,7 +45,7 @@ public class TelaHomeMototaxista extends JFrame{
 		btnListarCorridas = FabricaJButton.criarJButton("Listar Corridas", 150, 220, 560, 230,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
 		
-		btnComprarCreditos = FabricaJButton.criarJButton("Comprar Créditos", 150, 490, 560, 230,
+		btnComprarCreditos = FabricaJButton.criarJButton("Comprar CrÃ©ditos", 150, 490, 560, 230,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
 		
 		background.add(btnListarCorridas);
@@ -53,17 +54,20 @@ public class TelaHomeMototaxista extends JFrame{
 	
 	private void configMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menuOpcoes = new JMenu("Opções");
+		JMenu menuOpcoes = new JMenu("OpÃ§Ãµes");
 		itemEditar = new JMenuItem("Editar Perfil");
 		itemDeletar = new JMenuItem("Deletar Perfil");
+		itemSair = new JMenuItem("Sair");
 		
 		OuvinteTelaHomeMototaxista ouvinte = new OuvinteTelaHomeMototaxista(this);
 		itemEditar.addActionListener(ouvinte);
 		itemDeletar.addActionListener(ouvinte);
+		itemSair.addActionListener(ouvinte);
 		
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemEditar);
 		menuOpcoes.add(itemDeletar);
+		menuOpcoes.add(itemSair);
 		setJMenuBar(menuBar);
 	}
 	
