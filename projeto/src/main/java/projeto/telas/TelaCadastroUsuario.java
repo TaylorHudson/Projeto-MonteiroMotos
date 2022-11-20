@@ -54,7 +54,6 @@ public class TelaCadastroUsuario extends JFrame {
 
 		txtEmail = FabricaJText.criarJTextField(20, 135, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
 		txtSenha = FabricaJText.criarJPasswordField(20, 220, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177),20);
-
 		
 		box = new JComboBox<String>(new String[] {"Mototaxista","Passageiro"});
 		box.setBounds(20, 60, 460, 40);

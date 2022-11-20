@@ -1,6 +1,7 @@
 package projeto.telas.usuario.ouvintes;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -47,9 +48,11 @@ public class OuvinteTelaCadastroUsuario implements MouseListener{
 
 	public void mouseEntered(MouseEvent e) {
 		e.getComponent().setForeground(new Color(255, 255, 255));
+		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 	public void mouseExited(MouseEvent e) {
 		e.getComponent().setForeground(new Color(179, 177, 177));
+		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 	}
 
 	
