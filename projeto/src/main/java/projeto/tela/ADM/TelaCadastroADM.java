@@ -8,8 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import projeto.tela.ADM.ouvintes.OuvintesTelaDeCadastroUsuario;
-import projeto.telas.usuario.ouvintes.OuvinteTelaDeMudarDeSenha;
+import projeto.telas.ADM.ouvintes.OuvintesTelaDeLoginUsuario;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
@@ -44,7 +43,7 @@ public class TelaCadastroADM extends JFrame {
 		setTitle("Cadastro do ADM");
 	}
 	private void configFormLogin() {
-		OuvintesTelaDeCadastroUsuario ouvinte = new OuvintesTelaDeCadastroUsuario(this);
+		OuvintesTelaDeLoginUsuario ouvinte = new OuvintesTelaDeLoginUsuario(this);
 
 		menu = FabricaJLabel.criarJLabel(180, 200, 500, 400, Color.BLACK, 4);
 		lblEmail = FabricaJLabel.criarJLabel("Email", 20, 30, 460, 40, new Color(247, 247, 247), 25);

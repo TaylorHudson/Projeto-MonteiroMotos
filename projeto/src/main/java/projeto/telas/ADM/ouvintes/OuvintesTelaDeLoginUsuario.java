@@ -1,4 +1,4 @@
-package projeto.tela.ADM.ouvintes;
+package projeto.telas.ADM.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,11 +8,11 @@ import javax.swing.Action;
 import projeto.tela.ADM.TelaCadastroADM;
 import projeto.telas.TelaCadastroUsuario;
 
-public class OuvintesTelaDeCadastroUsuario implements ActionListener {
+public class OuvintesTelaDeLoginUsuario implements ActionListener {
 	
 	private TelaCadastroADM tela;
 	
-	public OuvintesTelaDeCadastroUsuario(TelaCadastroADM tela) {
+	public OuvintesTelaDeLoginUsuario(TelaCadastroADM tela) {
 		this.tela = tela;
 	}
 	public void actionPerformed(ActionEvent evento) {
