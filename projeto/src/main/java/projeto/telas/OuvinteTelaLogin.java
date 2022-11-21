@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import projeto.excecoes.usuario.CodigoInvalidoException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.telas.usuario.TelaCadastroUsuario;
 import projeto.telas.usuario.TelaDeMudarDeSenha;
 import utilidades.email.Mensageiro;
 import utilidades.fabricas.FabricaJOptionPane;
@@ -54,17 +55,21 @@ public class OuvinteTelaLogin implements MouseListener {
 				System.out.println("Logado");
 			else
 				System.out.println("Senha incorreta");
+		
+		}else if(e.getSource() == tela.getBtnCadastrese()) {
+			tela.dispose();
+			new TelaCadastroUsuario();
 		}
 		
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setForeground(new Color(255, 255, 255));
+		e.getComponent().setForeground(new Color(66, 65, 65));
 		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
 	public void mouseExited(MouseEvent e) {
-		e.getComponent().setForeground(new Color(179, 177, 177));
+		e.getComponent().setForeground(new Color(15, 15, 15));
 	}
 
 	public void mousePressed(MouseEvent e) {
