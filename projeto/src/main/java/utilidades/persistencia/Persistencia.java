@@ -4,14 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Collection;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.AnyTypePermission;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.NullPermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import projeto.modelo.Avaliacao;
 import projeto.modelo.Corrida;
@@ -37,13 +33,7 @@ public class Persistencia {
 		xstream.alias("avaliacao", Avaliacao.class);
 		xstream.alias("centralInformacoes", CentralDeInformacoes.class);
 
-		xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
 		xstream.addPermission(AnyTypePermission.ANY);
-		xstream.addPermission(NoTypePermission.NONE);
-		xstream.addPermission(NullPermission.NULL);
-		xstream.allowTypeHierarchy(Collection.class);
-		xstream.allowTypes(new Class[] { Persistencia.class, Passageiro.class, Avaliacao.class, Mototaxista.class,
-				Corrida.class, Usuario.class, CentralDeInformacoes.class });
 	}
 
 	public void salvarCentral(CentralDeInformacoes central, String nomeDoArquivo) {
@@ -76,5 +66,5 @@ public class Persistencia {
 		}
 		return new CentralDeInformacoes();
 	}
-	
+
 }
