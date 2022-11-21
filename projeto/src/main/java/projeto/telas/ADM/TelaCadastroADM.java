@@ -67,7 +67,7 @@ public class TelaCadastroADM extends JFrame {
 
 		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 360, 160, 50, Color.WHITE,
 				Color.BLACK, 30);
-		btnCadastrar.addActionListener(ouvinte);
+		btnCadastrar.addMouseListener(ouvinte);
 
 		menu.add(lblEmail);
 		menu.add(lblSenha);
