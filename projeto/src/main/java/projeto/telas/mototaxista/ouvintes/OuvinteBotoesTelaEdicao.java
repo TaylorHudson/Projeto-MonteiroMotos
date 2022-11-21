@@ -4,7 +4,11 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
+
 import projeto.telas.mototaxista.TelaEdicaoPerfil;
+import projeto.telas.mototaxista.TelaHomeMototaxista;
+import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteBotoesTelaEdicao implements MouseListener {
 
@@ -16,12 +20,18 @@ public class OuvinteBotoesTelaEdicao implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
+    if(e.getSource() == tela.getLblSeta()) {
+      int opc = FabricaJOptionPane.criarInput("Escolha uma opção", "Deseja sair realmente?");
+      if (opc == 0) {
+        tela.dispose();
+        new TelaHomeMototaxista();
+      }  
+    }
+
     String nomeCompleto = tela.getTxtNomeCompleto().getText();
     String email = tela.getTxtEmail().getText();
     String senha = String.valueOf(tela.getTxtSenha().getPassword());
     String dataNascimento = tela.getTxtData().getText();
-
-    System.out.println(dataNascimento);
   }
 
   @Override

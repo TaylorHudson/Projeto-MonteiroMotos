@@ -41,9 +41,12 @@ public class TelaEdicaoPerfil extends JFrame {
 	}
 
 	private void configMenu() {
+		OuvinteBotoesTelaEdicao ouvinte = new OuvinteBotoesTelaEdicao(this);
+
 		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
 		lblSeta = FabricaJLabel.criarJLabel(10, 10, 50, 50, Imagens.SETA);
+		lblSeta.addMouseListener(ouvinte);
 
 		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK,3);
 		menu.setBackground(Color.BLACK);
@@ -64,7 +67,7 @@ public class TelaEdicaoPerfil extends JFrame {
 		}
 
 		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50,Color.WHITE,Color.BLACK, 25);
-		btnSalvar.addMouseListener(new OuvinteBotoesTelaEdicao(this));
+		btnSalvar.addMouseListener(ouvinte);
 
 		menu.add(lblNomeCompleto);
 		menu.add(txtNomeCompleto);
