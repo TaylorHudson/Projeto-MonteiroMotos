@@ -3,9 +3,9 @@ package projeto.telas.mototaxista.ouvintes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import projeto.telas.TelaLogin;
 import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
-import projeto.telas.usuario.TelaLoginUsuario;
 import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteTelaHomeMototaxista implements ActionListener {
@@ -32,7 +32,7 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
 			int opcSair = FabricaJOptionPane.criarInput("Escolha uma opção", "Deseja sair realmente?");
       if (opcSair == 0) {
         tela.dispose();
-        new TelaLoginUsuario();
+        new TelaLogin();
       }  
 				break;
 		}

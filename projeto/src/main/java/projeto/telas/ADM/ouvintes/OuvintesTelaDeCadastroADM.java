@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 
-import projeto.telas.TelaCadastroUsuario;
+import projeto.telas.TelaLogin;
 import projeto.telas.ADM.TelaCadastroADM;
 
 public class OuvintesTelaDeCadastroADM implements ActionListener {
@@ -17,7 +17,7 @@ public class OuvintesTelaDeCadastroADM implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getSource() == tela.getBtnCadastrar()){
-			new TelaCadastroUsuario();			
+			new TelaLogin();			
 			
 		}
 		

@@ -18,11 +18,11 @@ import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaLogin implements MouseListener {
 
-	private TelaCadastroUsuario tela;
+	private TelaLogin tela;
 	private CentralDeInformacoes central;
 	private Persistencia persistencia = new Persistencia();
 
-	public OuvinteTelaLogin(TelaCadastroUsuario tela) {
+	public OuvinteTelaLogin(TelaLogin tela) {
 		this.tela = tela;
 		central = persistencia.recuperarCentral("central");
 	}

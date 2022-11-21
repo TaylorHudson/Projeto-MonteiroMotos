@@ -15,7 +15,7 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaCadastroUsuario extends JFrame {
+public class TelaLogin extends JFrame {
 
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
@@ -25,7 +25,7 @@ public class TelaCadastroUsuario extends JFrame {
 	private JButton btnEntrar;
 
 
-	public TelaCadastroUsuario() {
+	public TelaLogin() {
 		configurarTela();
 		configImagemFundo();
 		configFormLogin();
@@ -100,6 +100,6 @@ public class TelaCadastroUsuario extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new TelaCadastroUsuario();
+		new TelaLogin();
 	}
 }
