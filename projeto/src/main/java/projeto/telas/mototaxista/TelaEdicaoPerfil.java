@@ -10,7 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import projeto.telas.mototaxista.ouvintes.OuvinteBotaoSalvar;
+import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
@@ -64,7 +64,7 @@ public class TelaEdicaoPerfil extends JFrame {
 		}
 
 		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50,Color.WHITE,Color.BLACK, 25);
-		btnSalvar.addMouseListener(new OuvinteBotaoSalvar());
+		btnSalvar.addMouseListener(new OuvinteBotoesTelaEdicao(this));
 
 		menu.add(lblNomeCompleto);
 		menu.add(txtNomeCompleto);

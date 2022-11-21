@@ -1,15 +1,18 @@
-package projeto.tela.ADM;
+package projeto.telas.ADM;
 
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import projeto.telas.ADM.ouvintes.OuvintesTelaDeLoginUsuario;
 import utilidades.fabricas.FabricaJButton;
+import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
@@ -23,9 +26,9 @@ public class TelaCadastroADM extends JFrame {
 	private JLabel lblEmail;
 	private JLabel lblSenha;
 	private JLabel lblNomeCompleto;
-	private JButton btnResetSenha;
 	private JButton btnCadastrar;
 	private JTextField txtNomeCompleto;
+	private JFormattedTextField txtData;
 
 	public TelaCadastroADM() {
 		configurarTela();
@@ -45,19 +48,25 @@ public class TelaCadastroADM extends JFrame {
 	private void configFormLogin() {
 		OuvintesTelaDeLoginUsuario ouvinte = new OuvintesTelaDeLoginUsuario(this);
 
-		menu = FabricaJLabel.criarJLabel(180, 200, 500, 400, Color.BLACK, 4);
-		lblEmail = FabricaJLabel.criarJLabel("Email", 20, 30, 460, 40, new Color(247, 247, 247), 25);
-		lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 100, 460, 40, new Color(247, 247, 247), 25);
-		lblNomeCompleto = FabricaJLabel.criarJLabel("Nome Completo", 20, 175, 460, 40, new Color(247, 247, 247), 25);
+		menu = FabricaJLabel.criarJLabel(180, 160, 500, 450, Color.BLACK, 4);
+		menu.setBackground(Color.BLACK);
 
-		txtEmail = FabricaJText.criarJTextField(20, 65, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177), 16);
-		txtSenha = FabricaJText.criarJPasswordField(20, 135, 460, 40, new Color(28, 28, 30), new Color(179, 177, 177),
-				20);
-		txtNomeCompleto = FabricaJText.criarJTextField(20, 210, 460, 40, new Color(28, 28, 30),
-				new Color(179, 177, 177), 16);
+		lblEmail = FabricaJLabel.criarJLabel("Email", 20, 30, 460, 40, Color.WHITE, 25);
+		lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 100, 460, 40, Color.WHITE, 25);
+		lblNomeCompleto = FabricaJLabel.criarJLabel("Nome Completo", 20, 175, 460, 40, Color.WHITE, 25);
 
-		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 280, 160, 60, new Color(28, 28, 20),
-				new Color(179, 177, 177), 30);
+		txtEmail = FabricaJText.criarJTextField(20, 65, 460, 40, Color.WHITE, Color.BLACK, 16);
+		txtSenha = FabricaJText.criarJPasswordField(20, 135, 460, 40, Color.WHITE,Color.BLACK,20);
+		txtNomeCompleto = FabricaJText.criarJTextField(20, 210, 460, 40, Color.WHITE,Color.BLACK, 16);
+
+		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 250, 460, 40, Color.white, 25);
+		try {
+			txtData = FabricaJFormatted.criarJFormatted(20, 290, 460, 40, new MaskFormatter("##/##/####"));
+		} catch (Exception e) {
+		}
+
+		btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 360, 160, 50, Color.WHITE,
+				Color.BLACK, 30);
 		btnCadastrar.addActionListener(ouvinte);
 
 		menu.add(lblEmail);
@@ -67,6 +76,8 @@ public class TelaCadastroADM extends JFrame {
 		menu.add(txtSenha);
 		menu.add(txtNomeCompleto);
 		menu.add(btnCadastrar);
+		menu.add(lblDataNascimento);
+		menu.add(txtData);
 
 		background.add(menu);
 

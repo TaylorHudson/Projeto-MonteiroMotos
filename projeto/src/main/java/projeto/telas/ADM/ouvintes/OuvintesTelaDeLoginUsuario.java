@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 
-import projeto.tela.ADM.TelaCadastroADM;
 import projeto.telas.TelaCadastroUsuario;
+import projeto.telas.ADM.TelaCadastroADM;
 
 public class OuvintesTelaDeLoginUsuario implements ActionListener {
 	

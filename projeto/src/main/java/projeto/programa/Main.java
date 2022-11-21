@@ -1,7 +1,7 @@
 package projeto.programa;
 
 import projeto.repositorio.CentralDeInformacoes;
-import projeto.tela.ADM.TelaCadastroADM;
+import projeto.telas.ADM.TelaCadastroADM;
 import utilidades.persistencia.Persistencia;
 
 public class Main {
