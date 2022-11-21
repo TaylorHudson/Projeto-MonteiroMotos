@@ -8,11 +8,11 @@ import javax.swing.Action;
 import projeto.telas.TelaCadastroUsuario;
 import projeto.telas.ADM.TelaCadastroADM;
 
-public class OuvintesTelaDeLoginUsuario implements ActionListener {
+public class OuvintesTelaDeCadastroADM implements ActionListener {
 	
 	private TelaCadastroADM tela;
 	
-	public OuvintesTelaDeLoginUsuario(TelaCadastroADM tela) {
+	public OuvintesTelaDeCadastroADM(TelaCadastroADM tela) {
 		this.tela = tela;
 	}
 	public void actionPerformed(ActionEvent evento) {
