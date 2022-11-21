@@ -23,6 +23,7 @@ public class TelaEdicaoPerfil extends JFrame {
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JFormattedTextField txtData;
+	private JLabel lblSeta;
 
 	public TelaEdicaoPerfil() {
 		configurarTela();
@@ -42,33 +43,40 @@ public class TelaEdicaoPerfil extends JFrame {
 	private void configMenu() {
 		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
-		JLabel lblNomeCompleto = FabricaJLabel.criarJLabel("Nome Completo", 150, 60, 460, 40, Color.white, 25);
-		txtNomeCompleto = FabricaJText.criarJTextField(150, 100, 560, 40, Color.white, Color.BLACK, 16);
+		lblSeta = FabricaJLabel.criarJLabel(10, 10, 50, 50, Imagens.SETA);
 
-		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 150, 140, 460, 40, Color.white, 25);
-		txtEmail = FabricaJText.criarJTextField(150, 180, 560, 40, Color.white, Color.BLACK, 16);
+		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK,3);
+		menu.setBackground(Color.BLACK);
 
-		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 150, 220, 460, 40, Color.white, 25);
-		txtSenha = FabricaJText.criarJPasswordField(150, 260, 560, 40, Color.white, Color.BLACK, 16);
+		JLabel lblNomeCompleto = FabricaJLabel.criarJLabel("Nome Completo", 30, 60, 460, 40, Color.white, 25);
+		txtNomeCompleto = FabricaJText.criarJTextField(30, 100, 640, 40, Color.white, Color.BLACK, 16);
 
-		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 150, 300, 460, 40, Color.white, 25);
+		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 30, 140, 460, 40, Color.white, 25);
+		txtEmail = FabricaJText.criarJTextField(30, 180, 640, 40, Color.white, Color.BLACK, 16);
+
+		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 30, 220, 460, 40, Color.white, 25);
+		txtSenha = FabricaJText.criarJPasswordField(30, 260, 640, 40, Color.white, Color.BLACK, 16);
+
+		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 30, 300, 460, 40, Color.white, 25);
 		try {
-			txtData = FabricaJFormatted.criarJFormatted(150, 340, 560, 40, new MaskFormatter("##/##/####"));
+			txtData = FabricaJFormatted.criarJFormatted(30, 340, 640, 40, new MaskFormatter("##/##/####"));
 		} catch (Exception e) {
 		}
 
-		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 350, 420, 150, 50, Color.BLACK, Color.WHITE, 25);
+		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50,Color.WHITE,Color.BLACK, 25);
 		btnSalvar.addMouseListener(new OuvinteBotaoSalvar());
 
-		background.add(lblNomeCompleto);
-		background.add(txtNomeCompleto);
-		background.add(lblEmail);
-		background.add(txtEmail);
-		background.add(lblSenha);
-		background.add(txtSenha);
-		background.add(lblDataNascimento);
-		background.add(txtData);
-		background.add(btnSalvar);
+		menu.add(lblNomeCompleto);
+		menu.add(txtNomeCompleto);
+		menu.add(lblEmail);
+		menu.add(txtEmail);
+		menu.add(lblSenha);
+		menu.add(txtSenha);
+		menu.add(lblDataNascimento);
+		menu.add(txtData);
+		menu.add(btnSalvar);
+		background.add(menu);
+		background.add(lblSeta);
 		add(background);
 	}
 
@@ -87,7 +95,11 @@ public class TelaEdicaoPerfil extends JFrame {
 	public JFormattedTextField getTxtData() {
 		return txtData;
 	}
-	
+
+	public JLabel getLblSeta() {
+		return lblSeta;
+	}
+
 	public static void main(String[] args) {
 		new TelaEdicaoPerfil();
 	}
