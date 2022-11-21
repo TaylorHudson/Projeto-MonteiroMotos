@@ -42,11 +42,16 @@ public class TelaHomeMototaxista extends JFrame{
 	}
 	
 	private void configBotoes() {
+		OuvinteTelaHomeMototaxista ouvinte = new OuvinteTelaHomeMototaxista(this);
+
 		btnListarCorridas = FabricaJButton.criarJButton("Listar Corridas", 150, 220, 560, 230,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
 		
 		btnComprarCreditos = FabricaJButton.criarJButton("Comprar Créditos", 150, 490, 560, 230,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
+
+		btnListarCorridas.addActionListener(ouvinte);
+		btnComprarCreditos.addActionListener(ouvinte);
 		
 		background.add(btnListarCorridas);
 		background.add(btnComprarCreditos);
