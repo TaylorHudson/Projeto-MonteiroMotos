@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import projeto.telas.TelaLogin;
 import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
+import projeto.telas.mototaxista.TelaListarCorridas;
 import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteTelaHomeMototaxista implements ActionListener {
@@ -35,6 +36,9 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
         new TelaLogin();
       }  
 				break;
+			case "Listar Corridas":
+				tela.dispose();
+				new TelaListarCorridas();
 		}
 	}
 }

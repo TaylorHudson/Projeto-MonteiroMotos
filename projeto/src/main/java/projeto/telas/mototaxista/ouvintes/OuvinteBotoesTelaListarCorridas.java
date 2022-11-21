@@ -1,17 +1,18 @@
 package projeto.telas.mototaxista.ouvintes;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
+import projeto.telas.mototaxista.TelaListarCorridas;
 
-public class OuvinteBotoesTelaEdicao implements MouseListener {
+public class OuvinteBotoesTelaListarCorridas implements MouseListener {
 
-  private TelaEdicaoPerfil tela;
+  private TelaListarCorridas tela;
 
-  public OuvinteBotoesTelaEdicao(TelaEdicaoPerfil t) {
+  public OuvinteBotoesTelaListarCorridas(TelaListarCorridas t) {
     tela = t;
   }
 
@@ -21,23 +22,18 @@ public class OuvinteBotoesTelaEdicao implements MouseListener {
       tela.dispose();
       new TelaHomeMototaxista();
     }
-
-  String nomeCompleto = tela.getTxtNomeCompleto().getText();
-  String email = tela.getTxtEmail().getText();
-  String senha = String.valueOf(tela.getTxtSenha().getPassword());
-  String dataNascimento = tela.getTxtData().getText();
-  
   }
-
 
   @Override
   public void mouseEntered(MouseEvent e) {
     e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
+    e.getComponent().setForeground(new Color(179, 177, 177));
   }
 
   @Override
   public void mouseExited(MouseEvent e) {
     e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    e.getComponent().setForeground(Color.WHITE);
   }
 
   @Override
