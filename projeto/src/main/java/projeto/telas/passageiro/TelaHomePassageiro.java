@@ -39,6 +39,11 @@ public class TelaHomePassageiro extends JFrame {
 		setTitle("Home");
 	}
 	private void configMenu() {
+		
+		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 450, Color.BLACK, 4);
+		menu.setBackground(Color.BLACK);
+	
+		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuOpcoes = new JMenu("Opções");
 		itemEditar = new JMenuItem("Editar Perfil");
