@@ -11,7 +11,7 @@ public class ServicoCorrida {
 	private CentralDeInformacoes central;
 	private ArrayList<Corrida> corridas;
 	private ServicoPassageiro util;
-	
+
 	public ServicoCorrida(CentralDeInformacoes central, ServicoPassageiro util) {
 		this.central = central;
 		corridas = this.central.getCorridas();
@@ -19,13 +19,8 @@ public class ServicoCorrida {
 	}
 
 	public boolean adicionarCorrida(Corrida corrida) {
-		boolean ok = true;
-
-		for (Corrida c : corridas) {
-			if (corrida.equals(c))
-				ok = false;
-		}
-		if (ok) {
+		Corrida c = recuperarCorridaPeloId(corrida.getId());
+		if (c != null) {
 			corridas.add(corrida);
 			return true;
 		}
@@ -51,18 +46,5 @@ public class ServicoCorrida {
 			return corridasDoPassageiro;
 		}
 		return null;
-	}
-
-	public int recuperarNumeroCorridasDeUmPassageiro(String email) {
-		int numeroCorridas = 0;
-		Passageiro passageiro = util.recuperarPassageiroPeloEmail(email);
-		if (passageiro != null && corridas != null) {
-			for (Corrida c : corridas) {
-				if (c.getPassageiro().equals(passageiro))
-					numeroCorridas++;
-			}
-			return numeroCorridas;
-		}
-		return 0;
 	}
 }

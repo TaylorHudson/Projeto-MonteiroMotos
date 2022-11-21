@@ -3,8 +3,6 @@ package utilidades.validacao;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
-
 import projeto.excecoes.usuario.EmailInvalidoException;
 import projeto.excecoes.usuario.EmailSemCaracterException;
 import projeto.excecoes.usuario.LoginInvalidoException;

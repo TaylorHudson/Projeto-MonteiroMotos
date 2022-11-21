@@ -16,6 +16,10 @@ public class Usuario {
 		this.estaAtivo = estaAtivo;
 	}
 
+	public Usuario(String email) {
+		this.email = email;
+	}
+
 	public boolean equals(Usuario usuario) {
 		return email.equals(usuario.getEmail());
 	}

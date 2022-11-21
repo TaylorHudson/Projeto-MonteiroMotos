@@ -16,7 +16,8 @@ public class Passageiro extends Usuario {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Passageiro() {
+	public Passageiro(String email) {
+		super(email);
 	}
 
 	public String toString() {

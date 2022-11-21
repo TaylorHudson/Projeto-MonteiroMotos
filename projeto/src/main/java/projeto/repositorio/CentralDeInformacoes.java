@@ -2,6 +2,9 @@ package projeto.repositorio;
 
 import java.util.ArrayList;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.AnyTypePermission;
+
 import projeto.excecoes.usuario.UsuarioJaExisteException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
@@ -21,6 +24,11 @@ public class CentralDeInformacoes {
 	private ServicoPassageiro servicoPassageiro = new ServicoPassageiro(this);
 	private ServicoCorrida servicoCorrida = new ServicoCorrida(this, servicoPassageiro);
 	private ServicoUsuario servicoUsuario = new ServicoUsuario(this);
+
+	public CentralDeInformacoes() {
+		XStream xstream = new XStream();
+		xstream.addPermission(AnyTypePermission.ANY);
+	}
 	
 	public boolean adicionarUsuario(Usuario usuario) {
 		try {
@@ -61,7 +69,7 @@ public class CentralDeInformacoes {
 	}
 
 	public int recuperarNumeroCorridasDeUmPassageiro(String email) {
-	    return servicoCorrida.recuperarNumeroCorridasDeUmPassageiro(email);
+	    return servicoCorrida.recuperarCorridasDeUmPassageiro(email).size();
 	  }
 
 	public ArrayList<Passageiro> getPassageiros() {

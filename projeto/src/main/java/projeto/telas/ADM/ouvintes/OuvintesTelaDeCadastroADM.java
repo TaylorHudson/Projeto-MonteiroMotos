@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import projeto.servico.ServicoUsuario;
 import projeto.telas.TelaLogin;
 import projeto.telas.ADM.TelaCadastroADM;
+import utilidades.validacao.Validador;
 
 public class OuvintesTelaDeCadastroADM implements MouseListener{
 	
@@ -17,9 +20,11 @@ public class OuvintesTelaDeCadastroADM implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource() == tela.getBtnCadastrar()){
-			new TelaLogin();			
-		}
+		String nomeCompleto = tela.getTxtNomeCompleto().getText();
+		String senha = String.valueOf(tela.getTxtSenha().getPassword());
+		String email = tela.getTxtEmail().getText();
+		String dataNascimento = tela.getTxtData().getText(); 
+
 		
 	}
 
