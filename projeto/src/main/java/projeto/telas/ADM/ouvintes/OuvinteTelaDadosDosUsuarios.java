@@ -40,8 +40,6 @@ public class OuvinteTelaDadosDosUsuarios implements MouseListener {
 	public void mouseReleased(MouseEvent e) {
 
 	}
-
-	
 	public void mouseEntered(MouseEvent e) {
 		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
 		e.getComponent().setForeground(new Color(179, 177, 177));
