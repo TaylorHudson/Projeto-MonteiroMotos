@@ -19,7 +19,7 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Deletar Perfil")) {
-			int opcDeletar = FabricaJOptionPane.criarInput("Escolha uma opção", "Deseja deletar sua conta?");
+			int opcDeletar = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja deletar sua conta?");
 			if (opcDeletar == 0)
 				System.out.println("Deletar a conta");
 
@@ -29,7 +29,7 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
 			}
 
 			else if (e.getActionCommand().equals("Sair")) {
-				int opcSair = FabricaJOptionPane.criarInput("Escolha uma opção", "Deseja sair realmente?");
+				int opcSair = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja sair realmente?");
 				if (opcSair == 0) {
 					tela.dispose();
 					new TelaLogin();

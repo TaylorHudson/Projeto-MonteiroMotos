@@ -34,7 +34,7 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Relação das Corridas do Passageiro " + passageiro.getNome());
+			email.setSubject("Relaï¿½ï¿½o das Corridas do Passageiro " + passageiro.getNome());
 			email.setMsg(resposta);
 			email.addTo(passageiro.getEmail());
 
@@ -44,7 +44,7 @@ public class Mensageiro {
 		}
 	}
 
-	public static int enviarEmailComCodigoDeVerificacao(Usuario usuario) {
+	public static int enviarEmailComCodigoDeVerificacao(String emailDeCodigo) {
 		String remetente = "pooprojeto824@gmail.com";
 		String senha = "rehjpckvmjwhvkpu";
 
@@ -58,10 +58,10 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Código para mudança de senha.");
+			email.setSubject("Cï¿½digo para mudanï¿½a de senha.");
 			int codigo = new Random().nextInt((max - min) + 1) + min;
-			email.setMsg("Seu código: " + codigo);
-			email.addTo(usuario.getEmail());
+			email.setMsg("Seu cï¿½digo: " + codigo);
+			email.addTo(emailDeCodigo);
 			email.send();
 
 			return codigo;
