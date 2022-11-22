@@ -7,13 +7,11 @@ import projeto.modelo.enuns.Sexo;
 public class Passageiro extends Usuario {
 
 	private Sexo sexo;
-	private LocalDate dataNascimento;
 
-	public Passageiro(String nome ,Sexo sexo, LocalDate dataNascimento, String email,
-			String senha,boolean estaAtivo) {
-		super(nome, email, senha, estaAtivo);
+	public Passageiro(String nome, Sexo sexo, LocalDate dataNascimento, String email,
+			String senha, boolean estaAtivo) {
+		super(nome, email, senha, dataNascimento, estaAtivo);
 		this.sexo = sexo;
-		this.dataNascimento = dataNascimento;
 	}
 
 	public Passageiro(String email) {
@@ -34,14 +32,6 @@ public class Passageiro extends Usuario {
 
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 }

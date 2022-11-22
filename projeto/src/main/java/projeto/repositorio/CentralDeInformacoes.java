@@ -3,6 +3,7 @@ package projeto.repositorio;
 import java.util.ArrayList;
 
 import projeto.modelo.Corrida;
+import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.servico.ServicoCorrida;
@@ -12,6 +13,7 @@ public class CentralDeInformacoes {
 
 	private ArrayList<Passageiro> passageiros = new ArrayList<Passageiro>();
 	private ArrayList<Corrida> corridas = new ArrayList<Corrida>();
+	private ArrayList<Mototaxista> mototaxistas = new ArrayList<Mototaxista>();
 	private Usuario administrador;
 
 	private ServicoPassageiro servicoPassageiro = new ServicoPassageiro(this);
@@ -55,6 +57,10 @@ public class CentralDeInformacoes {
 
 	public Usuario getAdministrador() {
 		return administrador;
+	}
+
+	public ArrayList<Mototaxista> getMototaxistas() {
+		return mototaxistas;
 	}
 
 }

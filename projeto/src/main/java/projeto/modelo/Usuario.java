@@ -1,18 +1,22 @@
 package projeto.modelo;
 
+import java.time.LocalDate;
+
 public class Usuario {
 
 	private String nome;
 	private String email;
 	private String senha;
+	private LocalDate dataNascimento;
 	private boolean estaAtivo;
 	
 	public Usuario() {}
 
-	public Usuario(String nome, String email, String senha, boolean estaAtivo) {
+	public Usuario(String nome, String email, String senha, LocalDate dataNascimento,boolean estaAtivo) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.dataNascimento = dataNascimento;
 		this.estaAtivo = estaAtivo;
 	}
 
@@ -58,6 +62,14 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 }
