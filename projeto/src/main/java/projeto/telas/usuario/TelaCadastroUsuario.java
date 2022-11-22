@@ -108,4 +108,12 @@ public class TelaCadastroUsuario extends JFrame {
 	public static void main(String[] args) {
 		new TelaCadastroUsuario();
 	}
+	public JComboBox<String> getBox() {
+		return box;
+	}
+
+	public JFormattedTextField getTxtData() {
+		return txtData;
+	}
+	
 }
