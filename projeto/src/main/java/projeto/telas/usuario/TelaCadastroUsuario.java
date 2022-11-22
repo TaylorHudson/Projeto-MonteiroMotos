@@ -1,12 +1,13 @@
 package projeto.telas.usuario;
 
 import java.awt.Color;
-
+import java.awt.Font;
 
 //esta em observação pois a tela de cadastro está faltando o tipo do usuario, tem que ajeitar, e da uma ajeitada nesse pacote
 //"projeto.telas.usuario" por Completo.
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ public class TelaCadastroUsuario extends JFrame {
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JFormattedTextField txtData;
+	private JComboBox<String> box;
 	private JLabel background;
 
 	public TelaCadastroUsuario() {
@@ -54,27 +56,36 @@ public class TelaCadastroUsuario extends JFrame {
 	private void configFormLogin() {
 		OuvinteTelaCadastroUsuario ouvinte = new OuvinteTelaCadastroUsuario(this);
 		
-		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 430, Color.BLACK, 4);
+		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 500, Color.BLACK, 4);
 		menu.setBackground(Color.BLACK);
 		
-		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 5, 460, 40, new Color(247, 247, 247), 25);
-		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 80, 460, 40, new Color(247, 247, 247), 25);
-		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 155, 460, 40, new Color(247, 247, 247), 25);
+		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario",20, 20, 460, 40,Color.white, 25);
+		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 95, 460, 40, new Color(247, 247, 247), 25);
+		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 168, 460, 40, new Color(247, 247, 247), 25);
+		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 238, 460, 40, new Color(247, 247, 247), 25);
 
-		txtNome = FabricaJText.criarJTextField(20, 40, 460, 40, Color.white, Color.black, 16);
-		txtEmail = FabricaJText.criarJTextField(20, 115, 460, 40, Color.white, Color.black, 16);
-		txtSenha = FabricaJText.criarJPasswordField(20, 190, 460, 40, Color.white, Color.black,20);
+		txtNome = FabricaJText.criarJTextField(20, 130, 460, 40, Color.white, Color.black, 16);
+		txtEmail = FabricaJText.criarJTextField(20, 200, 460, 40, Color.white, Color.black, 16);
+		txtSenha = FabricaJText.criarJPasswordField(20, 270, 460, 40, Color.white, Color.black,20);
 		
-		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 230, 460, 40, Color.white, 25);
+		box = new JComboBox<String>(new String[] {"Mototaxista","Passageiro"});
+		box.setBounds(20, 60, 460, 40);
+		box.setFont(new Font("Arial", 1, 20));
+		box.setForeground(Color.black);
+		box.setBackground(Color.white);	
+			
+	
+	
+		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 460, 40, Color.white, 25);
 		try {
-			txtData = FabricaJFormatted.criarJFormatted(20, 265, 460, 40, new MaskFormatter("##/##/####"));
+			txtData = FabricaJFormatted.criarJFormatted(20, 350, 460, 40, new MaskFormatter("##/##/####"));
 		} catch (Exception e) {
 		}
-		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 350, 150, 45, Color.white,
+		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 420, 150, 45, Color.white,
 				Color.black, 28);
 		btnCadastrar.addMouseListener(ouvinte);
-	
-
+		menu.add(lblTipo);
+		menu.add(box);
 		menu.add(lblNome);
 		menu.add(txtNome);
 		menu.add(lblEmail);
