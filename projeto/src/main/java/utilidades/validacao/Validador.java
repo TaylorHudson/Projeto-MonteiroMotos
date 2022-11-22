@@ -1,5 +1,7 @@
 package utilidades.validacao;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +10,7 @@ import projeto.excecoes.usuario.EmailSemCaracterException;
 import projeto.excecoes.usuario.LoginInvalidoException;
 import projeto.excecoes.usuario.NomeInvalidoException;
 import projeto.excecoes.usuario.SenhaInvalidaException;
+import projeto.modelo.Usuario;
 
 public abstract class Validador {
 
@@ -60,4 +63,12 @@ public abstract class Validador {
 		return true;
 	}
 
+	public static boolean idadeValida(Usuario usuario) {
+		LocalDate dataNasc = usuario.getDataNascimento();
+		LocalDate dataAtual = LocalDate.now();
+		Period periodo = Period.between(dataNasc, dataAtual);
+		if (periodo.getYears() >= 18)
+			return true;
+		return false;
+	}
 }

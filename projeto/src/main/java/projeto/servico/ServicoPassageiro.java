@@ -1,11 +1,13 @@
 package projeto.servico;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
+import utilidades.validacao.Validador;
 
 public class ServicoPassageiro {
 
@@ -24,7 +26,7 @@ public class ServicoPassageiro {
 				ok = false;
 		}
 
-		if (ok && idadeValida(passageiro)) {
+		if (ok && Validador.idadeValida(passageiro)) {
 			passageiros.add(passageiro);
 			return true;
 		}
@@ -41,27 +43,9 @@ public class ServicoPassageiro {
 
 	public boolean validarPassageiro(String email, String senha) {
 		Usuario usuario = central.recuperarPassageiroPeloEmail(email);
-		if (usuario != null && usuario.getSenha().equals(senha)) return true;
+		if (usuario != null && usuario.getSenha().equals(senha))
+			return true;
 		return false;
-	}
-
-	private boolean idadeValida(Passageiro passageiro) {
-		int anoNascimento = passageiro.getDataNascimento().getYear();
-		int anoAtual = LocalDate.now().getYear();
-		boolean anoValido = (anoAtual - anoNascimento) >= 18;
-
-		int mesNasc = passageiro.getDataNascimento().getMonthValue();
-		int mesAtual = LocalDate.now().getMonthValue();
-		boolean mesValido = mesAtual >= mesNasc;
-
-		int diaNasc = passageiro.getDataNascimento().getDayOfMonth();
-		int diaAtual = LocalDate.now().getDayOfMonth();
-		boolean diaValido = diaAtual >= diaNasc;
-
-		if (!mesValido)
-			diaValido = false;
-
-		return (anoValido && mesValido && diaValido);
 	}
 
 	public CentralDeInformacoes getCentral() {

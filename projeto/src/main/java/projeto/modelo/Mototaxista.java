@@ -1,12 +1,19 @@
 package projeto.modelo;
 
+import java.time.LocalDate;
+
 public class Mototaxista extends Usuario {
 
 	private int creditosReivindicacao;
 
-	public Mototaxista(String nome, String email, String senha, boolean estaAtivo) {
-		super(nome, email, senha, estaAtivo);
-		creditosReivindicacao = 0;
+	public Mototaxista(String nome, String email, String senha, LocalDate dataNascimento, boolean estaAtivo) {
+		super(nome, email, senha, dataNascimento, estaAtivo);
+		this.creditosReivindicacao = 0;
+	}
+
+	public Mototaxista(String email) {
+		super(email);
+		this.creditosReivindicacao = 0;
 	}
 
 	public int getCreditosReivindicacao() {
