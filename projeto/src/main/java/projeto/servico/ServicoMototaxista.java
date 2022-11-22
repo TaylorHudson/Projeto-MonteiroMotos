@@ -30,4 +30,12 @@ public class ServicoMototaxista {
     return false;
   }
 
+  public Mototaxista recuperarMototaxistaPeloEmail(String email) {
+		for (Mototaxista m : mototaxistas) {
+			if (m.getEmail().equals(email))
+				return m;
+		}
+		return null;
+	}
+
 }
