@@ -9,5 +9,6 @@ public class Main {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
+		
 	}
 }

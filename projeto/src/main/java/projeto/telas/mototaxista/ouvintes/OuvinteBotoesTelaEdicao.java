@@ -15,7 +15,6 @@ public class OuvinteBotoesTelaEdicao implements MouseListener {
     tela = t;
   }
 
-  @Override
   public void mouseClicked(MouseEvent e) {
     if (e.getSource() == tela.getLblSeta()) {
       tela.dispose();
@@ -29,23 +28,18 @@ public class OuvinteBotoesTelaEdicao implements MouseListener {
   
   }
 
-
-  @Override
   public void mouseEntered(MouseEvent e) {
     e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
   }
 
-  @Override
   public void mouseExited(MouseEvent e) {
     e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
   }
 
-  @Override
   public void mousePressed(MouseEvent e) {
 
   }
 
-  @Override
   public void mouseReleased(MouseEvent e) {
 
   }
