@@ -39,7 +39,6 @@ public class OuvinteTelaCadastroUsuario implements MouseListener {
 			boolean teste = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento));
 			LocalDate data = ServicoData.retornarData(dataDeNascimento);
 			if (teste == true && tipo.equals("Mototaxista")) {
-				CentralDeInformacoes central = new CentralDeInformacoes();
 				central.adicionarMototaxista(new Mototaxista(nome, email, senha, data, true));
 				persistencia.salvarCentral(central, "central");
 				tela.dispose();
