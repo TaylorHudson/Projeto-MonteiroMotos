@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import projeto.modelo.Passageiro;
+import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 
 public class ServicoPassageiro {
@@ -36,6 +37,12 @@ public class ServicoPassageiro {
 				return p;
 		}
 		return null;
+	}
+
+	public boolean validarPassageiro(String email, String senha) {
+		Usuario usuario = central.recuperarPassageiroPeloEmail(email);
+		if (usuario != null && usuario.getSenha().equals(senha)) return true;
+		return false;
 	}
 
 	private boolean idadeValida(Passageiro passageiro) {
