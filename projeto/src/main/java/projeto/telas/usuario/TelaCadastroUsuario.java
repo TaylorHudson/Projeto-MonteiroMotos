@@ -3,8 +3,6 @@ package projeto.telas.usuario;
 import java.awt.Color;
 import java.awt.Font;
 
-//esta em observação pois a tela de cadastro está faltando o tipo do usuario, tem que ajeitar, e da uma ajeitada nesse pacote
-//"projeto.telas.usuario" por Completo.
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
