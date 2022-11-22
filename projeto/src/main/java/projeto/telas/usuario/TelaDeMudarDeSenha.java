@@ -31,26 +31,29 @@ public class TelaDeMudarDeSenha extends JFrame {
 	}
 	
 	public void addComponentes() {
+		
 		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
-		JLabel lblBorda  = FabricaJLabel.criarJLabel(180, 200, 500, 400, Color.black, 4);
-		JLabel lblNovaSenha = FabricaJLabel.criarJLabel("Nova Senha", 195, 280, 460, 40, new Color(28, 28, 30), Color.white, 25);
-		JLabel lblConfirmarSenha = FabricaJLabel.criarJLabel("Confirmar Senha", 195, 380, 460, 40, new Color(28, 28, 30), Color.white, 25);
-		txtNovaSenha = FabricaJText.criarJTextField(195, 320,460 , 40, new Color(28, 28, 30), new Color(179, 177 ,177), 16);
-		txtConfirmarSenha = FabricaJText.criarJTextField(195, 420,460 , 40, new Color(28, 28, 30), new Color(179, 177 ,177), 16);
+		JLabel menu = FabricaJLabel.criarJLabel(175, 200, 500, 400, Color.BLACK,3);
+		menu.setBackground(Color.BLACK);
+	
+		
+		JLabel lblNovaSenha = FabricaJLabel.criarJLabel("Nova Senha", 20, 100, 460, 40, Color.white, 25);
+		JLabel lblConfirmarSenha = FabricaJLabel.criarJLabel("Confirmar Senha", 20, 190, 460, 40, Color.white, 25);
+		txtNovaSenha = FabricaJText.criarJTextField(20, 140,460 , 40, Color.white, Color.black, 16);
+		txtConfirmarSenha = FabricaJText.criarJTextField(20, 230,460 , 40, Color.white, Color.black, 16);
 		
 		OuvinteTelaDeMudarDeSenha ouvinte = new OuvinteTelaDeMudarDeSenha(this);
 		
-		JButton btnConfirmar = FabricaJButton.criarJButton("Confirmar", 340, 500, 170, 45, new Color(28,28,20), new Color(179,177,177), 30);
+		JButton btnConfirmar = FabricaJButton.criarJButton("Confirmar", 165, 320, 170, 45,  Color.white, Color.black, 30);
 		btnConfirmar.addMouseListener(ouvinte);
 		
+		menu.add(txtNovaSenha);
+		menu.add(lblNovaSenha);
+		menu.add(lblConfirmarSenha);
+		menu.add(txtConfirmarSenha);
+		menu.add(btnConfirmar);
+		background.add(menu);
 		add(background);
-		background.add(lblBorda);
-		background.add(txtNovaSenha);
-		background.add(lblNovaSenha);
-		background.add(lblConfirmarSenha);
-		background.add(txtConfirmarSenha);
-		background.add(btnConfirmar);
-		
 	}
 
 	public JTextField getTxtNovaSenha() {

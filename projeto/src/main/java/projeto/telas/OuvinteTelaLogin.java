@@ -13,6 +13,7 @@ import projeto.telas.ADM.TelaHomeADM;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.passageiro.TelaHomePassageiro;
 import projeto.telas.usuario.TelaCadastroUsuario;
+import projeto.telas.usuario.TelaDeMudarDeSenha;
 import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaLogin implements MouseListener {
@@ -66,6 +67,9 @@ public class OuvinteTelaLogin implements MouseListener {
 		else if (e.getSource() == tela.getBtnCadastrese()) {
 			tela.dispose();
 			new TelaCadastroUsuario();
+		
+		}else if(e.getSource() == tela.getBtnResetSenha()) {
+			new TelaDeMudarDeSenha();
 		}
 
 	}
