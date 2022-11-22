@@ -6,31 +6,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import projeto.excecoes.usuario.EmailInvalidoException;
-import projeto.excecoes.usuario.EmailSemCaracterException;
-import projeto.excecoes.usuario.LoginInvalidoException;
-import projeto.excecoes.usuario.NomeInvalidoException;
-import projeto.excecoes.usuario.SenhaInvalidaException;
-import projeto.modelo.Usuario;
+import projeto.excecoes.usuario.ValidacaoException;
 
 public abstract class Validador {
 
-	public static boolean validarCadastroUsuario(String nome, String email, String senha) {
-		validarNome(nome);
-		validarEmail(email);
-		validarSenha(senha);
-		return true;
+	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data) {
+		boolean nomeValido = validarNome(nomeCompleto);
+		boolean emailValido = validarEmail(email);
+		boolean senhaValida = validarSenha(senha);
+		boolean dataValida = idadeValida(data);
+
+		if (nomeValido && emailValido && senhaValida && dataValida)
+			return true;
+		return false;
 	}
 
 	public static boolean validarNome(String nome) {
-		if (nome.isEmpty() || nome.length() < 6) {
-			throw new NomeInvalidoException();
+		if (nome.isEmpty() || nome.length() < 10) {
+			throw new ValidacaoException("O nome deve conter pelo menos dez caracteres");
 		}
 		return true;
 	}
 
 	public static boolean validarEmail(String email) {
 		if (email.equals(null) || email.isEmpty()) {
-			throw new EmailSemCaracterException();
+			throw new ValidacaoException("E-mail inválido");
 		}
 		String regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 		Pattern pattern = Pattern.compile(regex);
@@ -49,26 +49,20 @@ public abstract class Validador {
 		boolean temCaracterEspecial = matcher.matches();
 
 		if (senha.equals(null) || senha.isEmpty())
-			throw new SenhaInvalidaException("A senha n�o pode ser vazia");
+			throw new ValidacaoException("A senha não pode ser vazia");
 		else if (senha.length() < 6)
-			throw new SenhaInvalidaException();
+			throw new ValidacaoException("Senha inválida");
 		else if (!temCaracterEspecial)
-			throw new SenhaInvalidaException("A senha deve conter ao menos um caracter especial");
+			throw new ValidacaoException("A senha deve conter ao menos um caracter especial");
 		return true;
 	}
 
-	public static boolean validarLogin(String login) {
-		if (login.equals(null) || login.length() < 6)
-			throw new LoginInvalidoException();
-		return true;
-	}
-
-	public static boolean idadeValida(Usuario usuario) {
-		LocalDate dataNasc = usuario.getDataNascimento();
+	public static boolean idadeValida(LocalDate dataNascimento) {
+		LocalDate dataNasc = dataNascimento;
 		LocalDate dataAtual = LocalDate.now();
 		Period periodo = Period.between(dataNasc, dataAtual);
 		if (periodo.getYears() >= 18)
 			return true;
-		return false;
+		throw new ValidacaoException("Data de nascimento inválido");
 	}
 }

@@ -9,7 +9,7 @@ public abstract class FabricaJOptionPane {
 	}
 	
 	public static void criarMsgAtencao(String msg) {
-		JOptionPane.showMessageDialog(null, msg, "Atenção", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "AtenÃ§Ã£o", JOptionPane.WARNING_MESSAGE);
 	}
 	
 	public static int criarInput(String titulo, String msg) {

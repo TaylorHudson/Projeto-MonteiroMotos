@@ -55,6 +55,10 @@ public class CentralDeInformacoes {
 		return corridas;
 	}
 
+	public void setAdministrador(Usuario administrador) {
+		this.administrador = administrador;
+	}
+
 	public Usuario getAdministrador() {
 		return administrador;
 	}
