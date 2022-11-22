@@ -7,6 +7,7 @@ import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.servico.ServicoCorrida;
+import projeto.servico.ServicoMototaxista;
 import projeto.servico.ServicoPassageiro;
 
 public class CentralDeInformacoes {
@@ -18,6 +19,15 @@ public class CentralDeInformacoes {
 
 	private ServicoPassageiro servicoPassageiro = new ServicoPassageiro(this);
 	private ServicoCorrida servicoCorrida = new ServicoCorrida(this, servicoPassageiro);
+	private ServicoMototaxista servicoMototaxista = new ServicoMototaxista(this);
+
+	public boolean adicionarMototaxista(Mototaxista mototaxista) {
+		return servicoMototaxista.adicionarMototaxista(mototaxista);
+	}
+
+	public Mototaxista recuperarMototaxistaPeloEmail(String email) {
+		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
+	}
 
 	public boolean adicionarPassageiro(Passageiro passageiro) {
 		return servicoPassageiro.adicionarPassageiro(passageiro);

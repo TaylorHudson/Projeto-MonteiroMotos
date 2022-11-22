@@ -13,10 +13,10 @@ public class ServicoMototaxista {
 
   public ServicoMototaxista(CentralDeInformacoes central) {
     this.central = central;
-    mototaxistas = central.getMototaxistas();
+    mototaxistas = this.central.getMototaxistas();
   }
 
-  public boolean adicionarPassageiro(Mototaxista mototaxista) {
+  public boolean adicionarMototaxista(Mototaxista mototaxista) {
     boolean ok = true;
     for (Mototaxista m : mototaxistas) {
       if (mototaxista.equals(m))

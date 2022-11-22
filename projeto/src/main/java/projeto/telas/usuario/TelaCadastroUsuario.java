@@ -3,7 +3,6 @@ package projeto.telas.usuario;
 import java.awt.Color;
 import java.awt.Font;
 
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -13,7 +12,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import projeto.telas.usuario.ouvintes.OuvinteTelaCadastroUsuario;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -47,33 +45,31 @@ public class TelaCadastroUsuario extends JFrame {
 	}
 
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800,Imagens.BACKGROUND);
+		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
 		add(background);
 	}
 
 	private void configFormLogin() {
 		OuvinteTelaCadastroUsuario ouvinte = new OuvinteTelaCadastroUsuario(this);
-		
+
 		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 500, Color.BLACK, 4);
 		menu.setBackground(Color.BLACK);
-		
-		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario",20, 20, 460, 40,Color.white, 25);
+
+		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario", 20, 20, 460, 40, Color.white, 25);
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 95, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 168, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 238, 460, 40, new Color(247, 247, 247), 25);
 
 		txtNome = FabricaJText.criarJTextField(20, 130, 460, 40, Color.white, Color.black, 16);
 		txtEmail = FabricaJText.criarJTextField(20, 200, 460, 40, Color.white, Color.black, 16);
-		txtSenha = FabricaJText.criarJPasswordField(20, 270, 460, 40, Color.white, Color.black,20);
-		
-		box = new JComboBox<String>(new String[] {"Mototaxista","Passageiro"});
+		txtSenha = FabricaJText.criarJPasswordField(20, 270, 460, 40, Color.white, Color.black, 20);
+
+		box = new JComboBox<String>(new String[] { "Mototaxista", "Passageiro" });
 		box.setBounds(20, 60, 460, 40);
 		box.setFont(new Font("Arial", 1, 20));
 		box.setForeground(Color.black);
-		box.setBackground(Color.white);	
-			
-	
-	
+		box.setBackground(Color.white);
+
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 460, 40, Color.white, 25);
 		try {
 			txtData = FabricaJFormatted.criarJFormatted(20, 350, 460, 40, new MaskFormatter("##/##/####"));

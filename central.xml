@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<centralInformacoes>
+  <passageiros/>
+  <corridas/>
+  <mototaxistas/>
+  <administrador>
+    <nome>Taylor Hudson</nome>
+    <email>taylorhudsonsantos@gmail.com</email>
+    <senha>123456#</senha>
+    <dataNascimento>2002-11-20</dataNascimento>
+    <estaAtivo>true</estaAtivo>
+  </administrador>
+  <servicoPassageiro>
+    <central reference="../.."/>
+    <passageiros reference="../../passageiros"/>
+  </servicoPassageiro>
+  <servicoCorrida>
+    <central reference="../.."/>
+    <corridas reference="../../corridas"/>
+    <util reference="../../servicoPassageiro"/>
+  </servicoCorrida>
+  <servicoMototaxista>
+    <central reference="../.."/>
+    <mototaxistas reference="../../mototaxistas"/>
+  </servicoMototaxista>
+</centralInformacoes>

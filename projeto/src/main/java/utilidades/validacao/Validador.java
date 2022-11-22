@@ -5,7 +5,6 @@ import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import projeto.excecoes.usuario.EmailInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
 
 public abstract class Validador {
@@ -22,23 +21,22 @@ public abstract class Validador {
 	}
 
 	public static boolean validarNome(String nome) {
-		if (nome.isEmpty() || nome.length() < 10) {
+		if (nome.isEmpty() || nome.length() < 10)
 			throw new ValidacaoException("O nome deve conter pelo menos dez caracteres");
-		}
 		return true;
 	}
 
 	public static boolean validarEmail(String email) {
-		if (email.equals(null) || email.isEmpty()) {
-			throw new ValidacaoException("E-mail inválido");
-		}
+		if (email.isEmpty())
+			throw new ValidacaoException("E-mail não pode ser vazio");
+
 		String regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(email);
 		boolean valido = matcher.matches() && email.contains("gmail.com");
 
 		if (!valido)
-			throw new EmailInvalidoException();
+			throw new ValidacaoException("E-mail inválido");
 		return true;
 	}
 
@@ -48,9 +46,7 @@ public abstract class Validador {
 		Matcher matcher = pattern.matcher(senha);
 		boolean temCaracterEspecial = matcher.matches();
 
-		if (senha.equals(null) || senha.isEmpty())
-			throw new ValidacaoException("A senha não pode ser vazia");
-		else if (senha.length() < 6)
+		if (senha.isEmpty() || senha.length() < 6)
 			throw new ValidacaoException("Senha inválida");
 		else if (!temCaracterEspecial)
 			throw new ValidacaoException("A senha deve conter ao menos um caracter especial");
@@ -63,6 +59,6 @@ public abstract class Validador {
 		Period periodo = Period.between(dataNasc, dataAtual);
 		if (periodo.getYears() >= 18)
 			return true;
-		throw new ValidacaoException("Data de nascimento inválido");
+		throw new ValidacaoException("Data de nascimento inválida");
 	}
 }

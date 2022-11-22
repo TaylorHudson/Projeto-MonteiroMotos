@@ -68,7 +68,7 @@ public class TelaLogin extends JFrame {
 		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
 		
 		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 340, 270, 120, 20, Color.white,Color.black, 12);
-		btnCadastrese = FabricaJButton.criarJButton("Cadastre-se", 120, 418, 120, 20, Color.white,Color.black, 12);
+		btnCadastrese = FabricaJButton.criarJButton("Cadastre-se", 130, 418, 120, 20, Color.white,Color.black, 12);
 		btnCadastrese.addMouseListener(ouvinte);
 		btnResetSenha.addMouseListener(ouvinte);
 		btnEntrar = FabricaJButton.criarJButton("Entrar", 180, 300, 120, 45, Color.white,Color.black, 30);

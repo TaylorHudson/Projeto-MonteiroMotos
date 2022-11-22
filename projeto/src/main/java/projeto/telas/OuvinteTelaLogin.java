@@ -5,8 +5,14 @@ import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.telas.ADM.TelaHomeADM;
+import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.passageiro.TelaHomePassageiro;
+import projeto.telas.usuario.TelaCadastroUsuario;
 import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaLogin implements MouseListener {
@@ -21,22 +27,47 @@ public class OuvinteTelaLogin implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == tela.getBtnResetSenha()) {
-
-		} else if (e.getSource() == tela.getBtnEntrar()) {
+		if (e.getSource() == tela.getBtnEntrar()) {
 			String email = tela.getTxtEmail().getText().trim();
 			String senha = String.valueOf(tela.getTxtSenha().getPassword()).trim();
-
+			String tipo = "";
 			switch (tela.getBox().getSelectedIndex()) {
 				case 0:
+					tipo = "mototaxista";
 					break;
 				case 1:
-					boolean valido = central.validarPassageiro(email, senha);
-					if (valido) new TelaHomePassageiro();
+					tipo = "passageiro";
 					break;
 			}
 
+			Usuario adm = central.getAdministrador();
+			if (adm.getEmail().equals(email) && adm.getSenha().equals(senha)) {
+				tela.dispose();
+				new TelaHomeADM();
+			}
+
+			else if (tipo.equals("mototaxista")) {
+				Mototaxista mototaxista = central.recuperarMototaxistaPeloEmail(email);
+				if (mototaxista != null && mototaxista.getSenha().equals(senha)) {
+					tela.dispose();
+					new TelaHomeMototaxista();
+				}
+			}
+
+			else {
+				Passageiro passageiro = central.recuperarPassageiroPeloEmail(email);
+				if (passageiro != null && passageiro.getSenha().equals(senha)) {
+					tela.dispose();
+					new TelaHomePassageiro();
+				}
+			}
 		}
+
+		else if (e.getSource() == tela.getBtnCadastrese()) {
+			tela.dispose();
+			new TelaCadastroUsuario();
+		}
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
