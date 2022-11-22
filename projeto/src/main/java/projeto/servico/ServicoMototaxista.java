@@ -23,7 +23,7 @@ public class ServicoMototaxista {
         ok = false;
     }
 
-    if (ok && Validador.idadeValida(mototaxista)) {
+    if (ok && Validador.idadeValida(mototaxista.getDataNascimento())) {
       mototaxistas.add(mototaxista);
       return true;
     }

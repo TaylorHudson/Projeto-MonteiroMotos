@@ -1,7 +1,5 @@
 package projeto.servico;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 
 import projeto.modelo.Passageiro;
@@ -26,7 +24,7 @@ public class ServicoPassageiro {
 				ok = false;
 		}
 
-		if (ok && Validador.idadeValida(passageiro)) {
+		if (ok && Validador.idadeValida(passageiro.getDataNascimento())) {
 			passageiros.add(passageiro);
 			return true;
 		}
