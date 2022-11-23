@@ -7,9 +7,11 @@ import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -19,6 +21,7 @@ import projeto.telas.passageiro.ouvintes.OuvinteBotaoTelaDeCadastrarCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteCheckBoxTelaDeCadastrarCorrida;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJCheckBox;
+import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
@@ -35,6 +38,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	private JLabel lblChooser;
 	private JButton btnConfirmar;
 	private HorarioDaCorrida horario;
+	private JFormattedTextField txtHora;
 
 	private JCheckBox checkBoxParaAgora;
 	private JCheckBox checkBoxParaDepois;
@@ -87,6 +91,8 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addMouseListener(new OuvinteBotaoPadrao());
+		btnSeta.addActionListener(ouvinteBotao);
 
 		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK, 3);
 		menu.setBackground(Color.BLACK);
@@ -105,7 +111,17 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		JLabel lblComplemento = FabricaJLabel.criarJLabel("Complemento", 30, 220, 460, 40, Color.white, 25);
 		txtComplemento = FabricaJText.criarJTextField(30, 260, 640, 40, Color.white, Color.BLACK, 16);
 
-		btnConfirmar = FabricaJButton.criarJButton("Confirmar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
+		JLabel lblMsg = FabricaJLabel.criarJLabel("Digite A hora da corrida", 30, 370, 300, 40, Color.white, 9);
+
+		try {
+			txtHora = FabricaJFormatted.criarJFormatted(30, 400, 100, 40, new MaskFormatter("##:##:##"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		txtHora.addActionListener(ouvinteBotao);
+
+		btnConfirmar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
 		btnConfirmar.addMouseListener(new OuvinteBotaoPadrao());
 		btnConfirmar.addActionListener(ouvinteBotao);
 
@@ -118,6 +134,8 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		menu.add(checkBoxParaAgora);
 		menu.add(checkBoxParaDepois);
 		menu.add(lblChooser);
+		menu.add(txtHora);
+		menu.add(lblMsg);
 
 		menu.add(btnConfirmar);
 		background.add(menu);
@@ -175,6 +193,10 @@ public class TelaDeCadastrarCorrida extends JFrame {
 
 	public void setHorario(HorarioDaCorrida horario) {
 		this.horario = horario;
+	}
+
+	public JFormattedTextField getTxtHora() {
+		return txtHora;
 	}
 
 }

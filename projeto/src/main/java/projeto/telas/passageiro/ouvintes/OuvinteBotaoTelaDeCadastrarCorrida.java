@@ -3,7 +3,10 @@ package projeto.telas.passageiro.ouvintes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+
 import projeto.telas.passageiro.TelaDeCadastrarCorrida;
+import projeto.telas.passageiro.TelaHomePassageiro;
 import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
@@ -15,11 +18,26 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (tela.getHorario() == null) {
-			FabricaJOptionPane.criarMsgErro("Os campos De seleção devem estar selecionados.");
-		} else {
+	public void actionPerformed(ActionEvent evento) {
+		JButton item = (JButton) evento.getSource();
+
+		try {
+
+			System.out.println(tela.getTxtHora().getText());
+		} catch (Exception e) {
+			FabricaJOptionPane.criarMsgErro("Hora Invalida");
+			tela.getTxtHora().setText("");
+			e.printStackTrace();
+		}
+		if (tela.getHorario() != null) {
 			System.out.println(tela.getHorario());
+		} else {
+			FabricaJOptionPane.criarMsgErro("Os campos De seleção devem estar selecionados.");
+		}
+		if (item == tela.getBtnSeta()) {
+			tela.dispose();
+			new TelaHomePassageiro();
+
 		}
 	}
 }
