@@ -29,6 +29,7 @@ public class OuvinteMenuTelaHome implements ActionListener {
 			if (opcDeletar == 0)
 				System.out.println("Deletar a conta");
     }else {
+      int opcSair = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja sair?");
       tela.dispose();
       new TelaLogin();
     }

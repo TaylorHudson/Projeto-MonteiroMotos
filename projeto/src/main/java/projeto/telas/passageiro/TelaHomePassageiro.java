@@ -9,16 +9,20 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import projeto.OuvinteBotaoPadrao;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
 
 public class TelaHomePassageiro extends JFrame {
-
+	OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
+	
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
 	private JMenuItem itemSair;
+	private JButton btnListarCorrida;
+	private JButton btnCadastrarCorrida;
 
 	private JLabel background;
 
@@ -50,10 +54,10 @@ public class TelaHomePassageiro extends JFrame {
 		itemDeletar = new JMenuItem("Deletar Perfil");
 		itemSair = new JMenuItem("Sair");
 
-		OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
 		itemDeletar.addActionListener(ouvinte);
 		itemEditar.addActionListener(ouvinte);
 		itemSair.addActionListener(ouvinte);
+
 
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemEditar);
@@ -66,12 +70,16 @@ public class TelaHomePassageiro extends JFrame {
 		add(background);
 	}
 	private void configButton() {
-		JButton btnListarCorrida = FabricaJButton.criarJButton("Listar Corrida", 270, 190, 380, 240,
-				new Color(28, 28, 20), new Color(179, 177, 177), 28);
-		btnListarCorrida.addMouseListener(null);
-		JButton btnCadastrarCorrida = FabricaJButton.criarJButton("Cadastrar Corrida", 270, 440, 380, 240,
-				new Color(28, 28, 20), new Color(179, 177, 177), 28);
-		btnCadastrarCorrida.addMouseListener(null);
+		btnListarCorrida = FabricaJButton.criarJButton("Listar Corrida", 270, 190, 380, 240,
+		new Color(28, 28, 20), new Color(179, 177, 177), 28);
+		btnListarCorrida.addMouseListener(new OuvinteBotaoPadrao());
+		btnListarCorrida.addActionListener(ouvinte);
+		
+		
+		 btnCadastrarCorrida = FabricaJButton.criarJButton("Cadastrar Corrida", 270, 440, 380, 240,
+			new Color(28, 28, 20), new Color(179, 177, 177), 28);
+		btnCadastrarCorrida.addMouseListener(new OuvinteBotaoPadrao());
+		btnCadastrarCorrida.addActionListener(ouvinte);	
 
 		background.add(btnCadastrarCorrida);
 		background.add(btnListarCorrida);
@@ -88,4 +96,13 @@ public class TelaHomePassageiro extends JFrame {
 	public JMenuItem getItemSair() {
 		return itemSair;
 	}
+
+	public JButton getBtnListarCorrida() {
+		return btnListarCorrida;
+	}
+
+	public JButton getBtnCadastrarCorrida() {
+		return btnCadastrarCorrida;
+	}
+
 }
