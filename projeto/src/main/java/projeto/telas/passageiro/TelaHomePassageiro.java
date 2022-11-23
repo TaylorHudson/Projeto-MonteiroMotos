@@ -76,8 +76,8 @@ public class TelaHomePassageiro extends JFrame {
 		btnListarCorrida.addActionListener(ouvinte);
 		
 		
-		 btnCadastrarCorrida = FabricaJButton.criarJButton("Cadastrar Corrida", 270, 440, 380, 240,
-			new Color(28, 28, 20), new Color(179, 177, 177), 28);
+		btnCadastrarCorrida = FabricaJButton.criarJButton("Cadastrar Corrida", 270, 440, 380, 240,
+		new Color(28, 28, 20), new Color(179, 177, 177), 28);
 		btnCadastrarCorrida.addMouseListener(new OuvinteBotaoPadrao());
 		btnCadastrarCorrida.addActionListener(ouvinte);	
 

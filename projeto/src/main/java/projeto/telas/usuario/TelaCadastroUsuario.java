@@ -62,8 +62,8 @@ public class TelaCadastroUsuario extends JFrame {
 		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario", 20, 20, 460, 40, Color.white, 25);
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 95, 460, 40, new Color(247, 247, 247), 25);
 		
-		JCheckBox checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(20, 400, 100, 35, "Feminino",Color.BLACK,Color.WHITE);
-		JCheckBox checkBoxMasculino = FabricaJCheckBox.criarJCheckBox(110, 400, 100, 35, "Masculino", Color.black, Color.white);
+		JCheckBox checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(20, 400, 90, 30, "Feminino",Color.BLACK,Color.WHITE);
+		JCheckBox checkBoxMasculino = FabricaJCheckBox.criarJCheckBox(110, 400, 90, 30, "Masculino", Color.black, Color.white);
 		
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 168, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 238, 460, 40, new Color(247, 247, 247), 25);
