@@ -7,9 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import projeto.telas.ADM.TelaDadosDosUsuarios;
+import javax.swing.JButton;
 
-public class OuvinteTelaDadosDosUsuarios implements MouseListener {
+import projeto.telas.ADM.TelaDadosDosUsuarios;
+import projeto.telas.ADM.TelaHomeADM;
+
+public class OuvinteTelaDadosDosUsuarios implements ActionListener {
 	private TelaDadosDosUsuarios tela;
 
 	public OuvinteTelaDadosDosUsuarios(TelaDadosDosUsuarios tela) {
@@ -17,38 +20,13 @@ public class OuvinteTelaDadosDosUsuarios implements MouseListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		switch (e.getActionCommand()) {
-		case "Passageiro":
+		JButton btn = (JButton) e.getSource();
+		if(btn == tela.getBtnDetalhes()) {
 			tela.dispose();
-			break;
-		case "Moto-Taxista":
+		}else if(btn == tela.getBtnSeta()) {
 			tela.dispose();
-			break;
+			new TelaHomeADM();
 		}
-	}
-
-	
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	
-	public void mouseReleased(MouseEvent e) {
-
-	}
-	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
-		e.getComponent().setForeground(new Color(179, 177, 177));
-
-	}
-
-	public void mouseExited(MouseEvent e) {
-		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		e.getComponent().setForeground(Color.WHITE);
 
 	}
 

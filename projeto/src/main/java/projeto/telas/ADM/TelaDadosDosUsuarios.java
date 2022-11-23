@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -13,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.OuvinteBotaoPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDadosDosUsuarios;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
@@ -21,21 +23,17 @@ import utilidades.imagens.Imagens;
 
 public class TelaDadosDosUsuarios extends JFrame {
 
-	OuvinteTelaDadosDosUsuarios ouvinte = new OuvinteTelaDadosDosUsuarios(this);
-
 	private JTable tabelaUsuarios;
-	private JLabel lblSeta;
-
+	private JButton btnSeta;
 	private JLabel background;
 	private JButton btnDetalhes;
-	private JMenuItem itemPassageiro;
-	private JMenuItem itemMotoTaxista;
+	private JComboBox<String> box;
+	
 
 	public TelaDadosDosUsuarios() {
 		configurarTela();
 		configImagemFundo();
 		confiBotoes();
-		configMenu();
 		configTabela();
 		setVisible(true);
 	}
@@ -55,27 +53,31 @@ public class TelaDadosDosUsuarios extends JFrame {
 	}
 
 	private void confiBotoes() {
-		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, new Color(28, 28, 20), Color.white,
-				28);
-		background.add(btnDetalhes);
-		btnDetalhes.addMouseListener(ouvinte);
-	}
-
-	private void configMenu() {
-		JMenuBar menuBar = new JMenuBar();
-		JMenu menuOpcoes = new JMenu("Tipo do Usuario");
-		itemPassageiro = new JMenuItem("Passageiro");
-		itemMotoTaxista = new JMenuItem("Moto-Taxista");
-
 		OuvinteTelaDadosDosUsuarios ouvinte = new OuvinteTelaDadosDosUsuarios(this);
-		itemPassageiro.addMouseListener(ouvinte);
-		itemMotoTaxista.addMouseListener(ouvinte);
-
-		menuBar.add(menuOpcoes);
-		menuOpcoes.add(itemPassageiro);
-		menuOpcoes.add(itemMotoTaxista);
-		setJMenuBar(menuBar);
+		OuvinteBotaoPadrao mouse = new OuvinteBotaoPadrao();
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,
+				28);
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		
+		
+		box = new JComboBox<String>(new String[] {"Mototaxista","Passageiro"});
+		box.setBounds(380, 100, 460, 40);
+		box.setFont(new Font("Arial", 1, 20));
+		box.setForeground(Color.black);
+		box.setBackground(Color.white);
+		
+		btnDetalhes.addActionListener(ouvinte);
+		btnSeta.addActionListener(ouvinte);
+		
+		btnDetalhes.addMouseListener(mouse);
+		btnSeta.addMouseListener(mouse);
+		
+		background.add(btnDetalhes);
+		background.add(box);
+		background.add(btnSeta);
 	}
+
+	
 	private void configTabela() {
 
 		DefaultTableModel modelo = new DefaultTableModel();
@@ -83,15 +85,22 @@ public class TelaDadosDosUsuarios extends JFrame {
 		tabelaUsuarios = new JTable(modelo);
 		tabelaUsuarios.setFont(new Font("Arial", 1, 15));
 
-		lblSeta = FabricaJLabel.criarJLabel(40, 20, 50, 50, Imagens.SETA);
-		lblSeta.addMouseListener(ouvinte);
 
 		JScrollPane scrol = new JScrollPane(tabelaUsuarios);
 		scrol.getViewport().setBackground(new Color(124, 68, 2));
 		scrol.setBounds(2, 200, 885, 400);
 
 		background.add(scrol);
-		background.add(lblSeta);
+	}
+	
+	
+
+	public JButton getBtnSeta() {
+		return btnSeta;
+	}
+
+	public JButton getBtnDetalhes() {
+		return btnDetalhes;
 	}
 
 	public static void main(String[] args) {

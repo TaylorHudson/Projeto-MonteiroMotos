@@ -9,7 +9,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import projeto.telas.ADM.ouvintes.OuviteTelaHomeADM;
+import projeto.OuvinteBotaoPadrao;
+import projeto.telas.ADM.ouvintes.OuvinteMenuTelaHomeADM;
+import projeto.telas.ADM.ouvintes.OuvinteTelaHomeADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
@@ -18,6 +20,7 @@ public class TelaHomeADM  extends JFrame{
 	private JMenuItem itemEditar;
 	private JMenuItem itemListaDeCorridas;
 	private JMenuItem itemDefinirValorDosCreditos;
+	private JMenuItem itemSair;
 	private JLabel background;
 	private JButton btnDadosDosUsuarios;
 	private JButton btnFinancas;
@@ -43,16 +46,19 @@ public class TelaHomeADM  extends JFrame{
 		itemEditar = new JMenuItem("Editar Perfil");
 		itemListaDeCorridas = new JMenuItem("Lista de Corridas");
 		itemDefinirValorDosCreditos = new JMenuItem("Definir Valor dos Créditos");
+		itemSair = new JMenuItem("Sair");
 		
-		OuviteTelaHomeADM ouvinte = new OuviteTelaHomeADM(this);
+		OuvinteMenuTelaHomeADM ouvinte = new OuvinteMenuTelaHomeADM(this);
 		itemEditar.addActionListener(ouvinte);
 		itemListaDeCorridas.addActionListener(ouvinte);
 		itemDefinirValorDosCreditos.addActionListener(ouvinte);
+		itemSair.addActionListener(ouvinte);
 		
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemEditar);
 		menuOpcoes.add(itemListaDeCorridas);
 		menuOpcoes.add(itemDefinirValorDosCreditos);
+		menuOpcoes.add(itemSair);
 		setJMenuBar(menuBar);
 	}
 	private void configImagemFundo() {
@@ -60,10 +66,17 @@ public class TelaHomeADM  extends JFrame{
 		add(background);
 	}
 	private void confiBotoes() {
+		OuvinteTelaHomeADM ouvinte = new OuvinteTelaHomeADM(this);
+		OuvinteBotaoPadrao mouse = new OuvinteBotaoPadrao();
 		btnDadosDosUsuarios = FabricaJButton.criarJButton("Dados dos Usuarios", 150, 220, 300, 70,
-				new Color(28, 28, 20), new Color(179, 177, 177), 28);
+				Color.white, Color.black, 28);
 		btnFinancas = FabricaJButton.criarJButton("Finanças", 150, 490, 300, 70,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
+		
+		btnDadosDosUsuarios.addActionListener(ouvinte);
+		btnFinancas.addActionListener(ouvinte);
+		
+		btnDadosDosUsuarios.addMouseListener(mouse);
 		
 		
 		background.add(btnDadosDosUsuarios);
