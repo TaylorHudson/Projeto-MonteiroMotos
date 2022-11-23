@@ -29,11 +29,11 @@ public abstract class FabricaJButton {
 		JButton btn = new JButton();
 	    btn.setBounds(x, y, largura, altura);
 	    btn.setText(texto);
-	    //btn.setHorizontalTextPosition(JButton.BOTTOM);
 	    btn.setIcon(img);
+			btn.setContentAreaFilled(false); 
 	    btn.setFocusable(false);
 	    btn.setBorder(null);
-	    btn.setOpaque(true);
+	    btn.setOpaque(false);
 		
 	    return btn;
 	}

@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import projeto.OuvinteBotaoPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -23,7 +24,7 @@ public class TelaEdicaoPerfil extends JFrame {
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JFormattedTextField txtData;
-	private JLabel lblSeta;
+	private JButton btnSeta;
 
 	public TelaEdicaoPerfil() {
 		configurarTela();
@@ -42,11 +43,13 @@ public class TelaEdicaoPerfil extends JFrame {
 
 	private void configMenu() {
 		OuvinteBotoesTelaEdicao ouvinte = new OuvinteBotoesTelaEdicao(this);
+		OuvinteBotaoPadrao ouvinteBotao = new OuvinteBotaoPadrao(); 
 
 		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
-		lblSeta = FabricaJLabel.criarJLabel(10, 10, 50, 50, Imagens.SETA);
-		//lblSeta.addActionListener(ouvinte)
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addActionListener(ouvinte);
+		btnSeta.addMouseListener(ouvinteBotao);
 
 		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK,3);
 		menu.setBackground(Color.BLACK);
@@ -68,6 +71,7 @@ public class TelaEdicaoPerfil extends JFrame {
 
 		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50,Color.WHITE,Color.BLACK, 25);
 		btnSalvar.addActionListener(ouvinte);
+		btnSalvar.addMouseListener(ouvinteBotao);
 
 		menu.add(lblNomeCompleto);
 		menu.add(txtNomeCompleto);
@@ -79,7 +83,7 @@ public class TelaEdicaoPerfil extends JFrame {
 		menu.add(txtData);
 		menu.add(btnSalvar);
 		background.add(menu);
-		//background.add(lblSeta);
+		background.add(btnSeta);
 		add(background);
 	}
 
@@ -99,11 +103,12 @@ public class TelaEdicaoPerfil extends JFrame {
 		return txtData;
 	}
 
-	public JLabel getLblSeta() {
-		return lblSeta;
+	public JButton getBtnSeta() {
+		return btnSeta;
 	}
 
 	public static void main(String[] args) {
 		new TelaEdicaoPerfil();
 	}
+
 }

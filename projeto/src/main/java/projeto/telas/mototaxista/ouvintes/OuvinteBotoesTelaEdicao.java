@@ -15,7 +15,8 @@ public class OuvinteBotoesTelaEdicao implements ActionListener {
   }
 
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == tela.getLblSeta()) {
+
+    if(e.getSource() == tela.getBtnSeta()) {
       tela.dispose();
       new TelaHomeMototaxista();
     }
