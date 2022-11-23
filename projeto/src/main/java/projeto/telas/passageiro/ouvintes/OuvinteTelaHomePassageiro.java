@@ -7,7 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 import projeto.telas.mototaxista.TelaEdicaoPerfil;
+import projeto.telas.passageiro.TelaDeCadastrarCorrida;
 import projeto.telas.passageiro.TelaHomePassageiro;
+import projeto.telas.passageiro.TelaListarCorridas;
 import projeto.telas.usuario.TelaLogin;
 import utilidades.fabricas.FabricaJOptionPane;
 
@@ -22,9 +24,11 @@ public class OuvinteTelaHomePassageiro implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 		JButton item = (JButton) evento.getSource();
 		if(item == tela.getBtnCadastrarCorrida()){
-			System.out.println("tela Cadastrar corrida Aberta");
+			tela.dispose();
+			new TelaDeCadastrarCorrida();
 		}else if(item == tela.getBtnListarCorrida()){
-			System.out.println("Tela listar corrida aberta");
+			tela.dispose();
+			new TelaListarCorridas();
 		}
 	}
 }

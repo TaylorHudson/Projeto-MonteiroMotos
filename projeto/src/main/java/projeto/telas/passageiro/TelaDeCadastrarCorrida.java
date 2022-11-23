@@ -36,7 +36,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	private JTextField txtSexo;
 	private JDateChooser chooser;
 	private JLabel lblChooser;
-	private JButton btnConfirmar;
+	private JButton btnSalvar;
 	private HorarioDaCorrida horario;
 	private JFormattedTextField txtHora;
 
@@ -121,9 +121,9 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		}
 		txtHora.addActionListener(ouvinteBotao);
 
-		btnConfirmar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
-		btnConfirmar.addMouseListener(new OuvinteBotaoPadrao());
-		btnConfirmar.addActionListener(ouvinteBotao);
+		btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
+		btnSalvar.addMouseListener(new OuvinteBotaoPadrao());
+		btnSalvar.addActionListener(ouvinteBotao);
 
 		menu.add(lblPontoDeEcontro);
 		menu.add(txtPontoDeEncontro);
@@ -137,7 +137,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		menu.add(txtHora);
 		menu.add(lblMsg);
 
-		menu.add(btnConfirmar);
+		menu.add(btnSalvar);
 		background.add(menu);
 		background.add(btnSeta);
 		add(background);
@@ -159,8 +159,8 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		return lblChooser;
 	}
 
-	public JButton getBtnConfirmar() {
-		return btnConfirmar;
+	public JButton getBtnSalvar() {
+		return btnSalvar;
 	}
 
 	public JTextField getTxtPontoDeEncontro() {

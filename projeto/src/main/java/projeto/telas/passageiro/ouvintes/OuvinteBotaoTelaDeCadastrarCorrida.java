@@ -29,15 +29,20 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 			tela.getTxtHora().setText("");
 			e.printStackTrace();
 		}
-		if (tela.getHorario() != null) {
-			System.out.println(tela.getHorario());
-		} else {
-			FabricaJOptionPane.criarMsgErro("Os campos De seleção devem estar selecionados.");
-		}
 		if (item == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomePassageiro();
 
+		} else if (item == tela.getBtnSalvar()) {
+
+			if (tela.getHorario() != null) {
+				System.out.println(tela.getHorario());
+			} else {
+				FabricaJOptionPane.criarMsgErro("Os campos De seleção devem estar selecionados.");
+
+			}
+
 		}
+
 	}
 }
