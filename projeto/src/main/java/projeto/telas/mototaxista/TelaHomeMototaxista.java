@@ -9,6 +9,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import projeto.OuvinteBotaoPadrao;
+import projeto.telas.mototaxista.ouvintes.OuvinteMenuTelaHome;
 import projeto.telas.mototaxista.ouvintes.OuvinteTelaHomeMototaxista;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -64,10 +66,15 @@ public class TelaHomeMototaxista extends JFrame{
 		itemDeletar = new JMenuItem("Deletar Perfil");
 		itemSair = new JMenuItem("Sair");
 		
-		OuvinteTelaHomeMototaxista ouvinte = new OuvinteTelaHomeMototaxista(this);
-		itemEditar.addActionListener(ouvinte);
-		itemDeletar.addActionListener(ouvinte);
-		itemSair.addActionListener(ouvinte);
+		OuvinteMenuTelaHome ouvinteMenu = new OuvinteMenuTelaHome(this);
+		OuvinteBotaoPadrao ouvinteBotaoPadrao = new OuvinteBotaoPadrao();
+
+		itemEditar.addActionListener(ouvinteMenu);
+		itemEditar.addMouseListener(ouvinteBotaoPadrao);
+		itemDeletar.addActionListener(ouvinteMenu);
+		itemDeletar.addMouseListener(ouvinteBotaoPadrao);
+		itemSair.addActionListener(ouvinteMenu);
+		itemSair.addMouseListener(ouvinteBotaoPadrao);
 		
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemEditar);
@@ -99,6 +106,10 @@ public class TelaHomeMototaxista extends JFrame{
 
 	public JMenuItem getItemDeletar() {
 		return itemDeletar;
+	}
+
+	public JMenuItem getItemSair() {
+		return itemSair;
 	}
 
 }

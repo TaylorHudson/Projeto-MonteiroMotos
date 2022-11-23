@@ -3,11 +3,10 @@ package projeto.telas.mototaxista.ouvintes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import projeto.telas.mototaxista.TelaEdicaoPerfil;
+import javax.swing.JButton;
+
 import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.mototaxista.TelaListarCorridas;
-import projeto.telas.usuario.TelaLogin;
-import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteTelaHomeMototaxista implements ActionListener {
 
@@ -18,28 +17,12 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("Deletar Perfil")) {
-			int opcDeletar = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja deletar sua conta?");
-			if (opcDeletar == 0)
-				System.out.println("Deletar a conta");
-
-			else if (e.getActionCommand().equals("Editar Perfil")) {
-				tela.dispose();
-				new TelaEdicaoPerfil();
-			}
-
-			else if (e.getActionCommand().equals("Sair")) {
-				int opcSair = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja sair realmente?");
-				if (opcSair == 0) {
-					tela.dispose();
-					new TelaLogin();
-				}
-
-			} else if (e.getActionCommand().equals("Listar Corridas")) {
-				tela.dispose();
-				new TelaListarCorridas();
-			}
-			
+		JButton btn = (JButton) e.getSource();
+		if (btn == tela.getBtnListarCorridas()) {
+			tela.dispose();
+			new TelaListarCorridas();
+		}else {
+			tela.dispose();
 		}
 	}
 }
