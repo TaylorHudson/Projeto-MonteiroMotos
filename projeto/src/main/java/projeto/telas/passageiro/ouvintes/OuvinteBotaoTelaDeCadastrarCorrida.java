@@ -3,7 +3,6 @@ package projeto.telas.passageiro.ouvintes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import projeto.modelo.enuns.Sexo;
 import projeto.telas.passageiro.TelaDeCadastrarCorrida;
 import utilidades.fabricas.FabricaJOptionPane;
 

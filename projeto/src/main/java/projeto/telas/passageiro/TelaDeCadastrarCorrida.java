@@ -15,7 +15,6 @@ import com.toedter.calendar.JDateChooser;
 
 import projeto.OuvinteBotaoPadrao;
 import projeto.modelo.enuns.HorarioDaCorrida;
-import projeto.modelo.enuns.Sexo;
 import projeto.telas.passageiro.ouvintes.OuvinteBotaoTelaDeCadastrarCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteCheckBoxTelaDeCadastrarCorrida;
 import utilidades.fabricas.FabricaJButton;

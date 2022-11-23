@@ -4,15 +4,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import projeto.modelo.enuns.HorarioDaCorrida;
-import projeto.modelo.enuns.Sexo;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.passageiro.TelaDeCadastrarCorrida;
 
 public class OuvinteCheckBoxTelaDeCadastrarCorrida implements ItemListener {
-	
-	
+
 	CentralDeInformacoes central = new CentralDeInformacoes();
-	
 
 	private TelaDeCadastrarCorrida tela;
 
@@ -22,7 +19,7 @@ public class OuvinteCheckBoxTelaDeCadastrarCorrida implements ItemListener {
 	}
 
 	public void itemStateChanged(ItemEvent e) {
-		
+
 		if (tela.getCheckBoxParaAgora().isSelected()) {
 			tela.setHorario(HorarioDaCorrida.PARAAGORA);
 		}
