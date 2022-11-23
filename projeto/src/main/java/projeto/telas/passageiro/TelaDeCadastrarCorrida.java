@@ -13,6 +13,11 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import projeto.OuvinteBotaoPadrao;
+import projeto.modelo.enuns.HorarioDaCorrida;
+import projeto.modelo.enuns.Sexo;
+import projeto.telas.passageiro.ouvintes.OuvinteBotaoTelaDeCadastrarCorrida;
+import projeto.telas.passageiro.ouvintes.OuvinteCheckBoxTelaDeCadastrarCorrida;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJCheckBox;
 import utilidades.fabricas.FabricaJLabel;
@@ -29,6 +34,11 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	private JTextField txtSexo;
 	private JDateChooser chooser;
 	private JLabel lblChooser;
+	private JButton btnConfirmar;
+	private HorarioDaCorrida horario;
+
+	private JCheckBox checkBoxParaAgora;
+	private JCheckBox checkBoxParaDepois;
 
 	public TelaDeCadastrarCorrida() {
 		configurarDateChooser();
@@ -72,6 +82,8 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	}
 
 	private void configMenu() {
+		OuvinteBotaoTelaDeCadastrarCorrida ouvinteBotao = new OuvinteBotaoTelaDeCadastrarCorrida(this);
+		OuvinteCheckBoxTelaDeCadastrarCorrida ouvinteCheckBox = new OuvinteCheckBoxTelaDeCadastrarCorrida(this);
 
 		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
@@ -80,10 +92,10 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK, 3);
 		menu.setBackground(Color.BLACK);
 
-		JCheckBox checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(30, 300, 90, 30, "Feminino", Color.BLACK,
-				Color.WHITE);
-		JCheckBox checkBoxMasculino = FabricaJCheckBox.criarJCheckBox(130, 300, 90, 30, "Masculino", Color.black,
-				Color.white);
+		checkBoxParaAgora = FabricaJCheckBox.criarJCheckBox(30, 300, 90, 30, "Para agora", Color.BLACK, Color.WHITE);
+		checkBoxParaAgora.addItemListener(ouvinteCheckBox);
+		checkBoxParaDepois = FabricaJCheckBox.criarJCheckBox(130, 300, 90, 30, "Data futura", Color.black, Color.white);
+		checkBoxParaDepois.addItemListener(ouvinteCheckBox);
 
 		JLabel lblPontoDeEcontro = FabricaJLabel.criarJLabel("Ponto de encontro", 30, 60, 460, 40, Color.white, 25);
 		txtPontoDeEncontro = FabricaJText.criarJTextField(30, 100, 640, 40, Color.white, Color.BLACK, 16);
@@ -94,8 +106,9 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		JLabel lblComplemento = FabricaJLabel.criarJLabel("Complemento", 30, 220, 460, 40, Color.white, 25);
 		txtComplemento = FabricaJText.criarJTextField(30, 260, 640, 40, Color.white, Color.BLACK, 16);
 
-		JButton btnConfirmar = FabricaJButton.criarJButton("Confirmar", 270, 470, 150, 50, Color.WHITE, Color.BLACK,
-				25);
+		btnConfirmar = FabricaJButton.criarJButton("Confirmar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
+		btnConfirmar.addMouseListener(new OuvinteBotaoPadrao());
+		btnConfirmar.addActionListener(ouvinteBotao);
 
 		menu.add(lblPontoDeEcontro);
 		menu.add(txtPontoDeEncontro);
@@ -103,8 +116,8 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		menu.add(txtLocalDestino);
 		menu.add(lblComplemento);
 		menu.add(txtComplemento);
-		menu.add(checkBoxFeminino);
-		menu.add(checkBoxMasculino);
+		menu.add(checkBoxParaAgora);
+		menu.add(checkBoxParaDepois);
 		menu.add(lblChooser);
 
 		menu.add(btnConfirmar);
@@ -113,11 +126,56 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		add(background);
 	}
 
-	private void configButton() {
-
-	}
-
 	public static void main(String[] args) {
 		new TelaDeCadastrarCorrida();
 	}
+
+	public JButton getBtnSeta() {
+		return btnSeta;
+	}
+
+	public JDateChooser getChooser() {
+		return chooser;
+	}
+
+	public JLabel getLblChooser() {
+		return lblChooser;
+	}
+
+	public JButton getBtnConfirmar() {
+		return btnConfirmar;
+	}
+
+	public JTextField getTxtPontoDeEncontro() {
+		return txtPontoDeEncontro;
+	}
+
+	public JTextField getTxtLocalDestino() {
+		return txtLocalDestino;
+	}
+
+	public JTextField getTxtComplemento() {
+		return txtComplemento;
+	}
+
+	public JTextField getTxtSexo() {
+		return txtSexo;
+	}
+
+	public JCheckBox getCheckBoxParaAgora() {
+		return checkBoxParaAgora;
+	}
+
+	public JCheckBox getCheckBoxParaDepois() {
+		return checkBoxParaDepois;
+	}
+
+	public HorarioDaCorrida getHorario() {
+		return horario;
+	}
+
+	public void setHorario(HorarioDaCorrida horario) {
+		this.horario = horario;
+	}
+
 }
