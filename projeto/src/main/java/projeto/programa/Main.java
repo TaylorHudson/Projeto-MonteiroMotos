@@ -1,8 +1,8 @@
 package projeto.programa;
 
 import projeto.repositorio.CentralDeInformacoes;
-import projeto.telas.TelaLogin;
 import projeto.telas.ADM.TelaCadastroADM;
+import projeto.telas.usuario.TelaLogin;
 import utilidades.persistencia.Persistencia;
 
 public class Main {

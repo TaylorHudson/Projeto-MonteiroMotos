@@ -1,15 +1,13 @@
 package projeto.telas.usuario.ouvintes;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.usuario.TelaDeMudarDeSenha;
 import utilidades.persistencia.Persistencia;
 
-public class OuvinteTelaDeMudarDeSenha implements MouseListener {
+public class OuvinteTelaDeMudarDeSenha implements ActionListener {
 
 	private TelaDeMudarDeSenha tela;
 	private Persistencia persistencia = new Persistencia();
@@ -20,23 +18,8 @@ public class OuvinteTelaDeMudarDeSenha implements MouseListener {
 		central = persistencia.recuperarCentral("central");
 	}
 
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setForeground(new Color(66, 65, 65));
-		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
-	}
-
-	public void mouseExited(MouseEvent e) {
-		e.getComponent().setForeground(Color.black);
-		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-	}
-
-	public void mousePressed(MouseEvent e) {
-	}
-
-	public void mouseReleased(MouseEvent e) {
+	public void actionPerformed(ActionEvent e) {
+		String novaSenha = tela.getTxtNovaSenha().getText().trim();
+		String confirmacaoSenha = tela.getTxtConfirmarSenha().getText().trim();
 	}
 }

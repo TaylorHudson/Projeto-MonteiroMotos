@@ -1,9 +1,7 @@
 package projeto.telas.usuario.ouvintes;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.telas.usuario.TelaDeEnvioDeCodigo;
@@ -12,7 +10,7 @@ import utilidades.email.Mensageiro;
 import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.validacao.Validador;
 
-public class OuvinteTelaDeEnvioDeCodigo implements MouseListener {
+public class OuvinteTelaDeEnvioDeCodigo implements ActionListener {
 
 	private TelaDeEnvioDeCodigo tela;
 
@@ -20,7 +18,7 @@ public class OuvinteTelaDeEnvioDeCodigo implements MouseListener {
 		this.tela = tela;
 	}
 
-	public void mouseClicked(MouseEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		String email = tela.getTxtEmail().getText();
 		try {
 			boolean valido = Validador.validarEmail(email);
@@ -38,29 +36,7 @@ public class OuvinteTelaDeEnvioDeCodigo implements MouseListener {
 
 		} catch (ValidacaoException erro) {
 			FabricaJOptionPane.criarMsgErro(erro.getMessage());
-
 		}
-
-	}
-
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setForeground(new Color(66, 65, 65));
-		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-	}
-
-	public void mouseExited(MouseEvent e) {
-		e.getComponent().setForeground(Color.black);
-		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-
 	}
 
 }

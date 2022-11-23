@@ -1,4 +1,4 @@
-package projeto.telas;
+package projeto.telas.usuario;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import projeto.OuvinteBotaoPadrao;
+import projeto.telas.usuario.ouvintes.OuvinteBotaoEntrarTelaLogin;
+import projeto.telas.usuario.ouvintes.OuvinteTelaLogin;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
@@ -68,12 +71,17 @@ public class TelaLogin extends JFrame {
 		OuvinteTelaLogin ouvinte = new OuvinteTelaLogin(this);
 		
 		btnResetSenha = FabricaJButton.criarJButton("Esqueceu a senha?", 340, 270, 120, 20, Color.white,Color.black, 12);
+		btnResetSenha.addActionListener(ouvinte);
 		btnCadastrese = FabricaJButton.criarJButton("Cadastre-se", 130, 418, 120, 20, Color.white,Color.black, 12);
-		btnCadastrese.addMouseListener(ouvinte);
-		btnResetSenha.addMouseListener(ouvinte);
+		btnCadastrese.addActionListener(ouvinte);
 		btnEntrar = FabricaJButton.criarJButton("Entrar", 180, 300, 120, 45, Color.white,Color.black, 30);
-		btnEntrar.addMouseListener(ouvinte);
+		btnEntrar.addActionListener(new OuvinteBotaoEntrarTelaLogin(this));
 		
+		OuvinteBotaoPadrao ouvinteBotaoPadrao = new OuvinteBotaoPadrao();
+		btnResetSenha.addMouseListener(ouvinteBotaoPadrao);
+		btnCadastrese.addMouseListener(ouvinteBotaoPadrao);
+		btnEntrar.addMouseListener(ouvinteBotaoPadrao);
+
 		menu.add(lblInfo);
 		menu.add(txtEmail);
 		menu.add(lblEmail);

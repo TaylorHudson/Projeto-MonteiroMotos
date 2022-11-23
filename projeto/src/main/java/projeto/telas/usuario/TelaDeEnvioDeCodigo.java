@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import projeto.OuvinteBotaoPadrao;
 import projeto.telas.usuario.ouvintes.OuvinteTelaDeEnvioDeCodigo;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -45,7 +46,8 @@ public class TelaDeEnvioDeCodigo extends JFrame {
 
 		JButton btnEnviarCodigo = FabricaJButton.criarJButton("Enviar Codigo", 160, 270, 180, 45, Color.white,
 				Color.black, 25);
-		btnEnviarCodigo.addMouseListener(ouvinte);
+		btnEnviarCodigo.addActionListener(ouvinte);
+		btnEnviarCodigo.addMouseListener(new OuvinteBotaoPadrao());
 
 		menu.add(lblMensagem);
 		menu.add(txtEmail);

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import projeto.OuvinteBotaoPadrao;
 import projeto.telas.usuario.ouvintes.OuvinteTelaDeMudarDeSenha;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -35,7 +36,6 @@ public class TelaDeMudarDeSenha extends JFrame {
 		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
 		JLabel menu = FabricaJLabel.criarJLabel(175, 200, 500, 400, Color.BLACK,3);
 		menu.setBackground(Color.BLACK);
-	
 		
 		JLabel lblNovaSenha = FabricaJLabel.criarJLabel("Nova Senha", 20, 100, 460, 40, Color.white, 25);
 		JLabel lblConfirmarSenha = FabricaJLabel.criarJLabel("Confirmar Senha", 20, 190, 460, 40, Color.white, 25);
@@ -45,7 +45,8 @@ public class TelaDeMudarDeSenha extends JFrame {
 		OuvinteTelaDeMudarDeSenha ouvinte = new OuvinteTelaDeMudarDeSenha(this);
 		
 		JButton btnConfirmar = FabricaJButton.criarJButton("Confirmar", 165, 320, 170, 45,  Color.white, Color.black, 30);
-		btnConfirmar.addMouseListener(ouvinte);
+		btnConfirmar.addActionListener(ouvinte);
+		btnConfirmar.addMouseListener(new OuvinteBotaoPadrao());
 		
 		menu.add(txtNovaSenha);
 		menu.add(lblNovaSenha);
