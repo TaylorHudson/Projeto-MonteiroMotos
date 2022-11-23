@@ -55,12 +55,14 @@ public class TelaCadastroUsuario extends JFrame {
 	private void configFormLogin() {
 		OuvinteTelaCadastroUsuario ouvinte = new OuvinteTelaCadastroUsuario(this);
 
-		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 500, Color.BLACK, 4);
+		JLabel menu = FabricaJLabel.criarJLabel(180, 150, 500, 550, Color.BLACK, 4);
 		menu.setBackground(Color.BLACK);
 
 		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario", 20, 20, 460, 40, Color.white, 25);
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 95, 460, 40, new Color(247, 247, 247), 25);
-		JCheckBox checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(20, 175, 100, 35, "Feminino",Color.BLACK,Color.WHITE);
+		
+		JCheckBox checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(20, 400, 100, 35, "Feminino",Color.BLACK,Color.WHITE);
+		JCheckBox checkBoxMasculino = FabricaJCheckBox.criarJCheckBox(110, 400, 100, 35, "Masculino", Color.black, Color.white);
 		
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 168, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 238, 460, 40, new Color(247, 247, 247), 25);
@@ -81,22 +83,24 @@ public class TelaCadastroUsuario extends JFrame {
 			txtData = FabricaJFormatted.criarJFormatted(20, 350, 460, 40, new MaskFormatter("##/##/####"));
 		} catch (Exception e) {
 		}
-		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 420, 150, 45, Color.white,
+		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 450, 150, 45, Color.white,
 				Color.black, 28);
 		btnCadastrar.addMouseListener(ouvinte);
+		
 		menu.add(lblTipo);
 		menu.add(box);
 		menu.add(lblNome);
 		menu.add(txtNome);
-
+		
+		menu.add(checkBoxMasculino);
 		menu.add(checkBoxFeminino);
 
-		//menu.add(lblEmail);
-		//menu.add(txtEmail);
-		//menu.add(lblSenha);
-		//menu.add(txtSenha);
-		//menu.add(lblDataNascimento);
-		//menu.add(txtData);
+		menu.add(lblEmail);
+		menu.add(txtEmail);
+		menu.add(lblSenha);
+		menu.add(txtSenha);
+		menu.add(lblDataNascimento);
+		menu.add(txtData);
 		menu.add(btnCadastrar);
 
 		background.add(menu);
