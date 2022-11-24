@@ -16,7 +16,7 @@ import javax.swing.text.MaskFormatter;
 import com.toedter.calendar.JDateChooser;
 
 import projeto.OuvinteBotaoPadrao;
-import projeto.modelo.enuns.HorarioDaCorrida;
+import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteBotaoTelaDeCadastrarCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteCheckBoxTelaDeCadastrarCorrida;
 import utilidades.fabricas.FabricaJButton;
@@ -37,7 +37,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	private JDateChooser chooser;
 	private JLabel lblChooser;
 	private JButton btnSalvar;
-	private HorarioDaCorrida horario;
+	private StatusDaCorrida horario;
 	private JFormattedTextField txtHora;
 
 	private JCheckBox checkBoxParaAgora;
@@ -187,11 +187,11 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		return checkBoxParaDepois;
 	}
 
-	public HorarioDaCorrida getHorario() {
+	public StatusDaCorrida getHorario() {
 		return horario;
 	}
 
-	public void setHorario(HorarioDaCorrida horario) {
+	public void setHorario(StatusDaCorrida horario) {
 		this.horario = horario;
 	}
 

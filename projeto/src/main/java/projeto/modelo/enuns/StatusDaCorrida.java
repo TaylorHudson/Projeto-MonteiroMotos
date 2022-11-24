@@ -1,6 +1,6 @@
 package projeto.modelo.enuns;
 
-public enum HorarioDaCorrida {
+public enum StatusDaCorrida {
 	PARAAGORA,
 	PARADEPOIS;
 

@@ -3,7 +3,7 @@ package projeto.telas.passageiro.ouvintes;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import projeto.modelo.enuns.HorarioDaCorrida;
+import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.passageiro.TelaDeCadastrarCorrida;
 
@@ -21,10 +21,10 @@ public class OuvinteCheckBoxTelaDeCadastrarCorrida implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 
 		if (tela.getCheckBoxParaAgora().isSelected()) {
-			tela.setHorario(HorarioDaCorrida.PARAAGORA);
+			tela.setHorario(StatusDaCorrida.PARAAGORA);
 		}
 		if (tela.getCheckBoxParaDepois().isSelected()) {
-			tela.setHorario(HorarioDaCorrida.PARADEPOIS);
+			tela.setHorario(StatusDaCorrida.PARADEPOIS);
 		}
 	}
 
