@@ -25,7 +25,8 @@ import utilidades.imagens.Imagens;
 public class TelaCadastroUsuario extends JFrame {
 
 	private JTextField txtNome;
-	private JTextField txtSexo;
+	private JCheckBox checkBoxFeminino;
+	private JCheckBox checkBoxMasculino;
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JFormattedTextField txtData;
@@ -62,16 +63,15 @@ public class TelaCadastroUsuario extends JFrame {
 		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario", 20, 20, 460, 40, Color.white, 25);
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 95, 460, 40, new Color(247, 247, 247), 25);
 
-		JCheckBox checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(20, 400, 90, 30, "Feminino", Color.BLACK,
+		checkBoxFeminino = FabricaJCheckBox.criarJCheckBox(20, 400, 90, 30, "Feminino", Color.BLACK,
 				Color.WHITE);
-		JCheckBox checkBoxMasculino = FabricaJCheckBox.criarJCheckBox(110, 400, 90, 30, "Masculino", Color.black,
+		checkBoxMasculino = FabricaJCheckBox.criarJCheckBox(110, 400, 90, 30, "Masculino", Color.black,
 				Color.white);
 
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 20, 168, 460, 40, new Color(247, 247, 247), 25);
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 20, 238, 460, 40, new Color(247, 247, 247), 25);
 
 		txtNome = FabricaJText.criarJTextField(20, 130, 460, 40, Color.white, Color.black, 16);
-		txtSexo = FabricaJText.criarJTextField(20, 200, 460, 40, Color.white, Color.black, 16);
 		txtEmail = FabricaJText.criarJTextField(20, 200, 460, 40, Color.white, Color.black, 16);
 		txtSenha = FabricaJText.criarJPasswordField(20, 270, 460, 40, Color.white, Color.black, 20);
 
@@ -132,6 +132,14 @@ public class TelaCadastroUsuario extends JFrame {
 
 	public JFormattedTextField getTxtData() {
 		return txtData;
+	}
+
+	public JCheckBox getCheckBoxFeminino() {
+		return checkBoxFeminino;
+	}
+
+	public JCheckBox getCheckBoxMasculino() {
+		return checkBoxMasculino;
 	}
 
 }

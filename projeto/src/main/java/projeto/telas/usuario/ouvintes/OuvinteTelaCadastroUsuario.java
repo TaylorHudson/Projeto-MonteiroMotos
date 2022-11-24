@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.modelo.enuns.Sexo;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
 import projeto.telas.usuario.TelaCadastroUsuario;
@@ -31,13 +33,21 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 		String senha = String.valueOf(tela.getTxtSenha().getPassword()).trim();
 		String dataDeNascimento = tela.getTxtData().getText();
 		String tipo = (String) tela.getBox().getSelectedItem();
+		boolean selecionouFeminino = tela.getCheckBoxFeminino().isSelected();
+		boolean selecionouMasculino = tela.getCheckBoxMasculino().isSelected();
+		Sexo sexo = (selecionouFeminino ? Sexo.FEMININO : Sexo.MASCULINO);
 
 		try {
-			boolean teste = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento));
+			boolean valido = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento));
 			LocalDate data = ServicoData.retornarData(dataDeNascimento);
-			if (teste == true && tipo.equals("Mototaxista")) {
-				central.adicionarMototaxista(new Mototaxista(nome, email, senha, data, true));
-				persistencia.salvarCentral(central, "central");
+			if (valido) {
+				if (tipo.equals("Mototaxista")) {
+					central.adicionarMototaxista(new Mototaxista(nome, sexo, email, senha, data, true));
+					persistencia.salvarCentral(central, "central");
+				} else {
+					central.adicionarPassageiro(new Passageiro(nome, sexo, data, email, senha, true));
+					persistencia.salvarCentral(central, "central");
+				}
 				tela.dispose();
 				new TelaLogin();
 			}
