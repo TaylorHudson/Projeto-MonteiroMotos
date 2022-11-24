@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import javax.swing.JCheckBox;
 
+import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
@@ -55,7 +56,7 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 				tela.dispose();
 				new TelaLogin();
 			}
-		} catch (ValidacaoException | SexoInvalidoException erro) {
+		} catch (ValidacaoException | SexoInvalidoException | DataInvalidaException erro) {
 			FabricaJOptionPane.criarMsgAtencao(erro.getMessage());
 		}
 	}

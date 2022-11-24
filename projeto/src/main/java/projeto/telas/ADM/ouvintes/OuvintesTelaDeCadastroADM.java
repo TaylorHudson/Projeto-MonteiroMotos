@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 
+import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
@@ -43,10 +44,9 @@ public class OuvintesTelaDeCadastroADM implements MouseListener {
 					new TelaLogin();
 				}
 			}
-		} catch (ValidacaoException erro) {
+		} catch (ValidacaoException | DataInvalidaException erro) {
 			FabricaJOptionPane.criarMsgAtencao(erro.getMessage());
 		}
-
 	}
 
 	public void mouseEntered(MouseEvent e) {

@@ -9,20 +9,30 @@ import javax.swing.JCheckBox;
 
 import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
-import projeto.modelo.enuns.Sexo;
 
 public abstract class Validador {
 
-	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data, JCheckBox cbFeminino, JCheckBox cbMasculino)
+	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data) {
+		boolean nomeValido = validarNome(nomeCompleto);
+		boolean emailValido = validarEmail(email);
+		boolean senhaValida = validarSenha(senha);
+		boolean dataValida = idadeValida(data);
+
+		if (nomeValido && emailValido && senhaValida && dataValida)
+			return true;
+		return false;
+	}
+
+	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data,
+			JCheckBox cbFeminino, JCheckBox cbMasculino)
 			throws SexoInvalidoException {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
 		boolean dataValida = idadeValida(data);
 		boolean sexoValido = validarSexo(cbFeminino, cbMasculino);
-		
-	
-		if (nomeValido && emailValido && senhaValida && dataValida && sexoValido) 
+
+		if (nomeValido && emailValido && senhaValida && dataValida && sexoValido)
 			return true;
 		return false;
 	}
@@ -33,7 +43,7 @@ public abstract class Validador {
 		if (selecionouFeminino && selecionouMasculino) {
 			throw new SexoInvalidoException();
 		}
-		if(!selecionouFeminino && !selecionouMasculino) {
+		if (!selecionouFeminino && !selecionouMasculino) {
 			throw new SexoInvalidoException("Selecione um tipo de sexo");
 		}
 		return true;
