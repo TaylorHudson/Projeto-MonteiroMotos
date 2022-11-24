@@ -5,19 +5,38 @@ import java.time.Period;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JCheckBox;
+
+import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
+import projeto.modelo.enuns.Sexo;
 
 public abstract class Validador {
 
-	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data) {
+	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data, JCheckBox cbFeminino, JCheckBox cbMasculino)
+			throws SexoInvalidoException {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
 		boolean dataValida = idadeValida(data);
-
-		if (nomeValido && emailValido && senhaValida && dataValida)
+		boolean sexoValido = validarSexo(cbFeminino, cbMasculino);
+		
+	
+		if (nomeValido && emailValido && senhaValida && dataValida && sexoValido) 
 			return true;
 		return false;
+	}
+
+	public static boolean validarSexo(JCheckBox cbFeminino, JCheckBox cbMasculino) throws SexoInvalidoException {
+		boolean selecionouFeminino = cbFeminino.isSelected();
+		boolean selecionouMasculino = cbMasculino.isSelected();
+		if (selecionouFeminino && selecionouMasculino) {
+			throw new SexoInvalidoException();
+		}
+		if(!selecionouFeminino && !selecionouMasculino) {
+			throw new SexoInvalidoException("Selecione um tipo de sexo");
+		}
+		return true;
 	}
 
 	public static boolean validarNome(String nome) {

@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+import javax.swing.JCheckBox;
+
+import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
@@ -34,11 +37,12 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 		String dataDeNascimento = tela.getTxtData().getText();
 		String tipo = (String) tela.getBox().getSelectedItem();
 		boolean selecionouFeminino = tela.getCheckBoxFeminino().isSelected();
-		boolean selecionouMasculino = tela.getCheckBoxMasculino().isSelected();
 		Sexo sexo = (selecionouFeminino ? Sexo.FEMININO : Sexo.MASCULINO);
-
+		JCheckBox cbFeminino = tela.getCheckBoxFeminino();
+		JCheckBox cbMasculino = tela.getCheckBoxMasculino();
+		
 		try {
-			boolean valido = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento));
+			boolean valido = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento), cbFeminino, cbMasculino);
 			LocalDate data = ServicoData.retornarData(dataDeNascimento);
 			if (valido) {
 				if (tipo.equals("Mototaxista")) {
@@ -51,7 +55,7 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 				tela.dispose();
 				new TelaLogin();
 			}
-		} catch (ValidacaoException erro) {
+		} catch (ValidacaoException | SexoInvalidoException erro) {
 			FabricaJOptionPane.criarMsgAtencao(erro.getMessage());
 		}
 	}

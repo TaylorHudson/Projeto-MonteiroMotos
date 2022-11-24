@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<centralInformacoes>
+  <passageiros>
+    <passageiro>
+      <nome>joao vitor silva</nome>
+      <email>jv666776@gmail.com</email>
+      <senha>joao123!</senha>
+      <dataNascimento>2001-10-03</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <sexo>MASCULINO</sexo>
+    </passageiro>
+  </passageiros>
+  <corridas/>
+  <mototaxistas>
+    <mototaxista>
+      <nome>joao vitor silva</nome>
+      <email>jv666776@gmail.com</email>
+      <senha>joao123!</senha>
+      <dataNascimento>2001-10-03</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+  </mototaxistas>
+  <servicoPassageiro>
+    <central reference="../.."/>
+    <passageiros reference="../../passageiros"/>
+  </servicoPassageiro>
+  <servicoCorrida>
+    <central reference="../.."/>
+    <corridas reference="../../corridas"/>
+    <util reference="../../servicoPassageiro"/>
+  </servicoCorrida>
+  <servicoMototaxista>
+    <central reference="../.."/>
+    <mototaxistas reference="../../mototaxistas"/>
+  </servicoMototaxista>
+</centralInformacoes>
