@@ -3,57 +3,59 @@ package projeto.telas.mototaxista;
 import java.awt.Color;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoPadrao;
+import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteMenuTelaHome;
 import projeto.telas.mototaxista.ouvintes.OuvinteTelaHomeMototaxista;
 import utilidades.fabricas.FabricaJButton;
-import utilidades.fabricas.FabricaJLabel;
-import utilidades.imagens.Imagens;
+import utilidades.fabricas.FabricaJPanel;
 
-public class TelaHomeMototaxista extends JFrame{
-	private static final long serialVersionUID = 1L;
-	
+public class TelaHomeMototaxista extends TelaPadrao{
+
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
 	private JMenuItem itemSair;
 	private JButton btnListarCorridas;
 	private JButton btnComprarCreditos;
-	private JLabel background;
+	private ImagemDeFundo background;
 
-	public TelaHomeMototaxista(){
-		configImagemFundo();
-		configurarTela();
-		configMenu();
-		configBotoes();
+	public TelaHomeMototaxista() {
+		super("Home");
 		setVisible(true);
 	}
 	
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Home");
+	@Override
+	public void configurarComponentes() {
+		configImagemDeFundo();
+		configMenu();
+		configBotoes();
 	}
 	
+	private void configImagemDeFundo() {
+		background = super.configImagemDeFundo("home.jpg");
+		add(background);
+	}
+
 	private void configBotoes() {
 		OuvinteTelaHomeMototaxista ouvinte = new OuvinteTelaHomeMototaxista(this);
+		OuvinteBotaoPadrao ouvintePadrao = new OuvinteBotaoPadrao();
 
 		btnListarCorridas = FabricaJButton.criarJButton("Listar Corridas", 150, 220, 560, 230,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
 		
-		btnComprarCreditos = FabricaJButton.criarJButton("Comprar Créditos", 150, 490, 560, 230,
+		btnComprarCreditos = FabricaJButton.criarJButton("Comprar Creditos", 150, 490, 560, 230,
 				new Color(28, 28, 20), new Color(179, 177, 177), 28);
 
 		btnListarCorridas.addActionListener(ouvinte);
+		btnListarCorridas.addMouseListener(ouvintePadrao);
 		btnComprarCreditos.addActionListener(ouvinte);
+		btnComprarCreditos.addMouseListener(ouvintePadrao);
 		
 		background.add(btnListarCorridas);
 		background.add(btnComprarCreditos);
@@ -61,7 +63,7 @@ public class TelaHomeMototaxista extends JFrame{
 	
 	private void configMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menuOpcoes = new JMenu("Opções");
+		JMenu menuOpcoes = new JMenu("Opcoes");
 		itemEditar = new JMenuItem("Editar Perfil");
 		itemDeletar = new JMenuItem("Deletar Perfil");
 		itemSair = new JMenuItem("Sair");
@@ -81,11 +83,6 @@ public class TelaHomeMototaxista extends JFrame{
 		menuOpcoes.add(itemDeletar);
 		menuOpcoes.add(itemSair);
 		setJMenuBar(menuBar);
-	}
-	
-	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUNDHOME);
-		add(background);
 	}
 	
 	public static void main(String[] args) {

@@ -3,16 +3,20 @@ package projeto;
 import javax.swing.JFrame;
 
 public abstract class TelaPadrao extends JFrame {
-
-	private ImagemDeFundo imagemDeFundo;
 	
-	public TelaPadrao(String titulo, ImagemDeFundo imagem) {
+	public TelaPadrao(String titulo) {
 		configTela(titulo);
-		configImagemDeFundo(imagem);
 		configurarComponentes();
 	}
 	
 	public abstract void configurarComponentes();
+	
+	public ImagemDeFundo configImagemDeFundo(String caminho) {
+		ImagemDeFundo background = new ImagemDeFundo(caminho);
+		background.setLayout(null);
+		background.setBounds(0, 0, 900, 800);
+		return background;
+	}
 	
 	private void configTela(String titulo) {
 		setSize(900, 800);
@@ -22,11 +26,5 @@ public abstract class TelaPadrao extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle(titulo);
 	}
-	
-	private void configImagemDeFundo(ImagemDeFundo imagem) {
-		imagemDeFundo = imagem;
-		imagemDeFundo.setBounds(0, 0, 900, 800);
-		add(imagemDeFundo);
-	}
-	
+
 }
