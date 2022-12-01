@@ -11,13 +11,12 @@ import javax.swing.JMenuItem;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.telas.passageiro.ouvintes.OuvinteDoMenuDaTelaHomePassageiro;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 
 public class TelaHomePassageiro extends TelaPadrao {
-	private OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
-
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
 	private JMenuItem itemSair;
@@ -37,6 +36,7 @@ public class TelaHomePassageiro extends TelaPadrao {
 		configButton();
 	}
 	private void configMenu() {
+		OuvinteDoMenuDaTelaHomePassageiro ouvinte = new OuvinteDoMenuDaTelaHomePassageiro(this);
 
 		JLabel menu = FabricaJLabel.criarJLabel(180, 160, 500, 450, Color.BLACK, 4);
 		menu.setBackground(Color.BLACK);
@@ -64,6 +64,8 @@ public class TelaHomePassageiro extends TelaPadrao {
 	}
 
 	private void configButton() {
+		OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
+		
 		btnListarCorrida = FabricaJButton.criarJButton("Listar Corrida", 270, 190, 380, 240, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
 		btnListarCorrida.addMouseListener(new OuvinteBotaoFundoPreto());
