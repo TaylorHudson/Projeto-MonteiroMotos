@@ -20,5 +20,9 @@ public abstract class FabricaJOptionPane {
 		String codigo = JOptionPane.showInputDialog(msg);
 		return Integer.parseInt(codigo);
 	}
+	public static void criarMsg(String msg) {
+		JOptionPane.showMessageDialog(null, msg, "Informaçao", JOptionPane.INFORMATION_MESSAGE);
+	}
+
 	
 }

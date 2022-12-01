@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<centralInformacoes>
+  <passageiros/>
+  <corridas/>
+  <mototaxistas/>
+  <valorDoCredito>0.99</valorDoCredito>
+  <servicoPassageiro>
+    <central reference="../.."/>
+    <passageiros reference="../../passageiros"/>
+  </servicoPassageiro>
+  <servicoCorrida>
+    <central reference="../.."/>
+    <corridas reference="../../corridas"/>
+    <util reference="../../servicoPassageiro"/>
+  </servicoCorrida>
+  <servicoMototaxista>
+    <central reference="../.."/>
+    <mototaxistas reference="../../mototaxistas"/>
+  </servicoMototaxista>
+</centralInformacoes>

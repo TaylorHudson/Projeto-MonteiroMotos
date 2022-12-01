@@ -11,7 +11,7 @@ import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteMenuTelaHomeADM implements ActionListener {
 	
-private TelaHomeADM tela;
+	private TelaHomeADM tela;
 	
 	public OuvinteMenuTelaHomeADM(TelaHomeADM tela) {
 		this.tela = tela;

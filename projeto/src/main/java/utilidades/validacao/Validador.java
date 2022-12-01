@@ -11,6 +11,7 @@ import projeto.excecoes.usuario.CadastroDeCorridaInvalidoException;
 import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.StatusDaCorridaInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
+import projeto.excecoes.usuario.ValidarCreditoException;
 
 public abstract class Validador {
 
@@ -111,5 +112,10 @@ public abstract class Validador {
 		if (periodo.getYears() >= 18)
 			return true;
 		throw new ValidacaoException("Data de nascimento invalida");
+	}
+	public static boolean validarCredito(double credito)throws ValidarCreditoException {
+		if(credito == 0.0) {
+			throw new ValidarCreditoException("Valor do credito invalido");
+		}return true;
 	}
 }

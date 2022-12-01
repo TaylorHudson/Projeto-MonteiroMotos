@@ -16,6 +16,7 @@ public class CentralDeInformacoes {
 	private ArrayList<Corrida> corridas = new ArrayList<Corrida>();
 	private ArrayList<Mototaxista> mototaxistas = new ArrayList<Mototaxista>();
 	private Usuario administrador;
+	private double valorDoCredito;
 
 	private ServicoPassageiro servicoPassageiro = new ServicoPassageiro(this);
 	private ServicoCorrida servicoCorrida = new ServicoCorrida(this, servicoPassageiro);
@@ -75,6 +76,12 @@ public class CentralDeInformacoes {
 
 	public ArrayList<Mototaxista> getMototaxistas() {
 		return mototaxistas;
+	}
+	public double getValorDoCredito() {
+		return valorDoCredito;
+	}
+	public void setValorDoCredito(double valorDoCredito) {
+		this.valorDoCredito = valorDoCredito;
 	}
 
 }
