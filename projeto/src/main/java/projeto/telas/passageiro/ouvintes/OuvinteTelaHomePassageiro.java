@@ -23,9 +23,11 @@ public class OuvinteTelaHomePassageiro implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent evento) {
 		JButton item = (JButton) evento.getSource();
+		
 		if(item == tela.getBtnCadastrarCorrida()){
 			tela.dispose();
 			new TelaDeCadastrarCorrida();
+			System.out.println("clicado");
 		}else if(item == tela.getBtnListarCorrida()){
 			tela.dispose();
 			new TelaListarCorridas();

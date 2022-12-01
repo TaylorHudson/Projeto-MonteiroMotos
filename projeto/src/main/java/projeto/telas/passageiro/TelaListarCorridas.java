@@ -4,43 +4,36 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.ImagemDeFundo;
+import projeto.TelaPadrao;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaListarCorrida;
 import utilidades.fabricas.FabricaJButton;
-import utilidades.fabricas.FabricaJLabel;
-import utilidades.imagens.Imagens;
 
-public class TelaListarCorridas extends JFrame {
+public class TelaListarCorridas extends TelaPadrao {
 
-	private JLabel background;
+	private ImagemDeFundo background;
 	private JTable tabelaCorridas;
 	private JButton btnOrdenar;
 	private JButton btnDetalhes;
 
 	public TelaListarCorridas() {
-		configImagemFundo();
-		ConfigTela();
-		configButton();
-		configTabelaCorridas();
+		super("Listar Corridas");
 		setVisible(true);
 	}
 
-	public void ConfigTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(background);
-		setTitle("Listar Corridas");
+	public void configurarComponentes() {
+		configImagemFundo();
+		configButton();
+		configTabelaCorridas();
+
 	}
 
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUNDHOME);
+		background = super.configImagemDeFundo("background_2.jpg");
 		add(background);
 	}
 
@@ -70,13 +63,17 @@ public class TelaListarCorridas extends JFrame {
 
 		background.add(scrol);
 	}
+
 	public JButton getBtnOrdenar() {
 		return btnOrdenar;
 	}
+
 	public JButton getBtnDetalhes() {
 		return btnDetalhes;
 	}
+
 	public static void main(String[] args) {
 		new TelaListarCorridas();
 	}
+
 }

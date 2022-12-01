@@ -15,7 +15,9 @@ import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteBotaoTelaDeCadastrarCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteCheckBoxTelaDeCadastrarCorrida;
@@ -26,9 +28,9 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaDeCadastrarCorrida extends JFrame {
+public class TelaDeCadastrarCorrida extends TelaPadrao {
 
-	private JLabel background;
+	private ImagemDeFundo background;
 	private JButton btnSeta;
 	private JTextField txtPontoDeEncontro;
 	private JTextField txtLocalDestino;
@@ -44,10 +46,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	private JCheckBox checkBoxParaDepois;
 
 	public TelaDeCadastrarCorrida() {
-		configurarDateChooser();
-		configurarTela();
-		configMenu();
-		configImagemFundo();
+		super("Cadastrar corrida");
 		setVisible(true);
 	}
 
@@ -69,18 +68,15 @@ public class TelaDeCadastrarCorrida extends JFrame {
 
 		lblChooser.add(chooser);
 	}
-
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Cadastrar corrida ");
+	
+	public void configurarComponentes() {
+		configurarDateChooser();
+		configMenu();
+		configImagemFundo();
+		
 	}
-
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
+		background = super.configImagemDeFundo("background_2.jpg");
 		add(background);
 	}
 
@@ -198,5 +194,6 @@ public class TelaDeCadastrarCorrida extends JFrame {
 	public JFormattedTextField getTxtHora() {
 		return txtHora;
 	}
+
 
 }
