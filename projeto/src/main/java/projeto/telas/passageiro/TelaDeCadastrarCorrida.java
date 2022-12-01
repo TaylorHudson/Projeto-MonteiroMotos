@@ -15,7 +15,7 @@ import javax.swing.text.MaskFormatter;
 
 import com.toedter.calendar.JDateChooser;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteBotaoTelaDeCadastrarCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteCheckBoxTelaDeCadastrarCorrida;
@@ -91,7 +91,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
-		btnSeta.addMouseListener(new OuvinteBotaoPadrao());
+		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinteBotao);
 
 		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK, 3);
@@ -122,7 +122,7 @@ public class TelaDeCadastrarCorrida extends JFrame {
 		txtHora.addActionListener(ouvinteBotao);
 
 		btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
-		btnSalvar.addMouseListener(new OuvinteBotaoPadrao());
+		btnSalvar.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSalvar.addActionListener(ouvinteBotao);
 
 		menu.add(lblPontoDeEcontro);

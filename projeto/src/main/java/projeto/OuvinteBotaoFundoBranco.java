@@ -1,23 +1,24 @@
 package projeto;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.*;
 
-public class OuvinteBotaoPadrao implements MouseListener{
+public class OuvinteBotaoFundoBranco implements MouseListener{
 
   public void mouseClicked(MouseEvent e) {
     
   }
 
   public void mouseEntered(MouseEvent e) {
-    e.getComponent().setForeground(new Color(66, 65, 65));
-		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
+	  e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
+	e.getComponent().setForeground(new Color(179, 177, 177));
   }
 
   public void mouseExited(MouseEvent e) {
-    e.getComponent().setForeground(Color.BLACK);
-		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	  e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		e.getComponent().setForeground(Color.WHITE);
   }
  
   public void mousePressed(MouseEvent e) {

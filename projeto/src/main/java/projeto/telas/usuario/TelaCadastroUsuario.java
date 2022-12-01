@@ -13,7 +13,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.usuario.ouvintes.OuvinteTelaCadastroUsuario;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJCheckBox;
@@ -88,7 +88,7 @@ public class TelaCadastroUsuario extends JFrame {
 		}
 		JButton btnCadastrar = FabricaJButton.criarJButton("Cadastrar", 170, 450, 150, 45, Color.white, Color.black,
 				28);
-		btnCadastrar.addMouseListener(new OuvinteBotaoPadrao());
+		btnCadastrar.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnCadastrar.addActionListener(ouvinte);
 
 		menu.add(lblTipo);

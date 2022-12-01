@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -72,13 +72,13 @@ public class TelaHomePassageiro extends JFrame {
 	private void configButton() {
 		btnListarCorrida = FabricaJButton.criarJButton("Listar Corrida", 270, 190, 380, 240,
 		new Color(28, 28, 20), new Color(179, 177, 177), 28);
-		btnListarCorrida.addMouseListener(new OuvinteBotaoPadrao());
+		btnListarCorrida.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnListarCorrida.addActionListener(ouvinte);
 		
 		
 		btnCadastrarCorrida = FabricaJButton.criarJButton("Cadastrar Corrida", 270, 440, 380, 240,
 		new Color(28, 28, 20), new Color(179, 177, 177), 28);
-		btnCadastrarCorrida.addMouseListener(new OuvinteBotaoPadrao());
+		btnCadastrarCorrida.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnCadastrarCorrida.addActionListener(ouvinte);	
 
 		background.add(btnCadastrarCorrida);

@@ -1,14 +1,12 @@
 package projeto.telas.mototaxista.ouvintes;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.mototaxista.TelaListarCorridas;
 
-public class OuvinteBotoesTelaListarCorridas implements MouseListener {
+public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 
 	private TelaListarCorridas tela;
 
@@ -16,28 +14,12 @@ public class OuvinteBotoesTelaListarCorridas implements MouseListener {
 		tela = t;
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == tela.getBtnSeta()) {
+	public void actionPerformed(ActionEvent e) {
+		Object componente = e.getSource();
+		if (componente == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomeMototaxista();
 		}
 	}
 
-	public void mouseEntered(MouseEvent e) {
-		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
-		e.getComponent().setForeground(new Color(179, 177, 177));
-	}
-
-	public void mouseExited(MouseEvent e) {
-		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		e.getComponent().setForeground(Color.WHITE);
-	}
-
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	public void mouseReleased(MouseEvent e) {
-
-	}
 }

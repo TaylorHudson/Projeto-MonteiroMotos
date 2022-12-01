@@ -8,7 +8,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import projeto.ImagemDeFundo;
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoBranco;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
@@ -45,13 +46,15 @@ public class TelaListarCorridas extends TelaPadrao {
 	
 	private void configSeta() {
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
-		btnSeta.addMouseListener(new OuvinteBotaoPadrao());
+		btnSeta.addMouseListener(new OuvinteBotaoFundoBranco());
+		btnSeta.addActionListener(new OuvinteBotoesTelaListarCorridas(this));
 		background.add(btnSeta);
 	}
 
 	private void configTabela() {
 		OuvinteBotoesTelaListarCorridas ouvinte = new OuvinteBotoesTelaListarCorridas(this);
-
+		OuvinteBotaoFundoBranco ouvinteBtn = new OuvinteBotaoFundoBranco();
+		
 		DefaultTableModel modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(new String[] { "NOME", "STATUS", "DATA", "HORA" });
 		tabelaCorridas = new JTable(modelo);
@@ -62,11 +65,13 @@ public class TelaListarCorridas extends TelaPadrao {
 		scrol.setBounds(2, 240, 885, 400);
 
 		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20), Color.WHITE, 28);
-		btnOrdenar.addMouseListener(ouvinte);
+		btnOrdenar.addActionListener(ouvinte);
+		btnOrdenar.addMouseListener(ouvinteBtn);
 
 		btnReivindicarCorrida = FabricaJButton.criarJButton("Reivindicar Corrida", 50, 670, 280, 50,
 				new Color(28, 28, 20), Color.WHITE, 28);
-		btnReivindicarCorrida.addMouseListener(ouvinte);
+		btnReivindicarCorrida.addActionListener(ouvinte);
+		btnReivindicarCorrida.addMouseListener(ouvinteBtn);
 
 		background.add(scrol);
 		background.add(btnOrdenar);

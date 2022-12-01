@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDadosDosUsuarios;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
@@ -54,7 +54,7 @@ public class TelaDadosDosUsuarios extends JFrame {
 
 	private void confiBotoes() {
 		OuvinteTelaDadosDosUsuarios ouvinte = new OuvinteTelaDadosDosUsuarios(this);
-		OuvinteBotaoPadrao mouse = new OuvinteBotaoPadrao();
+		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,
 				28);
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);

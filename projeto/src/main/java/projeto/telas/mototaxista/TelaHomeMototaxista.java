@@ -9,7 +9,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import projeto.ImagemDeFundo;
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoBranco;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteMenuTelaHome;
 import projeto.telas.mototaxista.ouvintes.OuvinteTelaHomeMototaxista;
@@ -44,18 +45,18 @@ public class TelaHomeMototaxista extends TelaPadrao {
 
 	private void configBotoes() {
 		OuvinteTelaHomeMototaxista ouvinte = new OuvinteTelaHomeMototaxista(this);
-		OuvinteBotaoPadrao ouvintePadrao = new OuvinteBotaoPadrao();
+		OuvinteBotaoFundoBranco ouvinteBtn = new OuvinteBotaoFundoBranco();
 
 		btnListarCorridas = FabricaJButton.criarJButton("Listar Corridas", 150, 220, 560, 230,
-				new Color(28, 28, 20), new Color(179, 177, 177), 28);
+				new Color(28, 28, 20), Color.WHITE, 28);
 		
 		btnComprarCreditos = FabricaJButton.criarJButton("Comprar Creditos", 150, 490, 560, 230,
-				new Color(28, 28, 20), new Color(179, 177, 177), 28);
+				new Color(28, 28, 20), Color.WHITE, 28);
 
 		btnListarCorridas.addActionListener(ouvinte);
-		btnListarCorridas.addMouseListener(ouvintePadrao);
+		btnListarCorridas.addMouseListener(ouvinteBtn);
 		btnComprarCreditos.addActionListener(ouvinte);
-		btnComprarCreditos.addMouseListener(ouvintePadrao);
+		btnComprarCreditos.addMouseListener(ouvinteBtn);
 		
 		background.add(btnListarCorridas);
 		background.add(btnComprarCreditos);
@@ -69,7 +70,7 @@ public class TelaHomeMototaxista extends TelaPadrao {
 		itemSair = new JMenuItem("Sair");
 		
 		OuvinteMenuTelaHome ouvinteMenu = new OuvinteMenuTelaHome(this);
-		OuvinteBotaoPadrao ouvinteBotaoPadrao = new OuvinteBotaoPadrao();
+		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();
 
 		itemEditar.addActionListener(ouvinteMenu);
 		itemEditar.addMouseListener(ouvinteBotaoPadrao);

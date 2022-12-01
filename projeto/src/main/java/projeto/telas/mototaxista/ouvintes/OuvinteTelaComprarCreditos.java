@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import projeto.telas.mototaxista.TelaComprarCreditos;
+import projeto.telas.mototaxista.TelaHomeMototaxista;
 
 public class OuvinteTelaComprarCreditos implements ActionListener {
 
@@ -14,8 +15,12 @@ public class OuvinteTelaComprarCreditos implements ActionListener {
 	}
 
   public void actionPerformed(ActionEvent e) {
-    int valor = (Integer) tela.getSpinner().getValue();
-    System.out.println(valor);
+    Object componente = e.getSource();
+    
+    if(componente == tela.getBtnSeta()) {
+    	tela.dispose();
+    	new TelaHomeMototaxista();
+    }
   }
 
 }

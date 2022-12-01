@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.usuario.ouvintes.OuvinteTelaDeMudarDeSenha;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -46,7 +46,7 @@ public class TelaDeMudarDeSenha extends JFrame {
 		
 		JButton btnConfirmar = FabricaJButton.criarJButton("Confirmar", 165, 320, 170, 45,  Color.white, Color.black, 30);
 		btnConfirmar.addActionListener(ouvinte);
-		btnConfirmar.addMouseListener(new OuvinteBotaoPadrao());
+		btnConfirmar.addMouseListener(new OuvinteBotaoFundoPreto());
 		
 		menu.add(txtNovaSenha);
 		menu.add(lblNovaSenha);

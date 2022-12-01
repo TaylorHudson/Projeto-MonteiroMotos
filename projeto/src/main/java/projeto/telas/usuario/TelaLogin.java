@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.usuario.ouvintes.OuvinteBotaoEntrarTelaLogin;
 import projeto.telas.usuario.ouvintes.OuvinteTelaLogin;
 import utilidades.fabricas.FabricaJButton;
@@ -77,7 +77,7 @@ public class TelaLogin extends JFrame {
 		btnEntrar = FabricaJButton.criarJButton("Entrar", 180, 300, 120, 45, Color.white,Color.black, 30);
 		btnEntrar.addActionListener(new OuvinteBotaoEntrarTelaLogin(this));
 		
-		OuvinteBotaoPadrao ouvinteBotaoPadrao = new OuvinteBotaoPadrao();
+		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();
 		btnResetSenha.addMouseListener(ouvinteBotaoPadrao);
 		btnCadastrese.addMouseListener(ouvinteBotaoPadrao);
 		btnEntrar.addMouseListener(ouvinteBotaoPadrao);

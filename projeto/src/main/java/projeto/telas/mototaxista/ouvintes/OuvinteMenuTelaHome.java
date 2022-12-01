@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
@@ -12,27 +13,32 @@ import utilidades.fabricas.FabricaJOptionPane;
 
 public class OuvinteMenuTelaHome implements ActionListener {
 
-  private TelaHomeMototaxista tela;
+	private TelaHomeMototaxista tela;
 
 	public OuvinteMenuTelaHome(TelaHomeMototaxista tela) {
 		this.tela = tela;
 	}
 
-  public void actionPerformed(ActionEvent e) {
-    JMenuItem item = (JMenuItem) e.getSource();
+	public void actionPerformed(ActionEvent e) {
+		JMenuItem item = (JMenuItem) e.getSource();
 
-    if(item == tela.getItemEditar()) {
-      tela.dispose();
-      new TelaEdicaoPerfil();
-    }else if(item == tela.getItemDeletar()) {
-      int opcDeletar = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja deletar sua conta?");
-			if (opcDeletar == 0)
+		if (item == tela.getItemEditar()) {
+			tela.dispose();
+			new TelaEdicaoPerfil();
+			
+		} else if (item == tela.getItemDeletar()) {
+			int opc = FabricaJOptionPane.criarMsgDeOpcao("Escolha", "Deseja deletar sua conta?");
+			if (opc == JOptionPane.YES_OPTION)
 				System.out.println("Deletar a conta");
-    }else {
-      int opcSair = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja sair?");
-      tela.dispose();
-      new TelaLogin();
-    }
-  }
-  
+
+		} else {
+			int opc = FabricaJOptionPane.criarMsgDeOpcao("Escolha", "Deseja sair?");
+			if (opc == JOptionPane.YES_OPTION) {
+				tela.dispose();
+				new TelaLogin();
+			}
+
+		}
+	}
+
 }

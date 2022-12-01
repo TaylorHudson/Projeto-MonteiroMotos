@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.ADM.ouvintes.OuvinteTelaFinancasADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -47,7 +47,7 @@ public class TelaFinancasADM extends JFrame {
 	private void configButoes() {
 		
 		OuvinteTelaFinancasADM ouvinte = new OuvinteTelaFinancasADM(this);
-		OuvinteBotaoPadrao mouse = new OuvinteBotaoPadrao();
+		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnGerarRelatorio = FabricaJButton.criarJButton("Gerar Relatorio", 270, 650, 300, 40, Color.white, Color.black,28);
 		

@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import projeto.ImagemDeFundo;
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import utilidades.fabricas.FabricaJButton;
@@ -30,7 +30,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 	private ImagemDeFundo background;
 
 	public TelaEdicaoPerfil() {
-		super("Tela de edição de perfil");
+		super("Tela para editar perfil");
 		setVisible(true);
 	}
 	
@@ -47,7 +47,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 
 	private void configMenu() {
 		OuvinteBotoesTelaEdicao ouvinte = new OuvinteBotoesTelaEdicao(this);
-		OuvinteBotaoPadrao ouvinteBotao = new OuvinteBotaoPadrao(); 
+		OuvinteBotaoFundoPreto ouvinteBotao = new OuvinteBotaoFundoPreto(); 
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addActionListener(ouvinte);

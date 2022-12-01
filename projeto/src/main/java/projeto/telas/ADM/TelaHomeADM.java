@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import projeto.OuvinteBotaoPadrao;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.telas.ADM.ouvintes.OuvinteMenuTelaHomeADM;
 import projeto.telas.ADM.ouvintes.OuvinteTelaHomeADM;
 import utilidades.fabricas.FabricaJButton;
@@ -67,7 +67,7 @@ public class TelaHomeADM  extends JFrame{
 	}
 	private void confiBotoes() {
 		OuvinteTelaHomeADM ouvinte = new OuvinteTelaHomeADM(this);
-		OuvinteBotaoPadrao mouse = new OuvinteBotaoPadrao();
+		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnDadosDosUsuarios = FabricaJButton.criarJButton("Dados dos Usuarios", 150, 220, 300, 70,
 				Color.white, Color.black, 28);
 		btnFinancas = FabricaJButton.criarJButton("Finanças", 150, 490, 300, 70,
