@@ -16,7 +16,7 @@ import projeto.telas.mototaxista.ouvintes.OuvinteTelaHomeMototaxista;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJPanel;
 
-public class TelaHomeMototaxista extends TelaPadrao{
+public class TelaHomeMototaxista extends TelaPadrao {
 
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
@@ -32,12 +32,12 @@ public class TelaHomeMototaxista extends TelaPadrao{
 	
 	@Override
 	public void configurarComponentes() {
-		configImagemDeFundo();
+		configImagemFundo();
 		configMenu();
 		configBotoes();
 	}
 	
-	private void configImagemDeFundo() {
+	private void configImagemFundo() {
 		background = super.configImagemDeFundo("home.jpg");
 		add(background);
 	}

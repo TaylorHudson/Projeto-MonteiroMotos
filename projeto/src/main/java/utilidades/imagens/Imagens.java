@@ -10,10 +10,10 @@ public class Imagens {
 	  return icone;
   }
  
-  public static final ImageIcon BACKGROUND = (ImageIcon) Imagens.importarImagem("background.jpg");
-  public static final ImageIcon BACKGROUND_2 = (ImageIcon) Imagens.importarImagem("background_2.jpg");
-  public static final ImageIcon MOTOTAXISTA	 = (ImageIcon) Imagens.importarImagem("mototaxista.jpg");
-  public static final ImageIcon BACKGROUNDHOME = (ImageIcon) Imagens.importarImagem("home.jpg");
-  public static final ImageIcon SETA = (ImageIcon) Imagens.importarImagem("left-arrow.png");
+  public static final ImageIcon BACKGROUND = (ImageIcon) Imagens.importarImagem("img/background.jpg");
+  public static final ImageIcon BACKGROUND_2 = (ImageIcon) Imagens.importarImagem("img/background_2.jpg");
+  public static final ImageIcon MOTOTAXISTA	 = (ImageIcon) Imagens.importarImagem("img/mototaxista.jpg");
+  public static final ImageIcon BACKGROUNDHOME = (ImageIcon) Imagens.importarImagem("img/home.jpg");
+  public static final ImageIcon SETA = (ImageIcon) Imagens.importarImagem("img/left-arrow.png");
 }
  

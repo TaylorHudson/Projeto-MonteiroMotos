@@ -10,7 +10,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoPadrao;
+import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -18,34 +20,34 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaEdicaoPerfil extends JFrame {
+public class TelaEdicaoPerfil extends TelaPadrao {
 
 	private JTextField txtNomeCompleto;
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JFormattedTextField txtData;
 	private JButton btnSeta;
+	private ImagemDeFundo background;
 
 	public TelaEdicaoPerfil() {
-		configurarTela();
-		configMenu();
+		super("Tela de edição de perfil");
 		setVisible(true);
 	}
-
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Tela EdiÃ§Ã£o de Perfil");
+	
+	@Override
+	public void configurarComponentes() {
+		configImagemFundo();
+		configMenu();
+	}
+	
+	private void configImagemFundo() {
+		background = super.configImagemDeFundo("background_2.jpg");
+		add(background);
 	}
 
 	private void configMenu() {
 		OuvinteBotoesTelaEdicao ouvinte = new OuvinteBotoesTelaEdicao(this);
 		OuvinteBotaoPadrao ouvinteBotao = new OuvinteBotaoPadrao(); 
-
-		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addActionListener(ouvinte);
@@ -110,5 +112,6 @@ public class TelaEdicaoPerfil extends JFrame {
 	public static void main(String[] args) {
 		new TelaEdicaoPerfil();
 	}
+
 
 }

@@ -9,7 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoPadrao;
+import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteSpinner;
 import projeto.telas.mototaxista.ouvintes.OuvinteTelaComprarCreditos;
 import utilidades.fabricas.FabricaJButton;
@@ -17,42 +19,42 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaComprarCreditos extends JFrame {
+public class TelaComprarCreditos extends TelaPadrao {
 
   private JTextField txtPrecoTotal;
   private JSpinner spinner;
+  private ImagemDeFundo background;
 
   public TelaComprarCreditos() {
-    configurarTela();
-    configMenu();
+	super("Tela para compra de cr�ditos");
     setVisible(true);
   }
-
-  private void configurarTela() {
-    setSize(900, 800);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setLayout(null);
-    setResizable(false);
-    setLocationRelativeTo(null);
-    setTitle("Tela Comprar Créditos");
+  
+  @Override
+  public void configurarComponentes() {
+	  configImagemFundo();
+	  configMenu();
+  }
+  
+  private void configImagemFundo() {
+		background = super.configImagemDeFundo("background_2.jpg");
+		add(background);
   }
 
   private void configMenu() {
     OuvinteTelaComprarCreditos ouvinte = new OuvinteTelaComprarCreditos(this);
 
-    JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
-
     JLabel menu = FabricaJLabel.criarJLabel(150, 150, 550, 450, Color.BLACK, 0);
     menu.setBackground(Color.BLACK);
 
-    JLabel lblQuantidade = FabricaJLabel.criarJLabel("Quantidade de Créditos", 10,80,350, 26, Color.BLACK, Color.WHITE, 26);
+    JLabel lblQuantidade = FabricaJLabel.criarJLabel("Quantidade de Creditos", 10,80,350, 26, Color.BLACK, Color.WHITE, 26);
     
     spinner = new JSpinner();
     spinner.setBounds(10, 120, 100, 35);
     spinner.setFont(new Font("Arial", 1, 20));
     spinner.addChangeListener(new OuvinteSpinner(this));
 
-    JLabel lblPrecoTotal = FabricaJLabel.criarJLabel("Preço Total", 10,180,350, 30, Color.BLACK, Color.WHITE, 26);
+    JLabel lblPrecoTotal = FabricaJLabel.criarJLabel("Valor Total", 10,180,350, 30, Color.BLACK, Color.WHITE, 26);
 
     txtPrecoTotal = FabricaJText.criarJTextField(10,220,300, 30, Color.WHITE, Color.BLACK, 24);
     txtPrecoTotal.setEditable(false);
@@ -82,4 +84,5 @@ public class TelaComprarCreditos extends JFrame {
   public static void main(String[] args) {
     new TelaComprarCreditos();
   }
+
 }

@@ -7,6 +7,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoPadrao;
+import projeto.TelaPadrao;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
@@ -15,25 +18,35 @@ import utilidades.imagens.Imagens;
 import java.awt.Font;
 import java.awt.Color;
 
-public class TelaListarCorridas extends JFrame {
+public class TelaListarCorridas extends TelaPadrao {
 
 	private JTable tabelaCorridas;
-	private JLabel background;
 	private JButton btnOrdenar;
 	private JButton btnReivindicarCorrida;
-	private JLabel lblSeta;
+	private JButton btnSeta;
+	private ImagemDeFundo background;
 
 	public TelaListarCorridas() {
-		configurarTela();
-		configImagemFundo();
-		configTabela();
-
+		super("Tela de listagem de corridas");
 		setVisible(true);
 	}
 
+	@Override
+	public void configurarComponentes() {
+		configImagemFundo();
+		configTabela();
+		configSeta();
+	}
+	
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUNDHOME);
+		background = super.configImagemDeFundo("home.jpg");
 		add(background);
+	}
+	
+	private void configSeta() {
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addMouseListener(new OuvinteBotaoPadrao());
+		background.add(btnSeta);
 	}
 
 	private void configTabela() {
@@ -43,9 +56,6 @@ public class TelaListarCorridas extends JFrame {
 		modelo.setColumnIdentifiers(new String[] { "NOME", "STATUS", "DATA", "HORA" });
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
-
-		lblSeta = FabricaJLabel.criarJLabel(825, 2, 50, 50, Imagens.SETA);
-		lblSeta.addMouseListener(ouvinte);
 
 		JScrollPane scrol = new JScrollPane(tabelaCorridas);
 		scrol.getViewport().setBackground(new Color(124, 68, 2));
@@ -61,16 +71,6 @@ public class TelaListarCorridas extends JFrame {
 		background.add(scrol);
 		background.add(btnOrdenar);
 		background.add(btnReivindicarCorrida);
-		background.add(lblSeta);
-	}
-
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Tela Listar Corridas");
 	}
 
 	public static void main(String[] args) {
@@ -89,8 +89,8 @@ public class TelaListarCorridas extends JFrame {
 		return btnReivindicarCorrida;
 	}
 
-	public JLabel getLblSeta() {
-		return lblSeta;
+	public JButton getBtnSeta() {
+		return btnSeta;
 	}
 
 }

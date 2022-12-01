@@ -17,7 +17,7 @@ public class OuvinteBotoesTelaListarCorridas implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == tela.getLblSeta()) {
+		if (e.getSource() == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomeMototaxista();
 		}
