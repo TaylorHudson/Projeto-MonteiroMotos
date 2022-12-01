@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 
 import javax.swing.JCheckBox;
 
+import projeto.excecoes.usuario.CadastroDeCorridaInvalidoException;
 import projeto.excecoes.usuario.SexoInvalidoException;
+import projeto.excecoes.usuario.StatusDaCorridaInvalidoException;
 import projeto.excecoes.usuario.ValidacaoException;
 
 public abstract class Validador {
@@ -24,8 +26,7 @@ public abstract class Validador {
 	}
 
 	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data,
-			JCheckBox cbFeminino, JCheckBox cbMasculino)
-			throws SexoInvalidoException {
+			JCheckBox cbFeminino, JCheckBox cbMasculino) throws SexoInvalidoException {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
@@ -35,6 +36,27 @@ public abstract class Validador {
 		if (nomeValido && emailValido && senhaValida && dataValida && sexoValido)
 			return true;
 		return false;
+	}
+
+	public static boolean validarCorrida(String pontoDeEncontro, String localDestino, String complemento)
+			throws CadastroDeCorridaInvalidoException {
+		if (pontoDeEncontro.isEmpty() || localDestino.isEmpty() || complemento.isEmpty()) {
+			throw new CadastroDeCorridaInvalidoException();
+		}
+		return true;
+	}
+
+	public static boolean validarStatusDaCorrida(JCheckBox cbAgora, JCheckBox cbDepois)
+			throws StatusDaCorridaInvalidoException {
+		boolean selecionouParaAgora = cbAgora.isSelected();
+		boolean selecionouParaDepois = cbDepois.isSelected();
+		if (selecionouParaAgora && selecionouParaDepois) {
+			throw new StatusDaCorridaInvalidoException();
+		}
+		if (!selecionouParaAgora && !selecionouParaDepois) {
+			throw new StatusDaCorridaInvalidoException("Selecione um tipo de status da corrida");
+		}
+		return true;
 	}
 
 	public static boolean validarSexo(JCheckBox cbFeminino, JCheckBox cbMasculino) throws SexoInvalidoException {
