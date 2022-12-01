@@ -52,12 +52,13 @@ public class TelaValorDeCreditosADM extends TelaPadrao {
 		btnSalvar.addActionListener(ouvinte);
 		btnSeta.addActionListener(ouvinte);
 		btnSalvar.addMouseListener(mouse);
+		btnSeta.addMouseListener(mouse);
 		
 		imagem.add(btnSalvar);
 		imagem.add(btnSeta);
 	}
 	private void configTexto() {
-		lblValor = FabricaJLabel.criarJLabel("Valor dos Creditos de Reivindicação", 50, 100, 450, 40, Color.black,Color.white, 25);
+		lblValor = FabricaJLabel.criarJLabel("Valor dos Creditos de Reivindicação", 50, 100, 450, 40,Color.black, Color.white, 25);
 		try {
 		txtCreditos = FabricaJFormatted.criarJFormatted(50, 150, 90, 40, new MaskFormatter("0,##"));
 		}catch (Exception e) {

@@ -5,11 +5,6 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,71 +12,71 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.telas.ADM.ouvintes.OuvinteTelaDadosDosUsuarios;
-import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
+import projeto.telas.ADM.ouvintes.OuvinteTelaListarCorridasADM;
 import utilidades.fabricas.FabricaJButton;
-import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
 
-public class TelaDadosDosUsuarios extends TelaPadrao{
-
-
-	private JTable tabelaUsuarios;
-	private JButton btnSeta;
-	private ImagemDeFundo imagem;
+public class TelaListarCorridasADM extends TelaPadrao {
 	private JButton btnDetalhes;
+	private JButton btnOrdenar;
+	private ImagemDeFundo imagem;
+	private JTable tabelaListarCorridas;
+	private JButton btnSeta;
 	private JComboBox<String> box;
 	
-	public TelaDadosDosUsuarios() {
-		super("Dados dos Usuarios");
+	
+	public TelaListarCorridasADM() {
+		super("Lista de Corridas");
 		setVisible(true);
-		
 	}
 	public void configurarComponentes() {
 		configImagemDeFundo();
 		configBotoes();
 		configTabela();
+		
 	}
+	
 	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
 		add(imagem);
 	}
-	
 	private void configBotoes() {
-		OuvinteTelaDadosDosUsuarios ouvinte = new OuvinteTelaDadosDosUsuarios(this);
+		OuvinteTelaListarCorridasADM ouvinte = new OuvinteTelaListarCorridasADM(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
-		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,
-				28);
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,28);
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 600, 100, 200, 40, Color.white, Color.black,28);
 		
-		
-		box = new JComboBox<String>(new String[] {"Mototaxista","Passageiro"});
-		box.setBounds(520, 100, 300, 40);
+		box = new JComboBox<String>(new String[] {"Finalizada","Andamento", "Espera"});
+		box.setBounds(350, 100, 200, 40);
 		box.setFont(new Font("Arial", 1, 20));
 		box.setForeground(Color.black);
 		box.setBackground(Color.white);
 		
 		btnDetalhes.addActionListener(ouvinte);
+		btnOrdenar.addActionListener(ouvinte);
 		btnSeta.addActionListener(ouvinte);
 		
-		btnDetalhes.addMouseListener(mouse);
 		btnSeta.addMouseListener(mouse);
+		btnDetalhes.addMouseListener(mouse);
+		btnOrdenar.addMouseListener(mouse);
+		box.addMouseListener(mouse);
 		
 		imagem.add(btnDetalhes);
 		imagem.add(box);
+		imagem.add(btnOrdenar);
 		imagem.add(btnSeta);
+		
 	}
-
-	
 	private void configTabela() {
 
 		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "E-MAil", "Nome Completo", "Perfil Do Usuario" });
-		tabelaUsuarios = new JTable(modelo);
-		tabelaUsuarios.setFont(new Font("Arial", 1, 15));
+		modelo.setColumnIdentifiers(new String[] { "Nome do Passageiro", "Data", "Status" });
+		tabelaListarCorridas = new JTable(modelo);
+		tabelaListarCorridas.setFont(new Font("Arial", 1, 15));
 
 
-		JScrollPane scrol = new JScrollPane(tabelaUsuarios);
+		JScrollPane scrol = new JScrollPane(tabelaListarCorridas);
 		scrol.getViewport().setBackground(Color.orange);
 		scrol.setBounds(2, 200, 885, 400);
 
@@ -89,16 +84,17 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	}
 	
 	
-
-	public JButton getBtnSeta() {
-		return btnSeta;
-	}
-
 	public JButton getBtnDetalhes() {
 		return btnDetalhes;
 	}
-
-	public static void main(String[] args) {
-		new TelaDadosDosUsuarios();
+	public JButton getBtnOrdenar() {
+		return btnOrdenar;
 	}
+	public JButton getBtnSeta() {
+		return btnSeta;
+	}
+	public static void main(String[] args) {
+		new TelaListarCorridasADM();
+	}
+
 }

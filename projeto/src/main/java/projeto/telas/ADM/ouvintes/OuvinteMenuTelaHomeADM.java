@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import projeto.telas.ADM.TelaHomeADM;
+import projeto.telas.ADM.TelaListarCorridasADM;
 import projeto.telas.ADM.TelaValorDeCreditosADM;
+import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.usuario.TelaLogin;
 import utilidades.fabricas.FabricaJOptionPane;
 
@@ -23,8 +25,10 @@ public class OuvinteMenuTelaHomeADM implements ActionListener {
 
 	    if(item == tela.getItemEditar()) {
 	      tela.dispose();
+	      new TelaEdicaoPerfil();
 	    }else if(item == tela.getItemListaDeCorridas()) {
 	    	tela.dispose();
+	    	new TelaListarCorridasADM();
 	    }else if(item == tela.getItemDefinirValorDosCreditos()) {
 	    	tela.dispose();
 	    	new TelaValorDeCreditosADM();

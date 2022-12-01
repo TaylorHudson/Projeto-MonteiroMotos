@@ -51,6 +51,7 @@ public class TelaFinancasADM extends TelaPadrao {
 		btnSeta.addActionListener(ouvinte);
 		
 		btnGerarRelatorio.addMouseListener(mouse);
+		btnSeta.addMouseListener(mouse);
 		
 		imagem.add(btnGerarRelatorio);
 		imagem.add(btnSeta);

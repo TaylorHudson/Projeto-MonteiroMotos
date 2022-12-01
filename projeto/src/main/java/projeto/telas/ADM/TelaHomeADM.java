@@ -44,6 +44,8 @@ public class TelaHomeADM  extends TelaPadrao{
 	
 	
 	private void configMenu() {
+		OuvinteMenuTelaHomeADM ouvinte = new OuvinteMenuTelaHomeADM(this);
+		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuOpcoes = new JMenu("Opções");
 		itemEditar = new JMenuItem("Editar Perfil");
@@ -51,11 +53,15 @@ public class TelaHomeADM  extends TelaPadrao{
 		itemDefinirValorDosCreditos = new JMenuItem("Definir Valor dos Créditos");
 		itemSair = new JMenuItem("Sair");
 		
-		OuvinteMenuTelaHomeADM ouvinte = new OuvinteMenuTelaHomeADM(this);
 		itemEditar.addActionListener(ouvinte);
 		itemListaDeCorridas.addActionListener(ouvinte);
 		itemDefinirValorDosCreditos.addActionListener(ouvinte);
 		itemSair.addActionListener(ouvinte);
+		
+		itemDefinirValorDosCreditos.addMouseListener(mouse);
+		itemEditar.addMouseListener(mouse);
+		itemListaDeCorridas.addMouseListener(mouse);
+		itemSair.addMouseListener(mouse);
 		
 		menuBar.add(menuOpcoes);
 		menuOpcoes.add(itemEditar);
