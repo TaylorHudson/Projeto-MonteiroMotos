@@ -18,7 +18,7 @@ import projeto.repositorio.CentralDeInformacoes;
 
 public class Persistencia {
 
-	private XStream xstream = new XStream(new DomDriver("UTF-8"));
+	private XStream xstream = new XStream(new DomDriver("ISO-8859-1"));
 
 	public Persistencia() {
 		configIniciais();
@@ -37,7 +37,7 @@ public class Persistencia {
 	}
 
 	public void salvarCentral(CentralDeInformacoes central, String nomeDoArquivo) {
-		String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		String xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n";
 
 		File arquivo = new File(nomeDoArquivo + ".xml");
 

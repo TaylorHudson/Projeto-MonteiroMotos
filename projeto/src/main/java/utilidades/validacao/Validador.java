@@ -57,7 +57,7 @@ public abstract class Validador {
 
 	public static boolean validarEmail(String email) {
 		if (email.isEmpty())
-			throw new ValidacaoException("E-mail não pode ser vazio");
+			throw new ValidacaoException("E-mail nao pode ser vazio");
 
 		String regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 		Pattern pattern = Pattern.compile(regex);
@@ -65,7 +65,7 @@ public abstract class Validador {
 		boolean valido = matcher.matches() && email.contains("gmail.com");
 
 		if (!valido)
-			throw new ValidacaoException("E-mail inválido");
+			throw new ValidacaoException("E-mail invalido");
 		return true;
 	}
 
@@ -76,7 +76,7 @@ public abstract class Validador {
 		boolean temCaracterEspecial = matcher.matches();
 
 		if (senha.isEmpty() || senha.length() < 6)
-			throw new ValidacaoException("Senha inválida");
+			throw new ValidacaoException("Senha invalida");
 		else if (!temCaracterEspecial)
 			throw new ValidacaoException("A senha deve conter ao menos um caracter especial");
 		return true;
@@ -88,6 +88,6 @@ public abstract class Validador {
 		Period periodo = Period.between(dataNasc, dataAtual);
 		if (periodo.getYears() >= 18)
 			return true;
-		throw new ValidacaoException("Data de nascimento inválida");
+		throw new ValidacaoException("Data de nascimento invalida");
 	}
 }
