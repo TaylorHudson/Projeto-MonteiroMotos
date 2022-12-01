@@ -16,7 +16,7 @@ import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 
 public class TelaHomePassageiro extends TelaPadrao {
-	OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
+	private OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
 
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
