@@ -2,6 +2,8 @@ package projeto.servico;
 
 import java.util.ArrayList;
 
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
 import utilidades.validacao.Validador;
@@ -16,7 +18,7 @@ public class ServicoMototaxista {
     mototaxistas = this.central.getMototaxistas();
   }
 
-  public boolean adicionarMototaxista(Mototaxista mototaxista) {
+  public boolean adicionarMototaxista(Mototaxista mototaxista) throws ValidacaoException {
     boolean ok = true;
     for (Mototaxista m : mototaxistas) {
       if (mototaxista.equals(m))
@@ -30,12 +32,12 @@ public class ServicoMototaxista {
     return false;
   }
 
-  public Mototaxista recuperarMototaxistaPeloEmail(String email) {
+  public Mototaxista recuperarMototaxistaPeloEmail(String email) throws UsuarioNaoExisteException {
 		for (Mototaxista m : mototaxistas) {
 			if (m.getEmail().equals(email))
 				return m;
 		}
-		return null;
+		throw new UsuarioNaoExisteException();
 	}
 
 }

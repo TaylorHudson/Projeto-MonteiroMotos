@@ -2,6 +2,8 @@ package projeto.servico;
 
 import java.util.ArrayList;
 
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
@@ -17,7 +19,7 @@ public class ServicoPassageiro {
 		passageiros = this.central.getPassageiros();
 	}
 
-	public boolean adicionarPassageiro(Passageiro passageiro) {
+	public boolean adicionarPassageiro(Passageiro passageiro) throws ValidacaoException {
 		boolean ok = true;
 		for (Passageiro p : passageiros) {
 			if (passageiro.equals(p))
@@ -31,15 +33,15 @@ public class ServicoPassageiro {
 		return false;
 	}
 
-	public Passageiro recuperarPassageiroPeloEmail(String email) {
+	public Passageiro recuperarPassageiroPeloEmail(String email) throws UsuarioNaoExisteException {
 		for (Passageiro p : passageiros) {
 			if (p.getEmail().equals(email))
 				return p;
 		}
-		return null;
+		throw new UsuarioNaoExisteException();
 	}
 
-	public boolean validarPassageiro(String email, String senha) {
+	public boolean validarPassageiro(String email, String senha) throws UsuarioNaoExisteException {
 		Usuario usuario = central.recuperarPassageiroPeloEmail(email);
 		if (usuario != null && usuario.getSenha().equals(senha))
 			return true;

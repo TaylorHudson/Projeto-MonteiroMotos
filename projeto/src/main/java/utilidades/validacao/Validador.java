@@ -10,12 +10,18 @@ import javax.swing.JCheckBox;
 import projeto.excecoes.usuario.CadastroDeCorridaInvalidoException;
 import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.StatusDaCorridaInvalidoException;
+import projeto.excecoes.usuario.UsuarioInativoException;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.excecoes.usuario.ValidarCreditoException;
+import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.repositorio.CentralDeInformacoes;
 
 public abstract class Validador {
 
-	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data) {
+	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data)
+			throws ValidacaoException {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
@@ -27,7 +33,7 @@ public abstract class Validador {
 	}
 
 	public static boolean validarCadastro(String nomeCompleto, String email, String senha, LocalDate data,
-			JCheckBox cbFeminino, JCheckBox cbMasculino) throws SexoInvalidoException {
+			JCheckBox cbFeminino, JCheckBox cbMasculino) throws SexoInvalidoException, ValidacaoException {
 		boolean nomeValido = validarNome(nomeCompleto);
 		boolean emailValido = validarEmail(email);
 		boolean senhaValida = validarSenha(senha);
@@ -37,6 +43,31 @@ public abstract class Validador {
 		if (nomeValido && emailValido && senhaValida && dataValida && sexoValido)
 			return true;
 		return false;
+	}
+
+	public static boolean logar(String email, String senha, String tipo, CentralDeInformacoes central)
+			throws ValidacaoException, UsuarioInativoException, UsuarioNaoExisteException {
+
+		ValidacaoException erroValidacao = new ValidacaoException("E-mail/Senha incorretos");
+
+		if (tipo.equals("Mototaxista")) {
+			Mototaxista mototaxista = central.recuperarMototaxistaPeloEmail(email);
+			String senhaMototaxista = mototaxista.getSenha();
+			if (senha != senhaMototaxista)
+				throw erroValidacao;
+			else if (!mototaxista.isEstaAtivo())
+				throw new UsuarioInativoException();
+		} 
+		else if (tipo.equals("Passageiro")) {
+			Passageiro passageiro = central.recuperarPassageiroPeloEmail(email);
+			System.out.println(passageiro);
+			String senhaPassageiro = passageiro.getSenha();
+			if (senha != senhaPassageiro)
+				throw erroValidacao;
+			else if(!passageiro.isEstaAtivo())
+				throw new UsuarioInativoException();
+		}
+		return true;
 	}
 
 	public static boolean validarCorrida(String pontoDeEncontro, String localDestino, String complemento)
@@ -72,13 +103,13 @@ public abstract class Validador {
 		return true;
 	}
 
-	public static boolean validarNome(String nome) {
+	public static boolean validarNome(String nome) throws ValidacaoException {
 		if (nome.isEmpty() || nome.length() < 10)
 			throw new ValidacaoException("O nome deve conter pelo menos dez caracteres");
 		return true;
 	}
 
-	public static boolean validarEmail(String email) {
+	public static boolean validarEmail(String email) throws ValidacaoException {
 		if (email.isEmpty())
 			throw new ValidacaoException("E-mail nao pode ser vazio");
 
@@ -92,7 +123,7 @@ public abstract class Validador {
 		return true;
 	}
 
-	public static boolean validarSenha(String senha) {
+	public static boolean validarSenha(String senha) throws ValidacaoException {
 		String regex = ".*[@!#$%^&*()/\\\\]";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(senha);
@@ -105,7 +136,7 @@ public abstract class Validador {
 		return true;
 	}
 
-	public static boolean idadeValida(LocalDate dataNascimento) {
+	public static boolean idadeValida(LocalDate dataNascimento) throws ValidacaoException {
 		LocalDate dataNasc = dataNascimento;
 		LocalDate dataAtual = LocalDate.now();
 		Period periodo = Period.between(dataNasc, dataAtual);
@@ -113,9 +144,11 @@ public abstract class Validador {
 			return true;
 		throw new ValidacaoException("Data de nascimento invalida");
 	}
-	public static boolean validarCredito(double credito)throws ValidarCreditoException {
-		if(credito == 0.0) {
+
+	public static boolean validarCredito(double credito) throws ValidarCreditoException {
+		if (credito == 0.0) {
 			throw new ValidarCreditoException("Valor do credito invalido");
-		}return true;
+		}
+		return true;
 	}
 }

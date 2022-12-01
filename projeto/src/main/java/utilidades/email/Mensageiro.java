@@ -6,6 +6,7 @@ import java.util.Random;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.MultiPartEmail;
 
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
@@ -14,7 +15,7 @@ import utilidades.persistencia.Persistencia;
 
 public class Mensageiro {
 
-	public static void enviarHistoricoDeCorridas(Passageiro passageiro) {
+	public static void enviarHistoricoDeCorridas(Passageiro passageiro) throws UsuarioNaoExisteException {
 		String remetente = "pooprojeto824@gmail.com";
 		String senha = "rehjpckvmjwhvkpu";
 
@@ -34,7 +35,7 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Rela��o das Corridas do Passageiro " + passageiro.getNome());
+			email.setSubject("Relatorio das Corridas do Passageiro " + passageiro.getNome());
 			email.setMsg(resposta);
 			email.addTo(passageiro.getEmail());
 

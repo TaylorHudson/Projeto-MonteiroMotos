@@ -2,6 +2,8 @@ package projeto.repositorio;
 
 import java.util.ArrayList;
 
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
@@ -22,23 +24,23 @@ public class CentralDeInformacoes {
 	private ServicoCorrida servicoCorrida = new ServicoCorrida(this, servicoPassageiro);
 	private ServicoMototaxista servicoMototaxista = new ServicoMototaxista(this);
 
-	public boolean adicionarMototaxista(Mototaxista mototaxista) {
+	public boolean adicionarMototaxista(Mototaxista mototaxista) throws ValidacaoException {
 		return servicoMototaxista.adicionarMototaxista(mototaxista);
 	}
 
-	public Mototaxista recuperarMototaxistaPeloEmail(String email) {
+	public Mototaxista recuperarMototaxistaPeloEmail(String email) throws UsuarioNaoExisteException {
 		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
 	}
 
-	public boolean adicionarPassageiro(Passageiro passageiro) {
+	public boolean adicionarPassageiro(Passageiro passageiro) throws ValidacaoException {
 		return servicoPassageiro.adicionarPassageiro(passageiro);
 	}
 
-	public Passageiro recuperarPassageiroPeloEmail(String email) {
+	public Passageiro recuperarPassageiroPeloEmail(String email) throws UsuarioNaoExisteException {
 		return servicoPassageiro.recuperarPassageiroPeloEmail(email);
 	}
 
-	public boolean validarPassageiro(String email, String senha) {
+	public boolean validarPassageiro(String email, String senha) throws UsuarioNaoExisteException {
 		return servicoPassageiro.validarPassageiro(email, senha);
 	}
 
@@ -50,11 +52,11 @@ public class CentralDeInformacoes {
 		return servicoCorrida.recuperarCorridaPeloId(id);
 	}
 
-	public ArrayList<Corrida> recuperarCorridasDeUmPassageiro(String email) {
+	public ArrayList<Corrida> recuperarCorridasDeUmPassageiro(String email) throws UsuarioNaoExisteException {
 		return servicoCorrida.recuperarCorridasDeUmPassageiro(email);
 	}
 
-	public int recuperarNumeroCorridasDeUmPassageiro(String email) {
+	public int recuperarNumeroCorridasDeUmPassageiro(String email) throws UsuarioNaoExisteException {
 		return servicoCorrida.recuperarCorridasDeUmPassageiro(email).size();
 	}
 

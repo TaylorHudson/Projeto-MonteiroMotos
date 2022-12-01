@@ -2,6 +2,7 @@ package projeto.servico;
 
 import java.util.ArrayList;
 
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
@@ -35,7 +36,7 @@ public class ServicoCorrida {
 		return null;
 	}
 
-	public ArrayList<Corrida> recuperarCorridasDeUmPassageiro(String email) {
+	public ArrayList<Corrida> recuperarCorridasDeUmPassageiro(String email) throws UsuarioNaoExisteException {
 		ArrayList<Corrida> corridasDoPassageiro = new ArrayList<Corrida>();
 		Passageiro passageiro = util.recuperarPassageiroPeloEmail(email);
 		if (passageiro != null) {

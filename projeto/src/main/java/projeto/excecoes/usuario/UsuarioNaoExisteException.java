@@ -1,6 +1,6 @@
 package projeto.excecoes.usuario;
 
-public class UsuarioNaoExisteException extends RuntimeException{
+public class UsuarioNaoExisteException extends Exception{
 
 	public UsuarioNaoExisteException() {
 		super("Usuário inexistente");
