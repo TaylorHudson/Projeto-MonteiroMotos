@@ -14,45 +14,40 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDadosDosUsuarios;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
 
-public class TelaDadosDosUsuarios extends JFrame {
+public class TelaDadosDosUsuarios extends TelaPadrao{
+
 
 	private JTable tabelaUsuarios;
 	private JButton btnSeta;
-	private JLabel background;
+	private ImagemDeFundo imagem;
 	private JButton btnDetalhes;
 	private JComboBox<String> box;
 	
-
 	public TelaDadosDosUsuarios() {
-		configurarTela();
-		configImagemFundo();
-		confiBotoes();
-		configTabela();
+		super("Dados do Usuario");
 		setVisible(true);
+		
 	}
-
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Dados dos Usuarios");
+	public void configurarComponentes() {
+		configImagemDeFundo();
+		configBotoes();
+		configTabela();
 	}
-
-	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
-		add(background);
+	private void configImagemDeFundo() {
+		imagem = super.configImagemDeFundo("background_2.jpg");
+		add(imagem);
 	}
-
-	private void confiBotoes() {
+	
+	private void configBotoes() {
 		OuvinteTelaDadosDosUsuarios ouvinte = new OuvinteTelaDadosDosUsuarios(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,
@@ -72,9 +67,9 @@ public class TelaDadosDosUsuarios extends JFrame {
 		btnDetalhes.addMouseListener(mouse);
 		btnSeta.addMouseListener(mouse);
 		
-		background.add(btnDetalhes);
-		background.add(box);
-		background.add(btnSeta);
+		imagem.add(btnDetalhes);
+		imagem.add(box);
+		imagem.add(btnSeta);
 	}
 
 	
@@ -87,10 +82,10 @@ public class TelaDadosDosUsuarios extends JFrame {
 
 
 		JScrollPane scrol = new JScrollPane(tabelaUsuarios);
-		scrol.getViewport().setBackground(new Color(124, 68, 2));
+		scrol.getViewport().setBackground(Color.orange);
 		scrol.setBounds(2, 200, 885, 400);
 
-		background.add(scrol);
+		imagem.add(scrol);
 	}
 	
 	

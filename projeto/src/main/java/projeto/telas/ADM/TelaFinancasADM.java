@@ -10,41 +10,37 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteTelaFinancasADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
 
-public class TelaFinancasADM extends JFrame {
+public class TelaFinancasADM extends TelaPadrao {
 	
 	private JButton btnSeta;
 	private JButton btnGerarRelatorio;
-	private JLabel background;
+	private ImagemDeFundo imagem;
 	private JTable tabelaMototaxistas;
 	
 	public TelaFinancasADM() {
-		configurarTela();
-		configImagemFundo();
-		configTabela();
-		configButoes();
+		super("Finanças");	
 		setVisible(true);
 	}
+	public void configurarComponentes() {
+		configImagemDeFundo();
+		configBotoes();
+		configTabela();
+	}
+	private void configImagemDeFundo() {
+		imagem = super.configImagemDeFundo("background_2.jpg");
+		add(imagem);
+	}
 	
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Dados dos Usuarios");
-	}
-
-	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
-		add(background);
-	}
-	private void configButoes() {
+	
+	private void configBotoes() {
 		
 		OuvinteTelaFinancasADM ouvinte = new OuvinteTelaFinancasADM(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
@@ -56,8 +52,8 @@ public class TelaFinancasADM extends JFrame {
 		
 		btnGerarRelatorio.addMouseListener(mouse);
 		
-		background.add(btnGerarRelatorio);
-		background.add(btnSeta);
+		imagem.add(btnGerarRelatorio);
+		imagem.add(btnSeta);
 		
 	}
 	
@@ -71,10 +67,10 @@ public class TelaFinancasADM extends JFrame {
 		modelo.addRow(new String [] {"nguearngu", "456", "10/20/2000","2"});
 
 		JScrollPane scrol = new JScrollPane(tabelaMototaxistas);
-		scrol.getViewport().setBackground(new Color(124, 68, 2));
+		scrol.getViewport().setBackground(Color.orange);
 		scrol.setBounds(2, 200, 885, 400);
 
-		background.add(scrol);
+		imagem.add(scrol);
 	}
 	public JButton getBtnSeta() {
 		return btnSeta;

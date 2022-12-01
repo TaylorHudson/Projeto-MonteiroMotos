@@ -2,7 +2,17 @@
 <centralInformacoes>
   <passageiros/>
   <corridas/>
-  <mototaxistas/>
+  <mototaxistas>
+    <mototaxista>
+      <nome>Valdnei nunes</nome>
+      <email>valdneijose@gmail.com</email>
+      <senha>asdfghj@</senha>
+      <dataNascimento>2002-02-16</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+  </mototaxistas>
   <valorDoCredito>0.99</valorDoCredito>
   <servicoPassageiro>
     <central reference="../.."/>

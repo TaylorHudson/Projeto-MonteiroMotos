@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import projeto.telas.ADM.TelaDadosDosUsuarios;
+import projeto.telas.ADM.TelaFinancasADM;
 import projeto.telas.ADM.TelaHomeADM;
+import projeto.telas.mototaxista.TelaListarCorridas;
 
 public class OuvinteTelaHomeADM implements ActionListener{
 	
@@ -21,9 +23,9 @@ public class OuvinteTelaHomeADM implements ActionListener{
 		if (btn == tela.getBtnDadosDosUsuarios()) {
 			tela.dispose();
 			new TelaDadosDosUsuarios();
-		}else {
+		}else if(btn == tela.getBtnFinancas()){
 			tela.dispose();
+			new TelaFinancasADM();
 		}
-	
 	}
 }

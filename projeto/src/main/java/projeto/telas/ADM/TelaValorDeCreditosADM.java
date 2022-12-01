@@ -33,17 +33,17 @@ public class TelaValorDeCreditosADM extends TelaPadrao {
 
 	@Override
 	public void configurarComponentes() {
-		confgImagemDeFundo();
-		confgBotoes();
-		confgTexto();
+		configImagemDeFundo();
+		configBotoes();
+		configTexto();
 		
 		
 	}
-	public void confgImagemDeFundo() {
+	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
 		add(imagem);
 	}
-	public void confgBotoes() {
+	private void configBotoes() {
 		OuvinteTelaValorDeCreditosADM ouvinte = new OuvinteTelaValorDeCreditosADM(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnSalvar = FabricaJButton.criarJButton("SALVAR", 270, 650, 300, 40, Color.white, Color.black,28);
@@ -56,7 +56,7 @@ public class TelaValorDeCreditosADM extends TelaPadrao {
 		imagem.add(btnSalvar);
 		imagem.add(btnSeta);
 	}
-	public void confgTexto() {
+	private void configTexto() {
 		lblValor = FabricaJLabel.criarJLabel("Valor dos Creditos de Reivindicação", 50, 100, 450, 40, Color.black,Color.white, 25);
 		try {
 		txtCreditos = FabricaJFormatted.criarJFormatted(50, 150, 90, 40, new MaskFormatter("0,##"));

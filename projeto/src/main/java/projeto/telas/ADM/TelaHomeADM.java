@@ -9,37 +9,40 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteMenuTelaHomeADM;
 import projeto.telas.ADM.ouvintes.OuvinteTelaHomeADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
 
-public class TelaHomeADM  extends JFrame{
+public class TelaHomeADM  extends TelaPadrao{
 	private JMenuItem itemEditar;
 	private JMenuItem itemListaDeCorridas;
 	private JMenuItem itemDefinirValorDosCreditos;
 	private JMenuItem itemSair;
-	private JLabel background;
+	private ImagemDeFundo imagem;
 	private JButton btnDadosDosUsuarios;
 	private JButton btnFinancas;
 	
 	public TelaHomeADM() {
-		configurarTela();
-		configImagemFundo();
-		configMenu();
-		confiBotoes();
+		super("Home ADM");
 		setVisible(true);
 	}
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Home");
+	public void configurarComponentes() {
+		configImagemDeFundo();
+		confiBotoes();
+		configMenu();
 	}
+	public void configImagemDeFundo() {
+		imagem = super.configImagemDeFundo("home.jpg");
+		add(imagem);
+	}
+	
+	
+	
 	private void configMenu() {
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuOpcoes = new JMenu("Opções");
@@ -61,26 +64,24 @@ public class TelaHomeADM  extends JFrame{
 		menuOpcoes.add(itemSair);
 		setJMenuBar(menuBar);
 	}
-	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUNDHOME);
-		add(background);
-	}
+	
 	private void confiBotoes() {
 		OuvinteTelaHomeADM ouvinte = new OuvinteTelaHomeADM(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnDadosDosUsuarios = FabricaJButton.criarJButton("Dados dos Usuarios", 150, 220, 300, 70,
 				Color.white, Color.black, 28);
 		btnFinancas = FabricaJButton.criarJButton("Finanças", 150, 490, 300, 70,
-				new Color(28, 28, 20), new Color(179, 177, 177), 28);
+				Color.white,Color.black, 28);
 		
 		btnDadosDosUsuarios.addActionListener(ouvinte);
 		btnFinancas.addActionListener(ouvinte);
 		
 		btnDadosDosUsuarios.addMouseListener(mouse);
+		btnFinancas.addMouseListener(mouse);
 		
 		
-		background.add(btnDadosDosUsuarios);
-		background.add(btnFinancas);
+		imagem.add(btnDadosDosUsuarios);
+		imagem.add(btnFinancas);
 	}
 	public static void main(String[] args) {
 		new TelaHomeADM();

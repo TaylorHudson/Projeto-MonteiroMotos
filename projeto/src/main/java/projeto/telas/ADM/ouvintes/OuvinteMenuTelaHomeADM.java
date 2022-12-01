@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 import projeto.telas.ADM.TelaHomeADM;
+import projeto.telas.ADM.TelaValorDeCreditosADM;
 import projeto.telas.usuario.TelaLogin;
 import utilidades.fabricas.FabricaJOptionPane;
 
@@ -26,6 +27,7 @@ public class OuvinteMenuTelaHomeADM implements ActionListener {
 	    	tela.dispose();
 	    }else if(item == tela.getItemDefinirValorDosCreditos()) {
 	    	tela.dispose();
+	    	new TelaValorDeCreditosADM();
 	    }else {
 	    	int opcSair = FabricaJOptionPane.criarMsgDeOpcao("Escolha uma opção", "Deseja sair da sua conta?");
 			if (opcSair == 0) {
