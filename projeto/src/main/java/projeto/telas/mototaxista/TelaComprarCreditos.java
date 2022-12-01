@@ -68,6 +68,7 @@ public class TelaComprarCreditos extends TelaPadrao {
 
 		txtPrecoTotal = FabricaJText.criarJTextField(10, 220, 300, 30, Color.WHITE, Color.BLACK, 24);
 		txtPrecoTotal.setEditable(false);
+		txtPrecoTotal.setText("0,00");
 
 		JButton btnGerarBoleto = FabricaJButton.criarJButton("Gerar Boleto", 180, 350, 180, 40, Color.WHITE,
 				Color.BLACK, 24);
