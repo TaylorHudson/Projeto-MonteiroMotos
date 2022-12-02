@@ -41,11 +41,11 @@ public class ServicoPassageiro {
 		throw new UsuarioNaoExisteException();
 	}
 
-	public boolean validarPassageiro(String email, String senha) throws UsuarioNaoExisteException {
+	public boolean validarPassageiro(String email, String senha) throws UsuarioNaoExisteException, ValidacaoException {
 		Usuario usuario = central.recuperarPassageiroPeloEmail(email);
 		if (usuario != null && usuario.getSenha().equals(senha))
 			return true;
-		return false;
+		throw new ValidacaoException("E-mail/Senha incorretos");
 	}
 
 	public CentralDeInformacoes getCentral() {

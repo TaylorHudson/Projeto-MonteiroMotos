@@ -40,7 +40,7 @@ public class CentralDeInformacoes {
 		return servicoPassageiro.recuperarPassageiroPeloEmail(email);
 	}
 
-	public boolean validarPassageiro(String email, String senha) throws UsuarioNaoExisteException {
+	public boolean validarPassageiro(String email, String senha) throws UsuarioNaoExisteException, ValidacaoException {
 		return servicoPassageiro.validarPassageiro(email, senha);
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
+import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import utilidades.validacao.Validador;
 
@@ -40,4 +41,10 @@ public class ServicoMototaxista {
 		throw new UsuarioNaoExisteException();
 	}
 
+  public boolean validarMototaxista(String email, String senha) throws UsuarioNaoExisteException, ValidacaoException {
+		Usuario usuario = central.recuperarMototaxistaPeloEmail(email);
+		if (usuario != null && usuario.getSenha().equals(senha))
+			return true;
+		throw new ValidacaoException("E-mail/Senha incorretos");
+	}
 }

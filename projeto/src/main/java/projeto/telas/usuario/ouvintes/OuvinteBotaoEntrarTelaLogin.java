@@ -1,10 +1,10 @@
 package projeto.telas.usuario.ouvintes;
 
-import projeto.excecoes.usuario.UsuarioInativoException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
-import projeto.modelo.Mototaxista;
-import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.TelaHomeADM;
@@ -14,9 +14,6 @@ import projeto.telas.usuario.TelaLogin;
 import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
 import utilidades.validacao.Validador;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class OuvinteBotaoEntrarTelaLogin implements ActionListener {
 
@@ -40,19 +37,20 @@ public class OuvinteBotaoEntrarTelaLogin implements ActionListener {
 				tela.dispose();
 				new TelaHomeADM();
 			}
-		} else {
+		} 
+		else {
 			try {
 				Validador.logar(email, senha, tipoUsuario, central);
-				if (tipoUsuario.equals("Mototaxista")) {
-					tela.dispose();
-					new TelaHomeMototaxista();
-				} else if (tipoUsuario.equals("Passageiro")) {
-					tela.dispose();
-					new TelaHomePassageiro();
-				}
-			} catch (UsuarioNaoExisteException | UsuarioInativoException | ValidacaoException erro) {
+					if (tipoUsuario.equals("Mototaxista")) {
+						tela.dispose();
+						new TelaHomeMototaxista();
+					} else if (tipoUsuario.equals("Passageiro")) {
+						tela.dispose();
+						new TelaHomePassageiro();
+					}
+			} catch (ValidacaoException | UsuarioNaoExisteException erro) {
 				FabricaJOptionPane.criarMsgErro(erro.getMessage());
-			}
+			} 
 		}
 
 	}

@@ -10,13 +10,12 @@ import javax.swing.JCheckBox;
 import projeto.excecoes.usuario.CadastroDeCorridaInvalidoException;
 import projeto.excecoes.usuario.SexoInvalidoException;
 import projeto.excecoes.usuario.StatusDaCorridaInvalidoException;
-import projeto.excecoes.usuario.UsuarioInativoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.excecoes.usuario.ValidarCreditoException;
-import projeto.modelo.Mototaxista;
-import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.servico.ServicoMototaxista;
+import projeto.servico.ServicoPassageiro;
 
 public abstract class Validador {
 
@@ -46,28 +45,20 @@ public abstract class Validador {
 	}
 
 	public static boolean logar(String email, String senha, String tipo, CentralDeInformacoes central)
-			throws ValidacaoException, UsuarioInativoException, UsuarioNaoExisteException {
+			throws ValidacaoException, UsuarioNaoExisteException {
 
 		ValidacaoException erroValidacao = new ValidacaoException("E-mail/Senha incorretos");
+		ServicoPassageiro servicoPassageiro = new ServicoPassageiro(central);
+		ServicoMototaxista servicoMototaxista = new ServicoMototaxista(central);
 
 		if (tipo.equals("Mototaxista")) {
-			Mototaxista mototaxista = central.recuperarMototaxistaPeloEmail(email);
-			String senhaMototaxista = mototaxista.getSenha();
-			if (senha != senhaMototaxista)
-				throw erroValidacao;
-			else if (!mototaxista.isEstaAtivo())
-				throw new UsuarioInativoException();
-		} 
-		else if (tipo.equals("Passageiro")) {
-			Passageiro passageiro = central.recuperarPassageiroPeloEmail(email);
-			System.out.println(passageiro);
-			String senhaPassageiro = passageiro.getSenha();
-			if (senha != senhaPassageiro)
-				throw erroValidacao;
-			else if(!passageiro.isEstaAtivo())
-				throw new UsuarioInativoException();
+			boolean valido = servicoMototaxista.validarMototaxista(email, senha);
+			return valido;
+		} else if (tipo.equals("Passageiro")) {
+			boolean valido = servicoPassageiro.validarPassageiro(email, senha);
+			return valido;
 		}
-		return true;
+		throw erroValidacao;
 	}
 
 	public static boolean validarCorrida(String pontoDeEncontro, String localDestino, String complemento)
