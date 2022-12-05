@@ -5,35 +5,34 @@ import java.util.ArrayList;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
-import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import utilidades.validacao.Validador;
 
 public class ServicoMototaxista {
 
-  private CentralDeInformacoes central;
-  private ArrayList<Mototaxista> mototaxistas;
+	private CentralDeInformacoes central;
+	private ArrayList<Mototaxista> mototaxistas;
 
-  public ServicoMototaxista(CentralDeInformacoes central) {
-    this.central = central;
-    mototaxistas = this.central.getMototaxistas();
-  }
+	public ServicoMototaxista(CentralDeInformacoes central) {
+		this.central = central;
+		mototaxistas = this.central.getMototaxistas();
+	}
 
-  public boolean adicionarMototaxista(Mototaxista mototaxista) throws ValidacaoException {
-    boolean ok = true;
-    for (Mototaxista m : mototaxistas) {
-      if (mototaxista.equals(m))
-        ok = false;
-    }
+	public boolean adicionarMototaxista(Mototaxista mototaxista) throws ValidacaoException {
+		boolean ok = true;
+		for (Mototaxista m : mototaxistas) {
+			if (mototaxista.equals(m))
+				ok = false;
+		}
 
-    if (ok && Validador.idadeValida(mototaxista.getDataNascimento())) {
-      mototaxistas.add(mototaxista);
-      return true;
-    }
-    return false;
-  }
+		if (ok && Validador.idadeValida(mototaxista.getDataNascimento())) {
+			mototaxistas.add(mototaxista);
+			return true;
+		}
+		return false;
+	}
 
-  public Mototaxista recuperarMototaxistaPeloEmail(String email) throws UsuarioNaoExisteException {
+	public Mototaxista recuperarMototaxistaPeloEmail(String email) throws UsuarioNaoExisteException {
 		for (Mototaxista m : mototaxistas) {
 			if (m.getEmail().equals(email))
 				return m;
@@ -41,10 +40,15 @@ public class ServicoMototaxista {
 		throw new UsuarioNaoExisteException();
 	}
 
-  public boolean validarMototaxista(String email, String senha) throws UsuarioNaoExisteException, ValidacaoException {
-		Usuario usuario = central.recuperarMototaxistaPeloEmail(email);
-		if (usuario != null && usuario.getSenha().equals(senha))
-			return true;
-		throw new ValidacaoException("E-mail/Senha incorretos");
+	public boolean validarMototaxista(String email, String senha) throws ValidacaoException {
+			Mototaxista usuario;
+			try {
+				usuario = central.recuperarMototaxistaPeloEmail(email);
+				if (usuario.getSenha().equals(senha) && usuario.isEstaAtivo())
+					return true;
+			} catch (UsuarioNaoExisteException e) {
+				throw new ValidacaoException("E-mail/Senha incorretos");
+			}
+			return false;
 	}
 }

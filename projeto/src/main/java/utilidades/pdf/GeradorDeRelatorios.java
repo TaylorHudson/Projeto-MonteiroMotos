@@ -1,6 +1,7 @@
 package utilidades.pdf;
 
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.itextpdf.text.Document;
@@ -16,44 +17,92 @@ import utilidades.persistencia.Persistencia;
 
 public class GeradorDeRelatorios {
 
-  public static void obterSolicitacoesDeCorrida() {
-    Persistencia persistencia = new Persistencia();
-    CentralDeInformacoes central = persistencia.recuperarCentral("central");
+	public static void obterSolicitacoesDeCorrida() {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
-    Document doc = new Document(PageSize.A4, 72, 72, 72, 72);
+		Document doc = new Document(PageSize.A4, 72, 72, 72, 72);
 
-    try {
-      PdfWriter.getInstance(doc, new FileOutputStream("relatorio.pdf"));
-      doc.open();
+		try {
+			PdfWriter.getInstance(doc, new FileOutputStream("relatorio.pdf"));
+			doc.open();
 
-      PdfPTable tabela = new PdfPTable(2);
+			PdfPTable tabela = new PdfPTable(2);
 
-      Paragraph titulo = new Paragraph("SOLICITACOES DE CORRIDAS DOS PASSAGEIROS");
-      titulo.setAlignment(Element.ALIGN_CENTER);
-      
-      Paragraph linhaEmBranco = new Paragraph("                                     ");
+			Paragraph titulo = new Paragraph("SOLICITACOES DE CORRIDAS DOS PASSAGEIROS");
+			titulo.setAlignment(Element.ALIGN_CENTER);
 
-      doc.add(titulo);
-      doc.add(linhaEmBranco);
+			Paragraph linhaEmBranco = new Paragraph("                                     ");
 
-      ArrayList<Passageiro> passageiros = central.getPassageiros();
+			doc.add(titulo);
+			doc.add(linhaEmBranco);
 
-      tabela.addCell("Passageiro");
-      tabela.addCell("Numero de Corridas");
+			ArrayList<Passageiro> passageiros = central.getPassageiros();
 
-      for (Passageiro p : passageiros) {
-        tabela.addCell(p.getNome());
-        int numeroCorridas = central.recuperarNumeroCorridasDeUmPassageiro(p.getEmail());
-        tabela.addCell(String.valueOf(numeroCorridas));
-      }
+			tabela.addCell("Passageiro");
+			tabela.addCell("Numero de Corridas");
 
-      doc.add(tabela);
+			for (Passageiro p : passageiros) {
+				tabela.addCell(p.getNome());
+				int numeroCorridas = central.recuperarNumeroCorridasDeUmPassageiro(p.getEmail());
+				tabela.addCell(String.valueOf(numeroCorridas));
+			}
 
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      doc.close();
-    }
-  }
+			doc.add(tabela);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			doc.close();
+		}
+	}
+
+	public static void gerarBoleto(int quantidadeCreditos, double valor) {
+		Document doc = new Document(PageSize.A4, 72, 72, 72, 72);
+		
+		try {
+			
+			Paragraph linhaEmBranco = new Paragraph("                                     ");
+			
+			PdfWriter.getInstance(doc, new FileOutputStream("relatorio.pdf"));
+			doc.open();
+			
+			Paragraph nome = new Paragraph("Monteiro Motos");
+			nome.setAlignment(Element.ALIGN_LEFT);
+			
+			Paragraph agencia = new Paragraph("00000.00000 00000.00000 00000.00000 0 0000");
+			agencia.setAlignment(Element.ALIGN_RIGHT);
+			
+			LocalDate dataAtual = LocalDate.now();
+			Paragraph textoData = new Paragraph("Data da compra");
+			Paragraph data = new Paragraph(dataAtual.getDayOfMonth()+"/"+dataAtual.getMonthValue()+"/"+dataAtual.getYear());
+			
+			Paragraph textoQuantidade = new Paragraph("Quantidade de créditos");
+			Paragraph quantidade = new Paragraph(""+quantidadeCreditos);
+			
+			Paragraph textoValor = new Paragraph("Valor total");
+			Paragraph valorTotal = new Paragraph(""+valor);
+			
+			doc.add(nome);
+			doc.add(agencia);
+			doc.add(linhaEmBranco);
+			doc.add(linhaEmBranco);
+			doc.add(textoData);
+			doc.add(data);
+			doc.add(textoQuantidade);
+			doc.add(quantidade);
+			doc.add(textoValor);
+			doc.add(valorTotal);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			doc.close();
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		GeradorDeRelatorios.gerarBoleto(10, 10);
+	}
 }

@@ -5,15 +5,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.mototaxista.TelaComprarCreditos;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.mototaxista.TelaListarCorridas;
+import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaHomeMototaxista implements ActionListener {
 
 	private TelaHomeMototaxista tela;
+	private Persistencia persistencia = new Persistencia();
+	private CentralDeInformacoes central;
 
 	public OuvinteTelaHomeMototaxista(TelaHomeMototaxista tela) {
+		central = persistencia.recuperarCentral("central");
 		this.tela = tela;
 	}
 

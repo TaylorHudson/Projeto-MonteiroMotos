@@ -2,7 +2,11 @@ package projeto;
 
 import javax.swing.JFrame;
 
+import projeto.modelo.Mototaxista;
+
 public abstract class TelaPadrao extends JFrame {
+	
+	public static Mototaxista mototaxistaLogado; 
 	
 	public TelaPadrao(String titulo) {
 		configTela(titulo);

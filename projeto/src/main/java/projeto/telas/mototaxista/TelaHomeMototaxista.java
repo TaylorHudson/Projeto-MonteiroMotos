@@ -20,7 +20,7 @@ import utilidades.fabricas.FabricaJPanel;
 
 public class TelaHomeMototaxista extends TelaPadrao {
 
-	private Mototaxista mototaxista;
+	
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
 	private JMenuItem itemSair;
@@ -28,12 +28,6 @@ public class TelaHomeMototaxista extends TelaPadrao {
 	private JButton btnComprarCreditos;
 	private ImagemDeFundo background;
 
-	public TelaHomeMototaxista(Mototaxista mototaxista) {
-		super("Home");
-		this.mototaxista = mototaxista;
-		setVisible(true);
-	}
-	
 	public TelaHomeMototaxista() {
 		super("Home");
 		setVisible(true);
@@ -116,14 +110,6 @@ public class TelaHomeMototaxista extends TelaPadrao {
 
 	public JMenuItem getItemSair() {
 		return itemSair;
-	}
-
-	public Mototaxista getMototaxista() {
-		return mototaxista;
-	}
-
-	public void setMototaxista(Mototaxista mototaxista) {
-		this.mototaxista = mototaxista;
 	}
 
 }

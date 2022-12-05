@@ -23,6 +23,7 @@ public class TelaComprarCreditos extends TelaPadrao {
 
 	private JTextField txtPrecoTotal;
 	private JSpinner spinner;
+	private JButton btnGerarBoleto;
 	private ImagemDeFundo background;
 	private JButton btnSeta;
 
@@ -70,7 +71,7 @@ public class TelaComprarCreditos extends TelaPadrao {
 		txtPrecoTotal.setEditable(false);
 		txtPrecoTotal.setText("0,00");
 
-		JButton btnGerarBoleto = FabricaJButton.criarJButton("Gerar Boleto", 180, 350, 180, 40, Color.WHITE,
+		btnGerarBoleto = FabricaJButton.criarJButton("Gerar Boleto", 180, 350, 180, 40, Color.WHITE,
 				Color.BLACK, 24);
 		btnGerarBoleto.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnGerarBoleto.addActionListener(ouvinte);
@@ -95,6 +96,10 @@ public class TelaComprarCreditos extends TelaPadrao {
 
 	public JButton getBtnSeta() {
 		return btnSeta;
+	}
+	
+	public JButton getBtnGerarBoleto() {
+		return btnGerarBoleto;
 	}
 
 	public static void main(String[] args) {

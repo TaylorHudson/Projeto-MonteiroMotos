@@ -13,6 +13,7 @@ import projeto.excecoes.usuario.StatusDaCorridaInvalidoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.excecoes.usuario.ValidarCreditoException;
+import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoMototaxista;
 import projeto.servico.ServicoPassageiro;
@@ -44,21 +45,22 @@ public abstract class Validador {
 		return false;
 	}
 
-	public static boolean logar(String email, String senha, String tipo, CentralDeInformacoes central)
+	public static boolean logarMototaxista(String email, String senha, CentralDeInformacoes central)
 			throws ValidacaoException, UsuarioNaoExisteException {
 
-		ValidacaoException erroValidacao = new ValidacaoException("E-mail/Senha incorretos");
-		ServicoPassageiro servicoPassageiro = new ServicoPassageiro(central);
 		ServicoMototaxista servicoMototaxista = new ServicoMototaxista(central);
 
-		if (tipo.equals("Mototaxista")) {
-			boolean valido = servicoMototaxista.validarMototaxista(email, senha);
-			return valido;
-		} else if (tipo.equals("Passageiro")) {
-			boolean valido = servicoPassageiro.validarPassageiro(email, senha);
-			return valido;
-		}
-		throw erroValidacao;
+		boolean valido = servicoMototaxista.validarMototaxista(email, senha);
+		return valido;
+	}
+
+	public static boolean logarPassageiro(String email, String senha, CentralDeInformacoes central)
+			throws ValidacaoException {
+
+		ServicoPassageiro servicoPassageiro = new ServicoPassageiro(central);
+
+		boolean valido = servicoPassageiro.validarPassageiro(email, senha);
+		return valido;
 	}
 
 	public static boolean validarCorrida(String pontoDeEncontro, String localDestino, String complemento)
