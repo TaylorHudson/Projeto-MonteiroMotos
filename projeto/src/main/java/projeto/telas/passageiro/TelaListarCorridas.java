@@ -9,9 +9,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaListarCorrida;
 import utilidades.fabricas.FabricaJButton;
+import utilidades.imagens.Imagens;
 
 public class TelaListarCorridas extends TelaPadrao {
 
@@ -19,7 +21,9 @@ public class TelaListarCorridas extends TelaPadrao {
 	private JTable tabelaCorridas;
 	private JButton btnOrdenar;
 	private JButton btnDetalhes;
-
+	private DefaultTableModel modelo; 
+	private JButton btnSeta;
+	
 	public TelaListarCorridas() {
 		super("Listar Corridas");
 		setVisible(true);
@@ -39,6 +43,11 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	private void configButton() {
 		OuvinteTelaListarCorrida ouvinte = new OuvinteTelaListarCorrida(this);
+	
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
+		btnSeta.addActionListener(ouvinte);
+		
 
 		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
@@ -52,7 +61,7 @@ public class TelaListarCorridas extends TelaPadrao {
 	}
 
 	private void configTabelaCorridas() {
-		DefaultTableModel modelo = new DefaultTableModel();
+		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(new String[] { "NOME", "STATUS", "DATA", "HORA" });
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
@@ -62,6 +71,11 @@ public class TelaListarCorridas extends TelaPadrao {
 		scrol.setBounds(2, 240, 885, 400);
 
 		background.add(scrol);
+		background.add(btnSeta);
+	}
+
+	public DefaultTableModel getModelo() {
+		return modelo;
 	}
 
 	public JButton getBtnOrdenar() {
@@ -74,6 +88,10 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	public static void main(String[] args) {
 		new TelaListarCorridas();
+	}
+
+	public JButton getBtnSeta() {
+		return btnSeta;
 	}
 
 }

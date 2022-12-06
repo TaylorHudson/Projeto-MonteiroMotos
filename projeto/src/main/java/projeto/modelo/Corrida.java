@@ -27,6 +27,7 @@ public class Corrida {
 		this.data = data;
 		this.id = System.currentTimeMillis();
 	}
+
 	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
 			Passageiro passageiro, LocalDate data) {
 		this.status = status;
@@ -37,7 +38,6 @@ public class Corrida {
 		this.data = data;
 		this.id = System.currentTimeMillis();
 	}
-	
 
 	public String toString() {
 		String pegar = "pega-lo";
@@ -73,6 +73,14 @@ public class Corrida {
 
 	public void setPontoDeEncontro(String pontoDeEncontro) {
 		this.pontoDeEncontro = pontoDeEncontro;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	public String getLocalDeDestino() {
