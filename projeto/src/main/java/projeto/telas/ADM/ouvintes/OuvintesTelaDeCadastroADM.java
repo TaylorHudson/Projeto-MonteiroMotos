@@ -53,7 +53,7 @@ public class OuvintesTelaDeCadastroADM implements MouseListener {
 		e.getComponent().setForeground(new Color(81, 82, 82));
 		e.getComponent().setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
-
+	
 	public void mouseExited(MouseEvent e) {
 		e.getComponent().setForeground(Color.BLACK);
 		e.getComponent().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

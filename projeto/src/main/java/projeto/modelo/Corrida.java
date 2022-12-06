@@ -2,6 +2,7 @@ package projeto.modelo;
 
 import projeto.modelo.enuns.Sexo;
 import projeto.modelo.enuns.StatusCorrida;
+import projeto.modelo.enuns.StatusDaCorrida;
 
 public class Corrida {
 
@@ -28,7 +29,11 @@ public class Corrida {
 		this.id = System.currentTimeMillis();
 	}
 
-	public String toString() {
+	public Corrida(String pontoDeEncontro, String localDeDestino, String complemento, StatusDaCorrida status2,
+            boolean b) {
+    }
+
+    public String toString() {
 		String pegar = "pega-lo";
 		String nome = passageiro.getNome();
 		if (passageiro.getSexo() == Sexo.FEMININO)

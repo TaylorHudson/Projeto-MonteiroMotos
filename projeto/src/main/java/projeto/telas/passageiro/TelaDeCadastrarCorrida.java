@@ -195,5 +195,4 @@ public class TelaDeCadastrarCorrida extends TelaPadrao {
 		return txtHora;
 	}
 
-
 }
