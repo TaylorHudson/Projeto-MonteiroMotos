@@ -2,6 +2,8 @@ package projeto.telas.passageiro;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -21,9 +23,9 @@ public class TelaListarCorridas extends TelaPadrao {
 	private JTable tabelaCorridas;
 	private JButton btnOrdenar;
 	private JButton btnDetalhes;
-	private DefaultTableModel modelo; 
+	private DefaultTableModel modelo;
 	private JButton btnSeta;
-	
+
 	public TelaListarCorridas() {
 		super("Listar Corridas");
 		setVisible(true);
@@ -43,11 +45,10 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	private void configButton() {
 		OuvinteTelaListarCorrida ouvinte = new OuvinteTelaListarCorrida(this);
-	
+
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinte);
-		
 
 		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
@@ -60,9 +61,25 @@ public class TelaListarCorridas extends TelaPadrao {
 		background.add(btnOrdenar);
 	}
 
+	private class OuvinteFiltro implements KeyListener {
+
+		public void keyTyped(KeyEvent e) {
+
+		}
+
+		public void keyPressed(KeyEvent e) {
+
+		}
+
+		public void keyReleased(KeyEvent e) {
+
+		}
+
+	}
+
 	private void configTabelaCorridas() {
 		modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "NOME", "STATUS", "DATA", "HORA" });
+		modelo.setColumnIdentifiers(new String[] { "NOME", "PONTO DE ENCONTRO", "STATUS", "DATA",  });
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
 
