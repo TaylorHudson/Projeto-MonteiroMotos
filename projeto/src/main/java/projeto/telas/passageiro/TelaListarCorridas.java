@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -13,9 +14,13 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelo.Corrida;
+import projeto.modelo.enuns.StatusDaCorrida;
+import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaListarCorrida;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.imagens.Imagens;
+import utilidades.persistencia.Persistencia;
 
 public class TelaListarCorridas extends TelaPadrao {
 
@@ -25,6 +30,7 @@ public class TelaListarCorridas extends TelaPadrao {
 	private JButton btnDetalhes;
 	private DefaultTableModel modelo;
 	private JButton btnSeta;
+	private JScrollPane scrol;
 
 	public TelaListarCorridas() {
 		super("Listar Corridas");
@@ -35,7 +41,24 @@ public class TelaListarCorridas extends TelaPadrao {
 		configImagemFundo();
 		configButton();
 		configTabelaCorridas();
+		popularTabela();
+	}
 
+	private void popularTabela() {
+		Persistencia p = new Persistencia();
+		CentralDeInformacoes central = p.recuperarCentral("central");
+		
+		for (Corrida c : central.getCorridas()) {
+			Object[] linha = new Object[5];
+//			linha[0] = c.getPassageiro().getNome();
+			linha[1] = c.getPontoDeEncontro();
+			linha[2] = (c.getStatus() == StatusDaCorrida.PARAAGORA) ? "Para agora" : "Para depois";
+			linha[3] = c.getData();
+			linha[4] = c.getId();
+			
+			modelo.addRow(linha);
+			scrol.repaint();
+		}
 	}
 
 	private void configImagemFundo() {
@@ -79,17 +102,19 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	private void configTabelaCorridas() {
 		modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "NOME", "PONTO DE ENCONTRO", "STATUS", "DATA",  });
+		modelo.setColumnIdentifiers(new String[] { "NOME", "PONTO DE ENCONTRO", "STATUS", "DATA", "ID"});
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
 
-		JScrollPane scrol = new JScrollPane(tabelaCorridas);
+		scrol = new JScrollPane(tabelaCorridas);
 		scrol.getViewport().setBackground(new Color(124, 68, 2));
 		scrol.setBounds(2, 240, 885, 400);
 
 		background.add(scrol);
 		background.add(btnSeta);
 	}
+	
+	
 
 	public DefaultTableModel getModelo() {
 		return modelo;

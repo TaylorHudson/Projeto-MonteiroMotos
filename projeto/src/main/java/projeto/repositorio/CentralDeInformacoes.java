@@ -80,9 +80,11 @@ public class CentralDeInformacoes {
 	public ArrayList<Mototaxista> getMototaxistas() {
 		return mototaxistas;
 	}
+
 	public double getValorDoCredito() {
 		return valorDoCredito;
 	}
+
 	public void setValorDoCredito(double valorDoCredito) {
 		this.valorDoCredito = valorDoCredito;
 	}

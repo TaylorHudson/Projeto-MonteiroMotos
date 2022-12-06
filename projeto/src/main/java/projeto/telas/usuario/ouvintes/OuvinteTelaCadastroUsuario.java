@@ -58,7 +58,7 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 			}
 		} catch (ValidacaoException | SexoInvalidoException | DataInvalidaException erro) {
 			FabricaJOptionPane.criarMsgAtencao(erro.getMessage());
-		}
+		} 
 	}
 
 }
