@@ -9,7 +9,7 @@ import projeto.telas.mototaxista.TelaListarCorridas;
 public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 
 	private TelaListarCorridas tela;
-
+	
 	public OuvinteBotoesTelaListarCorridas(TelaListarCorridas t) {
 		tela = t;
 	}

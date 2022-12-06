@@ -8,6 +8,7 @@ import org.apache.commons.mail.MultiPartEmail;
 
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
+import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
@@ -70,6 +71,28 @@ public class Mensageiro {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public static void enviarEmailConfirmacaoCorrida(String emailDoPassageiro, Mototaxista mototaxista) {
+		String remetente = "pooprojeto824@gmail.com";
+		String senha = "rehjpckvmjwhvkpu";
+
+		MultiPartEmail email = new MultiPartEmail();
+		email.setHostName("smtp.gmail.com");
+		email.setSmtpPort(465);
+		email.setAuthenticator(new DefaultAuthenticator(remetente, senha));
+		email.setSSLOnConnect(true);
+		try {
+			email.setFrom(remetente);
+			email.setSubject("Informações da corrida.");
+			email.setMsg("Nome do mototaxista: " + mototaxista.getNome());
+			email.setMsg("Email do mototaxista: " + mototaxista.getEmail());
+			email.setMsg("Sexo do mototaxista: " + mototaxista.getSexo());
+			email.addTo(emailDoPassageiro);
+			email.send();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -56,7 +56,7 @@ public class TelaListarCorridas extends TelaPadrao {
 		OuvinteBotaoFundoBranco ouvinteBtn = new OuvinteBotaoFundoBranco();
 		
 		DefaultTableModel modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "NOME", "STATUS", "DATA", "HORA" });
+		modelo.setColumnIdentifiers(new String[] { "EMAIL DO PASSAGEIRO", "STATUS", "DATA", "HORA" });
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
 

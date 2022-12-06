@@ -13,4 +13,12 @@ public abstract class FabricaJCheckBox {
     check.setForeground(corDaLetra);
     return check;
   }
+  
+  public static JCheckBox criarJCheckBox(int x, int y, int largura, int altura, String texto,Color corDaLetra) {
+	    JCheckBox check = new JCheckBox(texto);
+	    check.setBounds(x, y, largura, altura);
+	    check.setBorder(null);
+	    check.setForeground(corDaLetra);
+	    return check;
+	  }
 }

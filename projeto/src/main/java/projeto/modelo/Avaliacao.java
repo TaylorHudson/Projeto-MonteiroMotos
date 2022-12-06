@@ -2,17 +2,18 @@ package projeto.modelo;
 
 public class Avaliacao {
 
-	private Passageiro autor;
 	private String avaliado;
 	private int nota;
 	private String comentario;
 	private boolean mototaxistaBloqueado;
-	public Passageiro getAutor() {
-		return autor;
+	
+	public Avaliacao(Passageiro autor, String avaliado, int nota, String comentario, boolean mototaxistaBloqueado) {
+		this.avaliado = avaliado;
+		this.nota = nota;
+		this.comentario = comentario;
+		this.mototaxistaBloqueado = mototaxistaBloqueado;
 	}
-	public void setAutor(Passageiro autor) {
-		this.autor = autor;
-	}
+
 	public String getAvaliado() {
 		return avaliado;
 	}
