@@ -3,6 +3,7 @@ package projeto.servico;
 import java.util.ArrayList;
 
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
@@ -19,13 +20,15 @@ public class ServicoCorrida {
 		this.util = util;
 	}
 
-	public boolean adicionarCorrida(Corrida corrida) {
-		Corrida c = recuperarCorridaPeloId(corrida.getId());
-		if (c != null) {
-			corridas.add(corrida);
-			return true;
+	public boolean adicionarCorrida(Corrida corrida) throws VerificacaoDeCorridaException {
+		for (Corrida c : central.getCorridas()) {
+			if(c.equals(corrida)) {
+				throw new VerificacaoDeCorridaException ();
+			}
+			
 		}
-		return false;
+		central.getCorridas().add(corrida);
+		return true;
 	}
 
 	public Corrida recuperarCorridaPeloId(long id) {

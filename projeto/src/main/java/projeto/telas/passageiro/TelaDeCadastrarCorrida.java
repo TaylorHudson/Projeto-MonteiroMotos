@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -68,13 +67,14 @@ public class TelaDeCadastrarCorrida extends TelaPadrao {
 
 		lblChooser.add(chooser);
 	}
-	
+
 	public void configurarComponentes() {
 		configurarDateChooser();
 		configMenu();
 		configImagemFundo();
-		
+
 	}
+
 	private void configImagemFundo() {
 		background = super.configImagemDeFundo("background_2.jpg");
 		add(background);
@@ -110,7 +110,7 @@ public class TelaDeCadastrarCorrida extends TelaPadrao {
 		JLabel lblMsg = FabricaJLabel.criarJLabel("Digite A hora da corrida", 30, 370, 300, 40, Color.white, 9);
 
 		try {
-			txtHora = FabricaJFormatted.criarJFormatted(30, 400, 100, 40, new MaskFormatter("##:##:##"));
+			txtHora = FabricaJFormatted.criarJFormatted(30, 400, 60, 30, new MaskFormatter("##:##"));
 
 		} catch (Exception e) {
 			e.printStackTrace();

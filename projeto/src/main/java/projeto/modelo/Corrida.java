@@ -1,44 +1,50 @@
 package projeto.modelo;
 
+import java.time.LocalDate;
+
 import projeto.modelo.enuns.Sexo;
-import projeto.modelo.enuns.StatusCorrida;
 import projeto.modelo.enuns.StatusDaCorrida;
 
 public class Corrida {
 
 	private long id;
-	private StatusCorrida status;
-	private Avaliacao avaliacao;
-	private String enderecoDePartida;
-	private String enderecoDeDestino;
+	private StatusDaCorrida status;
+	private String pontoDeEncontro;
+	private String localDeDestino;
+	private String complemento;
 	private Passageiro passageiro;
-	private Mototaxista mototaxista;
+	private String emailDoMototaxista;
+	private LocalDate data;
 
-	public Corrida(long id, StatusCorrida status, Avaliacao avaliacao, String enderecoDePartida,
-			String enderecoDeDestino, Passageiro passageiro, Mototaxista mototaxista) {
-		this.id = id;
+	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
+			Passageiro passageiro, String emailDoMototaxista, LocalDate data) {
 		this.status = status;
-		this.avaliacao = avaliacao;
-		this.enderecoDePartida = enderecoDePartida;
-		this.enderecoDeDestino = enderecoDeDestino;
+		this.pontoDeEncontro = pontoDeEncontro;
+		this.localDeDestino = localDeDestino;
+		this.complemento = complemento;
 		this.passageiro = passageiro;
-		this.mototaxista = mototaxista;
-	}
-
-	public Corrida() {
+		this.emailDoMototaxista = emailDoMototaxista;
+		this.data = data;
 		this.id = System.currentTimeMillis();
 	}
+	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
+			Passageiro passageiro, LocalDate data) {
+		this.status = status;
+		this.pontoDeEncontro = pontoDeEncontro;
+		this.localDeDestino = localDeDestino;
+		this.complemento = complemento;
+		this.passageiro = passageiro;
+		this.data = data;
+		this.id = System.currentTimeMillis();
+	}
+	
 
-	public Corrida(String pontoDeEncontro, String localDeDestino, String complemento, StatusDaCorrida status2,
-            boolean b) {
-    }
-
-    public String toString() {
+	public String toString() {
 		String pegar = "pega-lo";
 		String nome = passageiro.getNome();
 		if (passageiro.getSexo() == Sexo.FEMININO)
 			pegar = "pega-la";
-		return "<" + nome + "> pede para " + pegar + " em <" + enderecoDePartida + ">";
+		return "<" + nome + "> pede para " + pegar + " em <" + pontoDeEncontro + ">";
 	}
 
 	public boolean equals(Corrida corrida) {
@@ -49,20 +55,40 @@ public class Corrida {
 		return id;
 	}
 
-	public String getEnderecoDePartida() {
-		return enderecoDePartida;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public void setEnderecoDePartida(String enderecoDePartida) {
-		this.enderecoDePartida = enderecoDePartida;
+	public StatusDaCorrida getStatus() {
+		return status;
 	}
 
-	public String getEnderecoDeDestino() {
-		return enderecoDeDestino;
+	public void setStatus(StatusDaCorrida status) {
+		this.status = status;
 	}
 
-	public void setEnderecoDeDestino(String enderecoDeDestino) {
-		this.enderecoDeDestino = enderecoDeDestino;
+	public String getPontoDeEncontro() {
+		return pontoDeEncontro;
+	}
+
+	public void setPontoDeEncontro(String pontoDeEncontro) {
+		this.pontoDeEncontro = pontoDeEncontro;
+	}
+
+	public String getLocalDeDestino() {
+		return localDeDestino;
+	}
+
+	public void setLocalDeDestino(String localDeDestino) {
+		this.localDeDestino = localDeDestino;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
 	public Passageiro getPassageiro() {
@@ -73,28 +99,12 @@ public class Corrida {
 		this.passageiro = passageiro;
 	}
 
-	public Avaliacao getAvaliacao() {
-		return avaliacao;
+	public String getEmailDoMototaxista() {
+		return emailDoMototaxista;
 	}
 
-	public void setAvaliacao(Avaliacao avaliacao) {
-		this.avaliacao = avaliacao;
-	}
-
-	public Mototaxista getMototaxista() {
-		return mototaxista;
-	}
-
-	public void setMototaxista(Mototaxista mototaxista) {
-		this.mototaxista = mototaxista;
-	}
-
-	public StatusCorrida getStatus() {
-		return status;
-	}
-
-	public void setStatus(StatusCorrida status) {
-		this.status = status;
+	public void setEmailDoMototaxista(String emailDoMototaxista) {
+		this.emailDoMototaxista = emailDoMototaxista;
 	}
 
 }

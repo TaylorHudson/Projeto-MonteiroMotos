@@ -17,6 +17,7 @@ import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 
 public class TelaHomePassageiro extends TelaPadrao {
+	
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
 	private JMenuItem itemSair;

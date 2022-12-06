@@ -1,6 +1,6 @@
 package projeto.modelo.enuns;
 
-public enum StatusCorrida {
+public enum AndamentoDaCorrida{
 
 	FINALIZADA,
 	ANDAMENTO,

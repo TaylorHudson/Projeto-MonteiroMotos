@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import projeto.TelaPadrao;
 import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.usuario.TelaLogin;
@@ -25,7 +26,7 @@ public class OuvinteMenuTelaHome implements ActionListener {
 		if (item == tela.getItemEditar()) {
 			tela.dispose();
 			new TelaEdicaoPerfil();
-			
+
 		} else if (item == tela.getItemDeletar()) {
 			int opc = FabricaJOptionPane.criarMsgDeOpcao("Escolha", "Deseja deletar sua conta?");
 			if (opc == JOptionPane.YES_OPTION)
@@ -36,6 +37,7 @@ public class OuvinteMenuTelaHome implements ActionListener {
 			if (opc == JOptionPane.YES_OPTION) {
 				tela.dispose();
 				new TelaLogin();
+				TelaPadrao.mototaxistaLogado = null;
 			}
 
 		}

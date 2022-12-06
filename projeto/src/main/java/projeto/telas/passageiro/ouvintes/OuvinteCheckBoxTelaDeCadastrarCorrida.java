@@ -22,6 +22,10 @@ public class OuvinteCheckBoxTelaDeCadastrarCorrida implements ItemListener {
 
 		if (tela.getCheckBoxParaAgora().isSelected()) {
 			tela.setHorario(StatusDaCorrida.PARAAGORA);
+			tela.getChooser().setEnabled(false);
+		} else {
+			tela.getChooser().setEnabled(true);
+
 		}
 		if (tela.getCheckBoxParaDepois().isSelected()) {
 			tela.setHorario(StatusDaCorrida.PARADEPOIS);

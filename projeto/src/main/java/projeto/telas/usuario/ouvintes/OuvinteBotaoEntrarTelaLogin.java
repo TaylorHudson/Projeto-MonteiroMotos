@@ -7,6 +7,7 @@ import projeto.TelaPadrao;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.TelaHomeADM;
@@ -47,6 +48,8 @@ public class OuvinteBotaoEntrarTelaLogin implements ActionListener {
 					new TelaHomeMototaxista();
 				} else if (tipoUsuario.equals("Passageiro")) {
 					Validador.logarPassageiro(email, senha, central);
+					Passageiro passageiro = central.recuperarPassageiroPeloEmail(email);
+					TelaPadrao.passageiroLogado = passageiro;
 					tela.dispose();
 					new TelaHomePassageiro();
 				}

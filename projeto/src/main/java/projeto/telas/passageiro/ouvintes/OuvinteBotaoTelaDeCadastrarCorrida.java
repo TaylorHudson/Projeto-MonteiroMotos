@@ -6,13 +6,17 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 
+import projeto.TelaPadrao;
 import projeto.excecoes.usuario.CadastroDeCorridaInvalidoException;
+import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.StatusDaCorridaInvalidoException;
+import projeto.excecoes.usuario.ValidacaoDaHoraException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.servico.ServicoData;
 import projeto.telas.passageiro.TelaDeCadastrarCorrida;
 import projeto.telas.passageiro.TelaHomePassageiro;
 import utilidades.fabricas.FabricaJOptionPane;
@@ -31,7 +35,7 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent evento) {
-		
+
 		String pontoDeEncontro = tela.getTxtPontoDeEncontro().getText().trim();
 		String localDeDestino = tela.getTxtLocalDestino().getText().trim();
 		String complemento = tela.getTxtComplemento().getText().trim();
@@ -48,15 +52,21 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 			boolean valido = Validador.validarCorrida(pontoDeEncontro, localDeDestino, complemento);
 			boolean validarCheckBox = Validador.validarStatusDaCorrida(cbAgora, cbDepois);
 			if (valido && validarCheckBox) {
-				central.adicionarCorrida(new Corrida(pontoDeEncontro, localDeDestino, complemento, status, true));
-				persistencia.salvarCentral(central, "central");
-				System.out.println("salvo");
+				System.out.println(tela.getTxtHora());
+				if (tela.getTxtHora().getText().isBlank()) {
+					throw new ValidacaoDaHoraException();
+				} else {
 
-			} else if(tela.getTxtHora() == null) {
-				FabricaJOptionPane.criarMsgErro("Os campos de hora devem estar preenchido");
+					central.adicionarCorrida(new Corrida(status, pontoDeEncontro, localDeDestino, complemento,
+							TelaPadrao.passageiroLogado, ServicoData.retornarData(data)));
+					persistencia.salvarCentral(central, "central");
+					tela.dispose();
+					new TelaHomePassageiro();
+				}
 			}
 
-		} catch (CadastroDeCorridaInvalidoException | StatusDaCorridaInvalidoException e) {
+		} catch (CadastroDeCorridaInvalidoException | StatusDaCorridaInvalidoException | DataInvalidaException
+				| VerificacaoDeCorridaException | ValidacaoDaHoraException e) {
 			FabricaJOptionPane.criarMsgErro(e.getMessage());
 			tela.getTxtHora().setText("");
 

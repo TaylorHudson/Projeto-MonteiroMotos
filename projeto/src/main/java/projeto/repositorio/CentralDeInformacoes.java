@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
@@ -44,7 +45,7 @@ public class CentralDeInformacoes {
 		return servicoPassageiro.validarPassageiro(email, senha);
 	}
 
-	public boolean adicionarCorrida(Corrida corrida) {
+	public boolean adicionarCorrida(Corrida corrida) throws VerificacaoDeCorridaException {
 		return servicoCorrida.adicionarCorrida(corrida);
 	}
 
