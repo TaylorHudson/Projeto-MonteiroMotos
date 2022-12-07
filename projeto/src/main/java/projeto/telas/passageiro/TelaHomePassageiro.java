@@ -15,6 +15,7 @@ import projeto.telas.passageiro.ouvintes.OuvinteDoMenuDaTelaHomePassageiro;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
+import utilidades.imagens.Imagens;
 
 public class TelaHomePassageiro extends TelaPadrao {
 	
@@ -66,6 +67,8 @@ public class TelaHomePassageiro extends TelaPadrao {
 
 	private void configButton() {
 		OuvinteTelaHomePassageiro ouvinte = new OuvinteTelaHomePassageiro(this);
+		
+
 		
 		btnListarCorrida = FabricaJButton.criarJButton("Listar Corrida", 270, 190, 380, 240, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);

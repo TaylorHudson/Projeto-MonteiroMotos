@@ -70,7 +70,6 @@ public class TelaListarCorridas extends TelaPadrao {
 		public void keyPressed(KeyEvent e) {
 
 		}
-
 		public void keyReleased(KeyEvent e) {
 
 		}
