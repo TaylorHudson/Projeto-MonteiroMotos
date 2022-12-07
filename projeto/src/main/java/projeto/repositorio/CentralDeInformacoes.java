@@ -34,8 +34,8 @@ public class CentralDeInformacoes {
 		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
 	}
 	
-	public void atualizarPerfil(String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException {
-		servicoMototaxista.atualizarPerfil(email, nome, dataNascimento);
+	public Mototaxista atualizarPerfil(Mototaxista mototaxi,String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException {
+		return servicoMototaxista.atualizarPerfil(mototaxi,email, nome, dataNascimento);
 	}
 
 	public boolean adicionarPassageiro(Passageiro passageiro) throws ValidacaoException {
