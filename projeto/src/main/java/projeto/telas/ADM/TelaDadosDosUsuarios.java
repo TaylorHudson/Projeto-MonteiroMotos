@@ -17,11 +17,16 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.modelo.Usuario;
+import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDadosDosUsuarios;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
+import utilidades.persistencia.Persistencia;
 
 public class TelaDadosDosUsuarios extends TelaPadrao{
 
@@ -31,6 +36,23 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	private ImagemDeFundo imagem;
 	private JButton btnDetalhes;
 	private JComboBox<String> box;
+	private DefaultTableModel modelo;
+	public JTable getTabelaUsuarios() {
+		return tabelaUsuarios;
+	}
+	public ImagemDeFundo getImagem() {
+		return imagem;
+	}
+	public JScrollPane getScrol() {
+		return scrol;
+	}
+	public JButton getBtnOrdenar() {
+		return btnOrdenar;
+	}
+
+	private JScrollPane scrol;
+	private JButton btnOrdenar;
+	
 	
 	public TelaDadosDosUsuarios() {
 		super("Dados dos Usuarios");
@@ -41,6 +63,7 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 		configImagemDeFundo();
 		configBotoes();
 		configTabela();
+		popularTabela();
 	}
 	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
@@ -50,8 +73,8 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	private void configBotoes() {
 		OuvinteTelaDadosDosUsuarios ouvinte = new OuvinteTelaDadosDosUsuarios(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
-		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,
-				28);
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 600, 620, 200, 40, Color.white, Color.black,28);
+		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 600, 50, 200, 40, Color.white, Color.black,28);
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		
 		
@@ -63,25 +86,59 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 		
 		btnDetalhes.addActionListener(ouvinte);
 		btnSeta.addActionListener(ouvinte);
+		btnOrdenar.addActionListener(ouvinte);
 		
 		btnDetalhes.addMouseListener(mouse);
 		btnSeta.addMouseListener(mouse);
+		btnOrdenar.addMouseListener(mouse);
 		
 		imagem.add(btnDetalhes);
 		imagem.add(box);
 		imagem.add(btnSeta);
+		imagem.add(btnOrdenar);
 	}
+	private void popularTabela() {
+		popularTabelaMototaxista();
+		popularTabelaPassageiro();
+	}
+	public void popularTabelaMototaxista() {
+		Persistencia p = new Persistencia();
+		CentralDeInformacoes central = p.recuperarCentral("central");
+		for (Mototaxista mototaxista: central.getMototaxistas()) {
+			Object[] linha = new Object[3];
+			linha[0] = mototaxista.getEmail();
+			linha[1] = mototaxista.getNome();
+			linha[2] = "Mototaxista";
+			
+			modelo.addRow(linha);
+		}
 
+	}
+	public DefaultTableModel getModelo() {
+		return modelo;
+	}
+	public void popularTabelaPassageiro() {
+		Persistencia p = new Persistencia();
+		CentralDeInformacoes central = p.recuperarCentral("central");
+		for(Passageiro passageiro: central.getPassageiros()) {
+			Object[] linha = new Object[3];
+			linha[0] = passageiro.getEmail();
+			linha[1] = passageiro.getNome();
+			linha[2] = "Passageiro";
+			
+			modelo.addRow(linha);
+		}
+	}
 	
 	private void configTabela() {
 
-		DefaultTableModel modelo = new DefaultTableModel();
+		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(new String[] { "E-MAil", "Nome Completo", "Perfil Do Usuario" });
 		tabelaUsuarios = new JTable(modelo);
 		tabelaUsuarios.setFont(new Font("Arial", 1, 15));
 
 
-		JScrollPane scrol = new JScrollPane(tabelaUsuarios);
+		scrol = new JScrollPane(tabelaUsuarios);
 		scrol.getViewport().setBackground(Color.orange);
 		scrol.setBounds(2, 200, 885, 400);
 
@@ -96,6 +153,9 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 
 	public JButton getBtnDetalhes() {
 		return btnDetalhes;
+	}
+	public JComboBox<String> getBox() {
+		return box;
 	}
 
 	public static void main(String[] args) {

@@ -12,6 +12,9 @@ import javax.swing.text.MaskFormatter;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.modelo.Usuario;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDeEdicaoDosDadosDosUsuarios;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -29,9 +32,16 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
 	private JButton btnEnviarEmail;
 	
 
-	public TelaDeEdicaoDosDadosDosUsuarios() {
+	public TelaDeEdicaoDosDadosDosUsuarios(Passageiro p) {
 		super("Dados do Usuario Selecionado");
 		setVisible(true);
+		System.out.println(p.getEmail());
+		
+	}
+	public TelaDeEdicaoDosDadosDosUsuarios(Mototaxista m) {
+		super("Dados do Usuario Selecionado");
+		setVisible(true);
+		System.out.println(m.getEmail());
 		
 	}
 	public void configurarComponentes() {
@@ -90,9 +100,6 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
 		imagem.add(menu);
 		imagem.add(btnSeta);
 		add(imagem);
-	}
-	public static void main(String[] args) {
-		new TelaDeEdicaoDosDadosDosUsuarios();
 	}
 	public JTextField getTxtNomeCompleto() {
 		return txtNomeCompleto;
