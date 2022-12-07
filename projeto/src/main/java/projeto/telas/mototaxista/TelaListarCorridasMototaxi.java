@@ -19,7 +19,7 @@ import utilidades.imagens.Imagens;
 import java.awt.Font;
 import java.awt.Color;
 
-public class TelaListarCorridas extends TelaPadrao {
+public class TelaListarCorridasMototaxi extends TelaPadrao {
 
 	private JTable tabelaCorridas;
 	private JButton btnOrdenar;
@@ -27,7 +27,7 @@ public class TelaListarCorridas extends TelaPadrao {
 	private JButton btnSeta;
 	private ImagemDeFundo background;
 
-	public TelaListarCorridas() {
+	public TelaListarCorridasMototaxi() {
 		super("Tela de listagem de corridas");
 		setVisible(true);
 	}
@@ -79,7 +79,7 @@ public class TelaListarCorridas extends TelaPadrao {
 	}
 
 	public static void main(String[] args) {
-		new TelaListarCorridas();
+		new TelaListarCorridasMototaxi();
 	}
 
 	public JTable getTabelaCorridas() {

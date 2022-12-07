@@ -92,7 +92,7 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 		JLabel lblEmailPassageiro = FabricaJLabel.criarJLabel("E-mail do Passageiro", 50, 450, 250, 25, Color.WHITE,25);
 		JLabel lblData = FabricaJLabel.criarJLabel("Data", 550, 50, 250, 25, Color.WHITE,25);
 		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 550, 250, 250, 25, Color.WHITE,25);
-		cbConcluido = FabricaJCheckBox.criarJCheckBox(550, 480, 150, 50, "Concluída",Color.BLACK, Color.WHITE);
+		cbConcluido = FabricaJCheckBox.criarJCheckBox(550, 480, 150, 50, "Concluï¿½da",Color.BLACK, Color.WHITE);
 		cbConcluido.setFont(new Font("Arial", Font.BOLD, 25));
 		
 		background.add(lblDestino);
@@ -115,7 +115,7 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 			JButton btn = (JButton) e.getSource();
 			if(btn == btnSeta) {
 				tela.dispose();
-				new TelaListarCorridas();
+				new TelaListarCorridasMototaxi();
 			}else if(btn == btnReivindicar) {
 				
 			}
