@@ -52,7 +52,26 @@
       <data>2022-12-10</data>
     </corrida>
   </corridas>
-  <mototaxistas/>
+  <mototaxistas>
+    <mototaxista>
+      <nome>tuany hellen</nome>
+      <email>tuanyhellen@gmail.com</email>
+      <senha>tuany#</senha>
+      <dataNascimento>2003-02-01</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>FEMININO</sexo>
+    </mototaxista>
+    <mototaxista>
+      <nome>Taylor Hudson</nome>
+      <email>taylorhudsonsantos@gmail.com</email>
+      <senha>12458910t#</senha>
+      <dataNascimento>2004-06-24</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+  </mototaxistas>
   <administrador>
     <nome>Taylor Hudson Santos</nome>
     <email>taylorhudsonsantos@gmail.com</email>

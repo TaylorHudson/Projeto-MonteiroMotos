@@ -13,6 +13,9 @@ import javax.swing.text.MaskFormatter;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.modelo.Mototaxista;
+import projeto.servico.ServicoData;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -38,8 +41,21 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 	public void configurarComponentes() {
 		configImagemFundo();
 		configMenu();
+		carregarDados();
 	}
 	
+	private void carregarDados() {
+		Mototaxista mototaxi = TelaPadrao.mototaxistaLogado;
+		if(mototaxi != null) {
+			txtNomeCompleto.setText(mototaxi.getNome());
+			txtEmail.setText(mototaxi.getEmail());
+			txtSenha.setText(mototaxi.getSenha());
+			try {
+				txtData.setText(ServicoData.retornarString(mototaxi.getDataNascimento()));
+			} catch (DataInvalidaException e) {}
+		}
+	}
+
 	private void configImagemFundo() {
 		background = super.configImagemDeFundo("background_2.jpg");
 		add(background);
