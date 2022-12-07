@@ -13,7 +13,6 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDeEdicaoDosDadosDosUsuarios;
-import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaEdicao;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;

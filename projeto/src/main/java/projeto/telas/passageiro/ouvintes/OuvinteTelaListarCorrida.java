@@ -25,10 +25,7 @@ public class OuvinteTelaListarCorrida implements ActionListener {
 		if (evento.getSource() == tela.getBtnDetalhes()) {
 
 		} else if (evento.getSource() == tela.getBtnOrdenar()) {
-			for (Corrida c : central.getCorridas()) {
-				tela.getModelo().addRow(
-						new String[] { c.getPassageiro().getNome(), c.getStatus().toString(), c.getData().toString(), c.getPontoDeEncontro() });
-			}
+			
 		} else if (evento.getSource() == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomePassageiro();

@@ -2,6 +2,7 @@ package projeto.repositorio;
 
 import java.util.ArrayList;
 
+import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.excecoes.usuario.VerificacaoDeCorridaException;
@@ -31,6 +32,10 @@ public class CentralDeInformacoes {
 
 	public Mototaxista recuperarMototaxistaPeloEmail(String email) throws UsuarioNaoExisteException {
 		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
+	}
+	
+	public void atualizarPerfil(String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException {
+		servicoMototaxista.atualizarPerfil(email, nome, dataNascimento);
 	}
 
 	public boolean adicionarPassageiro(Passageiro passageiro) throws ValidacaoException {
@@ -80,9 +85,11 @@ public class CentralDeInformacoes {
 	public ArrayList<Mototaxista> getMototaxistas() {
 		return mototaxistas;
 	}
+
 	public double getValorDoCredito() {
 		return valorDoCredito;
 	}
+
 	public void setValorDoCredito(double valorDoCredito) {
 		this.valorDoCredito = valorDoCredito;
 	}
