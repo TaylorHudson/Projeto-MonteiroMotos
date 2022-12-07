@@ -49,6 +49,6 @@ public class ServicoMototaxista {
 			} catch (UsuarioNaoExisteException e) {
 				throw new ValidacaoException("E-mail/Senha incorretos");
 			}
-			return false;
+			throw new ValidacaoException("E-mail/Senha incorretos");
 	}
 }
