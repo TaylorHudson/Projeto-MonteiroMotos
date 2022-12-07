@@ -15,12 +15,14 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
@@ -85,7 +87,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 30, 220, 460, 40, Color.white, 25);
 		txtSenha = FabricaJText.criarJPasswordField(30, 260, 640, 40, Color.white, Color.BLACK, 16);
 		txtSenha.setEditable(false);
-		
+
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 30, 300, 460, 40, Color.white, 25);
 		try {
 			txtData = FabricaJFormatted.criarJFormatted(30, 340, 640, 40, new MaskFormatter("##/##/####"));
@@ -127,20 +129,24 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 			if (btn == tela.getBtnSeta()) {
 				tela.dispose();
 				new TelaHomeMototaxista();
-			} else if (btn == tela.getBtnSalvar()) {
+			}
+
+			else if (btn == tela.getBtnSalvar()) {
 				String nomeCompleto = tela.getTxtNomeCompleto().getText();
 				String email = tela.getTxtEmail().getText();
-				String senha = String.valueOf(tela.getTxtSenha().getPassword());
 				String dataNascimento = tela.getTxtData().getText();
 
-				Mototaxista mototaxista = TelaPadrao.mototaxistaLogado;
-				mototaxista.setNome(nomeCompleto);
-				mototaxista.setEmail(email);
 				try {
-					mototaxista.setDataNascimento(ServicoData.retornarData(dataNascimento));
-				} catch (DataInvalidaException e1) {}
-				
-				persistencia.salvarCentral(central, "central");
+					central.atualizarPerfil(email, nomeCompleto, dataNascimento);
+					persistencia.salvarCentral(central, "central");
+					FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
+					tela.repaint();
+					tela.dispose();
+					new TelaHomeMototaxista();
+				} catch (ValidacaoException erro) {
+					FabricaJOptionPane.criarMsgErro(erro.getMessage());
+				} catch (DataInvalidaException e1) {
+				}
 			}
 		}
 	}

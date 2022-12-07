@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
+import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
 import utilidades.validacao.Validador;
@@ -25,11 +26,19 @@ public class ServicoPassageiro {
 				ok = false;
 		}
 
+		for (Mototaxista m : central.getMototaxistas()) {
+			if (passageiro.equals(m)) {
+				ok = false;
+			}
+		}
+		
+		if(passageiro.equals(central.getAdministrador())) ok = false;
+		
 		if (ok && Validador.idadeValida(passageiro.getDataNascimento())) {
 			passageiros.add(passageiro);
 			return true;
 		}
-		return false;
+		throw new ValidacaoException("Email já cadastrado");
 	}
 
 	public Passageiro recuperarPassageiroPeloEmail(String email) throws UsuarioNaoExisteException {
