@@ -4,21 +4,26 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.modelo.Corrida;
+import projeto.modelo.Passageiro;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaListarCorrida;
 import utilidades.fabricas.FabricaJButton;
+import utilidades.fabricas.FabricaJLabel;
+import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
 
@@ -31,6 +36,8 @@ public class TelaListarCorridas extends TelaPadrao {
 	private DefaultTableModel modelo;
 	private JButton btnSeta;
 	private JScrollPane scrol;
+	private JTextField txtDados;
+	private ArrayList<Corrida> corridasSendoExibidas;
 
 	public TelaListarCorridas() {
 		super("Listar Corridas");
@@ -44,21 +51,67 @@ public class TelaListarCorridas extends TelaPadrao {
 		popularTabela();
 	}
 
+	private class OuvinteFiltro implements KeyListener {
+
+		private TelaListarCorridas tela;
+		private CentralDeInformacoes central;
+		private Persistencia persistencia = new Persistencia();
+		private ArrayList<Corrida> corridasSendoExibidas;
+
+		public void keyTyped(KeyEvent e) {
+			central = persistencia.recuperarCentral("central");
+			corridasSendoExibidas = new ArrayList<Corrida>();
+
+			String filtro = txtDados.getText();
+			char var = e.getKeyChar();
+			if (Character.isAlphabetic(var) || Character.isWhitespace(var)) {
+				filtro += var;
+			} else if (Character.isDigit(var)) {
+				e.consume();
+				return;
+			}
+			modelo.setRowCount(0);
+			for (Corrida corrida : central.getCorridas()) {
+				Passageiro passageiro = corrida.getPassageiro();
+				if (corrida.getPontoDeEncontro().contains(filtro) && passageiro.equals(TelaPadrao.passageiroLogado)) {
+					addLinha(modelo, corrida);
+
+				}
+			}
+			scrol.repaint();
+		}
+
+		public void keyPressed(KeyEvent e) {
+
+		}
+
+		public void keyReleased(KeyEvent e) {
+
+		}
+
+	}
+
+	private void addLinha(DefaultTableModel modelo, Corrida c) {
+
+		Object[] linha = new Object[5];
+		linha[0] = c.getPassageiro().getNome();
+		linha[1] = c.getPontoDeEncontro();
+		linha[2] = (c.getStatus() == StatusDaCorrida.PARAAGORA) ? "Para agora" : "Para depois";
+		linha[3] = c.getData();
+		linha[4] = c.getId();
+
+		modelo.addRow(linha);
+		scrol.repaint();
+
+	}
+
 	private void popularTabela() {
 		Persistencia p = new Persistencia();
 		CentralDeInformacoes central = p.recuperarCentral("central");
 
 		for (Corrida c : central.getCorridas()) {
 			if (c.getPassageiro().equals(TelaPadrao.passageiroLogado)) {
-				Object[] linha = new Object[5];
-				linha[0] = c.getPassageiro().getNome();
-				linha[1] = c.getPontoDeEncontro();
-				linha[2] = (c.getStatus() == StatusDaCorrida.PARAAGORA) ? "Para agora" : "Para depois";
-				linha[3] = c.getData();
-				linha[4] = c.getId();
-
-				modelo.addRow(linha);
-				scrol.repaint();
+				addLinha(modelo, c);
 			}
 		}
 	}
@@ -71,6 +124,10 @@ public class TelaListarCorridas extends TelaPadrao {
 	private void configButton() {
 		OuvinteTelaListarCorrida ouvinte = new OuvinteTelaListarCorrida(this);
 
+//		JLabel lblInfo = FabricaJLabel.criarJLabel("Pesquise", 660, 180, 180, 50, new Color(28, 28, 20), 20);
+
+		txtDados = FabricaJText.criarJTextField(20, 180, 460, 50, new Color(28, 28, 20), Color.white, 16);
+		txtDados.addKeyListener(new OuvinteFiltro());
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinte);
@@ -84,22 +141,8 @@ public class TelaListarCorridas extends TelaPadrao {
 
 		background.add(btnDetalhes);
 		background.add(btnOrdenar);
-	}
-
-	private class OuvinteFiltro implements KeyListener {
-
-		public void keyTyped(KeyEvent e) {
-		
-		}
-
-		public void keyPressed(KeyEvent e) {
-
-		}
-
-		public void keyReleased(KeyEvent e) {
-
-		}
-
+		background.add(txtDados);
+//		background.add(lblInfo);
 	}
 
 	private void configTabelaCorridas() {
@@ -134,6 +177,14 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	public JButton getBtnSeta() {
 		return btnSeta;
+	}
+
+	public JTextField getTxtDados() {
+		return txtDados;
+	}
+
+	public JTable getTabelaCorridas() {
+		return tabelaCorridas;
 	}
 
 }

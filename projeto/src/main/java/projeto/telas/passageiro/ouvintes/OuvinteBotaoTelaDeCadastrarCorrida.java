@@ -47,36 +47,34 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 		JButton item = (JButton) evento.getSource();
 		SimpleDateFormat sPDF = new SimpleDateFormat("dd/MM/yyyy");
 
-		try {
-			String data = sPDF.format(tela.getChooser().getDate());
-			boolean valido = Validador.validarCorrida(pontoDeEncontro, localDeDestino, complemento);
-			boolean validarCheckBox = Validador.validarStatusDaCorrida(cbAgora, cbDepois);
-			if (valido && validarCheckBox) {
-				System.out.println(tela.getTxtHora());
-				if (tela.getTxtHora().getText().isBlank()) {
-					throw new ValidacaoDaHoraException();
-				} else {
-
-					central.adicionarCorrida(new Corrida(status, pontoDeEncontro, localDeDestino, complemento,
-							TelaPadrao.passageiroLogado, ServicoData.retornarData(data)));
-					persistencia.salvarCentral(central, "central");
-					tela.dispose();
-					new TelaHomePassageiro();
-				}
-			}
-
-		} catch (CadastroDeCorridaInvalidoException | StatusDaCorridaInvalidoException | DataInvalidaException
-				| VerificacaoDeCorridaException | ValidacaoDaHoraException e) {
-			FabricaJOptionPane.criarMsgErro(e.getMessage());
-			tela.getTxtHora().setText("");
-
-		}
 		if (item == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomePassageiro();
 
 		} else if (item == tela.getBtnSalvar()) {
+			try {
+				String data = sPDF.format(tela.getChooser().getDate());
+				boolean valido = Validador.validarCorrida(pontoDeEncontro, localDeDestino, complemento);
+				boolean validarCheckBox = Validador.validarStatusDaCorrida(cbAgora, cbDepois);
+				if (valido && validarCheckBox) {
+					if (tela.getTxtHora().getText().isBlank()) {
+						throw new ValidacaoDaHoraException();
 
+					} else {
+
+						central.adicionarCorrida(new Corrida(status, pontoDeEncontro, localDeDestino, complemento,
+								TelaPadrao.passageiroLogado, ServicoData.retornarData(data)));
+						persistencia.salvarCentral(central, "central");
+						tela.dispose();
+						new TelaHomePassageiro();
+					}
+				}
+
+			} catch (CadastroDeCorridaInvalidoException | StatusDaCorridaInvalidoException | DataInvalidaException
+					| VerificacaoDeCorridaException | ValidacaoDaHoraException e) {
+				FabricaJOptionPane.criarMsgErro(e.getMessage());
+				tela.getTxtHora().setText("");
+			}
 		}
 
 	}

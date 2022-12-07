@@ -2,6 +2,8 @@ package projeto.telas.passageiro.ouvintes;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
@@ -21,10 +23,14 @@ public class OuvinteCheckBoxTelaDeCadastrarCorrida implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 
 		if (tela.getCheckBoxParaAgora().isSelected()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+			tela.getTxtHora().setText(sdf.format(new Date()));
+			tela.getTxtHora().setEnabled(false);
 			tela.setHorario(StatusDaCorrida.PARAAGORA);
 			tela.getChooser().setEnabled(false);
 		} else {
 			tela.getChooser().setEnabled(true);
+			tela.getTxtHora().setEnabled(true);
 
 		}
 		if (tela.getCheckBoxParaDepois().isSelected()) {

@@ -195,4 +195,8 @@ public class TelaDeCadastrarCorrida extends TelaPadrao {
 		return txtHora;
 	}
 
+	public void setTxtHora(JFormattedTextField txtHora) {
+		this.txtHora = txtHora;
+	}
+
 }

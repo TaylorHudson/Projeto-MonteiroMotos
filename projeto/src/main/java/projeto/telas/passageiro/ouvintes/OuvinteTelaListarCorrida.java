@@ -2,6 +2,7 @@ package projeto.telas.passageiro.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import projeto.modelo.Corrida;
 import projeto.repositorio.CentralDeInformacoes;
@@ -14,6 +15,7 @@ public class OuvinteTelaListarCorrida implements ActionListener {
 	private TelaListarCorridas tela;
 	private CentralDeInformacoes central;
 	private Persistencia persistencia = new Persistencia();
+	private ArrayList<Corrida> corridasSendoExibidas;
 
 	public OuvinteTelaListarCorrida(TelaListarCorridas tela) {
 		central = persistencia.recuperarCentral("central");
@@ -25,7 +27,7 @@ public class OuvinteTelaListarCorrida implements ActionListener {
 		if (evento.getSource() == tela.getBtnDetalhes()) {
 
 		} else if (evento.getSource() == tela.getBtnOrdenar()) {
-			
+
 		} else if (evento.getSource() == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomePassageiro();
