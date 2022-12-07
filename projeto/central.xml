@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<centralInformacoes>
+  <passageiros/>
+  <corridas/>
+  <mototaxistas>
+    <mototaxista>
+      <nome>Hudson Taylor</nome>
+      <email>taylorhudson@gmail.com</email>
+      <senha>12458910$</senha>
+      <dataNascimento>2000-01-24</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+  </mototaxistas>
+  <administrador>
+    <nome>Taylor Hudson Cordeiro</nome>
+    <email>tayloradmin@gmail.com</email>
+    <senha>123456$</senha>
+    <dataNascimento>2004-06-24</dataNascimento>
+    <estaAtivo>true</estaAtivo>
+  </administrador>
+  <valorDoCredito>0.0</valorDoCredito>
+  <servicoPassageiro>
+    <central reference="../.."/>
+    <passageiros reference="../../passageiros"/>
+  </servicoPassageiro>
+  <servicoCorrida>
+    <central reference="../.."/>
+    <corridas reference="../../corridas"/>
+    <util reference="../../servicoPassageiro"/>
+  </servicoCorrida>
+  <servicoMototaxista>
+    <central reference="../.."/>
+    <mototaxistas reference="../../mototaxistas"/>
+  </servicoMototaxista>
+</centralInformacoes>

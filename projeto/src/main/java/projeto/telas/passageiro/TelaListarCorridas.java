@@ -47,17 +47,19 @@ public class TelaListarCorridas extends TelaPadrao {
 	private void popularTabela() {
 		Persistencia p = new Persistencia();
 		CentralDeInformacoes central = p.recuperarCentral("central");
-		
+
 		for (Corrida c : central.getCorridas()) {
-			Object[] linha = new Object[5];
-//			linha[0] = c.getPassageiro().getNome();
-			linha[1] = c.getPontoDeEncontro();
-			linha[2] = (c.getStatus() == StatusDaCorrida.PARAAGORA) ? "Para agora" : "Para depois";
-			linha[3] = c.getData();
-			linha[4] = c.getId();
-			
-			modelo.addRow(linha);
-			scrol.repaint();
+			if (c.getPassageiro().equals(TelaPadrao.passageiroLogado)) {
+				Object[] linha = new Object[5];
+				linha[0] = c.getPassageiro().getNome();
+				linha[1] = c.getPontoDeEncontro();
+				linha[2] = (c.getStatus() == StatusDaCorrida.PARAAGORA) ? "Para agora" : "Para depois";
+				linha[3] = c.getData();
+				linha[4] = c.getId();
+
+				modelo.addRow(linha);
+				scrol.repaint();
+			}
 		}
 	}
 
@@ -87,12 +89,13 @@ public class TelaListarCorridas extends TelaPadrao {
 	private class OuvinteFiltro implements KeyListener {
 
 		public void keyTyped(KeyEvent e) {
-
+		
 		}
 
 		public void keyPressed(KeyEvent e) {
 
 		}
+
 		public void keyReleased(KeyEvent e) {
 
 		}
@@ -101,7 +104,7 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	private void configTabelaCorridas() {
 		modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "NOME", "PONTO DE ENCONTRO", "STATUS", "DATA", "ID"});
+		modelo.setColumnIdentifiers(new String[] { "NOME", "PONTO DE ENCONTRO", "STATUS", "DATA", "ID" });
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
 
@@ -112,8 +115,6 @@ public class TelaListarCorridas extends TelaPadrao {
 		background.add(scrol);
 		background.add(btnSeta);
 	}
-	
-	
 
 	public DefaultTableModel getModelo() {
 		return modelo;

@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import projeto.telas.ADM.TelaDadosDosUsuarios;
 import projeto.telas.ADM.TelaFinancasADM;
 import projeto.telas.ADM.TelaHomeADM;
-import projeto.telas.mototaxista.TelaListarCorridas;
+import projeto.telas.mototaxista.TelaListarCorridasMototaxi;
 
 public class OuvinteTelaHomeADM implements ActionListener{
 	

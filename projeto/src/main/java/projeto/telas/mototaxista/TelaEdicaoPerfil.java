@@ -137,10 +137,12 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 				String dataNascimento = tela.getTxtData().getText();
 
 				try {
-					central.atualizarPerfil(email, nomeCompleto, dataNascimento);
+					Mototaxista moto = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto, dataNascimento);
+					System.out.println(TelaPadrao.mototaxistaLogado);
+					TelaPadrao.mototaxistaLogado = moto;
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
-					tela.repaint();
+					tela.carregarDados();
 					tela.dispose();
 					new TelaHomeMototaxista();
 				} catch (ValidacaoException erro) {

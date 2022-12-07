@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import projeto.telas.mototaxista.TelaHomeMototaxista;
-import projeto.telas.mototaxista.TelaListarCorridas;
+import projeto.telas.mototaxista.TelaListarCorridasMototaxi;
 
 public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 
-	private TelaListarCorridas tela;
+	private TelaListarCorridasMototaxi tela;
 	
-	public OuvinteBotoesTelaListarCorridas(TelaListarCorridas t) {
+	public OuvinteBotoesTelaListarCorridas(TelaListarCorridasMototaxi t) {
 		tela = t;
 	}
 

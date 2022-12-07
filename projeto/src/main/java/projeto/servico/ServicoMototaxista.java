@@ -70,57 +70,44 @@ public class ServicoMototaxista {
 		mototaxi.setEstaAtivo(false);
 	}
 
-	public void atualizarPerfil(String email, String nome, String dataNascimento)
+	public Mototaxista atualizarPerfil(Mototaxista mototaxiLogado, String email, String nome, String dataNascimento)
 			throws ValidacaoException, DataInvalidaException {
 
 		LocalDate data = ServicoData.retornarData(dataNascimento);
 		Validador.validarEmail(email);
 		Validador.validarNome(nome);
 		Validador.idadeValida(data);
-		String emailLogado = TelaPadrao.mototaxistaLogado.getEmail();
 
-		try {
-			Mototaxista mototaxiLogado = recuperarMototaxistaPeloEmail(emailLogado);
-			Mototaxista mototaxiAntigo = mototaxiLogado;
+		Mototaxista mototaxiAntigo = mototaxiLogado;
 
-			System.out.println(mototaxiLogado.getNome());
-			System.out.println(mototaxiLogado.getEmail());
-			System.out.println(mototaxiLogado.getDataNascimento());
+		String dataEmString = ServicoData.retornarString(mototaxiLogado.getDataNascimento());
 
-			boolean valido = true;
-			System.out.println(email.equals(mototaxiLogado.getEmail()));
-			System.out.println(nome.equals(mototaxiLogado.getEmail()));
-			System.out.println(data.equals(mototaxiLogado.getDataNascimento()));
-					
-			if (email.equals(mototaxiLogado.getEmail()) && nome.equals(mototaxiLogado.getEmail())
-					&& data.equals(mototaxiLogado.getDataNascimento())) {
-				throw new ValidacaoException("Altere um dos campos");
-			}else {
-				System.out.println("Mexeu");
-				mototaxiLogado.setEmail(email);
-				mototaxiLogado.setNome(nome);
-				mototaxiLogado.setDataNascimento(data);
+		boolean valido = true;
+		if (email.equals(mototaxiAntigo.getEmail()) && nome.equals(mototaxiAntigo.getNome())
+				&& dataNascimento.equals(dataEmString)) {
+			throw new ValidacaoException("Altere um dos campos");
+		} else {
+			mototaxiLogado.setEmail(email);
+			mototaxiLogado.setNome(nome);
+			mototaxiLogado.setDataNascimento(data);
 
-				if (mototaxiLogado.equals(central.getAdministrador()))
+			if (mototaxiLogado.equals(central.getAdministrador()))
+				valido = false;
+
+			for (Mototaxista mototaxista : central.getMototaxistas()) {
+				if (mototaxista.equals(mototaxiLogado))
 					valido = false;
-
-				for (Mototaxista mototaxista : central.getMototaxistas()) {
-					if (mototaxista.equals(mototaxiLogado))
-						valido = false;
-				}
-
-				for (Passageiro passageiro : central.getPassageiros()) {
-					if (passageiro.equals(mototaxiLogado))
-						valido = false;
-				}
-
-				if (!valido) {
-					throw new ValidacaoException("Email já cadastrado, tente com outro");
-				}
 			}
-		} catch (UsuarioNaoExisteException e) {
-		}
 
+			for (Passageiro passageiro : central.getPassageiros()) {
+				if (passageiro.equals(mototaxiLogado))
+					valido = false;
+			}
+
+			System.out.println(valido);
+			if (valido) return mototaxiLogado;
+			else return mototaxiAntigo;
+		}
 	}
 
 }
