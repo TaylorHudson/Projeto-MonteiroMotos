@@ -1,12 +1,13 @@
 package projeto.modelo;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.modelo.enuns.Sexo;
 import projeto.modelo.enuns.StatusDaCorrida;
 
-public class Corrida {
+public class Corrida implements Comparator<Corrida>{
 
 	private long id;
 	private StatusDaCorrida status;
@@ -124,5 +125,13 @@ public class Corrida {
 	public void setStatus(StatusDaCorrida status) {
 		this.status = status;
 	}
+
+
+	@Override
+	public int compare(Corrida c1, Corrida c2) {
+		return c1.getData()
+				.compareTo(c2.getData());
+	}
+
 
 }

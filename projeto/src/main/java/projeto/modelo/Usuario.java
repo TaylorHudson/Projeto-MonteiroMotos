@@ -2,7 +2,7 @@ package projeto.modelo;
 
 import java.time.LocalDate;
 
-public class Usuario {
+public class Usuario{
 
 	private String nome;
 	private String email;
