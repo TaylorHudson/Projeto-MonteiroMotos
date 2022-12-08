@@ -47,7 +47,7 @@ public class TelaListarCorridasADM extends TelaPadrao {
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 600, 100, 200, 40, Color.white, Color.black,28);
 		
-		box = new JComboBox<String>(new String[] {"Finalizada","Andamento", "Espera"});
+		box = new JComboBox<String>(new String[] {"Finalizada","Espera"});
 		box.setBounds(350, 100, 200, 40);
 		box.setFont(new Font("Arial", 1, 20));
 		box.setForeground(Color.black);

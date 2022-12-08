@@ -2,10 +2,14 @@ package projeto.telas.ADM;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import projeto.ImagemDeFundo;
@@ -13,10 +17,14 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
 import projeto.telas.ADM.ouvintes.OuvinteTelaFinancasADM;
+import projeto.telas.passageiro.TelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
+import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
 
@@ -30,6 +38,7 @@ public class TelaFinancasADM extends TelaPadrao {
 	private JScrollPane scrol;
 	private Persistencia p = new Persistencia();
 	private CentralDeInformacoes central = p.recuperarCentral("central");
+	private JTextField txtDados;
 	
 	public TelaFinancasADM() {
 		super("Finanças");	
@@ -40,10 +49,16 @@ public class TelaFinancasADM extends TelaPadrao {
 		configBotoes();
 		configTabela();
 		popularTabela();
+		configTexto();
 	}
 	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
 		add(imagem);
+	}
+	private void configTexto() {
+		txtDados = FabricaJText.criarJTextField(100, 100, 300, 40, Color.white, Color.black, 16);
+		txtDados.addKeyListener(new OuvinteFiltro());
+		imagem.add(txtDados);
 	}
 	
 	
@@ -106,5 +121,54 @@ public class TelaFinancasADM extends TelaPadrao {
 	public static void main(String[] args) {
 		new TelaFinancasADM();
 	}
+	private class OuvinteFiltro implements KeyListener {
 
+		private TelaListarCorridas tela;
+		
+		
+		
+		public void keyTyped(KeyEvent e) {
+			
+			p = new Persistencia();
+			central = p.recuperarCentral("central");
+			
+			
+			
+
+			String filtro = txtDados.getText();
+			char var = e.getKeyChar();
+			if (Character.isAlphabetic(var) || Character.isWhitespace(var)) {
+				filtro += var;
+			} else if (Character.isDigit(var)) {
+				e.consume();
+				return;
+			}
+			modelo.setRowCount(0);
+			for(Mototaxista m: central.getMototaxistas()) {
+				if(m.getEmail().contains(filtro))
+					addLinha(modelo, m);
+			}
+			scrol.repaint();
+		}
+
+
+		private void addLinha(DefaultTableModel modelo, Mototaxista m) {
+			Object[] linha = new Object[4];
+			linha[0] = m.getEmail();
+			linha[1] = m.getCreditosReivindicacao();
+			linha[3] = central.getValorDoCredito();
+			try {
+				linha[2] = ServicoData.retornarString(m.getDataDaUltimaCompra());
+			} catch (DataInvalidaException e) {}
+			modelo.addRow(linha);
+			scrol.repaint();
+		}
+
+
+		
+		public void keyPressed(KeyEvent e) {	
+		}
+		public void keyReleased(KeyEvent e) {		
+		}
+	}
 }

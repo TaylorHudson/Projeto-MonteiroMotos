@@ -6,14 +6,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDetalhesDaCorridaADM;
 import utilidades.fabricas.FabricaJButton;
+import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
+import utilidades.fabricas.FabricaJTextArea;
 import utilidades.imagens.Imagens;
 
 public class TelaDetalhesDaCorridaADM extends TelaPadrao{
@@ -57,40 +60,47 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 	}
 	
 	private void configTexto() {
-		JLabel lblNomeDoPassageiro = FabricaJLabel.criarJLabel("Nome Do Passageiro", 40, 100, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblPontoDeEncontro = FabricaJLabel.criarJLabel("Ponto de Encontro", 40, 200, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblLocalDeDestino = FabricaJLabel.criarJLabel("Local de Destino", 40, 300, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblData = FabricaJLabel.criarJLabel("Data", 40, 400, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 40, 500, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblEmailDoMototaxista = FabricaJLabel.criarJLabel("E-mail do Mototaxista", 500, 100, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliação", 500, 200, 300, 30, Color.orange,Color.black, 20);
-		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario", 500, 300, 300, 30, Color.orange,Color.black, 20);
+		JLabel menu = FabricaJLabel.criarJLabel(10, 70, 850, 600, Color.BLACK, 4);
+		menu.setBackground(Color.BLACK);
+		JLabel lblNomeDoPassageiro = FabricaJLabel.criarJLabel("Nome Do Passageiro", 40, 50, 300, 30, Color.white,Color.black, 20);
+		JLabel lblPontoDeEncontro = FabricaJLabel.criarJLabel("Ponto de Encontro", 40, 150, 300, 30, Color.white,Color.black, 20);
+		JLabel lblLocalDeDestino = FabricaJLabel.criarJLabel("Local de Destino", 40, 250, 300, 30, Color.white,Color.black, 20);
+		JLabel lblData = FabricaJLabel.criarJLabel("Data", 40, 350, 300, 30, Color.white,Color.black, 20);
+		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 40, 450, 300, 30, Color.white,Color.black, 20);
+		JLabel lblEmailDoMototaxista = FabricaJLabel.criarJLabel("E-mail do Mototaxista", 500, 50, 300, 30, Color.white,Color.black, 20);
+		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliação", 500, 150, 300, 30, Color.white,Color.black, 20);
+		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario", 500, 250, 300, 30, Color.white,Color.black, 20);
 		
-		imagem.add(lblNomeDoPassageiro);
-		imagem.add(lblPontoDeEncontro);
-		imagem.add(lblLocalDeDestino);
-		imagem.add(lblData);
-		imagem.add(lblHora);
-		imagem.add(lblEmailDoMototaxista);
-		imagem.add(lblAvaliacao);
-		imagem.add(lblComentario);
+		menu.add(lblNomeDoPassageiro);
+		menu.add(lblPontoDeEncontro);
+		menu.add(lblLocalDeDestino);
+		menu.add(lblData);
+		menu.add(lblHora);
+		menu.add(lblEmailDoMototaxista);
+		menu.add(lblAvaliacao);
+		menu.add(lblComentario);
 		
-		txtNome = FabricaJText.criarJTextField(40, 140, 300, 40, Color.orange, Color.black, 16);
-		txtPontoDeEncontro = FabricaJText.criarJTextField(40, 240, 300, 40, Color.orange, Color.black, 16);
-		txtLocalDeDestino = FabricaJText.criarJTextField(40, 340, 300, 40, Color.orange, Color.black, 16);
-		txtData = FabricaJText.criarJTextField(40, 440, 300, 40, Color.orange, Color.black, 16);
-		txtHora = FabricaJText.criarJTextField(40, 540, 300, 40, Color.orange, Color.black, 16);
-		txtEmailDoMototaxista = FabricaJText.criarJTextField(500, 140, 300, 40, Color.orange, Color.black, 16);
-		txtAvaliacao = FabricaJText.criarJTextField(500, 240, 300, 40, Color.orange, Color.black, 16);
-		//txaComentario = 
+		txtNome = FabricaJText.criarJTextField(40, 90, 300, 40, Color.white, Color.black, 16);
+		txtPontoDeEncontro = FabricaJText.criarJTextField(40, 190, 300, 40, Color.white, Color.black, 16);
+		txtLocalDeDestino = FabricaJText.criarJTextField(40, 290, 300, 40, Color.white, Color.black, 16);
+		txtHora = FabricaJText.criarJTextField(40, 490, 300, 40, Color.white, Color.black, 16);
+		txtEmailDoMototaxista = FabricaJText.criarJTextField(500, 90, 300, 40, Color.white, Color.black, 16);
+		txtAvaliacao = FabricaJText.criarJTextField(500, 190, 300, 40, Color.white, Color.black, 16);
+		txaComentario = FabricaJTextArea.criarJTextArea(500, 290, 300, 200, Color.white, Color.black);
+		try {
+			txtData = FabricaJFormatted.criarJFormatted(40, 390, 300, 40,new MaskFormatter("##/##/####"));
+		}catch (Exception e) {
+		}
 		
-		imagem.add(txtNome);
-		imagem.add(txtPontoDeEncontro);
-		imagem.add(txtLocalDeDestino);
-		imagem.add(txtData);
-		imagem.add(txtHora);
-		imagem.add(txtEmailDoMototaxista);
-		imagem.add(txtAvaliacao);
+		menu.add(txtNome);
+		menu.add(txtPontoDeEncontro);
+		menu.add(txtLocalDeDestino);
+		menu.add(txtData);
+		menu.add(txtHora);
+		menu.add(txtEmailDoMototaxista);
+		menu.add(txtAvaliacao);
+		menu.add(txaComentario);
+		imagem.add(menu);
 		
 	}
 	
