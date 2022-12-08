@@ -32,6 +32,7 @@ public class TelaCadastroUsuario extends JFrame {
 	private JFormattedTextField txtData;
 	private JComboBox<String> box;
 	private JLabel background;
+	private JButton btnSeta;
 
 	public TelaCadastroUsuario() {
 		configurarTela();
@@ -59,7 +60,11 @@ public class TelaCadastroUsuario extends JFrame {
 
 		JLabel menu = FabricaJLabel.criarJLabel(180, 150, 500, 550, Color.BLACK, 4);
 		menu.setBackground(Color.BLACK);
-
+	
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
+		btnSeta.addActionListener(ouvinte);
+		
 		JLabel lblTipo = FabricaJLabel.criarJLabel("Tipo do usuario", 20, 20, 460, 40, Color.white, 25);
 		JLabel lblNome = FabricaJLabel.criarJLabel("Nome Completo", 20, 95, 460, 40, new Color(247, 247, 247), 25);
 
@@ -106,7 +111,8 @@ public class TelaCadastroUsuario extends JFrame {
 		menu.add(lblDataNascimento);
 		menu.add(txtData);
 		menu.add(btnCadastrar);
-
+		
+		background.add(btnSeta);
 		background.add(menu);
 	}
 
@@ -141,5 +147,10 @@ public class TelaCadastroUsuario extends JFrame {
 	public JCheckBox getCheckBoxMasculino() {
 		return checkBoxMasculino;
 	}
+
+	public JButton getBtnSeta() {
+		return btnSeta;
+	}
+	
 
 }

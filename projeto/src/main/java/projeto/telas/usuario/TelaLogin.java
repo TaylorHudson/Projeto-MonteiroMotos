@@ -77,8 +77,12 @@ public class TelaLogin extends JFrame {
 		OuvinteBotaoFundoPreto ouvinteBotaoPadrao = new OuvinteBotaoFundoPreto();
 		btnResetSenha.addActionListener(ouvinte);
 		btnResetSenha.addMouseListener(ouvinteBotaoPadrao);
+		
 		btnCadastrese.addActionListener(ouvinte);
 		btnCadastrese.addMouseListener(ouvinteBotaoPadrao);
+		
+		
+		
 		btnEntrar.addActionListener(new OuvinteBotaoEntrarTelaLogin(this));
 		btnEntrar.addMouseListener(ouvinteBotaoPadrao);
 

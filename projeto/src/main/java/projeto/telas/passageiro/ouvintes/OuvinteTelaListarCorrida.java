@@ -4,11 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import projeto.modelo.Corrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.passageiro.TelaDeDetalhesPassageiro;
 import projeto.telas.passageiro.TelaHomePassageiro;
 import projeto.telas.passageiro.TelaListarCorridas;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
 
 public class OuvinteTelaListarCorrida implements ActionListener {
@@ -25,12 +28,7 @@ public class OuvinteTelaListarCorrida implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent evento) {
-		if (evento.getSource() == tela.getBtnDetalhes()) {
-			tela.dispose();
-			new TelaDeDetalhesPassageiro();
-		} else if (evento.getSource() == tela.getBtnOrdenar()) {
-
-		} else if (evento.getSource() == tela.getBtnSeta()) {
+		if (evento.getSource() == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomePassageiro();
 		}

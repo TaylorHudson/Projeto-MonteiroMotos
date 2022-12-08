@@ -19,6 +19,7 @@ public class TelaDeEnvioDeCodigo extends JFrame {
 
 	private JLabel background;
 	private JTextField txtEmail;
+	private JButton btnSeta;
 
 	public TelaDeEnvioDeCodigo() {
 
@@ -37,6 +38,11 @@ public class TelaDeEnvioDeCodigo extends JFrame {
 		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
 		JLabel menu = FabricaJLabel.criarJLabel(175, 200, 500, 400, Color.BLACK, 3);
 		menu.setBackground(Color.BLACK);
+		
+		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
+		btnSeta.addActionListener(ouvinte);
+		
 
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Digite seu Email", 20, 100, 460, 40, Color.white, 25);
 		txtEmail = FabricaJText.criarJTextField(20, 140, 460, 40, Color.white, Color.black, 16);
@@ -49,16 +55,22 @@ public class TelaDeEnvioDeCodigo extends JFrame {
 		btnEnviarCodigo.addActionListener(ouvinte);
 		btnEnviarCodigo.addMouseListener(new OuvinteBotaoFundoPreto());
 
+		
 		menu.add(lblMensagem);
 		menu.add(txtEmail);
 		menu.add(lblEmail);
 		menu.add(btnEnviarCodigo);
+		background.add(btnSeta);
 		background.add(menu);
 		add(background);
 	}
 
 	public JTextField getTxtEmail() {
 		return txtEmail;
+	}
+
+	public JButton getBtnSeta() {
+		return btnSeta;
 	}
 
 	public static void main(String[] args) {

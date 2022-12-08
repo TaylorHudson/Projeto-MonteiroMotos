@@ -71,10 +71,10 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 	private void configMenu() {
 		OuvinteBotoesTelaEdicao ouvinte = new OuvinteBotoesTelaEdicao(this);
 		OuvinteBotaoFundoPreto ouvinteBotao = new OuvinteBotaoFundoPreto();
-
+		
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
+		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinte);
-		btnSeta.addMouseListener(ouvinteBotao);
 
 		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK, 3);
 		menu.setBackground(Color.BLACK);

@@ -12,6 +12,7 @@ import javax.swing.text.MaskFormatter;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelo.Corrida;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaDeDetalhesDoPassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -26,9 +27,23 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 	private ImagemDeFundo background;
 	private JTextField txtData;
 	private JFormattedTextField txtHora;
+	private Corrida corrida;
+	private JTextField txtNomeDoPassageiro;
+	private JTextField txtPontoDeEncontro;
+	private JTextField txtLocalDeDestino;
+	private JTextField txtEmailDoMotoTaxi;
+	private JTextField txtAvaliacao;
+	private JTextArea txtComentario;
 
-	public TelaDeDetalhesPassageiro() {
+	public TelaDeDetalhesPassageiro(Corrida corrida) {
 		super("Detalhes do passageiro");
+		this.corrida = corrida;
+		txtNomeDoPassageiro.setText(corrida.getPassageiro().getNome());
+		txtPontoDeEncontro.setText(corrida.getPontoDeEncontro());
+		txtLocalDeDestino.setText(corrida.getLocalDeDestino());
+		txtEmailDoMotoTaxi.setText(corrida.getEmailDoMototaxista());
+		txtAvaliacao.setText("");
+		txtComentario.setText("");
 		setVisible(true);
 	}
 
@@ -54,15 +69,15 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 
 		JLabel lblNomeDoPassaeiro = FabricaJLabel.criarJLabel("Nome do passageiro", 20, 60, 460, 40, Color.white, 22);
 
-		JTextField txtNomeDoPassageiro = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
+		txtNomeDoPassageiro = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
 
 		JLabel lblPontoDeEncontro = FabricaJLabel.criarJLabel("Ponto de encontro", 20, 140, 460, 40, Color.white, 22);
 
-		JTextField txtPontoDeEncontro = FabricaJText.criarJTextField(20, 180, 340, 40, Color.white, Color.black, 16);
+		txtPontoDeEncontro = FabricaJText.criarJTextField(20, 180, 340, 40, Color.white, Color.black, 16);
 
 		JLabel lblLocalDeDestino = FabricaJLabel.criarJLabel("Local de destino", 20, 230, 460, 40, Color.white, 22);
 
-		JTextField txtLocalDeDestino = FabricaJText.criarJTextField(20, 270, 340, 40, Color.white, Color.black, 16);
+		txtLocalDeDestino = FabricaJText.criarJTextField(20, 270, 340, 40, Color.white, Color.black, 16);
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 360, 40, Color.white, 25);
 		try {
@@ -81,15 +96,15 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 
 		JLabel lblEmailDoMotoTaxi = FabricaJLabel.criarJLabel("E-Mail do Moto Taxi", 20, 60, 460, 40, Color.white, 22);
 
-		JTextField txtEmailDoMotoTaxi = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
+		txtEmailDoMotoTaxi = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
 
 		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliacao", 20, 140, 460, 40, Color.white, 22);
 
-		JTextField txtAvaliacao = FabricaJText.criarJTextField(20, 180, 340, 40, Color.white, Color.black, 16);
+		txtAvaliacao = FabricaJText.criarJTextField(20, 180, 340, 40, Color.white, Color.black, 16);
 
 		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario ", 20, 230, 460, 40, Color.white, 22);
 
-		JTextArea txtComentario = FabricaJTextArea.criarJTextArea(20, 270, 340, 200, Color.white, Color.black);
+		txtComentario = FabricaJTextArea.criarJTextArea(20, 270, 340, 200, Color.white, Color.black);
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
@@ -129,10 +144,6 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		menu2.add(lblComentario);
 		menu2.add(txtComentario);
 
-	}
-
-	public static void main(String[] args) {
-		new TelaDeDetalhesPassageiro();
 	}
 
 	public JButton getBtnSeta() {

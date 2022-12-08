@@ -41,9 +41,14 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 		Sexo sexo = (selecionouFeminino ? Sexo.FEMININO : Sexo.MASCULINO);
 		JCheckBox cbFeminino = tela.getCheckBoxFeminino();
 		JCheckBox cbMasculino = tela.getCheckBoxMasculino();
+		if (e.getSource() == tela.getBtnSeta()) {
+			tela.dispose();
+			new TelaLogin();
+		}else {
 		
 		try {
-			boolean valido = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento), cbFeminino, cbMasculino);
+			boolean valido = Validador.validarCadastro(nome, email, senha, ServicoData.retornarData(dataDeNascimento),
+					cbFeminino, cbMasculino);
 			LocalDate data = ServicoData.retornarData(dataDeNascimento);
 			if (valido) {
 				if (tipo.equals("Mototaxista")) {
@@ -58,7 +63,9 @@ public class OuvinteTelaCadastroUsuario implements ActionListener {
 			}
 		} catch (ValidacaoException | SexoInvalidoException | DataInvalidaException erro) {
 			FabricaJOptionPane.criarMsgAtencao(erro.getMessage());
-		} 
+		}
+		}
+		
 	}
 
 }

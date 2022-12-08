@@ -2,12 +2,13 @@ package projeto.telas.passageiro;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -16,13 +17,14 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Passageiro;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaListarCorrida;
 import utilidades.fabricas.FabricaJButton;
-import utilidades.fabricas.FabricaJLabel;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
@@ -38,9 +40,13 @@ public class TelaListarCorridas extends TelaPadrao {
 	private JScrollPane scrol;
 	private JTextField txtDados;
 	private ArrayList<Corrida> corridasSendoExibidas;
+	private Persistencia persistencia;
+	private CentralDeInformacoes central;
 
 	public TelaListarCorridas() {
 		super("Listar Corridas");
+		persistencia = new Persistencia();
+		central = persistencia.recuperarCentral("central");
 		setVisible(true);
 	}
 
@@ -51,11 +57,33 @@ public class TelaListarCorridas extends TelaPadrao {
 		popularTabela();
 	}
 
+	private class OuvinteBotaoDetalhes implements ActionListener {
+		private TelaListarCorridas tela;
+
+		public OuvinteBotaoDetalhes(TelaListarCorridas tela) {
+			this.tela = tela;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			JButton item = (JButton) e.getSource();
+			int var = tela.getTabelaCorridas().getSelectedRow();
+			if (tela.getTabelaCorridas().getSelectedRow() == -1) {
+				FabricaJOptionPane.criarMsgErro("Selecione Alguma corrida");
+			} else {
+				long idSelecionado = (long) tela.getTabelaCorridas().getValueAt(var, 4);
+
+				Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
+				tela.dispose();
+				new TelaDeDetalhesPassageiro(corrida);
+			}
+
+		}
+
+	}
+
 	private class OuvinteFiltro implements KeyListener {
 
 		private TelaListarCorridas tela;
-		private CentralDeInformacoes central;
-		private Persistencia persistencia = new Persistencia();
 		private ArrayList<Corrida> corridasSendoExibidas;
 
 		public void keyTyped(KeyEvent e) {
@@ -106,14 +134,17 @@ public class TelaListarCorridas extends TelaPadrao {
 	}
 
 	private void popularTabela() {
-		Persistencia p = new Persistencia();
-		CentralDeInformacoes central = p.recuperarCentral("central");
 
-		for (Corrida c : central.getCorridas()) {
-			if (c.getPassageiro().equals(TelaPadrao.passageiroLogado)) {
+		try {
+
+			ArrayList<Corrida> corridasDoPassageiro = central
+					.recuperarCorridasDeUmPassageiro(TelaPadrao.passageiroLogado.getEmail());
+			for (Corrida c : corridasDoPassageiro) {
 				addLinha(modelo, c);
 			}
+		} catch (UsuarioNaoExisteException e) {
 		}
+
 	}
 
 	private void configImagemFundo() {
@@ -124,22 +155,19 @@ public class TelaListarCorridas extends TelaPadrao {
 	private void configButton() {
 		OuvinteTelaListarCorrida ouvinte = new OuvinteTelaListarCorrida(this);
 
-		JLabel lblInfo = FabricaJLabel.criarJLabel("Pesquise", 30, 140, 460, 40, Color.white, 25);
-
-		txtDados = FabricaJText.criarJTextField(20, 180, 460, 50, new Color(28, 28, 20), Color.white, 16);
+		txtDados = FabricaJText.criarJTextField(20, 180, 460, 50, Color.white, Color.black, 16);
 		txtDados.addKeyListener(new OuvinteFiltro());
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinte);
 
-		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 50, 650, 180, 50, new Color(28, 28, 20),
-				new Color(179, 177, 177), 28);
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 50, 650, 180, 50, Color.white, Color.black, 28);
 		btnDetalhes.addMouseListener(new OuvinteBotaoFundoPreto());
-		btnDetalhes.addActionListener(ouvinte);
+		btnDetalhes.addActionListener(new OuvinteBotaoDetalhes(this));
 
 		background.add(btnDetalhes);
 		background.add(txtDados);
-		background.add(lblInfo);
+
 	}
 
 	private void configTabelaCorridas() {
@@ -149,7 +177,7 @@ public class TelaListarCorridas extends TelaPadrao {
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
 
 		scrol = new JScrollPane(tabelaCorridas);
-		scrol.getViewport().setBackground(new Color(124, 68, 2));
+		scrol.getViewport().setBackground(Color.orange);
 		scrol.setBounds(2, 240, 885, 400);
 
 		background.add(scrol);
@@ -170,6 +198,7 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	public static void main(String[] args) {
 		new TelaListarCorridas();
+
 	}
 
 	public JButton getBtnSeta() {
