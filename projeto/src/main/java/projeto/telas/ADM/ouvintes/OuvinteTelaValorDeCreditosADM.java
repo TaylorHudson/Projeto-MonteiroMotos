@@ -4,14 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 import projeto.excecoes.usuario.ValidarCreditoException;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.TelaHomeADM;
 import projeto.telas.ADM.TelaValorDeCreditosADM;
 import utilidades.fabricas.FabricaJOptionPane;
-import utilidades.fabricas.FabricaJPanel;
 import utilidades.persistencia.Persistencia;
 import utilidades.validacao.Validador;
 
@@ -34,6 +32,8 @@ public class OuvinteTelaValorDeCreditosADM implements ActionListener{
 					central.setValorDoCredito(valorCredito);
 					persistencia.salvarCentral(central, "central");
 					FabricaJOptionPane.criarMsg("Valor Salvo");
+					tela.dispose();
+					new TelaHomeADM();
 				}
 				
 			}catch (ValidarCreditoException erro) {

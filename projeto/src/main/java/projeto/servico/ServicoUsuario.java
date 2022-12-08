@@ -16,10 +16,11 @@ import utilidades.validacao.Validador;
 
 public class ServicoUsuario {
 	private CentralDeInformacoes central;
+
 	public ServicoUsuario(CentralDeInformacoes central) {
 		this.central = central;
 	}
-	
+
 	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento)
 			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
 
@@ -34,8 +35,7 @@ public class ServicoUsuario {
 		String dataEmString = ServicoData.retornarString(usuario.getDataNascimento());
 
 		boolean valido = true;
-		if (email.equals(usuario.getEmail()) && nome.equals(usuario.getNome())
-				&& dataNascimento.equals(dataEmString)) {
+		if (email.equals(usuario.getEmail()) && nome.equals(usuario.getNome()) && dataNascimento.equals(dataEmString)) {
 			throw new ValidacaoException("Altere um dos campos");
 		} else {
 			novoUsuario.setEmail(email);
@@ -57,27 +57,29 @@ public class ServicoUsuario {
 			}
 
 			for (Passageiro passageiro : central.getPassageiros()) {
-				if (passageiro.equals(novoUsuario) && passageiro.isEstaAtivo()) {
-					valido = false;
-					throw new EmailEmUsoException();
+				if (!usuario.equals(passageiro)) {
+					if (passageiro.equals(novoUsuario) && passageiro.isEstaAtivo()) {
+						valido = false;
+						throw new EmailEmUsoException();
+					}
 				}
 			}
 
 			if (valido) {
 				try {
-					if(usuario instanceof Mototaxista) {
-					Mototaxista m = central.recuperarMototaxistaPeloEmail(usuario.getEmail());
-					m.setEmail(novoUsuario.getEmail());
-					m.setNome(novoUsuario.getNome());
-					m.setDataNascimento(novoUsuario.getDataNascimento());
-					}
-					else if(usuario instanceof Passageiro) {
+					if (usuario instanceof Mototaxista) {
+						Mototaxista m = central.recuperarMototaxistaPeloEmail(usuario.getEmail());
+						m.setEmail(novoUsuario.getEmail());
+						m.setNome(novoUsuario.getNome());
+						m.setDataNascimento(novoUsuario.getDataNascimento());
+					} else if (usuario instanceof Passageiro) {
 						Passageiro p = central.recuperarPassageiroPeloEmail(usuario.getEmail());
 						p.setEmail(novoUsuario.getEmail());
 						p.setNome(novoUsuario.getNome());
 						p.setDataNascimento(novoUsuario.getDataNascimento());
 					}
-				} catch (UsuarioNaoExisteException e) {}
+				} catch (UsuarioNaoExisteException e) {
+				}
 				return novoUsuario;
 			} else {
 				return usuario;

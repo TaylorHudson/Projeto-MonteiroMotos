@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -13,11 +11,12 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.servico.ServicoData;
 import projeto.telas.ADM.ouvintes.OuvinteTelaFinancasADM;
 import utilidades.fabricas.FabricaJButton;
-import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
 
@@ -73,6 +72,9 @@ public class TelaFinancasADM extends TelaPadrao {
 			linha[0] = mototaxista.getEmail();
 			linha[1] = mototaxista.getCreditosReivindicacao();
 			linha[3] = central.getValorDoCredito();
+			try {
+				linha[2] = ServicoData.retornarString(mototaxista.getDataDaUltimaCompra());
+			} catch (DataInvalidaException e) {}
 			
 			modelo.addRow(linha);
 		}
@@ -84,7 +86,7 @@ public class TelaFinancasADM extends TelaPadrao {
 	private void configTabela() {
 
 		modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "E-MAil", "Quantidade de Creditos", "Data da Compra","Valor de cada Credito" });
+		modelo.setColumnIdentifiers(new String[] { "Email", "Quantidade de Creditos", "Data da Compra","Valor de cada Credito" });
 		tabelaFinancas = new JTable(modelo);
 		tabelaFinancas.setFont(new Font("Arial", 1, 15));
 

@@ -53,8 +53,6 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 		}
 		txtSenha.setText(u.getSenha());
 		setVisible(true);
-		System.out.println(u.getEmail());
-
 	}
 
 	public void configurarComponentes() {
@@ -168,10 +166,12 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 				try {
 					Usuario u = usu.atualizarPerfil(usuario, txtEmail.getText(), txtNomeCompleto.getText(),
 							txtData.getText());
-					if (!u.equals(usuario)) {
+					if (u.getEmail() != usuario.getEmail() && u.getNome() != usuario.getNome()) {
 						p.salvarCentral(central, "central");
 						tela.repaint();
 						FabricaJOptionPane.criarMsg("Perfil atualizado");
+						tela.dispose();
+						new TelaDadosDosUsuarios();
 					}
 				} catch (ValidacaoException | EmailEmUsoException e1) {
 					FabricaJOptionPane.criarMsgErro(e1.getMessage());

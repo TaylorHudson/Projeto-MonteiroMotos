@@ -2,8 +2,10 @@ package projeto.telas.mototaxista.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.mototaxista.TelaComprarCreditos;
@@ -15,6 +17,8 @@ import utilidades.persistencia.Persistencia;
 public class OuvinteTelaComprarCreditos implements ActionListener {
 
 	private TelaComprarCreditos tela;
+	private Persistencia persistencia = new Persistencia();
+	private CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 	public OuvinteTelaComprarCreditos(TelaComprarCreditos tela) {
 		this.tela = tela;
@@ -32,8 +36,16 @@ public class OuvinteTelaComprarCreditos implements ActionListener {
 				String valorString = tela.getTxtPrecoTotal().getText().replace(',', '.');
 				double valor = Double.parseDouble(valorString);
 				GeradorDeRelatorios.gerarBoleto(qtd, valor);
-				Mototaxista mototaxista = TelaPadrao.mototaxistaLogado;
-				mototaxista.setCreditosReivindicacao(qtd);
+				
+				String email = TelaPadrao.mototaxistaLogado.getEmail();
+				try {
+					Mototaxista m = central.recuperarMototaxistaPeloEmail(email);
+					m.setCreditosReivindicacao(m.getCreditosReivindicacao() + qtd);
+					m.setDataDaUltimaCompra(LocalDate.now());
+					persistencia.salvarCentral(central, "central");
+				} catch (UsuarioNaoExisteException e1) {} 
+				
+				
 				FabricaJOptionPane.criarMsg("Compra realizada com sucesso");
 			}
 		}
