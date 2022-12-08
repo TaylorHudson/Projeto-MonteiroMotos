@@ -10,9 +10,11 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import projeto.ImagemDeFundo;
+import projeto.OuvinteBotaoFundoBranco;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.modelo.Corrida;
+import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.telas.passageiro.ouvintes.OuvinteTelaDeDetalhesDoPassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -80,44 +82,49 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		txtLocalDeDestino = FabricaJText.criarJTextField(20, 270, 340, 40, Color.white, Color.black, 16);
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 360, 40, Color.white, 25);
-		try {
-			txtData = FabricaJFormatted.criarJFormatted(20, 350, 340, 40, new MaskFormatter("##/##/####"));
-		} catch (Exception e) {
-		}
-		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 20, 410, 460, 40, Color.white, 22);
-		try {
-			txtHora = FabricaJFormatted.criarJFormatted(20, 450, 60, 30, new MaskFormatter("##:##"));
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		// adicionando os argumentos do menu2
 
-		JLabel lblEmailDoMotoTaxi = FabricaJLabel.criarJLabel("E-Mail do Moto Taxi", 20, 60, 460, 40, Color.white, 22);
+		JLabel lblEmailDoMotoTaxi = FabricaJLabel.criarJLabel("E-Mail do Moto Taxi", 20, 320, 460, 40, Color.white, 22);
+		txtEmailDoMotoTaxi = FabricaJText.criarJTextField(20, 360, 340, 40, Color.white, Color.black, 16);
+		txtEmailDoMotoTaxi.setVisible(false);
+		lblEmailDoMotoTaxi.setVisible(false);
 
-		txtEmailDoMotoTaxi = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
+		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliacao", 20, 60, 460, 40, Color.white, 22);
+		lblAvaliacao.setVisible(false);
+		txtAvaliacao = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
+		txtAvaliacao.setVisible(false);
 
-		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliacao", 20, 140, 460, 40, Color.white, 22);
-
-		txtAvaliacao = FabricaJText.criarJTextField(20, 180, 340, 40, Color.white, Color.black, 16);
-
-		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario ", 20, 230, 460, 40, Color.white, 22);
-
-		txtComentario = FabricaJTextArea.criarJTextArea(20, 270, 340, 200, Color.white, Color.black);
+		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario ", 20, 140, 460, 40, Color.white, 22);
+		lblComentario.setVisible(false);
+		txtComentario = FabricaJTextArea.criarJTextArea(20, 180, 340, 220, Color.white, Color.black);
+		txtComentario.setVisible(false);
+	
+//		if (corrida.getAndamento().equals(AndamentoDaCorrida.FINALIZADA)) {
+//			lblAvaliacao.setVisible(true);
+//			txtAvaliacao.setVisible(true);
+//			lblComentario.setVisible(true);
+//			txtComentario.setVisible(true);
+//		}
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
-		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
+		btnSeta.addMouseListener(new OuvinteBotaoFundoBranco());
 		btnSeta.addActionListener(ouvinte);
 
 		btnBloquearMototaxi = FabricaJButton.criarJButton("Bloquear Mototaxi", 650, 640, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 20);
-		btnBloquearMototaxi.addMouseListener(new OuvinteBotaoFundoPreto());
+		btnBloquearMototaxi.addMouseListener(new OuvinteBotaoFundoBranco());
 		btnBloquearMototaxi.addActionListener(ouvinte);
+
+		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 340, 640, 180, 50, new Color(28, 28, 20),
+				new Color(179, 177, 177), 20);
+		btnSalvar.addMouseListener(new OuvinteBotaoFundoBranco());
+		btnSalvar.addActionListener(ouvinte);
 
 		background.add(menu);
 		background.add(btnSeta);
 		background.add(btnBloquearMototaxi);
+		background.add(btnSalvar);
 
 		menu.add(lblNomeDoPassaeiro);
 		menu.add(txtNomeDoPassageiro);
@@ -128,15 +135,10 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		menu.add(lblLocalDeDestino);
 		menu.add(txtLocalDeDestino);
 
-		menu.add(lblDataNascimento);
-		menu.add(txtData);
-		menu.add(lblHora);
-		menu.add(txtHora);
-
 		background.add(menu2);
 
-		menu2.add(lblEmailDoMotoTaxi);
-		menu2.add(txtEmailDoMotoTaxi);
+		menu.add(lblEmailDoMotoTaxi);
+		menu.add(txtEmailDoMotoTaxi);
 
 		menu2.add(lblAvaliacao);
 		menu2.add(txtAvaliacao);

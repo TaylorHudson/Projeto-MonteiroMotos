@@ -2,6 +2,7 @@ package projeto.modelo;
 
 import java.time.LocalDate;
 
+import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.modelo.enuns.Sexo;
 import projeto.modelo.enuns.StatusDaCorrida;
 
@@ -9,6 +10,7 @@ public class Corrida {
 
 	private long id;
 	private StatusDaCorrida status;
+	private AndamentoDaCorrida andamento = AndamentoDaCorrida.ESPERA;
 	private String pontoDeEncontro;
 	private String localDeDestino;
 	private String complemento;
@@ -59,12 +61,12 @@ public class Corrida {
 		this.id = id;
 	}
 
-	public StatusDaCorrida getStatus() {
-		return status;
+	public AndamentoDaCorrida getAndamento() {
+		return andamento;
 	}
 
-	public void setStatus(StatusDaCorrida status) {
-		this.status = status;
+	public void setAndamento(AndamentoDaCorrida andamento) {
+		this.andamento = andamento;
 	}
 
 	public String getPontoDeEncontro() {
@@ -113,6 +115,14 @@ public class Corrida {
 
 	public void setEmailDoMototaxista(String emailDoMototaxista) {
 		this.emailDoMototaxista = emailDoMototaxista;
+	}
+
+	public StatusDaCorrida getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusDaCorrida status) {
+		this.status = status;
 	}
 
 }

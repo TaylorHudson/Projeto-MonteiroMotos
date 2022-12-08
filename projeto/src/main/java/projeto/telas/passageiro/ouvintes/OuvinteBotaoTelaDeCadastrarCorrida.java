@@ -61,7 +61,6 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 						throw new ValidacaoDaHoraException();
 
 					} else {
-
 						central.adicionarCorrida(new Corrida(status, pontoDeEncontro, localDeDestino, complemento,
 								TelaPadrao.passageiroLogado, ServicoData.retornarData(data)));
 						persistencia.salvarCentral(central, "central");
