@@ -3,6 +3,7 @@ package projeto.repositorio;
 import java.util.ArrayList;
 
 import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.excecoes.usuario.VerificacaoDeCorridaException;
@@ -34,7 +35,7 @@ public class CentralDeInformacoes {
 		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
 	}
 	
-	public Mototaxista atualizarPerfil(Mototaxista mototaxi,String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException {
+	public Mototaxista atualizarPerfil(Mototaxista mototaxi,String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
 		return servicoMototaxista.atualizarPerfil(mototaxi,email, nome, dataNascimento);
 	}
 

@@ -24,7 +24,9 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public boolean equals(Usuario usuario) {
+	@Override
+	public boolean equals(Object obj) {
+		Usuario usuario = (Usuario) obj;
 		return email.equals(usuario.getEmail());
 	}
 

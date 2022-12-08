@@ -9,14 +9,6 @@
       <estaAtivo>true</estaAtivo>
       <sexo>MASCULINO</sexo>
     </passageiro>
-    <passageiro>
-      <nome>rita de cassia</nome>
-      <email>ritadecassia@gmail.com</email>
-      <senha>rita123!</senha>
-      <dataNascimento>2001-10-04</dataNascimento>
-      <estaAtivo>true</estaAtivo>
-      <sexo>FEMININO</sexo>
-    </passageiro>
   </passageiros>
   <corridas>
     <corrida>
@@ -86,7 +78,7 @@
   </corridas>
   <mototaxistas>
     <mototaxista>
-      <nome>Hudson Taylor</nome>
+      <nome>Taylor Hudson Santos</nome>
       <email>taylorhudson@gmail.com</email>
       <senha>12458910$</senha>
       <dataNascimento>2000-01-24</dataNascimento>

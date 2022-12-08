@@ -20,10 +20,6 @@ public class Mototaxista extends Usuario {
 		this.creditosReivindicacao = 0;
 	}
 
-	public boolean equals(Mototaxista mototaxista) {
-		return getEmail().equals(mototaxista.getEmail());
-	}
-
 	public int getCreditosReivindicacao() {
 		return creditosReivindicacao;
 	}

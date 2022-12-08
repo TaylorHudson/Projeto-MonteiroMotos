@@ -15,6 +15,7 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
@@ -137,18 +138,20 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 				String dataNascimento = tela.getTxtData().getText();
 
 				try {
-					Mototaxista moto = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto, dataNascimento);
-					System.out.println(TelaPadrao.mototaxistaLogado);
-					TelaPadrao.mototaxistaLogado = moto;
-					persistencia.salvarCentral(central, "central");
-					FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
-					tela.carregarDados();
-					tela.dispose();
-					new TelaHomeMototaxista();
-				} catch (ValidacaoException erro) {
+					Mototaxista mototaxi = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto,
+							dataNascimento);
+					
+					if (mototaxi.equals(TelaPadrao.mototaxistaLogado)) {
+						persistencia.salvarCentral(central, "central");
+						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
+						tela.carregarDados();
+						tela.dispose();
+						new TelaHomeMototaxista();
+					}
+				} catch (ValidacaoException | EmailEmUsoException erro) {
 					FabricaJOptionPane.criarMsgErro(erro.getMessage());
 				} catch (DataInvalidaException e1) {
-				}
+				} 
 			}
 		}
 	}
