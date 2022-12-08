@@ -40,13 +40,9 @@ public class TelaListarCorridas extends TelaPadrao {
 	private JScrollPane scrol;
 	private JTextField txtDados;
 	private ArrayList<Corrida> corridasSendoExibidas;
-	private Persistencia persistencia;
-	private CentralDeInformacoes central;
-
+	
 	public TelaListarCorridas() {
 		super("Listar Corridas");
-		persistencia = new Persistencia();
-		central = persistencia.recuperarCentral("central");
 		setVisible(true);
 	}
 
@@ -59,6 +55,8 @@ public class TelaListarCorridas extends TelaPadrao {
 
 	private class OuvinteBotaoDetalhes implements ActionListener {
 		private TelaListarCorridas tela;
+		private Persistencia persistencia = new Persistencia();
+		private CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		public OuvinteBotaoDetalhes(TelaListarCorridas tela) {
 			this.tela = tela;
@@ -85,6 +83,8 @@ public class TelaListarCorridas extends TelaPadrao {
 
 		private TelaListarCorridas tela;
 		private ArrayList<Corrida> corridasSendoExibidas;
+		private Persistencia persistencia = new Persistencia();
+		private CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		public void keyTyped(KeyEvent e) {
 			central = persistencia.recuperarCentral("central");
@@ -134,9 +134,10 @@ public class TelaListarCorridas extends TelaPadrao {
 	}
 
 	private void popularTabela() {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		try {
-
 			ArrayList<Corrida> corridasDoPassageiro = central
 					.recuperarCorridasDeUmPassageiro(TelaPadrao.passageiroLogado.getEmail());
 			for (Corrida c : corridasDoPassageiro) {
