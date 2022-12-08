@@ -13,17 +13,24 @@ import javax.swing.table.DefaultTableModel;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelo.Mototaxista;
+import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.ouvintes.OuvinteTelaFinancasADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.imagens.Imagens;
+import utilidades.persistencia.Persistencia;
 
 public class TelaFinancasADM extends TelaPadrao {
 	
 	private JButton btnSeta;
 	private JButton btnGerarRelatorio;
 	private ImagemDeFundo imagem;
-	private JTable tabelaMototaxistas;
+	private JTable tabelaFinancas;
+	private DefaultTableModel modelo;
+	private JScrollPane scrol;
+	private Persistencia p = new Persistencia();
+	private CentralDeInformacoes central = p.recuperarCentral("central");
 	
 	public TelaFinancasADM() {
 		super("Finanças");	
@@ -33,6 +40,7 @@ public class TelaFinancasADM extends TelaPadrao {
 		configImagemDeFundo();
 		configBotoes();
 		configTabela();
+		popularTabela();
 	}
 	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
@@ -57,17 +65,30 @@ public class TelaFinancasADM extends TelaPadrao {
 		imagem.add(btnSeta);
 		
 	}
+	private void popularTabela() {
+		p = new Persistencia();
+		central = p.recuperarCentral("central");
+		for(Mototaxista mototaxista: central.getMototaxistas()) {
+			Object[] linha = new Object[4];
+			linha[0] = mototaxista.getEmail();
+			linha[1] = mototaxista.getCreditosReivindicacao();
+			linha[3] = central.getValorDoCredito();
+			
+			modelo.addRow(linha);
+		}
+	}
+	
+	
 	
 	
 	private void configTabela() {
 
-		DefaultTableModel modelo = new DefaultTableModel();
+		modelo = new DefaultTableModel();
 		modelo.setColumnIdentifiers(new String[] { "E-MAil", "Quantidade de Creditos", "Data da Compra","Valor de cada Credito" });
-		tabelaMototaxistas = new JTable(modelo);
-		tabelaMototaxistas.setFont(new Font("Arial", 1, 15));
-		modelo.addRow(new String [] {"nguearngu", "456", "10/20/2000","2"});
+		tabelaFinancas = new JTable(modelo);
+		tabelaFinancas.setFont(new Font("Arial", 1, 15));
 
-		JScrollPane scrol = new JScrollPane(tabelaMototaxistas);
+		scrol = new JScrollPane(tabelaFinancas);
 		scrol.getViewport().setBackground(Color.orange);
 		scrol.setBounds(2, 200, 885, 400);
 

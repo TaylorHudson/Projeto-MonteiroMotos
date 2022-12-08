@@ -2,6 +2,9 @@ package projeto.telas.ADM;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,19 +15,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDadosDosUsuarios;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
+import projeto.telas.passageiro.TelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
+import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
 
@@ -37,21 +44,13 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	private JButton btnDetalhes;
 	private JComboBox<String> box;
 	private DefaultTableModel modelo;
-	public JTable getTabelaUsuarios() {
-		return tabelaUsuarios;
-	}
-	public ImagemDeFundo getImagem() {
-		return imagem;
-	}
-	public JScrollPane getScrol() {
-		return scrol;
-	}
-	public JButton getBtnOrdenar() {
-		return btnOrdenar;
-	}
-
 	private JScrollPane scrol;
 	private JButton btnOrdenar;
+	private Persistencia p = new Persistencia();
+	private CentralDeInformacoes central = p.recuperarCentral("central");
+	private JTextField txtDados;
+	
+	
 	
 	
 	public TelaDadosDosUsuarios() {
@@ -64,6 +63,7 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 		configBotoes();
 		configTabela();
 		popularTabela();
+		configTexto();
 	}
 	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
@@ -102,8 +102,8 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 		popularTabelaPassageiro();
 	}
 	public void popularTabelaMototaxista() {
-		Persistencia p = new Persistencia();
-		CentralDeInformacoes central = p.recuperarCentral("central");
+		p = new Persistencia();
+		central = p.recuperarCentral("central");
 		for (Mototaxista mototaxista: central.getMototaxistas()) {
 			Object[] linha = new Object[3];
 			linha[0] = mototaxista.getEmail();
@@ -114,12 +114,9 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 		}
 
 	}
-	public DefaultTableModel getModelo() {
-		return modelo;
-	}
 	public void popularTabelaPassageiro() {
-		Persistencia p = new Persistencia();
-		CentralDeInformacoes central = p.recuperarCentral("central");
+		p = new Persistencia();
+		central = p.recuperarCentral("central");
 		for(Passageiro passageiro: central.getPassageiros()) {
 			Object[] linha = new Object[3];
 			linha[0] = passageiro.getEmail();
@@ -144,6 +141,12 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 
 		imagem.add(scrol);
 	}
+	private void configTexto() {
+		txtDados = FabricaJText.criarJTextField(100, 100, 300, 40, Color.white, Color.black, 16);
+		txtDados.addKeyListener(new OuvinteFiltro());
+		imagem.add(txtDados);
+		
+	}
 	
 	
 
@@ -157,8 +160,81 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	public JComboBox<String> getBox() {
 		return box;
 	}
+	public DefaultTableModel getModelo() {
+		return modelo;
+	}
+	public JTable getTabelaUsuarios() {
+		return tabelaUsuarios;
+	}
+	public ImagemDeFundo getImagem() {
+		return imagem;
+	}
+	public JScrollPane getScrol() {
+		return scrol;
+	}
+	public JButton getBtnOrdenar() {
+		return btnOrdenar;
+	}
+	
+	
 
 	public static void main(String[] args) {
 		new TelaDadosDosUsuarios();
 	}
+	private class OuvinteFiltro implements KeyListener {
+
+		private TelaListarCorridas tela;
+		
+		
+		private ArrayList<Usuario> todosOsUsuarios;
+		public void keyTyped(KeyEvent e) {
+			todosOsUsuarios = new ArrayList<>();
+			p = new Persistencia();
+			central = p.recuperarCentral("central");
+			for(Passageiro p: central.getPassageiros()) {
+				todosOsUsuarios.add(p);
+			}
+			for(Mototaxista m: central.getMototaxistas()) {
+				todosOsUsuarios.add(m);
+			}
+			
+
+			String filtro = txtDados.getText();
+			char var = e.getKeyChar();
+			if (Character.isAlphabetic(var) || Character.isWhitespace(var)) {
+				filtro += var;
+			} else if (Character.isDigit(var)) {
+				e.consume();
+				return;
+			}
+			modelo.setRowCount(0);
+			for(Usuario u: todosOsUsuarios) {
+				if(u.getEmail().contains(filtro))
+					addLinha(modelo, u);
+			}
+			scrol.repaint();
+		}
+
+
+		private void addLinha(DefaultTableModel modelo, Usuario usuario) {
+			Object[] linha = new Object[3];
+			linha[0] = usuario.getEmail();
+			linha[1] = usuario.getNome();
+			linha[2] = (usuario instanceof Mototaxista)?"Mototaxista":"Passageiro";
+			
+			modelo.addRow(linha);
+			scrol.repaint();
+		}
+
+
+		public void keyPressed(KeyEvent e) {
+
+		}
+
+		public void keyReleased(KeyEvent e) {
+
+		}
+
+	}
 }
+

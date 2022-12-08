@@ -1,6 +1,8 @@
 package projeto.telas.ADM;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -12,17 +14,24 @@ import javax.swing.text.MaskFormatter;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.excecoes.usuario.EmailEmUsoException;
+import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
-import projeto.telas.ADM.ouvintes.OuvinteTelaDeEdicaoDosDadosDosUsuarios;
+import projeto.repositorio.CentralDeInformacoes;
+import projeto.servico.ServicoData;
+import projeto.servico.ServicoUsuario;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
+import utilidades.persistencia.Persistencia;
 
-public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
+public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 	private ImagemDeFundo imagem;
 	private JTextField txtNomeCompleto;
 	private JTextField txtEmail;
@@ -30,42 +39,48 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
 	private JFormattedTextField txtData;
 	private JButton btnSeta;
 	private JButton btnEnviarEmail;
-	
+	private JButton btnSalvar;
+	private Usuario usuario;
 
-	public TelaDeEdicaoDosDadosDosUsuarios(Passageiro p) {
+	public TelaDeEdicaoDosDadosDosUsuarios(Usuario u) {
 		super("Dados do Usuario Selecionado");
+		usuario = u;
+		txtNomeCompleto.setText(u.getNome());
+		txtEmail.setText(u.getEmail());
+		try {
+			txtData.setText(ServicoData.retornarString(u.getDataNascimento()));
+		} catch (DataInvalidaException e) {
+		}
+		txtSenha.setText(u.getSenha());
 		setVisible(true);
-		System.out.println(p.getEmail());
-		
+		System.out.println(u.getEmail());
+
 	}
-	public TelaDeEdicaoDosDadosDosUsuarios(Mototaxista m) {
-		super("Dados do Usuario Selecionado");
-		setVisible(true);
-		System.out.println(m.getEmail());
-		
-	}
+
 	public void configurarComponentes() {
 		configImagemDeFundo();
 		configMenu();
 	}
-	
+
 	private void configImagemDeFundo() {
 		imagem = super.configImagemDeFundo("background_2.jpg");
 		add(imagem);
 	}
+
 	private void configMenu() {
 		OuvinteTelaDeEdicaoDosDadosDosUsuarios ouvinte = new OuvinteTelaDeEdicaoDosDadosDosUsuarios(this);
-		OuvinteBotaoFundoPreto ouvinteBotao = new OuvinteBotaoFundoPreto(); 
+		OuvinteBotaoFundoPreto ouvinteBotao = new OuvinteBotaoFundoPreto();
 
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
-		btnEnviarEmail = FabricaJButton.criarJButton("Enviar E-mail para o Usuario",20,550, 300,30, Color.white, Color.black,18);
+		btnEnviarEmail = FabricaJButton.criarJButton("Enviar E-mail para o Usuario", 20, 550, 300, 30, Color.white,
+				Color.black, 18);
 		btnSeta.addActionListener(ouvinte);
 		btnEnviarEmail.addActionListener(ouvinte);
-		
+
 		btnSeta.addMouseListener(ouvinteBotao);
 		btnEnviarEmail.addMouseListener(ouvinteBotao);
-		
-		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK,3);
+
+		JLabel menu = FabricaJLabel.criarJLabel(80, 80, 700, 620, Color.BLACK, 3);
 		menu.setBackground(Color.BLACK);
 
 		JLabel lblNomeCompleto = FabricaJLabel.criarJLabel("Nome Completo", 30, 60, 460, 40, Color.white, 25);
@@ -76,6 +91,7 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
 
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 30, 220, 460, 40, Color.white, 25);
 		txtSenha = FabricaJText.criarJPasswordField(30, 260, 640, 40, Color.white, Color.BLACK, 16);
+		txtSenha.setEditable(false);
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 30, 300, 460, 40, Color.white, 25);
 		try {
@@ -83,7 +99,7 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
 		} catch (Exception e) {
 		}
 
-		JButton btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50,Color.WHITE,Color.BLACK, 25);
+		btnSalvar = FabricaJButton.criarJButton("Salvar", 270, 470, 150, 50, Color.WHITE, Color.BLACK, 25);
 		btnSalvar.addActionListener(ouvinte);
 		btnSalvar.addMouseListener(ouvinteBotao);
 
@@ -101,25 +117,69 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao{
 		imagem.add(btnSeta);
 		add(imagem);
 	}
+
+	public JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
 	public JTextField getTxtNomeCompleto() {
 		return txtNomeCompleto;
 	}
+
 	public JTextField getTxtEmail() {
 		return txtEmail;
 	}
+
 	public JPasswordField getTxtSenha() {
 		return txtSenha;
 	}
+
 	public JFormattedTextField getTxtData() {
 		return txtData;
 	}
+
 	public JButton getBtnSeta() {
 		return btnSeta;
 	}
+
 	public JButton getBtnEnviarEmail() {
 		return btnEnviarEmail;
 	}
-	
-	
+
+	public class OuvinteTelaDeEdicaoDosDadosDosUsuarios implements ActionListener {
+		private TelaDeEdicaoDosDadosDosUsuarios tela;
+		private Persistencia p = new Persistencia();
+		private CentralDeInformacoes central = p.recuperarCentral("central");
+
+		public OuvinteTelaDeEdicaoDosDadosDosUsuarios(TelaDeEdicaoDosDadosDosUsuarios tela) {
+			this.tela = tela;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			JButton btn = (JButton) e.getSource();
+			ServicoUsuario usu = new ServicoUsuario(central);
+
+			if (btn == tela.getBtnEnviarEmail()) {
+				tela.dispose();
+			} else if (btn == tela.getBtnSeta()) {
+				tela.dispose();
+				new TelaDadosDosUsuarios();
+			} else if (btn == tela.getBtnSalvar()) {
+				try {
+					Usuario u = usu.atualizarPerfil(usuario, txtEmail.getText(), txtNomeCompleto.getText(),
+							txtData.getText());
+					if (!u.equals(usuario)) {
+						p.salvarCentral(central, "central");
+						tela.repaint();
+						FabricaJOptionPane.criarMsg("Perfil atualizado");
+					}
+				} catch (ValidacaoException | EmailEmUsoException e1) {
+					FabricaJOptionPane.criarMsgErro(e1.getMessage());
+				} catch (DataInvalidaException e1) {
+				}
+			}
+		}
+
+	}
 
 }
