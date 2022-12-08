@@ -124,7 +124,7 @@ public class TelaListarCorridas extends TelaPadrao {
 	private void configButton() {
 		OuvinteTelaListarCorrida ouvinte = new OuvinteTelaListarCorrida(this);
 
-//		JLabel lblInfo = FabricaJLabel.criarJLabel("Pesquise", 660, 180, 180, 50, new Color(28, 28, 20), 20);
+		JLabel lblInfo = FabricaJLabel.criarJLabel("Pesquise", 30, 140, 460, 40, Color.white, 25);
 
 		txtDados = FabricaJText.criarJTextField(20, 180, 460, 50, new Color(28, 28, 20), Color.white, 16);
 		txtDados.addKeyListener(new OuvinteFiltro());
@@ -132,17 +132,14 @@ public class TelaListarCorridas extends TelaPadrao {
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinte);
 
-		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 660, 180, 180, 50, new Color(28, 28, 20),
-				new Color(179, 177, 177), 28);
-		btnOrdenar.addActionListener(ouvinte);
 		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 50, 650, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 28);
+		btnDetalhes.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnDetalhes.addActionListener(ouvinte);
 
 		background.add(btnDetalhes);
-		background.add(btnOrdenar);
 		background.add(txtDados);
-//		background.add(lblInfo);
+		background.add(lblInfo);
 	}
 
 	private void configTabelaCorridas() {

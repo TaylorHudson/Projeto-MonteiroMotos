@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import projeto.modelo.Corrida;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.telas.passageiro.TelaDeDetalhesPassageiro;
 import projeto.telas.passageiro.TelaHomePassageiro;
 import projeto.telas.passageiro.TelaListarCorridas;
 import utilidades.persistencia.Persistencia;
@@ -25,7 +26,8 @@ public class OuvinteTelaListarCorrida implements ActionListener {
 
 	public void actionPerformed(ActionEvent evento) {
 		if (evento.getSource() == tela.getBtnDetalhes()) {
-
+			tela.dispose();
+			new TelaDeDetalhesPassageiro();
 		} else if (evento.getSource() == tela.getBtnOrdenar()) {
 
 		} else if (evento.getSource() == tela.getBtnSeta()) {
