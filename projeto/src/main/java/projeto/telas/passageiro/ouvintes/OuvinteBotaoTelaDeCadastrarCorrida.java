@@ -56,13 +56,19 @@ public class OuvinteBotaoTelaDeCadastrarCorrida implements ActionListener {
 				String data = sPDF.format(tela.getChooser().getDate());
 				boolean valido = Validador.validarCorrida(pontoDeEncontro, localDeDestino, complemento);
 				boolean validarCheckBox = Validador.validarStatusDaCorrida(cbAgora, cbDepois);
+				
+				
+				// ------------ LEMBRAR DE VALIDAR A HORA <JVÊ> ----------------------------------
+				String hora = tela.getTxtHora().getText();
+				
+				
 				if (valido && validarCheckBox) {
 					if (tela.getTxtHora().getText().isBlank()) {
 						throw new ValidacaoDaHoraException();
 
 					} else {
 						central.adicionarCorrida(new Corrida(status, pontoDeEncontro, localDeDestino, complemento,
-								TelaPadrao.passageiroLogado, ServicoData.retornarData(data)));
+								TelaPadrao.passageiroLogado, ServicoData.retornarData(data),hora));
 						persistencia.salvarCentral(central, "central");
 						tela.dispose();
 						new TelaHomePassageiro();

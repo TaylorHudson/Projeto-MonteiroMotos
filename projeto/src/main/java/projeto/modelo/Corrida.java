@@ -18,10 +18,12 @@ public class Corrida implements Comparator<Corrida>{
 	private Passageiro passageiro;
 	private String emailDoMototaxista;
 	private LocalDate data;
+	private String hora;
 
 	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
-			Passageiro passageiro, String emailDoMototaxista, LocalDate data) {
+			Passageiro passageiro, String emailDoMototaxista, LocalDate data,String hora) {
 		this.status = status;
+		this.hora = hora;
 		this.pontoDeEncontro = pontoDeEncontro;
 		this.localDeDestino = localDeDestino;
 		this.complemento = complemento;
@@ -32,8 +34,9 @@ public class Corrida implements Comparator<Corrida>{
 	}
 
 	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
-			Passageiro passageiro, LocalDate data) {
+			Passageiro passageiro, LocalDate data, String hora) {
 		this.status = status;
+		this.hora = hora;
 		this.pontoDeEncontro = pontoDeEncontro;
 		this.localDeDestino = localDeDestino;
 		this.complemento = complemento;
@@ -126,6 +129,13 @@ public class Corrida implements Comparator<Corrida>{
 		this.status = status;
 	}
 
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
 
 	@Override
 	public int compare(Corrida c1, Corrida c2) {

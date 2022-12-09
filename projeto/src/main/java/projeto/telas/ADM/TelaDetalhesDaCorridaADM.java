@@ -44,7 +44,7 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 			txtData.setText(ServicoData.retornarString(c.getData()));
 		} catch (DataInvalidaException e) {
 		}
-//		txtHora.setText(c.get);
+		txtHora.setText(c.getHora());
 		txtEmailDoMototaxista.setText(c.getEmailDoMototaxista());
 		txtAvaliacao.setText("???????");
 		txaComentario.setText("????????????????????");
@@ -78,14 +78,14 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 	private void configTexto() {
 		JLabel menu = FabricaJLabel.criarJLabel(10, 70, 850, 600, Color.BLACK, 4);
 		menu.setBackground(Color.BLACK);
-		JLabel lblNomeDoPassageiro = FabricaJLabel.criarJLabel("Nome Do Passageiro", 40, 50, 300, 30, Color.white,Color.black, 20);
-		JLabel lblPontoDeEncontro = FabricaJLabel.criarJLabel("Ponto de Encontro", 40, 150, 300, 30, Color.white,Color.black, 20);
-		JLabel lblLocalDeDestino = FabricaJLabel.criarJLabel("Local de Destino", 40, 250, 300, 30, Color.white,Color.black, 20);
-		JLabel lblData = FabricaJLabel.criarJLabel("Data", 40, 350, 300, 30, Color.white,Color.black, 20);
-		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 40, 450, 300, 30, Color.white,Color.black, 20);
-		JLabel lblEmailDoMototaxista = FabricaJLabel.criarJLabel("E-mail do Mototaxista", 500, 50, 300, 30, Color.white,Color.black, 20);
-		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliação", 500, 150, 300, 30, Color.white,Color.black, 20);
-		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario", 500, 250, 300, 30, Color.white,Color.black, 20);
+		JLabel lblNomeDoPassageiro = FabricaJLabel.criarJLabel("Nome Do Passageiro", 40, 50, 300, 30, Color.black,Color.white, 20);
+		JLabel lblPontoDeEncontro = FabricaJLabel.criarJLabel("Ponto de Encontro", 40, 150, 300, 30, Color.black,Color.white, 20);
+		JLabel lblLocalDeDestino = FabricaJLabel.criarJLabel("Local de Destino", 40, 250, 300, 30, Color.black,Color.white, 20);
+		JLabel lblData = FabricaJLabel.criarJLabel("Data", 40, 350, 300, 30, Color.black,Color.white,20);
+		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 40, 450, 300, 30, Color.black,Color.white, 20);
+		JLabel lblEmailDoMototaxista = FabricaJLabel.criarJLabel("E-mail do Mototaxista", 500, 50, 300, 30, Color.black,Color.white, 20);
+		JLabel lblAvaliacao = FabricaJLabel.criarJLabel("Avaliação", 500, 150, 300, 30, Color.black,Color.white, 20);
+		JLabel lblComentario = FabricaJLabel.criarJLabel("Comentario", 500, 250, 300, 30, Color.black,Color.white, 20);
 		
 		menu.add(lblNomeDoPassageiro);
 		menu.add(lblPontoDeEncontro);

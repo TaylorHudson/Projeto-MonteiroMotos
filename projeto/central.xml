@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<centralInformacoes>
+  <passageiros>
+    <passageiro>
+      <nome>João Vitor</nome>
+      <email>jv666776@gmail.com</email>
+      <senha>123456!</senha>
+      <dataNascimento>2001-10-03</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <sexo>MASCULINO</sexo>
+    </passageiro>
+  </passageiros>
+  <corridas>
+    <corrida>
+      <id>1670546492760</id>
+      <status>PARADEPOIS</status>
+      <andamento>ESPERA</andamento>
+      <pontoDeEncontro>Rua 10</pontoDeEncontro>
+      <localDeDestino>Rua 20</localDeDestino>
+      <complemento>centro</complemento>
+      <passageiro>
+        <nome>João Vitor</nome>
+        <email>jv666776@gmail.com</email>
+        <senha>123456!</senha>
+        <dataNascimento>2001-10-03</dataNascimento>
+        <estaAtivo>true</estaAtivo>
+        <sexo>MASCULINO</sexo>
+      </passageiro>
+      <data>2022-12-10</data>
+      <hora>12:30</hora>
+    </corrida>
+    <corrida>
+      <id>1670546520207</id>
+      <status>PARAAGORA</status>
+      <andamento>ESPERA</andamento>
+      <pontoDeEncontro>Rua teste</pontoDeEncontro>
+      <localDeDestino>Rua teste 2</localDeDestino>
+      <complemento>ahaeeey</complemento>
+      <passageiro>
+        <nome>João Vitor</nome>
+        <email>jv666776@gmail.com</email>
+        <senha>123456!</senha>
+        <dataNascimento>2001-10-03</dataNascimento>
+        <estaAtivo>true</estaAtivo>
+        <sexo>MASCULINO</sexo>
+      </passageiro>
+      <data>2022-12-08</data>
+      <hora>21:41</hora>
+    </corrida>
+  </corridas>
+  <mototaxistas>
+    <mototaxista>
+      <nome>mototaxista 1</nome>
+      <email>mototaxista1@gmail.com</email>
+      <senha>123456!</senha>
+      <dataNascimento>2000-12-12</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+    <mototaxista>
+      <nome>mototaxista 2</nome>
+      <email>mototaxista2@gmail.com</email>
+      <senha>123456!</senha>
+      <dataNascimento>2001-10-20</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+  </mototaxistas>
+  <administrador>
+    <nome>Taylor Hudson</nome>
+    <email>taylorhudsonsantos@gmail.com</email>
+    <senha>12458910#</senha>
+    <dataNascimento>2004-06-24</dataNascimento>
+    <estaAtivo>true</estaAtivo>
+  </administrador>
+  <valorDoCredito>0.0</valorDoCredito>
+  <servicoPassageiro>
+    <central reference="../.."/>
+    <passageiros reference="../../passageiros"/>
+  </servicoPassageiro>
+  <servicoCorrida>
+    <central reference="../.."/>
+    <corridas reference="../../corridas"/>
+    <util reference="../../servicoPassageiro"/>
+  </servicoCorrida>
+  <servicoMototaxista>
+    <central reference="../.."/>
+    <mototaxistas reference="../../mototaxistas"/>
+  </servicoMototaxista>
+</centralInformacoes>
