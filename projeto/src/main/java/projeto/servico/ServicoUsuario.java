@@ -2,6 +2,7 @@ package projeto.servico;
 
 import java.time.LocalDate;
 
+import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
@@ -39,7 +40,6 @@ public class ServicoUsuario {
 			novoUsuario.setEmail(email);
 			novoUsuario.setNome(nome);
 			novoUsuario.setDataNascimento(data);
-
 			Usuario adm = central.getAdministrador();
 			if (!usuario.equals(adm) && novoUsuario.equals(adm)) {
 				valido = false;
@@ -71,11 +71,13 @@ public class ServicoUsuario {
 						m.setEmail(novoUsuario.getEmail());
 						m.setNome(novoUsuario.getNome());
 						m.setDataNascimento(novoUsuario.getDataNascimento());
+						TelaPadrao.mototaxistaLogado = m;
 					} else if (usuario instanceof Passageiro) {
 						Passageiro p = central.recuperarPassageiroPeloEmail(usuario.getEmail());
 						p.setEmail(novoUsuario.getEmail());
 						p.setNome(novoUsuario.getNome());
 						p.setDataNascimento(novoUsuario.getDataNascimento());
+						TelaPadrao.passageiroLogado = p;
 					} else {
 						adm.setEmail(novoUsuario.getEmail());
 						adm.setNome(novoUsuario.getNome());

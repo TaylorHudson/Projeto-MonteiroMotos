@@ -43,7 +43,6 @@ public class CentralDeInformacoes {
 	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento)
 			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
 		ServicoUsuario servicoUsuario = new ServicoUsuario(this);
-		System.out.println(servicoUsuario);
 		return servicoUsuario.atualizarPerfil(usuario, email, nome, dataNascimento);
 	}
 	

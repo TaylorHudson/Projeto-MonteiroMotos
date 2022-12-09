@@ -52,16 +52,6 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 		configImagemFundo();
 		configMenu();
 		carregarDados();
-		carregarDadosPassageiro();
-		carregarDadosADM();
-	}
-
-	private void carregarDadosADM() {
-
-	}
-
-	private void carregarDadosPassageiro() {
-
 	}
 
 	private void carregarDados() {
@@ -69,11 +59,8 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 
 		Mototaxista mototaxi = TelaPadrao.mototaxistaLogado;
-		System.out.println(mototaxi);
 		Passageiro passageiro = TelaPadrao.passageiroLogado;
-		System.out.println(passageiro);
 		Usuario adm = central.getAdministrador();
-		System.out.println(adm);
 
 		if (mototaxi != null)
 			carregarDadosDoUsuario(mototaxi);
@@ -143,7 +130,9 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 		add(background);
 	}
 
-	/* ------------------------------------------------ Refatorar essa classe ----------------------------------- */
+	/*
+	 * ------------------------------------------------ Refatorar essa classe
+	 */
 	public class OuvinteBotoesTelaEdicao implements ActionListener {
 
 		private TelaEdicaoPerfil tela;
@@ -160,9 +149,12 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 
 			if (btn == tela.getBtnSeta()) {
 				tela.dispose();
-				if(TelaPadrao.mototaxistaLogado != null) new TelaHomeMototaxista();
-				else if(TelaPadrao.passageiroLogado != null) new TelaHomePassageiro();
-				else new TelaHomeADM();
+				if (TelaPadrao.mototaxistaLogado != null)
+					new TelaHomeMototaxista();
+				else if (TelaPadrao.passageiroLogado != null)
+					new TelaHomePassageiro();
+				else
+					new TelaHomeADM();
 			}
 
 			else if (btn == tela.getBtnSalvar()) {
@@ -173,37 +165,32 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 				try {
 					Usuario usuario = null;
 					if (TelaPadrao.mototaxistaLogado != null) {
-						 usuario = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto,
+						usuario = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto,
 								dataNascimento);
-					}
-					else if (TelaPadrao.passageiroLogado != null) {
-						 usuario = central.atualizarPerfil(TelaPadrao.passageiroLogado, email, nomeCompleto,
-								dataNascimento);
-					}
-					else {
-						 usuario = central.atualizarPerfil(central.getAdministrador(), email, nomeCompleto,
-								dataNascimento);
-					}
-
-					if (usuario instanceof Mototaxista && usuario.equals(TelaPadrao.mototaxistaLogado)) {
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
 						tela.carregarDados();
 						tela.dispose();
 						new TelaHomeMototaxista();
-					} else if (usuario instanceof Passageiro && usuario.equals(TelaPadrao.passageiroLogado)) {
+					} else if (TelaPadrao.passageiroLogado != null) {
+						usuario = central.atualizarPerfil(TelaPadrao.passageiroLogado, email, nomeCompleto,
+								dataNascimento);
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
 						tela.carregarDados();
 						tela.dispose();
 						new TelaHomePassageiro();
-					} else if (usuario.equals(central.getAdministrador())) {
+					} else {
+						usuario = central.atualizarPerfil(central.getAdministrador(), email, nomeCompleto,
+								dataNascimento);
+						central.setAdministrador(usuario);
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
 						tela.carregarDados();
 						tela.dispose();
 						new TelaHomeADM();
 					}
+					
 				} catch (ValidacaoException | EmailEmUsoException erro) {
 					FabricaJOptionPane.criarMsgErro(erro.getMessage());
 				} catch (DataInvalidaException e1) {
