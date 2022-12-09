@@ -10,7 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.usuario.ouvintes.OuvinteBotaoEntrarTelaLogin;
 import projeto.telas.usuario.ouvintes.OuvinteTelaLogin;
 import utilidades.fabricas.FabricaJButton;
@@ -18,34 +20,29 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaLogin extends JFrame {
+public class TelaLogin extends TelaPadrao {
 
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
-	private JLabel background;
+	private ImagemDeFundo background;
 	private JComboBox<String> box;
 	private JButton btnResetSenha;
 	private JButton btnEntrar;
 	private JButton btnCadastrese;
 
 	public TelaLogin() {
-		configurarTela();
-		configImagemFundo();
-		configFormLogin();
+		super("Login");
 		setVisible(true);
 	}
-
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Login");
+	public void configurarComponentes() {
+		configImagemFundo();
+		configFormLogin();
+		
 	}
 
+
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800,Imagens.BACKGROUND);
+		background = super.configImagemDeFundo("background.jpg");
 		add(background);
 	}
 
@@ -127,5 +124,7 @@ public class TelaLogin extends JFrame {
 	public JButton getBtnCadastrese() {
 		return btnCadastrese;
 	}
+
+	
 	
 }
