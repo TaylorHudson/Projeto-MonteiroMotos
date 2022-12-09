@@ -11,6 +11,9 @@ import javax.swing.text.MaskFormatter;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.modelo.Corrida;
+import projeto.servico.ServicoData;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDetalhesDaCorridaADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -31,9 +34,22 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 	private JButton btnSeta;
 	private ImagemDeFundo imagem;
 	
-	public TelaDetalhesDaCorridaADM() {
+	
+	public TelaDetalhesDaCorridaADM(Corrida c) {
 		super("Detalhes da Corrida");
+		txtNome.setText(c.getPassageiro().getNome());
+		txtPontoDeEncontro.setText(c.getPontoDeEncontro());
+		txtLocalDeDestino.setText(c.getLocalDeDestino());
+		try {
+			txtData.setText(ServicoData.retornarString(c.getData()));
+		} catch (DataInvalidaException e) {
+		}
+//		txtHora.setText(c.get);
+		txtEmailDoMototaxista.setText(c.getEmailDoMototaxista());
+		txtAvaliacao.setText("???????");
+		txaComentario.setText("????????????????????");
 		setVisible(true);
+		
 	}
 	
 	public void configurarComponentes() {
@@ -141,11 +157,5 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 		return btnSeta;
 	}
 
-	public static void main(String[] args) {
-		new TelaDetalhesDaCorridaADM();
-	}
-	
-	
-	
 
 }

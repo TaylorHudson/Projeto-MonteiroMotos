@@ -16,6 +16,7 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
@@ -32,6 +33,7 @@ public class TelaFinancasADM extends TelaPadrao {
 	
 	private JButton btnSeta;
 	private JButton btnGerarRelatorio;
+	private JButton btnOrdenar;
 	private ImagemDeFundo imagem;
 	private JTable tabelaFinancas;
 	private DefaultTableModel modelo;
@@ -68,15 +70,19 @@ public class TelaFinancasADM extends TelaPadrao {
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnGerarRelatorio = FabricaJButton.criarJButton("Gerar Relatorio", 270, 650, 300, 40, Color.white, Color.black,28);
+		btnOrdenar = FabricaJButton.criarJButton("Ordenar", 600, 100, 150, 40, Color.white, Color.black, 28);
 		
 		btnGerarRelatorio.addActionListener(ouvinte);
 		btnSeta.addActionListener(ouvinte);
+		btnOrdenar.addActionListener(ouvinte);
 		
 		btnGerarRelatorio.addMouseListener(mouse);
 		btnSeta.addMouseListener(mouse);
+		btnOrdenar.addMouseListener(mouse);
 		
 		imagem.add(btnGerarRelatorio);
 		imagem.add(btnSeta);
+		imagem.add(btnOrdenar);
 		
 	}
 	private void popularTabela() {
@@ -118,6 +124,10 @@ public class TelaFinancasADM extends TelaPadrao {
 	public JButton getBtnGerarRelatorio() {
 		return btnGerarRelatorio;
 	}
+	
+	public JButton getBtnOrdenar() {
+		return btnOrdenar;
+	}
 	public static void main(String[] args) {
 		new TelaFinancasADM();
 	}
@@ -128,25 +138,19 @@ public class TelaFinancasADM extends TelaPadrao {
 		
 		
 		public void keyTyped(KeyEvent e) {
-			
-			p = new Persistencia();
-			central = p.recuperarCentral("central");
-			
-			
-			
-
 			String filtro = txtDados.getText();
 			char var = e.getKeyChar();
-			if (Character.isAlphabetic(var) || Character.isWhitespace(var)) {
+			if (Character.isAlphabetic(var) || Character.isDigit(var)) {
 				filtro += var;
-			} else if (Character.isDigit(var)) {
+			} 
+			else if(Character.isWhitespace(var)) {
 				e.consume();
 				return;
 			}
 			modelo.setRowCount(0);
-			for(Mototaxista m: central.getMototaxistas()) {
+			for(Mototaxista m : central.getMototaxistas()) {
 				if(m.getEmail().contains(filtro))
-					addLinha(modelo, m);
+					addLinha(modelo,m);
 			}
 			scrol.repaint();
 		}

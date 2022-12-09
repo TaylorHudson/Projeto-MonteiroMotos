@@ -177,6 +177,7 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	}
 	
 	
+	
 
 	public static void main(String[] args) {
 		new TelaDadosDosUsuarios();
@@ -201,9 +202,10 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 
 			String filtro = txtDados.getText();
 			char var = e.getKeyChar();
-			if (Character.isAlphabetic(var) || Character.isWhitespace(var)) {
+			if (Character.isAlphabetic(var) || Character.isDigit(var)) {
 				filtro += var;
-			} else if (Character.isDigit(var)) {
+			} 
+			else if(Character.isWhitespace(var)) {
 				e.consume();
 				return;
 			}
