@@ -53,7 +53,8 @@ public class Corrida implements Comparator<Corrida>{
 		return "<" + nome + "> pede para " + pegar + " em <" + pontoDeEncontro + ">";
 	}
 
-	public boolean equals(Corrida corrida) {
+	public boolean equals(Object obj) {
+		Corrida corrida = (Corrida) obj;
 		return (id == corrida.getId());
 	}
 

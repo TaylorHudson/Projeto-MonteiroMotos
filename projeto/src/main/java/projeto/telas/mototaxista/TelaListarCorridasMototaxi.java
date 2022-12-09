@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -17,6 +16,7 @@ import projeto.OuvinteBotaoFundoBranco;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.modelo.Corrida;
+import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
@@ -38,6 +38,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 	private CentralDeInformacoes central;
 	private Persistencia persistencia = new Persistencia();
 	private JTextField txtFiltro;
+	private JButton btnDetalhes;
 
 	public TelaListarCorridasMototaxi() {
 		super("Tela de listagem de corridas");
@@ -57,7 +58,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
 		for (Corrida c : central.getCorridas()) {
-			addLinha(modelo, c);
+			if(c.getAndamento() != AndamentoDaCorrida.FINALIZADA) addLinha(modelo, c);
 		}
 
 		scrol.repaint();
@@ -71,6 +72,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 			linha[2] = ServicoData.retornarString(corrida.getData());
 		} catch (DataInvalidaException e) {
 		}
+		linha[3] = corrida.getId();
 
 		modelo.addRow(linha);
 	}
@@ -124,7 +126,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 		OuvinteBotaoFundoBranco ouvinteBtn = new OuvinteBotaoFundoBranco();
 
 		modelo = new DefaultTableModel();
-		modelo.setColumnIdentifiers(new String[] { "EMAIL DO PASSAGEIRO", "STATUS", "DATA" });
+		modelo.setColumnIdentifiers(new String[] { "EMAIL DO PASSAGEIRO", "STATUS", "DATA", "ID" });
 		tabelaCorridas = new JTable(modelo);
 		tabelaCorridas.setFont(new Font("Arial", 1, 15));
 
@@ -140,6 +142,11 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 				new Color(28, 28, 20), Color.WHITE, 28);
 		btnReivindicarCorrida.addActionListener(ouvinte);
 		btnReivindicarCorrida.addMouseListener(ouvinteBtn);
+		
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 550, 670, 280, 50,
+				new Color(28, 28, 20), Color.WHITE, 28);
+		btnDetalhes.addActionListener(ouvinte);
+		btnDetalhes.addMouseListener(ouvinteBtn);
 
 		txtFiltro = FabricaJText.criarJTextField(50, 185, 350, 47, Color.BLACK,Color.WHITE,23);
 		txtFiltro.addKeyListener(new OuvinteFiltro());
@@ -148,10 +155,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 		background.add(btnOrdenar);
 		background.add(btnReivindicarCorrida);
 		background.add(txtFiltro);
-	}
-
-	public static void main(String[] args) {
-		new TelaListarCorridasMototaxi();
+		background.add(btnDetalhes);
 	}
 
 	public JTable getTabelaCorridas() {
@@ -182,4 +186,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 		return txtFiltro;
 	}
 
+	public JButton getBtnDetalhes() {
+		return btnDetalhes;
+	}
 }

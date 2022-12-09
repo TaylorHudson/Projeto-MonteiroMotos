@@ -2,19 +2,14 @@ package projeto.telas.ADM.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.swing.JButton;
-import javax.swing.table.DefaultTableModel;
 
 import projeto.modelo.Corrida;
-import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.TelaDetalhesDaCorridaADM;
 import projeto.telas.ADM.TelaHomeADM;
 import projeto.telas.ADM.TelaListarCorridasADM;
-import projeto.telas.passageiro.TelaDeDetalhesPassageiro;
 import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
 

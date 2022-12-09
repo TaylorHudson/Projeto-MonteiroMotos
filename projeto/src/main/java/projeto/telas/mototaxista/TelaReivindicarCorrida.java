@@ -15,14 +15,21 @@ import javax.swing.text.MaskFormatter;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoBranco;
-import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.modelo.Corrida;
+import projeto.modelo.Mototaxista;
+import projeto.modelo.enuns.AndamentoDaCorrida;
+import projeto.repositorio.CentralDeInformacoes;
+import projeto.servico.ServicoData;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJCheckBox;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
+import utilidades.persistencia.Persistencia;
 
 public class TelaReivindicarCorrida extends TelaPadrao {
 	
@@ -31,23 +38,39 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 	private JTextField txtEmailPassageiro;
 	private JFormattedTextField txtData;
 	private JFormattedTextField txtHora;
+	private JTextField txtComplemento;
 	private JCheckBox cbConcluido;
 	private JButton btnSeta;
 	private ImagemDeFundo background;
-	private JButton btnReivindicar;
+	private JButton btnConcluir;
+	private Corrida corrida;
 
-	public TelaReivindicarCorrida() {
+	public TelaReivindicarCorrida(Corrida corrida) {
 		super("Reivindicar corrida");
+		this.corrida = corrida;
+		txtDestino.setText(corrida.getLocalDeDestino());
+		txtEncontro.setText(corrida.getPontoDeEncontro());
+		try {
+			txtData.setText(ServicoData.retornarString(corrida.getData()));
+		} catch (DataInvalidaException e) {}
+		txtEmailPassageiro.setText(corrida.getPassageiro().getEmail());
+		txtHora.setText(corrida.getHora());
+		txtComplemento.setText(corrida.getComplemento());
 		setVisible(true);
 	}
-
+	
 	public void configurarComponentes() {
 		configImagemFundo();
 		configLabel();
 		configTextField();
 		configBotao();
 	}
-
+	
+	public void ocultarCampos() {
+		cbConcluido.setVisible(false);
+		btnConcluir.setVisible(false);
+	}
+	
 	private void configTextField() {
 		txtDestino = FabricaJText.criarJTextField(50, 85, 300, 50,Color.WHITE,Color.BLACK,20);
 		txtEncontro = FabricaJText.criarJTextField(50, 285, 300, 50,Color.WHITE,Color.BLACK,20);
@@ -55,15 +78,24 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 		
 		try {
 			txtData = FabricaJFormatted.criarJFormatted(550, 85, 300, 50, new MaskFormatter("##/##/####"));
-			txtHora = FabricaJFormatted.criarJFormatted(550, 285, 300, 50, new MaskFormatter("##:##:##"));
+			txtHora = FabricaJFormatted.criarJFormatted(550, 285, 300, 50, new MaskFormatter("##:##"));
 		} catch (ParseException e) {
 		}
+		txtComplemento = FabricaJText.criarJTextField(550, 480, 300, 50,Color.WHITE,Color.BLACK,20);
+		
+		txtDestino.setEditable(false);
+		txtComplemento.setEditable(false);
+		txtData.setEditable(false);
+		txtEncontro.setEditable(false);
+		txtEmailPassageiro.setEditable(false);
+		txtHora.setEditable(false);
 		
 		background.add(txtDestino);
 		background.add(txtEncontro);
 		background.add(txtEmailPassageiro);
 		background.add(txtData);
 		background.add(txtHora);
+		background.add(txtComplemento);
 	}
 	
 	private void configImagemFundo() {
@@ -72,7 +104,7 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 	}
 
 	private void configBotao() {
-		btnReivindicar = FabricaJButton.criarJButton("Reivindicar",300, 635, 250, 55,Color.BLACK,Color.WHITE,30);
+		btnConcluir = FabricaJButton.criarJButton("Concluir",300, 635, 250, 55,Color.BLACK,Color.WHITE,30);
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 5, 5, 50, 50);
 		
 		OuvinteBotaoFundoBranco ouvinteBotao = new OuvinteBotaoFundoBranco();
@@ -80,9 +112,28 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 		btnSeta.addActionListener(new OuvinteTelaReivindicarCorrida(this));
 		btnSeta.addMouseListener(ouvinteBotao);
 		
-		btnReivindicar.addMouseListener(ouvinteBotao);
+		btnConcluir.addMouseListener(ouvinteBotao);
+		btnConcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Persistencia p = new Persistencia();
+				CentralDeInformacoes central = p.recuperarCentral("central");
+				
+				boolean selecionado = cbConcluido.isSelected();
+				if(selecionado) {
+					try {
+						Corrida c = central.recuperarCorridaPeloId(corrida.getId());
+						c.setAndamento(AndamentoDaCorrida.FINALIZADA);
+						Mototaxista m = central.recuperarMototaxistaPeloEmail(TelaPadrao.mototaxistaLogado.getEmail());
+						m.setCorridaReivindicada(null);
+						p.salvarCentral(central, "central");
+					} catch (UsuarioNaoExisteException e1) {}
+				}
+				dispose();
+				new TelaListarCorridasMototaxi();
+			}
+		});
 		
-		background.add(btnReivindicar);
+		background.add(btnConcluir);
 		background.add(btnSeta);
 	}
 
@@ -92,7 +143,8 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 		JLabel lblEmailPassageiro = FabricaJLabel.criarJLabel("E-mail do Passageiro", 50, 450, 250, 25, Color.WHITE,25);
 		JLabel lblData = FabricaJLabel.criarJLabel("Data", 550, 50, 250, 25, Color.WHITE,25);
 		JLabel lblHora = FabricaJLabel.criarJLabel("Hora", 550, 250, 250, 25, Color.WHITE,25);
-		cbConcluido = FabricaJCheckBox.criarJCheckBox(550, 480, 150, 50, "Conclu�da",Color.BLACK, Color.WHITE);
+		JLabel lblComplemento = FabricaJLabel.criarJLabel("Complemento", 550, 450, 250, 25, Color.WHITE,25);
+		cbConcluido = FabricaJCheckBox.criarJCheckBox(700, 700, 150, 40, "Concluida",Color.BLACK, Color.WHITE);
 		cbConcluido.setFont(new Font("Arial", Font.BOLD, 25));
 		
 		background.add(lblDestino);
@@ -101,6 +153,7 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 		background.add(lblData);
 		background.add(lblHora);
 		background.add(cbConcluido);
+		background.add(lblComplemento);
 	}
 	
 	public class OuvinteTelaReivindicarCorrida implements ActionListener {
@@ -116,14 +169,11 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 			if(btn == btnSeta) {
 				tela.dispose();
 				new TelaListarCorridasMototaxi();
-			}else if(btn == btnReivindicar) {
+			}else if(btn == btnConcluir) {
 				
 			}
 		}
 		
 	}
 
-	public static void main(String[] args) {
-		new TelaReivindicarCorrida();
-	}
 }

@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.EmailEmUsoException;
+import projeto.excecoes.usuario.SemCreditoReivindicacaoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
+import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.validacao.Validador;
 
 public class ServicoMototaxista {
@@ -129,4 +132,11 @@ public class ServicoMototaxista {
 		}
 	}
 
+	public void reivindicarCorrida(Mototaxista mototaxista, Corrida corrida) throws SemCreditoReivindicacaoException {
+		int qtdCreditos = mototaxista.getCreditosReivindicacao();
+		if (qtdCreditos == 0) {
+			throw new SemCreditoReivindicacaoException();
+		}
+		
+	}
 }

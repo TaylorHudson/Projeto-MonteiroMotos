@@ -6,6 +6,7 @@ import projeto.modelo.enuns.Sexo;
 
 public class Mototaxista extends Usuario {
 
+	private Corrida corridaReivindicada = null;
 	private LocalDate dataDaUltimaCompra;
 	private int creditosReivindicacao;
 	private Sexo sexo;
@@ -44,5 +45,13 @@ public class Mototaxista extends Usuario {
 	public void setDataDaUltimaCompra(LocalDate dataDaUltimaCompra) {
 		this.dataDaUltimaCompra = dataDaUltimaCompra;
 	}
-	
+
+	public Corrida getCorridaReivindicada() {
+		return corridaReivindicada;
+	}
+
+	public void setCorridaReivindicada(Corrida corridaReivindicada) {
+		this.corridaReivindicada = corridaReivindicada;
+	}
+
 }
