@@ -1,9 +1,7 @@
 package projeto.servico;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
@@ -42,7 +40,8 @@ public class ServicoUsuario {
 			novoUsuario.setNome(nome);
 			novoUsuario.setDataNascimento(data);
 
-			if (novoUsuario.equals(central.getAdministrador())) {
+			Usuario adm = central.getAdministrador();
+			if (!usuario.equals(adm) && novoUsuario.equals(adm)) {
 				valido = false;
 				throw new EmailEmUsoException();
 			}
@@ -77,6 +76,10 @@ public class ServicoUsuario {
 						p.setEmail(novoUsuario.getEmail());
 						p.setNome(novoUsuario.getNome());
 						p.setDataNascimento(novoUsuario.getDataNascimento());
+					} else {
+						adm.setEmail(novoUsuario.getEmail());
+						adm.setNome(novoUsuario.getNome());
+						adm.setDataNascimento(novoUsuario.getDataNascimento());
 					}
 				} catch (UsuarioNaoExisteException e) {
 				}

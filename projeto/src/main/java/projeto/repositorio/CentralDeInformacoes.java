@@ -14,6 +14,7 @@ import projeto.modelo.Usuario;
 import projeto.servico.ServicoCorrida;
 import projeto.servico.ServicoMototaxista;
 import projeto.servico.ServicoPassageiro;
+import projeto.servico.ServicoUsuario;
 
 public class CentralDeInformacoes {
 
@@ -35,10 +36,17 @@ public class CentralDeInformacoes {
 		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
 	}
 	
-	public Mototaxista atualizarPerfil(Mototaxista mototaxi,String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
-		return servicoMototaxista.atualizarPerfil(mototaxi,email, nome, dataNascimento);
-	}
+//	public Mototaxista atualizarPerfil(Mototaxista mototaxi,String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
+//		return servicoMototaxista.atualizarPerfil(mototaxi,email, nome, dataNascimento);
+//	}
 
+	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento)
+			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
+		ServicoUsuario servicoUsuario = new ServicoUsuario(this);
+		System.out.println(servicoUsuario);
+		return servicoUsuario.atualizarPerfil(usuario, email, nome, dataNascimento);
+	}
+	
 	public boolean adicionarPassageiro(Passageiro passageiro) throws ValidacaoException {
 		return servicoPassageiro.adicionarPassageiro(passageiro);
 	}

@@ -53,7 +53,7 @@
       <nome>mototaxista 1</nome>
       <email>mototaxista1@gmail.com</email>
       <senha>123456!</senha>
-      <dataNascimento>2000-12-12</dataNascimento>
+      <dataNascimento>2004-10-02</dataNascimento>
       <estaAtivo>true</estaAtivo>
       <creditosReivindicacao>0</creditosReivindicacao>
       <sexo>MASCULINO</sexo>
@@ -69,10 +69,10 @@
     </mototaxista>
   </mototaxistas>
   <administrador>
-    <nome>Taylor Hudson</nome>
+    <nome>Taylor Hudson Santos</nome>
     <email>taylorhudsonsantos@gmail.com</email>
     <senha>12458910#</senha>
-    <dataNascimento>2004-06-24</dataNascimento>
+    <dataNascimento>1999-06-24</dataNascimento>
     <estaAtivo>true</estaAtivo>
   </administrador>
   <valorDoCredito>0.0</valorDoCredito>

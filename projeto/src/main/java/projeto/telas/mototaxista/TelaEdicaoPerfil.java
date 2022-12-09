@@ -18,8 +18,12 @@ import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
+import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
+import projeto.telas.ADM.TelaHomeADM;
+import projeto.telas.passageiro.TelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
@@ -48,18 +52,44 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 		configImagemFundo();
 		configMenu();
 		carregarDados();
+		carregarDadosPassageiro();
+		carregarDadosADM();
+	}
+
+	private void carregarDadosADM() {
+
+	}
+
+	private void carregarDadosPassageiro() {
+
 	}
 
 	private void carregarDados() {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+
 		Mototaxista mototaxi = TelaPadrao.mototaxistaLogado;
-		if (mototaxi != null) {
-			txtNomeCompleto.setText(mototaxi.getNome());
-			txtEmail.setText(mototaxi.getEmail());
-			txtSenha.setText(mototaxi.getSenha());
-			try {
-				txtData.setText(ServicoData.retornarString(mototaxi.getDataNascimento()));
-			} catch (DataInvalidaException e) {
-			}
+		System.out.println(mototaxi);
+		Passageiro passageiro = TelaPadrao.passageiroLogado;
+		System.out.println(passageiro);
+		Usuario adm = central.getAdministrador();
+		System.out.println(adm);
+
+		if (mototaxi != null)
+			carregarDadosDoUsuario(mototaxi);
+		else if (passageiro != null)
+			carregarDadosDoUsuario(passageiro);
+		else
+			carregarDadosDoUsuario(adm);
+	}
+
+	private void carregarDadosDoUsuario(Usuario usuario) {
+		txtNomeCompleto.setText(usuario.getNome());
+		txtEmail.setText(usuario.getEmail());
+		txtSenha.setText(usuario.getSenha());
+		try {
+			txtData.setText(ServicoData.retornarString(usuario.getDataNascimento()));
+		} catch (DataInvalidaException e) {
 		}
 	}
 
@@ -71,7 +101,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 	private void configMenu() {
 		OuvinteBotoesTelaEdicao ouvinte = new OuvinteBotoesTelaEdicao(this);
 		OuvinteBotaoFundoPreto ouvinteBotao = new OuvinteBotaoFundoPreto();
-		
+
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinte);
@@ -113,6 +143,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 		add(background);
 	}
 
+	/* ------------------------------------------------ Refatorar essa classe ----------------------------------- */
 	public class OuvinteBotoesTelaEdicao implements ActionListener {
 
 		private TelaEdicaoPerfil tela;
@@ -129,7 +160,9 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 
 			if (btn == tela.getBtnSeta()) {
 				tela.dispose();
-				new TelaHomeMototaxista();
+				if(TelaPadrao.mototaxistaLogado != null) new TelaHomeMototaxista();
+				else if(TelaPadrao.passageiroLogado != null) new TelaHomePassageiro();
+				else new TelaHomeADM();
 			}
 
 			else if (btn == tela.getBtnSalvar()) {
@@ -138,20 +171,43 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 				String dataNascimento = tela.getTxtData().getText();
 
 				try {
-					Mototaxista mototaxi = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto,
-							dataNascimento);
-					
-					if (mototaxi.equals(TelaPadrao.mototaxistaLogado)) {
+					Usuario usuario = null;
+					if (TelaPadrao.mototaxistaLogado != null) {
+						 usuario = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto,
+								dataNascimento);
+					}
+					else if (TelaPadrao.passageiroLogado != null) {
+						 usuario = central.atualizarPerfil(TelaPadrao.passageiroLogado, email, nomeCompleto,
+								dataNascimento);
+					}
+					else {
+						 usuario = central.atualizarPerfil(central.getAdministrador(), email, nomeCompleto,
+								dataNascimento);
+					}
+
+					if (usuario instanceof Mototaxista && usuario.equals(TelaPadrao.mototaxistaLogado)) {
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
 						tela.carregarDados();
 						tela.dispose();
 						new TelaHomeMototaxista();
+					} else if (usuario instanceof Passageiro && usuario.equals(TelaPadrao.passageiroLogado)) {
+						persistencia.salvarCentral(central, "central");
+						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
+						tela.carregarDados();
+						tela.dispose();
+						new TelaHomePassageiro();
+					} else if (usuario.equals(central.getAdministrador())) {
+						persistencia.salvarCentral(central, "central");
+						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
+						tela.carregarDados();
+						tela.dispose();
+						new TelaHomeADM();
 					}
 				} catch (ValidacaoException | EmailEmUsoException erro) {
 					FabricaJOptionPane.criarMsgErro(erro.getMessage());
 				} catch (DataInvalidaException e1) {
-				} 
+				}
 			}
 		}
 	}
