@@ -15,7 +15,7 @@ import projeto.repositorio.CentralDeInformacoes;
 import utilidades.persistencia.Persistencia;
 
 public class Mensageiro {
-
+	
 	public static void enviarHistoricoDeCorridas(Passageiro passageiro) throws UsuarioNaoExisteException {
 		String remetente = "pooprojeto824@gmail.com";
 		String senha = "rehjpckvmjwhvkpu";
@@ -66,6 +66,7 @@ public class Mensageiro {
 			email.addTo(emailDeCodigo);
 			email.send();
 
+			System.out.println(codigo);
 			return codigo;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,6 +96,27 @@ public class Mensageiro {
 		}
 	}
 
+	
+	public static void main(String[] args) {
+		String remetente = "pooprojeto824@gmail.com";
+		String senha = "rehjpckvmjwhvkpu";
+
+		MultiPartEmail email = new MultiPartEmail();
+		email.setHostName("smtp.gmail.com");
+		email.setSmtpPort(465);
+		email.setAuthenticator(new DefaultAuthenticator(remetente, senha));
+		email.setSSLOnConnect(true);
+		try {
+			email.setFrom(remetente);
+			email.setSubject("Relatorio das Corridas do Passageiro ");
+			email.addTo("valdneijose@gmail.com");
+
+			email.send();
+			System.out.println("chegou aqui");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 

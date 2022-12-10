@@ -47,13 +47,14 @@ public class OuvinteTelaComprarCreditos implements ActionListener {
 						Mototaxista m = central.recuperarMototaxistaPeloEmail(email);
 						m.setCreditosReivindicacao(m.getCreditosReivindicacao() + qtd);
 						m.setDataDaUltimaCompra(LocalDate.now());
-						central.getCreditosDoSistema().add(new CreditosDeRevindicacao(m, LocalDate.now(), qtd, central.getValorDoCredito()));
+						
+						CreditosDeRevindicacao credito = new CreditosDeRevindicacao(m, LocalDate.now(), qtd, central.getValorDoCredito());
+						central.adicionarReivindicacao(credito);
+						
+						persistencia.salvarCentral(central, "central");
 						System.out.println(central.getCreditosDoSistema().get(0));
 					} catch (UsuarioNaoExisteException e1) {
 					}
-
-					persistencia.salvarCentral(central, "central");
-					
 					FabricaJOptionPane.criarMsg("Compra realizada com sucesso");
 				}
 			}

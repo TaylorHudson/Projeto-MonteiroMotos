@@ -11,8 +11,10 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import projeto.modelo.CreditosDeRevindicacao;
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
+import projeto.servico.ServicoData;
 import utilidades.persistencia.Persistencia;
 
 public class GeradorDeRelatorios {
@@ -46,6 +48,47 @@ public class GeradorDeRelatorios {
 				tabela.addCell(p.getNome());
 				int numeroCorridas = central.recuperarNumeroCorridasDeUmPassageiro(p.getEmail());
 				tabela.addCell(String.valueOf(numeroCorridas));
+			}
+
+			doc.add(tabela);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			doc.close();
+		}
+	}
+	
+	public static void obterRelatorioDeCreditos() {
+		Persistencia persistencia = new Persistencia();
+		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+
+		Document doc = new Document(PageSize.A4, 72, 72, 72, 72);
+
+		try {
+			PdfWriter.getInstance(doc, new FileOutputStream("relatorioDeCreditos.pdf"));
+			doc.open();
+
+			PdfPTable tabela = new PdfPTable(4);
+
+			Paragraph titulo = new Paragraph("Finanças do Sistema");
+			titulo.setAlignment(Element.ALIGN_CENTER);
+
+			Paragraph linhaEmBranco = new Paragraph("                                     ");
+
+			doc.add(titulo);
+			doc.add(linhaEmBranco);
+
+			tabela.addCell("Email do Mototaxista");
+			tabela.addCell("Quantidade de Creditos");
+			tabela.addCell("Data da Compra");
+			tabela.addCell("Valor de cada Credito");
+
+			for (CreditosDeRevindicacao c : central.getCreditosDoSistema()) {
+				tabela.addCell(c.getMototaxista().getEmail());
+				tabela.addCell(String.valueOf(c.getQuantidadeDeCreditos()));
+				tabela.addCell(ServicoData.retornarString(c.getDataDaCompra()));
+				tabela.addCell(String.valueOf(c.getValorDosCreditos()));
 			}
 
 			doc.add(tabela);

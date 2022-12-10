@@ -38,10 +38,10 @@ public class CentralDeInformacoes {
 		return servicoMototaxista.recuperarMototaxistaPeloEmail(email);
 	}
 	
-//	public Mototaxista atualizarPerfil(Mototaxista mototaxi,String email, String nome, String dataNascimento) throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
-//		return servicoMototaxista.atualizarPerfil(mototaxi,email, nome, dataNascimento);
-//	}
-
+	public void adicionarReivindicacao(CreditosDeRevindicacao credito) {
+		creditosDoSistema.add(credito);
+	}
+	
 	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento)
 			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
 		ServicoUsuario servicoUsuario = new ServicoUsuario(this);

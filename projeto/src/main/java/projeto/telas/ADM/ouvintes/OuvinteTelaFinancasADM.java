@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import projeto.telas.ADM.TelaFinancasADM;
 import projeto.telas.ADM.TelaHomeADM;
+import utilidades.pdf.GeradorDeRelatorios;
 
 public class OuvinteTelaFinancasADM implements ActionListener{
 	
@@ -19,7 +20,7 @@ public class OuvinteTelaFinancasADM implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
 		if(btn == tela.getBtnGerarRelatorio()) {
-			
+			GeradorDeRelatorios.obterRelatorioDeCreditos();
 		}else if(btn == tela.getBtnSeta()) {
 			tela.dispose();
 			new TelaHomeADM();

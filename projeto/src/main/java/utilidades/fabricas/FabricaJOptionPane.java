@@ -16,9 +16,9 @@ public abstract class FabricaJOptionPane {
 		int opc = JOptionPane.showConfirmDialog(null, msg, titulo,JOptionPane.YES_NO_OPTION);
 		return opc;
 	}
-	public static int criarInput(String msg) {
+	public static String criarInput(String msg) {
 		String codigo = JOptionPane.showInputDialog(msg);
-		return Integer.parseInt(codigo);
+		return codigo;
 	}
 	public static void criarMsg(String msg) {
 		JOptionPane.showMessageDialog(null, msg, "Informaçao", JOptionPane.INFORMATION_MESSAGE);
