@@ -17,6 +17,7 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.modelo.Corrida;
+import projeto.modelo.CreditosDeRevindicacao;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
@@ -88,13 +89,13 @@ public class TelaFinancasADM extends TelaPadrao {
 	private void popularTabela() {
 		p = new Persistencia();
 		central = p.recuperarCentral("central");
-		for(Mototaxista mototaxista: central.getMototaxistas()) {
+		for(CreditosDeRevindicacao c: central.getCreditosDoSistema()) {
 			Object[] linha = new Object[4];
-			linha[0] = mototaxista.getEmail();
-			linha[1] = mototaxista.getCreditosReivindicacao();
-			linha[3] = central.getValorDoCredito();
+			linha[0] = c.getMototaxista().getEmail();
+			linha[1] = c.getQuantidadeDeCreditos();
+			linha[3] = c.getValorDosCreditos();
 			try {
-				linha[2] = ServicoData.retornarString(mototaxista.getDataDaUltimaCompra());
+				linha[2] = ServicoData.retornarString(c.getDataDaCompra());
 			} catch (DataInvalidaException e) {}
 			
 			modelo.addRow(linha);

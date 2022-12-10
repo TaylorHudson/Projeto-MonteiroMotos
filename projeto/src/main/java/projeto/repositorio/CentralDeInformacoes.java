@@ -8,6 +8,7 @@ import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
+import projeto.modelo.CreditosDeRevindicacao;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
@@ -21,6 +22,7 @@ public class CentralDeInformacoes {
 	private ArrayList<Passageiro> passageiros = new ArrayList<Passageiro>();
 	private ArrayList<Corrida> corridas = new ArrayList<Corrida>();
 	private ArrayList<Mototaxista> mototaxistas = new ArrayList<Mototaxista>();
+	private ArrayList<CreditosDeRevindicacao> creditosDoSistema = new ArrayList<CreditosDeRevindicacao>();
 	private Usuario administrador;
 	private double valorDoCredito = 0;
 
@@ -101,5 +103,11 @@ public class CentralDeInformacoes {
 	public void setValorDoCredito(double valorDoCredito) {
 		this.valorDoCredito = valorDoCredito;
 	}
+
+	public ArrayList<CreditosDeRevindicacao> getCreditosDoSistema() {
+		return creditosDoSistema;
+	}
+	
+	
 
 }

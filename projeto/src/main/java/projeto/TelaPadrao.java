@@ -1,7 +1,10 @@
 package projeto;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
+import projeto.modelo.CreditosDeRevindicacao;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 

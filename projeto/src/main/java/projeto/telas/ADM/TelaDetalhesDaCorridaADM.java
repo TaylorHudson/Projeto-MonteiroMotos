@@ -46,8 +46,8 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 		}
 		txtHora.setText(c.getHora());
 		txtEmailDoMototaxista.setText(c.getEmailDoMototaxista());
-		txtAvaliacao.setText("???????");
-		txaComentario.setText("????????????????????");
+		txtAvaliacao.setText(String.valueOf(c.getAvaliacao()));
+		txaComentario.setText(c.getComentario());
 		setVisible(true);
 		
 	}
@@ -107,7 +107,14 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 			txtData = FabricaJFormatted.criarJFormatted(40, 390, 300, 40,new MaskFormatter("##/##/####"));
 		}catch (Exception e) {
 		}
-		
+		txtNome.setEditable(false);
+		txtPontoDeEncontro.setEditable(false);
+		txtLocalDeDestino.setEditable(false);
+		txtHora.setEditable(false);
+		txtEmailDoMototaxista.setEditable(false);
+		txtAvaliacao.setEditable(false);
+		txaComentario.setEditable(false);
+		txtData.setEditable(false);
 		menu.add(txtNome);
 		menu.add(txtPontoDeEncontro);
 		menu.add(txtLocalDeDestino);
