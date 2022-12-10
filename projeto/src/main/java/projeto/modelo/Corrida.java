@@ -19,6 +19,8 @@ public class Corrida implements Comparator<Corrida>{
 	private String emailDoMototaxista;
 	private LocalDate data;
 	private String hora;
+	private String comentario;
+	private int avaliacao;
 
 	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
 			Passageiro passageiro, String emailDoMototaxista, LocalDate data,String hora) {
@@ -142,6 +144,22 @@ public class Corrida implements Comparator<Corrida>{
 	public int compare(Corrida c1, Corrida c2) {
 		return c1.getData()
 				.compareTo(c2.getData());
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public int getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(int avaliacao) {
+		this.avaliacao = avaliacao;
 	}
 
 

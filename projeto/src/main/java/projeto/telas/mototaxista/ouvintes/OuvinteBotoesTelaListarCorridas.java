@@ -78,15 +78,16 @@ public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 					if (mototaxista.getCreditosReivindicacao() > 0) {
 						reivindicarCorrida();
 						mototaxista.setCorridaReivindicada(corrida);
+						corrida.setEmailDoMototaxista(TelaPadrao.mototaxistaLogado.getEmail());
 						persistencia.salvarCentral(central, "central");
 						tela.dispose();
 						TelaReivindicarCorrida tela = new TelaReivindicarCorrida(corrida);
 						tela.ocultarCampos();
 					} else {
-						FabricaJOptionPane.criarMsgErro("Você não tem créditos de reivindicação");
+						FabricaJOptionPane.criarMsgErro("Vocï¿½ nï¿½o tem crï¿½ditos de reivindicaï¿½ï¿½o");
 					}
 				} else
-					FabricaJOptionPane.criarMsgErro("Você já reivindicou uma corrida");
+					FabricaJOptionPane.criarMsgErro("Vocï¿½ jï¿½ reivindicou uma corrida");
 			}
 		}
 
@@ -101,9 +102,10 @@ public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 				if (mototaxista.getCorridaReivindicada().equals(corrida)) {
 					tela.dispose();
 					new TelaReivindicarCorrida(corrida);
-				}else FabricaJOptionPane.criarMsgErro("Para ver detalhes da corrida você deve reivindicá-la");
+				} else
+					FabricaJOptionPane.criarMsgErro("Para ver detalhes da corrida vocï¿½ deve reivindicï¿½-la");
 			} else
-				FabricaJOptionPane.criarMsgErro("Você só pode ver detalhes de uma corrida reivindicada");
+				FabricaJOptionPane.criarMsgErro("Vocï¿½ sï¿½ pode ver detalhes de uma corrida reivindicada");
 		}
 	}
 
