@@ -2,6 +2,7 @@ package projeto.repositorio;
 
 import java.util.ArrayList;
 
+import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
@@ -16,6 +17,7 @@ import projeto.servico.ServicoCorrida;
 import projeto.servico.ServicoMototaxista;
 import projeto.servico.ServicoPassageiro;
 import projeto.servico.ServicoUsuario;
+import utilidades.validacao.Validador;
 
 public class CentralDeInformacoes {
 
@@ -48,6 +50,15 @@ public class CentralDeInformacoes {
 		return servicoUsuario.atualizarPerfil(usuario, email, nome, dataNascimento);
 	}
 	
+	public void atualizarSenha(String email, String senha) throws ValidacaoException {
+		Validador.validarSenha(senha);
+		for(Usuario u : getMototaxistas())
+			if(u.getEmail().equals(email)) u.setSenha(senha);
+		for(Usuario u : getPassageiros()) 
+			if(u.getEmail().equals(email)) u.setSenha(senha);
+		if(administrador.getEmail().equals(email)) administrador.setSenha(senha);
+	}
+	
 	public boolean adicionarPassageiro(Passageiro passageiro) throws ValidacaoException {
 		return servicoPassageiro.adicionarPassageiro(passageiro);
 	}
@@ -74,6 +85,18 @@ public class CentralDeInformacoes {
 
 	public int recuperarNumeroCorridasDeUmPassageiro(String email) throws UsuarioNaoExisteException {
 		return servicoCorrida.recuperarCorridasDeUmPassageiro(email).size();
+	}
+	
+	public boolean verificarEmailExistente(String email) throws UsuarioNaoExisteException {
+		boolean valido = false;
+		for(Usuario u : getMototaxistas())
+			if(u.getEmail().equals(email)) valido = true;
+		for(Usuario u : getPassageiros()) 
+			if(u.getEmail().equals(email)) valido = true;
+		if(administrador.getEmail().equals(email)) valido = true;
+		
+		if(valido) return true;
+		throw new UsuarioNaoExisteException();
 	}
 
 	public ArrayList<Passageiro> getPassageiros() {

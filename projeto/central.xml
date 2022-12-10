@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<centralInformacoes>
+  <passageiros>
+    <passageiro>
+      <nome>Jve Alguma coisa</nome>
+      <email>jve@gmail.com</email>
+      <senha>123456!</senha>
+      <dataNascimento>2000-02-20</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <sexo>MASCULINO</sexo>
+    </passageiro>
+  </passageiros>
+  <corridas/>
+  <mototaxistas>
+    <mototaxista>
+      <nome>Taylor Santos</nome>
+      <email>jv666776@gmail.com</email>
+      <senha>124589!</senha>
+      <dataNascimento>2000-02-24</dataNascimento>
+      <estaAtivo>true</estaAtivo>
+      <creditosReivindicacao>0</creditosReivindicacao>
+      <sexo>MASCULINO</sexo>
+    </mototaxista>
+  </mototaxistas>
+  <creditosDoSistema/>
+  <administrador>
+    <nome>Taylor Hudson</nome>
+    <email>valdneijose@gmail.com</email>
+    <senha>12345$$</senha>
+    <dataNascimento>2004-02-01</dataNascimento>
+    <estaAtivo>true</estaAtivo>
+  </administrador>
+  <valorDoCredito>0.0</valorDoCredito>
+  <servicoPassageiro>
+    <central reference="../.."/>
+    <passageiros reference="../../passageiros"/>
+  </servicoPassageiro>
+  <servicoCorrida>
+    <central reference="../.."/>
+    <corridas reference="../../corridas"/>
+    <util reference="../../servicoPassageiro"/>
+  </servicoCorrida>
+  <servicoMototaxista>
+    <central reference="../.."/>
+    <mototaxistas reference="../../mototaxistas"/>
+  </servicoMototaxista>
+</centralInformacoes>

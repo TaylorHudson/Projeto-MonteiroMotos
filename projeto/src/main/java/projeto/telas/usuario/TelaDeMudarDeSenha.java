@@ -19,8 +19,10 @@ public class TelaDeMudarDeSenha extends JFrame {
 	private JTextField txtNovaSenha;
 	private JTextField txtConfirmarSenha;
 	private JLabel background;
+	private String email;
 
-	public TelaDeMudarDeSenha() {
+	public TelaDeMudarDeSenha(String email) {
+		this.email = email;
 		setSize(900, 800);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -65,7 +67,8 @@ public class TelaDeMudarDeSenha extends JFrame {
 		return txtConfirmarSenha;
 	}
 
-	public static void main(String[] args) {
-		new TelaDeMudarDeSenha();
+	public String getEmail() {
+		return email;
 	}
+
 }
