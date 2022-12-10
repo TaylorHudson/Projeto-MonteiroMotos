@@ -45,6 +45,10 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 	public TelaDeEdicaoDosDadosDosUsuarios(Usuario u) {
 		super("Dados do Usuario Selecionado");
 		usuario = u;
+		configUsuario(u);
+		setVisible(true);
+	}
+	private void configUsuario(Usuario u) {
 		txtNomeCompleto.setText(u.getNome());
 		txtEmail.setText(u.getEmail());
 		try {
@@ -52,7 +56,6 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 		} catch (DataInvalidaException e) {
 		}
 		txtSenha.setText(u.getSenha());
-		setVisible(true);
 	}
 
 	public void configurarComponentes() {

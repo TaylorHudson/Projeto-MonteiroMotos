@@ -146,18 +146,6 @@ public class TelaListarCorridasADM extends TelaPadrao {
 
 		imagem.add(scrol);
 	}
-	public void addLinha(DefaultTableModel modelo, Corrida corrida) {
-		Object[] linha = new Object[4];
-		linha[0] = corrida.getPassageiro().getNome();
-		try {
-			linha[1] = ServicoData.retornarString(corrida.getData());
-		} catch (DataInvalidaException e) {
-		}
-		linha[2] = (corrida.getAndamento() == AndamentoDaCorrida.ESPERA) ? "Espera" : "Finalizada";
-		linha[3] = corrida.getId();
-
-		modelo.addRow(linha);
-	}
 	
 	
 	public JButton getBtnDetalhes() {
@@ -209,6 +197,18 @@ public class TelaListarCorridasADM extends TelaPadrao {
 			}
 			scrol.repaint();
 			
+		}
+		public void addLinha(DefaultTableModel modelo, Corrida corrida) {
+			Object[] linha = new Object[4];
+			linha[0] = corrida.getPassageiro().getNome();
+			try {
+				linha[1] = ServicoData.retornarString(corrida.getData());
+			} catch (DataInvalidaException e) {
+			}
+			linha[2] = (corrida.getAndamento() == AndamentoDaCorrida.ESPERA) ? "Espera" : "Finalizada";
+			linha[3] = corrida.getId();
+			
+			modelo.addRow(linha);
 		}
 		public void keyPressed(KeyEvent e) {
 		}

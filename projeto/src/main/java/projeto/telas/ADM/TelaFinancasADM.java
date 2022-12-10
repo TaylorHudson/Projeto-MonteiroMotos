@@ -102,9 +102,6 @@ public class TelaFinancasADM extends TelaPadrao {
 		}
 	}
 	
-	
-	
-	
 	private void configTabela() {
 
 		modelo = new DefaultTableModel();

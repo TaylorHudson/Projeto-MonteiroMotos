@@ -31,7 +31,6 @@ public class TelaValorDeCreditosADM extends TelaPadrao {
 		
 	}
 
-	@Override
 	public void configurarComponentes() {
 		configImagemDeFundo();
 		configBotoes();

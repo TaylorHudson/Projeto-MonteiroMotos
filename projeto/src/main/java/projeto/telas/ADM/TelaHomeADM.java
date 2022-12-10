@@ -89,10 +89,7 @@ public class TelaHomeADM  extends TelaPadrao{
 		imagem.add(btnDadosDosUsuarios);
 		imagem.add(btnFinancas);
 	}
-	public static void main(String[] args) {
-		new TelaHomeADM();
 		
-	}
 	public JMenuItem getItemEditar() {
 		return itemEditar;
 	}
@@ -107,6 +104,10 @@ public class TelaHomeADM  extends TelaPadrao{
 	}
 	public JButton getBtnFinancas() {
 		return btnFinancas;
+	}
+	
+	public static void main(String[] args) {
+		new TelaHomeADM();
 	}
 	
 

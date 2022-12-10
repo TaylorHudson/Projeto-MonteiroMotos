@@ -13,6 +13,7 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.modelo.Corrida;
+import projeto.modelo.Usuario;
 import projeto.servico.ServicoData;
 import projeto.telas.ADM.ouvintes.OuvinteTelaDetalhesDaCorridaADM;
 import utilidades.fabricas.FabricaJButton;
@@ -37,6 +38,11 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 	
 	public TelaDetalhesDaCorridaADM(Corrida c) {
 		super("Detalhes da Corrida");
+		configCorrida(c);
+		setVisible(true);
+		
+	}
+	private void configCorrida(Corrida c) {
 		txtNome.setText(c.getPassageiro().getNome());
 		txtPontoDeEncontro.setText(c.getPontoDeEncontro());
 		txtLocalDeDestino.setText(c.getLocalDeDestino());
@@ -48,8 +54,6 @@ public class TelaDetalhesDaCorridaADM extends TelaPadrao{
 		txtEmailDoMototaxista.setText(c.getEmailDoMototaxista());
 		txtAvaliacao.setText(String.valueOf(c.getAvaliacao()));
 		txaComentario.setText(c.getComentario());
-		setVisible(true);
-		
 	}
 	
 	public void configurarComponentes() {

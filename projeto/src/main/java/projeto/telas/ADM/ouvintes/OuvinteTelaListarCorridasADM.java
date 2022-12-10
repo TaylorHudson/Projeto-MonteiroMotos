@@ -41,7 +41,7 @@ public class OuvinteTelaListarCorridasADM implements ActionListener {
 				tela.repaint();
 			}
 		} else if (btn == tela.getBtnDetalhes()) {
-			if (tela.getTabelaListarCorridas().getSelectedRow() == -1) {
+			if (var == -1) {
 				FabricaJOptionPane.criarMsgErro("Selecione Alguma corrida");
 			} else {
 				long idSelecionado = (long) tela.getTabelaListarCorridas().getValueAt(var, 3);
