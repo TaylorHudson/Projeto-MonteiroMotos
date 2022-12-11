@@ -20,13 +20,14 @@ public class ServicoUsuario {
 		this.central = central;
 	}
 
-	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento)
+	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento, String senha)
 			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
 
 		LocalDate data = ServicoData.retornarData(dataNascimento);
 		Validador.validarEmail(email);
 		Validador.validarNome(nome);
 		Validador.idadeValida(data);
+		Validador.validarSenha(senha);
 
 		Usuario novoUsuario = new Usuario(usuario.getEmail());
 		novoUsuario.setSenha(usuario.getSenha());
@@ -34,12 +35,14 @@ public class ServicoUsuario {
 		String dataEmString = ServicoData.retornarString(usuario.getDataNascimento());
 
 		boolean valido = true;
-		if (email.equals(usuario.getEmail()) && nome.equals(usuario.getNome()) && dataNascimento.equals(dataEmString)) {
+		if (email.equals(usuario.getEmail()) && nome.equals(usuario.getNome()) 
+				&& dataNascimento.equals(dataEmString) && senha.equals(usuario.getSenha())) {
 			throw new ValidacaoException("Altere um dos campos");
 		} else {
 			novoUsuario.setEmail(email);
 			novoUsuario.setNome(nome);
 			novoUsuario.setDataNascimento(data);
+			novoUsuario.setSenha(senha);
 			Usuario adm = central.getAdministrador();
 			if (!usuario.equals(adm) && novoUsuario.equals(adm)) {
 				valido = false;
@@ -71,17 +74,20 @@ public class ServicoUsuario {
 						m.setEmail(novoUsuario.getEmail());
 						m.setNome(novoUsuario.getNome());
 						m.setDataNascimento(novoUsuario.getDataNascimento());
+						m.setSenha(novoUsuario.getSenha());
 						TelaPadrao.mototaxistaLogado = m;
 					} else if (usuario instanceof Passageiro) {
 						Passageiro p = central.recuperarPassageiroPeloEmail(usuario.getEmail());
 						p.setEmail(novoUsuario.getEmail());
 						p.setNome(novoUsuario.getNome());
 						p.setDataNascimento(novoUsuario.getDataNascimento());
+						p.setSenha(novoUsuario.getSenha());
 						TelaPadrao.passageiroLogado = p;
 					} else {
 						adm.setEmail(novoUsuario.getEmail());
 						adm.setNome(novoUsuario.getNome());
 						adm.setDataNascimento(novoUsuario.getDataNascimento());
+						adm.setSenha(novoUsuario.getSenha());
 					}
 				} catch (UsuarioNaoExisteException e) {
 				}

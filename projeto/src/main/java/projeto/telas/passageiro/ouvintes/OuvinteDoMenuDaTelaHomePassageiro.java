@@ -7,8 +7,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import projeto.TelaPadrao;
-import projeto.telas.mototaxista.TelaEdicaoPerfil;
 import projeto.telas.passageiro.TelaHomePassageiro;
+import projeto.telas.usuario.TelaEdicaoPerfil;
 import projeto.telas.usuario.TelaLogin;
 import utilidades.fabricas.FabricaJOptionPane;
 

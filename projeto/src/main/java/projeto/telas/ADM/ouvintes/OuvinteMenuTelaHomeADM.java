@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import projeto.telas.ADM.TelaHomeADM;
 import projeto.telas.ADM.TelaListarCorridasADM;
 import projeto.telas.ADM.TelaValorDeCreditosADM;
-import projeto.telas.mototaxista.TelaEdicaoPerfil;
+import projeto.telas.usuario.TelaEdicaoPerfil;
 import projeto.telas.usuario.TelaLogin;
 import utilidades.fabricas.FabricaJOptionPane;
 

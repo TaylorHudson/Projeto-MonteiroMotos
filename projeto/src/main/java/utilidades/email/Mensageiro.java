@@ -96,8 +96,7 @@ public class Mensageiro {
 		}
 	}
 
-	
-	public static void main(String[] args) {
+	public static void enviarDadosAtualizados(Usuario usuario) {
 		String remetente = "pooprojeto824@gmail.com";
 		String senha = "rehjpckvmjwhvkpu";
 
@@ -108,11 +107,13 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Relatorio das Corridas do Passageiro ");
-			email.addTo("valdneijose@gmail.com");
-
+			email.setSubject("Dados atualizados do usuário");
+			email.setMsg("Nome do usuário: " + usuario.getNome() + "\n" +
+						 "Email do usuário: " + usuario.getEmail() + "\n" +
+						 "Senha: " + usuario.getSenha() + "\n" +
+						 "Data de nascimento " + usuario.getDataNascimento());
+			email.addTo(usuario.getEmail());
 			email.send();
-			System.out.println("chegou aqui");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -16,6 +16,7 @@ import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.EmailEmUsoException;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
@@ -23,6 +24,7 @@ import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
 import projeto.servico.ServicoUsuario;
+import utilidades.email.Mensageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
 import utilidades.fabricas.FabricaJLabel;
@@ -30,6 +32,7 @@ import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 import utilidades.persistencia.Persistencia;
+import utilidades.validacao.Validador;
 
 public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 	private ImagemDeFundo imagem;
@@ -48,6 +51,7 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 		configUsuario(u);
 		setVisible(true);
 	}
+
 	private void configUsuario(Usuario u) {
 		txtNomeCompleto.setText(u.getNome());
 		txtEmail.setText(u.getEmail());
@@ -89,14 +93,15 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 
 		JLabel lblEmail = FabricaJLabel.criarJLabel("Email", 30, 140, 460, 40, Color.white, 25);
 		txtEmail = FabricaJText.criarJTextField(30, 180, 640, 40, Color.white, Color.BLACK, 16);
+		txtEmail.setEditable(false);
 
 		JLabel lblSenha = FabricaJLabel.criarJLabel("Senha", 30, 220, 460, 40, Color.white, 25);
 		txtSenha = FabricaJText.criarJPasswordField(30, 260, 640, 40, Color.white, Color.BLACK, 16);
-		txtSenha.setEditable(false);
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 30, 300, 460, 40, Color.white, 25);
 		try {
 			txtData = FabricaJFormatted.criarJFormatted(30, 340, 640, 40, new MaskFormatter("##/##/####"));
+			txtData.setEditable(false);
 		} catch (Exception e) {
 		}
 
@@ -156,19 +161,45 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 			this.tela = tela;
 		}
 
+		public void enviarEmailParaUsuario() {
+			try {
+				String nome = tela.getTxtNomeCompleto().getText();
+				String senha = String.valueOf(tela.getTxtSenha().getPassword());
+
+				Validador.validarNome(nome);
+				Validador.validarSenha(senha);
+
+				if (usuario instanceof Passageiro) {
+					Passageiro passageiro = central.recuperarPassageiroPeloEmail(usuario.getEmail());
+					passageiro.setNome(nome);
+					passageiro.setSenha(senha);
+					Mensageiro.enviarDadosAtualizados(passageiro);
+				}else if(usuario instanceof Mototaxista) {
+					Mototaxista mototaxista = central.recuperarMototaxistaPeloEmail(usuario.getEmail());
+					mototaxista.setNome(nome);
+					mototaxista.setSenha(senha);
+					Mensageiro.enviarDadosAtualizados(mototaxista);
+				}
+
+				p.salvarCentral(central, "central");
+			} catch (UsuarioNaoExisteException | ValidacaoException e) {
+				FabricaJOptionPane.criarMsgErro(e.getMessage());
+			}
+		}
+
 		public void actionPerformed(ActionEvent e) {
 			JButton btn = (JButton) e.getSource();
 			ServicoUsuario usu = new ServicoUsuario(central);
 
 			if (btn == tela.getBtnEnviarEmail()) {
-				tela.dispose();
+				enviarEmailParaUsuario();
 			} else if (btn == tela.getBtnSeta()) {
 				tela.dispose();
 				new TelaDadosDosUsuarios();
 			} else if (btn == tela.getBtnSalvar()) {
 				try {
 					Usuario u = usu.atualizarPerfil(usuario, txtEmail.getText(), txtNomeCompleto.getText(),
-							txtData.getText());
+							txtData.getText(), String.valueOf(tela.getTxtSenha().getPassword()));
 					if (u.getEmail() != usuario.getEmail() && u.getNome() != usuario.getNome()) {
 						p.salvarCentral(central, "central");
 						tela.repaint();
@@ -182,7 +213,6 @@ public class TelaDeEdicaoDosDadosDosUsuarios extends TelaPadrao {
 				}
 			}
 		}
-
 	}
 
 }

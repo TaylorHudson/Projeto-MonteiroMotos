@@ -1,4 +1,4 @@
-package projeto.telas.mototaxista;
+package projeto.telas.usuario;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -23,6 +23,7 @@ import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
 import projeto.telas.ADM.TelaHomeADM;
+import projeto.telas.mototaxista.TelaHomeMototaxista;
 import projeto.telas.passageiro.TelaHomePassageiro;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -166,7 +167,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 					Usuario usuario = null;
 					if (TelaPadrao.mototaxistaLogado != null) {
 						usuario = central.atualizarPerfil(TelaPadrao.mototaxistaLogado, email, nomeCompleto,
-								dataNascimento);
+								dataNascimento, String.valueOf(txtSenha.getPassword()));
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
 						tela.carregarDados();
@@ -174,7 +175,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 						new TelaHomeMototaxista();
 					} else if (TelaPadrao.passageiroLogado != null) {
 						usuario = central.atualizarPerfil(TelaPadrao.passageiroLogado, email, nomeCompleto,
-								dataNascimento);
+								dataNascimento, String.valueOf(txtSenha.getPassword()));
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");
 						tela.carregarDados();
@@ -182,7 +183,7 @@ public class TelaEdicaoPerfil extends TelaPadrao {
 						new TelaHomePassageiro();
 					} else {
 						usuario = central.atualizarPerfil(central.getAdministrador(), email, nomeCompleto,
-								dataNascimento);
+								dataNascimento, String.valueOf(txtSenha.getPassword()));
 						central.setAdministrador(usuario);
 						persistencia.salvarCentral(central, "central");
 						FabricaJOptionPane.criarMsg("Perfil atualizado com sucesso");

@@ -44,10 +44,10 @@ public class CentralDeInformacoes {
 		creditosDoSistema.add(credito);
 	}
 	
-	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento)
+	public Usuario atualizarPerfil(Usuario usuario, String email, String nome, String dataNascimento,String senha)
 			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
 		ServicoUsuario servicoUsuario = new ServicoUsuario(this);
-		return servicoUsuario.atualizarPerfil(usuario, email, nome, dataNascimento);
+		return servicoUsuario.atualizarPerfil(usuario, email, nome, dataNascimento,senha);
 	}
 	
 	public void atualizarSenha(String email, String senha) throws ValidacaoException {
