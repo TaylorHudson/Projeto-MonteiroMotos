@@ -21,6 +21,15 @@ public class Corrida implements Comparator<Corrida>{
 	private String hora;
 	private String comentario;
 	private int avaliacao;
+	private boolean avaliada = false;
+
+	public boolean isAvaliada() {
+		return avaliada;
+	}
+
+	public void setAvaliada(boolean avaliada) {
+		this.avaliada = avaliada;
+	}
 
 	public Corrida(StatusDaCorrida status, String pontoDeEncontro, String localDeDestino, String complemento,
 			Passageiro passageiro, String emailDoMototaxista, LocalDate data,String hora) {

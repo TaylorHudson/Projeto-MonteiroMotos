@@ -8,6 +8,7 @@ import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
@@ -15,7 +16,10 @@ import javax.swing.text.MaskFormatter;
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoBranco;
 import projeto.TelaPadrao;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
+import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
 import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import utilidades.fabricas.FabricaJButton;
@@ -51,8 +55,6 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		txtPontoDeEncontro.setText(corrida.getPontoDeEncontro());
 		txtLocalDeDestino.setText(corrida.getLocalDeDestino());
 		txtEmailDoMotoTaxi.setText(corrida.getEmailDoMototaxista());
-
-//		a avaliação esta começando de zero devido o valueOf, ajeitar para o ususario só poder avaliar apenas uma unica vez
 		txtAvaliacao.setText(String.valueOf(corrida.getAvaliacao()));
 		txtComentario.setText(corrida.getComentario());
 		verificarCorridaFinalizada();
@@ -68,6 +70,7 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 			txtComentario.setVisible(true);
 			lblEmailDoMotoTaxi.setVisible(true);
 			txtEmailDoMotoTaxi.setVisible(true);
+			btnSalvar.setVisible(true);
 		}
 
 	}
@@ -85,6 +88,11 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 
 		public void actionPerformed(ActionEvent e) {
 			Corrida c = central.recuperarCorridaPeloId(corrida.getId());
+			Passageiro p = null;
+			try {
+				p = central.recuperarPassageiroPeloEmail(TelaPadrao.passageiroLogado.getEmail());
+			} catch (UsuarioNaoExisteException e1) {}
+			
 			JButton item = (JButton) e.getSource();
 
 			if (item == tela.getBtnSeta()) {
@@ -104,20 +112,32 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 				if (corrida.getAndamento() == AndamentoDaCorrida.ESPERA) {
 
 				} else if (corrida.getAndamento() == AndamentoDaCorrida.FINALIZADA) {
-					if (tela.verificarSeAvaliou()) {
-						if (!txtAvaliacao.getText().equals("")) {
-							int avaliacao = Integer.parseInt(txtAvaliacao.getText());
-							c.setAvaliacao(avaliacao);
-							c.setComentario(txtComentario.getText());
+
+					if (corrida.isAvaliada())
+						FabricaJOptionPane.criarMsgAtencao("Você ja avaliou essa corrida");
+					else {
+						txtAvaliacao.setEditable(true);
+						txtComentario.setEditable(true);
+						int avaliacao = Integer.parseInt(txtAvaliacao.getText());
+						if (avaliacao >= 1 && avaliacao < 6) {
+							if (avaliacao < 3) {
+								int escolha = FabricaJOptionPane.criarMsgDeOpcao("Escolha","Deseja bloquear o mototaxista?");
+								if (escolha == JOptionPane.YES_OPTION) {
+									try {
+										Mototaxista mototaxi = central.recuperarMototaxistaPeloEmail(c.getEmailDoMototaxista());
+										p.getMototaxistasBloqueados().add(mototaxi);
+									} catch (UsuarioNaoExisteException e1) {}
+								}
+							} else {
+								c.setAvaliacao(avaliacao);
+								c.setComentario(txtComentario.getText());
+								c.setAvaliada(true);
+							}
 							persistencia.salvarCentral(central, "central");
 							tela.dispose();
 							new TelaListarCorridas();
-							tela.verificarSeAvaliou();
-						} else {
-							txtAvaliacao.setEditable(false);
-							txtComentario.setEditable(false);
-							FabricaJOptionPane.criarMsgAtencao("Você ja avaliou essa corrida");
-						}
+						} else
+							FabricaJOptionPane.criarMsgErro("A nota deve ser entre 1 e 5");
 					}
 				}
 			}
@@ -131,7 +151,6 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 	}
 
 	public boolean verificarSeAvaliou() {
-
 		if (!txtAvaliacao.getText().isBlank()) {
 			int avaliacaoN = Integer.parseInt(txtAvaliacao.getText());
 			if (avaliacaoN >= 1 && avaliacaoN < 6) {
@@ -163,14 +182,17 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		JLabel lblNomeDoPassaeiro = FabricaJLabel.criarJLabel("Nome do passageiro", 20, 60, 460, 40, Color.white, 22);
 
 		txtNomeDoPassageiro = FabricaJText.criarJTextField(20, 100, 340, 40, Color.white, Color.black, 16);
+		txtNomeDoPassageiro.setEditable(false);
 
 		JLabel lblPontoDeEncontro = FabricaJLabel.criarJLabel("Ponto de encontro", 20, 140, 460, 40, Color.white, 22);
 
 		txtPontoDeEncontro = FabricaJText.criarJTextField(20, 180, 340, 40, Color.white, Color.black, 16);
+		txtPontoDeEncontro.setEditable(false);
 
 		JLabel lblLocalDeDestino = FabricaJLabel.criarJLabel("Local de destino", 20, 230, 460, 40, Color.white, 22);
 
 		txtLocalDeDestino = FabricaJText.criarJTextField(20, 270, 340, 40, Color.white, Color.black, 16);
+		txtLocalDeDestino.setEditable(false);
 
 		JLabel lblDataNascimento = FabricaJLabel.criarJLabel("Data de Nascimento", 20, 315, 360, 40, Color.white, 25);
 
@@ -179,6 +201,7 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		lblEmailDoMotoTaxi = FabricaJLabel.criarJLabel("E-Mail do Moto Taxi", 20, 410, 460, 40, Color.white, 22);
 		txtEmailDoMotoTaxi = FabricaJText.criarJTextField(20, 448, 340, 40, Color.white, Color.black, 16);
 		txtEmailDoMotoTaxi.setVisible(false);
+		txtEmailDoMotoTaxi.setEditable(false);
 		lblEmailDoMotoTaxi.setVisible(false);
 
 		lblAvaliacao = FabricaJLabel.criarJLabel("Avaliacao", 20, 60, 460, 40, Color.white, 22);
@@ -189,11 +212,13 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		}
 
 		txtAvaliacao.setVisible(false);
+		txtAvaliacao.setEditable(false);
 
 		lblComentario = FabricaJLabel.criarJLabel("Comentario ", 20, 140, 460, 40, Color.white, 22);
 		lblComentario.setVisible(false);
 		txtComentario = FabricaJTextArea.criarJTextArea(20, 180, 340, 220, Color.white, Color.black);
 		txtComentario.setVisible(false);
+		txtComentario.setEditable(false);
 
 		btnBloquearMototaxi = FabricaJButton.criarJButton("Bloquear Mototaxi", 650, 640, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 20);
@@ -207,6 +232,7 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 
 		btnSalvar = FabricaJButton.criarJButton("Salvar", 340, 640, 180, 50, new Color(28, 28, 20),
 				new Color(179, 177, 177), 20);
+		btnSalvar.setVisible(false);
 		btnSalvar.addMouseListener(new OuvinteBotaoFundoBranco());
 		btnSalvar.addActionListener(ouvinte);
 

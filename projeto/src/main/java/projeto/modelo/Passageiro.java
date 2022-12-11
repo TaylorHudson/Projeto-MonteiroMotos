@@ -1,12 +1,14 @@
 package projeto.modelo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import projeto.modelo.enuns.Sexo;
 
 public class Passageiro extends Usuario {
 
 	private Sexo sexo;
+	private ArrayList<Mototaxista> mototaxistasBloqueados = new ArrayList<Mototaxista>();
 
 	public Passageiro(String nome, Sexo sexo, LocalDate dataNascimento, String email,
 			String senha, boolean estaAtivo) {
@@ -32,6 +34,10 @@ public class Passageiro extends Usuario {
 
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+
+	public ArrayList<Mototaxista> getMototaxistasBloqueados() {
+		return mototaxistasBloqueados;
 	}
 
 }

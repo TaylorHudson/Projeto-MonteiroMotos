@@ -23,6 +23,5 @@ public abstract class FabricaJOptionPane {
 	public static void criarMsg(String msg) {
 		JOptionPane.showMessageDialog(null, msg, "Informaçao", JOptionPane.INFORMATION_MESSAGE);
 	}
-
 	
 }

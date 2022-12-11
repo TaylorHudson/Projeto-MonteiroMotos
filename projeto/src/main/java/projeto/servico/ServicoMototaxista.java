@@ -1,11 +1,8 @@
 package projeto.servico;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import projeto.TelaPadrao;
-import projeto.excecoes.usuario.DataInvalidaException;
-import projeto.excecoes.usuario.EmailEmUsoException;
 import projeto.excecoes.usuario.SemCreditoReivindicacaoException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.excecoes.usuario.ValidacaoException;
@@ -13,7 +10,6 @@ import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.repositorio.CentralDeInformacoes;
-import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.validacao.Validador;
 
 public class ServicoMototaxista {
@@ -74,64 +70,14 @@ public class ServicoMototaxista {
 		mototaxi.setEstaAtivo(false);
 	}
 
-	public Mototaxista atualizarPerfil(Mototaxista mototaxiLogado, String email, String nome, String dataNascimento)
-			throws ValidacaoException, DataInvalidaException, EmailEmUsoException {
-
-		LocalDate data = ServicoData.retornarData(dataNascimento);
-		Validador.validarEmail(email);
-		Validador.validarNome(nome);
-		Validador.idadeValida(data);
-
-		Mototaxista novoMototaxi = new Mototaxista(mototaxiLogado.getEmail());
-		novoMototaxi.setSenha(mototaxiLogado.getSenha());
-
-		String dataEmString = ServicoData.retornarString(mototaxiLogado.getDataNascimento());
-
-		boolean valido = true;
-		if (email.equals(mototaxiLogado.getEmail()) && nome.equals(mototaxiLogado.getNome())
-				&& dataNascimento.equals(dataEmString)) {
-			throw new ValidacaoException("Altere um dos campos");
-		} else {
-			novoMototaxi.setEmail(email);
-			novoMototaxi.setNome(nome);
-			novoMototaxi.setDataNascimento(data);
-
-			if (novoMototaxi.equals(central.getAdministrador())) {
-				valido = false;
-				throw new EmailEmUsoException();
-			}
-
-			for (Mototaxista mototaxista : central.getMototaxistas()) {
-				if (!mototaxiLogado.equals(mototaxista)) {
-					if (mototaxista.equals(novoMototaxi) && mototaxista.isEstaAtivo()) {
-						valido = false;
-						throw new EmailEmUsoException();
-					}
-				}
-			}
-
-			for (Passageiro passageiro : central.getPassageiros()) {
-				if (passageiro.equals(novoMototaxi) && passageiro.isEstaAtivo()) {
-					valido = false;
-					throw new EmailEmUsoException();
-				}
-			}
-
-			if (valido) {
-				TelaPadrao.mototaxistaLogado = novoMototaxi;
-				try {
-					Mototaxista m = central.recuperarMototaxistaPeloEmail(mototaxiLogado.getEmail());
-					m.setEmail(novoMototaxi.getEmail());
-					m.setNome(novoMototaxi.getNome());
-					m.setDataNascimento(novoMototaxi.getDataNascimento());
-				} catch (UsuarioNaoExisteException e) {}
-				return novoMototaxi;
-			} else {
-				return mototaxiLogado;
-			}
+	public boolean estaBloqueado(Passageiro passageiro) {
+		Mototaxista mototaxista = TelaPadrao.mototaxistaLogado;
+		for(Mototaxista m: passageiro.getMototaxistasBloqueados()) {
+			if(m.equals(mototaxista)) return true;
 		}
+		return false;
 	}
-
+	
 	public void reivindicarCorrida(Mototaxista mototaxista, Corrida corrida) throws SemCreditoReivindicacaoException {
 		int qtdCreditos = mototaxista.getCreditosReivindicacao();
 		if (qtdCreditos == 0) {

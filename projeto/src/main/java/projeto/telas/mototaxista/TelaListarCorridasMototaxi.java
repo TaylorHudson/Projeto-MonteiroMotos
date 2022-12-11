@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -15,11 +16,15 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoBranco;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
+import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
+import projeto.modelo.Mototaxista;
+import projeto.modelo.Passageiro;
 import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
+import projeto.servico.ServicoMototaxista;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJText;
@@ -57,8 +62,19 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 	private void popularTabela() {
 		Persistencia persistencia = new Persistencia();
 		CentralDeInformacoes central = persistencia.recuperarCentral("central");
+		ServicoMototaxista servico = new ServicoMototaxista(central);
+		ArrayList<Corrida> corridasPermitidas = new ArrayList<Corrida>();
+
 		for (Corrida c : central.getCorridas()) {
-			if(c.getAndamento() != AndamentoDaCorrida.FINALIZADA) addLinha(modelo, c);
+				try {
+					Passageiro passageiro = central.recuperarPassageiroPeloEmail(c.getPassageiro().getEmail());
+					boolean bloqueado = servico.estaBloqueado(passageiro);
+					if(!bloqueado) corridasPermitidas.add(c);
+				} catch (UsuarioNaoExisteException e) {}
+		}
+		
+		for(Corrida c: corridasPermitidas) {
+			if (c.getAndamento() != AndamentoDaCorrida.FINALIZADA) addLinha(modelo, c);
 		}
 
 		scrol.repaint();
@@ -84,16 +100,15 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 			char var = e.getKeyChar();
 			if (Character.isAlphabetic(var) || Character.isDigit(var)) {
 				filtro += var;
-			} 
-			else if(Character.isWhitespace(var)) {
+			} else if (Character.isWhitespace(var)) {
 				e.consume();
 				return;
 			}
 			System.out.println(filtro);
-			
+
 			modelo.setRowCount(0);
-			for(Corrida c : central.getCorridas()) {
-				if(c.getPassageiro().getEmail().contains(filtro))
+			for (Corrida c : central.getCorridas()) {
+				if (c.getPassageiro().getEmail().contains(filtro))
 					addLinha(modelo, c);
 			}
 			scrol.repaint();
@@ -142,13 +157,13 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 				new Color(28, 28, 20), Color.WHITE, 28);
 		btnReivindicarCorrida.addActionListener(ouvinte);
 		btnReivindicarCorrida.addMouseListener(ouvinteBtn);
-		
-		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 550, 670, 280, 50,
-				new Color(28, 28, 20), Color.WHITE, 28);
+
+		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 550, 670, 280, 50, new Color(28, 28, 20), Color.WHITE,
+				28);
 		btnDetalhes.addActionListener(ouvinte);
 		btnDetalhes.addMouseListener(ouvinteBtn);
 
-		txtFiltro = FabricaJText.criarJTextField(50, 185, 350, 47, Color.BLACK,Color.WHITE,23);
+		txtFiltro = FabricaJText.criarJTextField(50, 185, 350, 47, Color.BLACK, Color.WHITE, 23);
 		txtFiltro.addKeyListener(new OuvinteFiltro());
 
 		background.add(scrol);
