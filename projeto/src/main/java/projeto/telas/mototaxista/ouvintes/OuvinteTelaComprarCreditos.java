@@ -52,7 +52,8 @@ public class OuvinteTelaComprarCreditos implements ActionListener {
 						central.adicionarReivindicacao(credito);
 						
 						persistencia.salvarCentral(central, "central");
-						System.out.println(central.getCreditosDoSistema().get(0));
+						tela.dispose();
+						new TelaHomeMototaxista();
 					} catch (UsuarioNaoExisteException e1) {
 					}
 					FabricaJOptionPane.criarMsg("Compra realizada com sucesso");
