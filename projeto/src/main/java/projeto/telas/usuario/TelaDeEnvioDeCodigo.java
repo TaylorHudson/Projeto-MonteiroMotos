@@ -25,12 +25,12 @@ public class TelaDeEnvioDeCodigo extends TelaPadrao {
 
 	public TelaDeEnvioDeCodigo() {
 		super("Tela De Envio De Codigo");
+		addComponentes();
 		setVisible(true);
 	}
 	
 	public void configurarComponentes() {
 		configBg();
-		addComponentes();
 	}
 	
 	public void configBg() {
@@ -75,10 +75,6 @@ public class TelaDeEnvioDeCodigo extends TelaPadrao {
 
 	public JButton getBtnSeta() {
 		return btnSeta;
-	}
-
-	public static void main(String[] args) {
-		new TelaDeEnvioDeCodigo();
 	}
 
 }

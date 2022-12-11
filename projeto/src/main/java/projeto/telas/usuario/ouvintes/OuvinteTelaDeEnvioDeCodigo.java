@@ -38,7 +38,7 @@ public class OuvinteTelaDeEnvioDeCodigo implements ActionListener {
 				boolean valido = Validador.validarEmail(email);
 				if (valido) {
 					int c = Mensageiro.enviarEmailComCodigoDeVerificacao(email);
-					String codigoDoUsuario = FabricaJOptionPane.criarInput("Digite seu codigo de Confirmação");
+					String codigoDoUsuario = FabricaJOptionPane.criarInput("Digite seu codigo de Confirmaï¿½ï¿½o");
 					String codigo = String.valueOf(c);
 					if (codigo.equals(codigoDoUsuario)) {
 						tela.dispose();
