@@ -16,6 +16,13 @@ import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
 
+/*
+ * @author Taylor Hudson
+ * 
+ * Classe responsável por fazer a persistência dos dados.
+ *  
+*/
+
 public class Persistencia {
 
 	private XStream xstream = new XStream(new DomDriver("ISO-8859-1"));
@@ -23,7 +30,11 @@ public class Persistencia {
 	public Persistencia() {
 		configIniciais();
 	}
-
+	
+	/*
+	 * Método responsável por fazer as configurações iniciais do arquivo chamado 
+	 * central que ainda será criado.
+	*/
 	private void configIniciais() {
 		xstream.alias("corrida", Corrida.class);
 		xstream.alias("passageiro", Passageiro.class);
@@ -35,7 +46,11 @@ public class Persistencia {
 
 		xstream.addPermission(AnyTypePermission.ANY);
 	}
-
+	
+	/*
+	 * Método responsável por fazer a mudança de classes java para arquivo xml, e também
+	 * por criar o arquivo onde ficarão salvos os dados do sistema. 
+	*/
 	public void salvarCentral(CentralDeInformacoes central, String nomeDoArquivo) {
 		String xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n";
 
@@ -54,6 +69,10 @@ public class Persistencia {
 		}
 	}
 
+	/*
+	 * Método responsável por recuperar os dados já salvos na central, e passá-los de formato 
+	 * xml para classes do java.
+	*/
 	public CentralDeInformacoes recuperarCentral(String nomeDoArquivo) {
 		File arquivo = new File(nomeDoArquivo + ".xml");
 		try {
