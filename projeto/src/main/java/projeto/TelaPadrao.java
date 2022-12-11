@@ -8,11 +8,24 @@ import javax.swing.UnsupportedLookAndFeelException;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 
+/*
+ * @author José Valdnei
+ * 
+ * Classe que todas as telas do sistemas herdam dela 
+ * */
 public abstract class TelaPadrao extends JFrame {
-	
-	public static Mototaxista mototaxistaLogado; 
+	/*
+	 * Representa o Mototaxista logado no momento
+	 * */
+	public static Mototaxista mototaxistaLogado;
+	/*
+	 * Representa o Passageiro logado no momento
+	 * */
 	public static Passageiro passageiroLogado;
 	
+	/*
+	 * Inicia as configurações padrões de todas as telas
+	 * */
 	public TelaPadrao(String titulo) {
 		
 		try {
@@ -27,16 +40,22 @@ public abstract class TelaPadrao extends JFrame {
 		configTela(titulo);
 		configurarComponentes();
 	}
-	
+	/*
+	 * Método obrigatório em todas as classes para configurar os componentes da tela 
+	 * */
 	public abstract void configurarComponentes();
-	
+	/*
+	 * Método para configurar a imagem de fundo da tela 
+	 * */
 	public ImagemDeFundo configImagemDeFundo(String caminho) {
 		ImagemDeFundo background = new ImagemDeFundo(caminho);
 		background.setLayout(null);
 		background.setBounds(0, 0, 900, 800);
 		return background;
 	}
-	
+	/*
+	 * Método para configurar as dimensões e posições da tela
+	 * */
 	private void configTela(String titulo) {
 		setSize(900, 800);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,5 +64,4 @@ public abstract class TelaPadrao extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle(titulo);
 	}
-
 }
