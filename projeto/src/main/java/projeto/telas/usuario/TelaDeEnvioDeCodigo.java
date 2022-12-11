@@ -7,35 +7,39 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.usuario.ouvintes.OuvinteTelaDeEnvioDeCodigo;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaDeEnvioDeCodigo extends JFrame {
+public class TelaDeEnvioDeCodigo extends TelaPadrao {
 	OuvinteTelaDeEnvioDeCodigo ouvinte = new OuvinteTelaDeEnvioDeCodigo(this);
 
-	private JLabel background;
+	private ImagemDeFundo background;
 	private JTextField txtEmail;
 	private JButton btnSeta;
 
 	public TelaDeEnvioDeCodigo() {
-
-		setSize(900, 800);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setTitle("Tela De Envio De Codigo");
-		addComponentes();
+		super("Tela De Envio De Codigo");
 		setVisible(true);
+	}
+	
+	public void configurarComponentes() {
+		configBg();
+		addComponentes();
+	}
+	
+	public void configBg() {
+		background = super.configImagemDeFundo("background.jpg");
+		add(background);
 	}
 
 	public void addComponentes() {
 
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
 		JLabel menu = FabricaJLabel.criarJLabel(175, 200, 500, 400, Color.BLACK, 3);
 		menu.setBackground(Color.BLACK);
 		
@@ -76,4 +80,5 @@ public class TelaDeEnvioDeCodigo extends JFrame {
 	public static void main(String[] args) {
 		new TelaDeEnvioDeCodigo();
 	}
+
 }

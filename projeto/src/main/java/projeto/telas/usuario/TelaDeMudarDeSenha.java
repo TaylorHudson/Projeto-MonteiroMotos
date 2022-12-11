@@ -7,35 +7,41 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.usuario.ouvintes.OuvinteTelaDeMudarDeSenha;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaDeMudarDeSenha extends JFrame {
+public class TelaDeMudarDeSenha extends TelaPadrao {
 	
 	private JTextField txtNovaSenha;
 	private JTextField txtConfirmarSenha;
-	private JLabel background;
+	private ImagemDeFundo background;
 	private String email;
 
 	public TelaDeMudarDeSenha(String email) {
+		super("Tela De Mudar Senha");
 		this.email = email;
-		setSize(900, 800);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setTitle("Tela De Mudar Senha");
-		addComponentes();
 		setVisible(true);
 	}
 	
+	public void configurarComponentes() {
+		configImagemDeFundo();
+		addComponentes();
+	}
+	
+	private void configImagemDeFundo() {
+		background = super.configImagemDeFundo("background.jpg");
+		add(background);
+	}
+
+	
 	public void addComponentes() {
 		
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
 		JLabel menu = FabricaJLabel.criarJLabel(175, 200, 500, 400, Color.BLACK,3);
 		menu.setBackground(Color.BLACK);
 		

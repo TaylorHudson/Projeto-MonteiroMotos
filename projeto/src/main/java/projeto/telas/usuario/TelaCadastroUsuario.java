@@ -13,7 +13,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
+import projeto.TelaPadrao;
 import projeto.telas.usuario.ouvintes.OuvinteTelaCadastroUsuario;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJCheckBox;
@@ -22,7 +24,7 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaCadastroUsuario extends JFrame {
+public class TelaCadastroUsuario extends TelaPadrao {
 
 	private JTextField txtNome;
 	private JCheckBox checkBoxFeminino;
@@ -31,27 +33,21 @@ public class TelaCadastroUsuario extends JFrame {
 	private JPasswordField txtSenha;
 	private JFormattedTextField txtData;
 	private JComboBox<String> box;
-	private JLabel background;
+	private ImagemDeFundo background;
 	private JButton btnSeta;
 
 	public TelaCadastroUsuario() {
-		configurarTela();
-		configImagemFundo();
-		configFormLogin();
+		super("Cadastro");
 		setVisible(true);
 	}
 
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Cadastro");
+	public void configurarComponentes() {
+		configImagemFundo();
+		configFormLogin();
 	}
 
 	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
+		background = super.configImagemDeFundo("background.jpg");
 		add(background);
 	}
 
@@ -151,6 +147,5 @@ public class TelaCadastroUsuario extends JFrame {
 	public JButton getBtnSeta() {
 		return btnSeta;
 	}
-	
 
 }
