@@ -74,10 +74,11 @@ public class TelaHomeADM  extends TelaPadrao{
 	private void confiBotoes() {
 		OuvinteTelaHomeADM ouvinte = new OuvinteTelaHomeADM(this);
 		OuvinteBotaoFundoPreto mouse = new OuvinteBotaoFundoPreto();
-		btnDadosDosUsuarios = FabricaJButton.criarJButton("Dados dos Usuarios", 150, 220, 300, 70,
-				Color.white, Color.black, 28);
-		btnFinancas = FabricaJButton.criarJButton("Finanças", 150, 490, 300, 70,
-				Color.white,Color.black, 28);
+		btnDadosDosUsuarios = FabricaJButton.criarJButton("Dados dos Usuarios", 150, 220, 560, 230,
+				new Color(28, 28, 20), Color.WHITE, 28);
+	
+		btnFinancas = FabricaJButton.criarJButton("Finanças", 150, 490, 560, 230,
+				new Color(28, 28, 20), Color.WHITE, 28);
 		
 		btnDadosDosUsuarios.addActionListener(ouvinte);
 		btnFinancas.addActionListener(ouvinte);
@@ -105,11 +106,6 @@ public class TelaHomeADM  extends TelaPadrao{
 	public JButton getBtnFinancas() {
 		return btnFinancas;
 	}
-	
-	public static void main(String[] args) {
-		new TelaHomeADM();
-	}
-	
 
 }
 	
