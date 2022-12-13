@@ -12,6 +12,7 @@ import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.Usuario;
 import projeto.repositorio.CentralDeInformacoes;
+import utilidades.fabricas.FabricaJOptionPane;
 import utilidades.persistencia.Persistencia;
 
 public class Mensageiro {
@@ -60,9 +61,9 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Código para mudança de senha.");
+			email.setSubject("Cï¿½digo para mudanï¿½a de senha.");
 			int codigo = new Random().nextInt((max - min) + 1) + min;
-			email.setMsg("Seu código: " + codigo);
+			email.setMsg("Seu cï¿½digo: " + codigo);
 			email.addTo(emailDeCodigo);
 			email.send();
 
@@ -85,7 +86,7 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Informações da corrida.");
+			email.setSubject("Informaï¿½ï¿½es da corrida.");
 			email.setMsg("Nome do mototaxista: " + mototaxista.getNome());
 			email.setMsg("Email do mototaxista: " + mototaxista.getEmail());
 			email.setMsg("Sexo do mototaxista: " + mototaxista.getSexo());
@@ -99,6 +100,7 @@ public class Mensageiro {
 	public static void enviarDadosAtualizados(Usuario usuario) {
 		String remetente = "pooprojeto824@gmail.com";
 		String senha = "rehjpckvmjwhvkpu";
+		String mensagen = FabricaJOptionPane.criarInput("Mensagem para o usuario");
 
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.gmail.com");
@@ -107,11 +109,12 @@ public class Mensageiro {
 		email.setSSLOnConnect(true);
 		try {
 			email.setFrom(remetente);
-			email.setSubject("Dados atualizados do usuário");
-			email.setMsg("Nome do usuário: " + usuario.getNome() + "\n" +
-						 "Email do usuário: " + usuario.getEmail() + "\n" +
-						 "Senha: " + usuario.getSenha() + "\n" +
-						 "Data de nascimento " + usuario.getDataNascimento());
+			email.setSubject("Dados atualizados do usuï¿½rio");
+			email.setMsg(mensagen + "\n" +
+						"Nome do usuï¿½rio: " + usuario.getNome() + "\n" +
+						"Email do usuï¿½rio: " + usuario.getEmail() + "\n" +
+						"Senha: " + usuario.getSenha() + "\n" +
+						"Data de nascimento " + usuario.getDataNascimento());
 			email.addTo(usuario.getEmail());
 			email.send();
 		} catch (Exception e) {

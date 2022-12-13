@@ -175,13 +175,6 @@ public class TelaDadosDosUsuarios extends TelaPadrao{
 	public JButton getBtnOrdenar() {
 		return btnOrdenar;
 	}
-	
-	
-	
-
-	public static void main(String[] args) {
-		new TelaDadosDosUsuarios();
-	}
 	private class OuvinteFiltro implements KeyListener {
 
 		private TelaListarCorridas tela;

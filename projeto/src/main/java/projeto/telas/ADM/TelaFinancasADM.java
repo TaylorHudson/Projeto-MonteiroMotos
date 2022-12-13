@@ -126,9 +126,6 @@ public class TelaFinancasADM extends TelaPadrao {
 	public JButton getBtnOrdenar() {
 		return btnOrdenar;
 	}
-	public static void main(String[] args) {
-		new TelaFinancasADM();
-	}
 	private class OuvinteFiltro implements KeyListener {
 
 		private TelaListarCorridas tela;
@@ -146,24 +143,24 @@ public class TelaFinancasADM extends TelaPadrao {
 				return;
 			}
 			modelo.setRowCount(0);
-			for(Mototaxista m : central.getMototaxistas()) {
-				if(m.getEmail().contains(filtro))
-					addLinha(modelo,m);
+			for(CreditosDeRevindicacao c: central.getCreditosDoSistema()) {
+				if(c.getMototaxista().getEmail().contains(filtro))
+					addLinha(modelo,c);
 			}
 			scrol.repaint();
 		}
 
 
-		private void addLinha(DefaultTableModel modelo, Mototaxista m) {
+		private void addLinha(DefaultTableModel modelo, CreditosDeRevindicacao c) {
 			Object[] linha = new Object[4];
-			linha[0] = m.getEmail();
-			linha[1] = m.getCreditosReivindicacao();
-			linha[3] = central.getValorDoCredito();
+			linha[0] = c.getMototaxista().getEmail();
+			linha[1] = c.getQuantidadeDeCreditos();
+			linha[3] = c.getValorDosCreditos();
 			try {
-				linha[2] = ServicoData.retornarString(m.getDataDaUltimaCompra());
+				linha[2] = ServicoData.retornarString(c.getDataDaCompra());
 			} catch (DataInvalidaException e) {}
+			
 			modelo.addRow(linha);
-			scrol.repaint();
 		}
 
 

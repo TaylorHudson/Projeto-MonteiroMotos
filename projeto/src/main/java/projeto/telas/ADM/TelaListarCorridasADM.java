@@ -100,9 +100,10 @@ public class TelaListarCorridasADM extends TelaPadrao {
 	public void popularTabelaEspera() {
 		p = new Persistencia();
 		central = p.recuperarCentral("central");
+		Object[] linha = new Object[4];
 		for (Corrida c : central.getCorridas()) {
 			if(c.getAndamento() == AndamentoDaCorrida.ESPERA ) {
-				Object[] linha = new Object[4];
+				
 				linha[0] = c.getPassageiro().getNome();
 				try {
 					linha[1] = ServicoData.retornarString(c.getData());
@@ -172,12 +173,8 @@ public class TelaListarCorridasADM extends TelaPadrao {
 	public JTable getTabelaListarCorridas() {
 		return tabelaListarCorridas;
 	}
-	public static void main(String[] args) {
-		new TelaListarCorridasADM();
-	}
 	private class OuvinteFiltro implements KeyListener {
 
-		private TelaListarCorridas tela;
 
 		
 		public void keyTyped(KeyEvent e) {

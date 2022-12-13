@@ -77,11 +77,4 @@ public class TelaValorDeCreditosADM extends TelaPadrao {
 	public JTextField getTxtCreditos() {
 		return txtCreditos;
 	}
-	
-	public static void main(String[] args) {
-		new TelaValorDeCreditosADM();
-	}
-
-	
-
 }

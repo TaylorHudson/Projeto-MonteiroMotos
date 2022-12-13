@@ -10,6 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import projeto.ImagemDeFundo;
+import projeto.TelaPadrao;
 import projeto.telas.ADM.ouvintes.OuvintesTelaDeCadastroADM;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJFormatted;
@@ -17,28 +19,27 @@ import utilidades.fabricas.FabricaJLabel;
 import utilidades.fabricas.FabricaJText;
 import utilidades.imagens.Imagens;
 
-public class TelaCadastroADM extends JFrame {
+public class TelaCadastroADM extends TelaPadrao {
 
 	private JTextField txtEmail;
 	private JPasswordField txtSenha;
-	private JLabel background;
+	private ImagemDeFundo background;
 	private JTextField txtNomeCompleto;
 	private JFormattedTextField txtData;
 
 	public TelaCadastroADM() {
-		configurarTela();
-		configImagemFundo();
-		configFormLogin();
+		super("\"Cadastro do ADM\"");
 		setVisible(true);
 	}
+	
+	public void configurarComponentes() {
+		configImagemFundo();
+		configFormLogin();
+	}
 
-	private void configurarTela() {
-		setSize(900, 800);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setTitle("Cadastro do ADM");
+	private void configImagemFundo() {
+		background = super.configImagemDeFundo("background.jpg");
+		add(background);
 	}
 	private void configFormLogin() {
 		OuvintesTelaDeCadastroADM ouvinte = new OuvintesTelaDeCadastroADM(this);
@@ -78,10 +79,6 @@ public class TelaCadastroADM extends JFrame {
 
 	}
 
-	private void configImagemFundo() {
-		background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND);
-		add(background);
-	}
 
 	public JTextField getTxtEmail() {
 		return txtEmail;
@@ -98,9 +95,4 @@ public class TelaCadastroADM extends JFrame {
 	public JFormattedTextField getTxtData() {
 		return txtData;
 	}
-
-	public static void main(String[] args) {
-		new TelaCadastroADM();
-	}
-
 }
