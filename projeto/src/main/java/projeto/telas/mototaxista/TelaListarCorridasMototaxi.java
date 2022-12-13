@@ -18,13 +18,13 @@ import projeto.TelaPadrao;
 import projeto.excecoes.usuario.DataInvalidaException;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
 import projeto.modelo.Corrida;
-import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
 import projeto.modelo.enuns.AndamentoDaCorrida;
 import projeto.modelo.enuns.StatusDaCorrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.servico.ServicoData;
 import projeto.servico.ServicoMototaxista;
+import projeto.telas.mototaxista.ouvintes.OuvinteBotaoReivindicarCorrida;
 import projeto.telas.mototaxista.ouvintes.OuvinteBotoesTelaListarCorridas;
 import utilidades.fabricas.FabricaJButton;
 import utilidades.fabricas.FabricaJText;
@@ -104,7 +104,6 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 				e.consume();
 				return;
 			}
-			System.out.println(filtro);
 
 			modelo.setRowCount(0);
 			for (Corrida c : central.getCorridas()) {
@@ -155,7 +154,7 @@ public class TelaListarCorridasMototaxi extends TelaPadrao {
 
 		btnReivindicarCorrida = FabricaJButton.criarJButton("Reivindicar Corrida", 50, 670, 280, 50,
 				new Color(28, 28, 20), Color.WHITE, 28);
-		btnReivindicarCorrida.addActionListener(ouvinte);
+		btnReivindicarCorrida.addActionListener(new OuvinteBotaoReivindicarCorrida(this));
 		btnReivindicarCorrida.addMouseListener(ouvinteBtn);
 
 		btnDetalhes = FabricaJButton.criarJButton("Detalhes", 550, 670, 280, 50, new Color(28, 28, 20), Color.WHITE,

@@ -169,8 +169,6 @@ public class TelaReivindicarCorrida extends TelaPadrao {
 			if(btn == btnSeta) {
 				tela.dispose();
 				new TelaListarCorridasMototaxi();
-			}else if(btn == btnConcluir) {
-				
 			}
 		}
 		

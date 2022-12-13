@@ -29,18 +29,6 @@ public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 		tela = t;
 	}
 
-	private void reivindicarCorrida() {
-		Mototaxista mototaxistaLogado = TelaPadrao.mototaxistaLogado;
-		Mototaxista mototaxista;
-		try {
-			mototaxista = central.recuperarMototaxistaPeloEmail(mototaxistaLogado.getEmail());
-			mototaxista.setCreditosReivindicacao(mototaxista.getCreditosReivindicacao() - 1);
-			TelaPadrao.mototaxistaLogado = mototaxista;
-		} catch (UsuarioNaoExisteException e) {
-		}
-
-	}
-
 	public void actionPerformed(ActionEvent e) {
 
 		Object componente = e.getSource();
@@ -66,46 +54,21 @@ public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 			tela.getScrol().repaint();
 		}
 
-		else if (componente == tela.getBtnReivindicarCorrida()) {
-			int linhaSelecionada = tela.getTabelaCorridas().getSelectedRow();
-
-			if (linhaSelecionada == -1)
-				FabricaJOptionPane.criarMsgAtencao("Selecione uma linha");
-			else {
-				long idSelecionado = (long) tela.getTabelaCorridas().getValueAt(linhaSelecionada, 3);
-				if (mototaxista.getCorridaReivindicada() == null) {
-					Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
-					if (mototaxista.getCreditosReivindicacao() > 0) {
-						reivindicarCorrida();
-						mototaxista.setCorridaReivindicada(corrida);
-						corrida.setEmailDoMototaxista(TelaPadrao.mototaxistaLogado.getEmail());
-						persistencia.salvarCentral(central, "central");
-						tela.dispose();
-						TelaReivindicarCorrida tela = new TelaReivindicarCorrida(corrida);
-						tela.ocultarCampos();
-					} else {
-						FabricaJOptionPane.criarMsgErro("Voc� n�o tem cr�ditos de reivindica��o");
-					}
-				} else
-					FabricaJOptionPane.criarMsgErro("Voc� j� reivindicou uma corrida");
-			}
-		}
-
 		else if (componente == tela.getBtnDetalhes()) {
 			int linhaSelecionada = tela.getTabelaCorridas().getSelectedRow();
 			if (linhaSelecionada == -1)
 				FabricaJOptionPane.criarMsgAtencao("Selecione uma linha");
 
-			if (mototaxista.getCorridaReivindicada() != null) {
+			else if (mototaxista.getCorridaReivindicada() != null) {
 				long idSelecionado = (long) tela.getTabelaCorridas().getValueAt(linhaSelecionada, 3);
 				Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
 				if (mototaxista.getCorridaReivindicada().equals(corrida)) {
 					tela.dispose();
 					new TelaReivindicarCorrida(corrida);
 				} else
-					FabricaJOptionPane.criarMsgErro("Para ver detalhes da corrida voc� deve reivindic�-la");
+					FabricaJOptionPane.criarMsgErro("Para ver detalhes da corrida voce deve reivindica-la");
 			} else
-				FabricaJOptionPane.criarMsgErro("Voc� s� pode ver detalhes de uma corrida reivindicada");
+				FabricaJOptionPane.criarMsgErro("Voce so pode ver detalhes de uma corrida reivindicada");
 		}
 	}
 

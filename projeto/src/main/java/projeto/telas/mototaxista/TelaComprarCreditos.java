@@ -102,8 +102,4 @@ public class TelaComprarCreditos extends TelaPadrao {
 		return btnGerarBoleto;
 	}
 
-	public static void main(String[] args) {
-		new TelaComprarCreditos();
-	}
-
 }

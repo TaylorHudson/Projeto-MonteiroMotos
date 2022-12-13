@@ -18,10 +18,29 @@ import utilidades.persistencia.Persistencia;
 public class OuvinteTelaComprarCreditos implements ActionListener {
 
 	private TelaComprarCreditos tela;
-	
 
 	public OuvinteTelaComprarCreditos(TelaComprarCreditos tela) {
 		this.tela = tela;
+	}
+
+	private void comprarCredito(Persistencia p, CentralDeInformacoes c, int qtd) {
+		String email = TelaPadrao.mototaxistaLogado.getEmail();
+
+		try {
+			Mototaxista m = c.recuperarMototaxistaPeloEmail(email);
+			m.setCreditosReivindicacao(m.getCreditosReivindicacao() + qtd);
+			m.setDataDaUltimaCompra(LocalDate.now());
+
+			CreditosDeRevindicacao credito = new CreditosDeRevindicacao(m, LocalDate.now(), qtd, c.getValorDoCredito());
+			c.adicionarReivindicacao(credito);
+
+			p.salvarCentral(c, "central");
+			FabricaJOptionPane.criarMsg("Compra realizada com sucesso");
+			
+			tela.dispose();
+			new TelaHomeMototaxista();
+		} catch (UsuarioNaoExisteException e1) {
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -33,33 +52,17 @@ public class OuvinteTelaComprarCreditos implements ActionListener {
 			tela.dispose();
 			new TelaHomeMototaxista();
 		} else if (componente == tela.getBtnGerarBoleto()) {
-			if (central.getValorDoCredito() == 0) {
-				FabricaJOptionPane.criarMsgErro("N�o foi poss�vel comprar os cr�ditos no momento");
-			} else {
-				int qtd = (Integer) tela.getSpinner().getValue();
-				if (qtd > 0) {
-					String valorString = tela.getTxtPrecoTotal().getText().replace(',', '.');
-					double valor = Double.parseDouble(valorString);
-					GeradorDeRelatorios.gerarBoleto(qtd, valor);
+			int qtd = (Integer) tela.getSpinner().getValue();
 
-					String email = TelaPadrao.mototaxistaLogado.getEmail();
-					try {
-						Mototaxista m = central.recuperarMototaxistaPeloEmail(email);
-						m.setCreditosReivindicacao(m.getCreditosReivindicacao() + qtd);
-						m.setDataDaUltimaCompra(LocalDate.now());
-						
-						CreditosDeRevindicacao credito = new CreditosDeRevindicacao(m, LocalDate.now(), qtd, central.getValorDoCredito());
-						central.adicionarReivindicacao(credito);
-						
-						persistencia.salvarCentral(central, "central");
-						tela.dispose();
-						new TelaHomeMototaxista();
-					} catch (UsuarioNaoExisteException e1) {
-					}
-					FabricaJOptionPane.criarMsg("Compra realizada com sucesso");
-				}
+			if (central.getValorDoCredito() == 0) {
+				FabricaJOptionPane.criarMsgErro("Nao foi possivel comprar os creditos no momento");
+			} else if (qtd > 0) {
+				String valorString = tela.getTxtPrecoTotal().getText().replace(',', '.');
+				double valor = Double.parseDouble(valorString);
+				GeradorDeRelatorios.gerarBoleto(qtd, valor);
+
+				comprarCredito(persistencia, central, qtd);
 			}
 		}
 	}
-
 }

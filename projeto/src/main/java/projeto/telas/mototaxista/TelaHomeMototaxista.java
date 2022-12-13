@@ -6,20 +6,16 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoBranco;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
-import projeto.modelo.Mototaxista;
 import projeto.telas.mototaxista.ouvintes.OuvinteMenuTelaHome;
 import projeto.telas.mototaxista.ouvintes.OuvinteTelaHomeMototaxista;
 import utilidades.fabricas.FabricaJButton;
-import utilidades.fabricas.FabricaJPanel;
 
 public class TelaHomeMototaxista extends TelaPadrao {
-
 	
 	private JMenuItem itemEditar;
 	private JMenuItem itemDeletar;
@@ -88,10 +84,6 @@ public class TelaHomeMototaxista extends TelaPadrao {
 		setJMenuBar(menuBar);
 	}
 	
-	public static void main(String[] args) {
-		new TelaHomeMototaxista();
-	}
-
 	public JButton getBtnListarCorridas() {
 		return btnListarCorridas;
 	}

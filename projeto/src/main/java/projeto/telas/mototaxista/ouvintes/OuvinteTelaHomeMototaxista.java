@@ -24,11 +24,11 @@ public class OuvinteTelaHomeMototaxista implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		JButton btn = (JButton) e.getSource();
+		
+		tela.dispose();
 		if (btn == tela.getBtnListarCorridas()) {
-			tela.dispose();
 			new TelaListarCorridasMototaxi();
 		}else if(btn == tela.getBtnComprarCreditos()) {
-			tela.dispose();
 			new TelaComprarCreditos();
 		}
 	}
