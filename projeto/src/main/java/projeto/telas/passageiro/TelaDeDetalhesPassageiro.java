@@ -17,6 +17,7 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoBranco;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.modelo.Passageiro;
@@ -87,11 +88,12 @@ public class TelaDeDetalhesPassageiro extends TelaPadrao {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			Corrida c = central.recuperarCorridaPeloId(corrida.getId());
+			Corrida c = null;
 			Passageiro p = null;
 			try {
+				c = central.recuperarCorridaPeloId(corrida.getId());
 				p = central.recuperarPassageiroPeloEmail(TelaPadrao.passageiroLogado.getEmail());
-			} catch (UsuarioNaoExisteException e1) {}
+			} catch (UsuarioNaoExisteException | VerificacaoDeCorridaException e1) {}
 			
 			JButton item = (JButton) e.getSource();
 

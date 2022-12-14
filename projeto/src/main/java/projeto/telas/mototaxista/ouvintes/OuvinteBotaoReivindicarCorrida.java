@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
@@ -54,16 +55,18 @@ public class OuvinteBotaoReivindicarCorrida implements ActionListener {
 		else {
 			long idSelecionado = (long) tela.getTabelaCorridas().getValueAt(linhaSelecionada, 3);
 			if (mototaxista.getCorridaReivindicada() == null) {
-				Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
-				if (mototaxista.getCreditosReivindicacao() > 0) {
-					reivindicarCorrida(corrida);
-					
-					persistencia.salvarCentral(central, "central");
-					tela.dispose();
-					TelaReivindicarCorrida tela = new TelaReivindicarCorrida(corrida);
-					tela.ocultarCampos();
-				} else FabricaJOptionPane.criarMsgErro("Voce nao tem creditos de reivindicacao");
-				
+				Corrida corrida;
+				try {
+					corrida = central.recuperarCorridaPeloId(idSelecionado);
+					if (mototaxista.getCreditosReivindicacao() > 0) {
+						reivindicarCorrida(corrida);
+						
+						persistencia.salvarCentral(central, "central");
+						tela.dispose();
+						TelaReivindicarCorrida tela = new TelaReivindicarCorrida(corrida);
+						tela.ocultarCampos();
+					} else FabricaJOptionPane.criarMsgErro("Voce nao tem creditos de reivindicacao");
+				} catch (VerificacaoDeCorridaException e1) {}
 			} else
 				FabricaJOptionPane.criarMsgErro("Voce ja reivindicou uma corrida");
 		}

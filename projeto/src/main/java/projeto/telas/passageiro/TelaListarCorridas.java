@@ -18,6 +18,7 @@ import projeto.ImagemDeFundo;
 import projeto.OuvinteBotaoFundoPreto;
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Passageiro;
 import projeto.modelo.enuns.StatusDaCorrida;
@@ -69,10 +70,12 @@ public class TelaListarCorridas extends TelaPadrao {
 				FabricaJOptionPane.criarMsgErro("Selecione Alguma corrida");
 			} else {
 				long idSelecionado = (long) tela.getTabelaCorridas().getValueAt(var, 4);
-
-				Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
-				tela.dispose();
-				new TelaDeDetalhesPassageiro(corrida);
+				Corrida corrida;
+				try {
+					corrida = central.recuperarCorridaPeloId(idSelecionado);
+					tela.dispose();
+					new TelaDeDetalhesPassageiro(corrida);
+				} catch (VerificacaoDeCorridaException e1) {}
 			}
 
 		}

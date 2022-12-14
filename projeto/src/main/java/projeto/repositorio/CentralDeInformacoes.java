@@ -71,11 +71,11 @@ public class CentralDeInformacoes {
 		return servicoPassageiro.validarPassageiro(email, senha);
 	}
 
-	public boolean adicionarCorrida(Corrida corrida) throws VerificacaoDeCorridaException {
-		return servicoCorrida.adicionarCorrida(corrida);
+	public void adicionarCorrida(Corrida corrida) throws VerificacaoDeCorridaException {
+		servicoCorrida.adicionarCorrida(corrida);
 	}
 
-	public Corrida recuperarCorridaPeloId(long id) {
+	public Corrida recuperarCorridaPeloId(long id) throws VerificacaoDeCorridaException {
 		return servicoCorrida.recuperarCorridaPeloId(id);
 	}
 

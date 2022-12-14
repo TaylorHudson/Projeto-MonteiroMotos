@@ -84,8 +84,6 @@ public class TelaDeCadastrarCorrida extends TelaPadrao {
 		OuvinteBotaoTelaDeCadastrarCorrida ouvinteBotao = new OuvinteBotaoTelaDeCadastrarCorrida(this);
 		OuvinteCheckBoxTelaDeCadastrarCorrida ouvinteCheckBox = new OuvinteCheckBoxTelaDeCadastrarCorrida(this);
 
-		JLabel background = FabricaJLabel.criarJLabel(0, 0, 900, 800, Imagens.BACKGROUND_2);
-
 		btnSeta = FabricaJButton.criarJButton("", Imagens.SETA, 10, 10, 50, 50);
 		btnSeta.addMouseListener(new OuvinteBotaoFundoPreto());
 		btnSeta.addActionListener(ouvinteBotao);
@@ -136,7 +134,6 @@ public class TelaDeCadastrarCorrida extends TelaPadrao {
 		menu.add(btnSalvar);
 		background.add(menu);
 		background.add(btnSeta);
-		add(background);
 	}
 
 	public static void main(String[] args) {

@@ -20,35 +20,29 @@ public class ServicoCorrida {
 		this.util = util;
 	}
 
-	public boolean adicionarCorrida(Corrida corrida) throws VerificacaoDeCorridaException {
+	public void adicionarCorrida(Corrida corrida) throws VerificacaoDeCorridaException {
 		for (Corrida c : central.getCorridas()) {
-			if(c.equals(corrida)) {
-				throw new VerificacaoDeCorridaException ();
-			}
-			
+			if (c.equals(corrida))
+				throw new VerificacaoDeCorridaException("Corrida já cadastrada");
 		}
 		central.getCorridas().add(corrida);
-		return true;
 	}
 
-	public Corrida recuperarCorridaPeloId(long id) {
+	public Corrida recuperarCorridaPeloId(long id) throws VerificacaoDeCorridaException {
 		for (Corrida c : corridas) {
 			if (c.getId() == id)
 				return c;
 		}
-		return null;
+		throw new VerificacaoDeCorridaException();
 	}
 
 	public ArrayList<Corrida> recuperarCorridasDeUmPassageiro(String email) throws UsuarioNaoExisteException {
 		ArrayList<Corrida> corridasDoPassageiro = new ArrayList<Corrida>();
 		Passageiro passageiro = util.recuperarPassageiroPeloEmail(email);
-		if (passageiro != null) {
-			for (Corrida c : corridas) {
-				if (c.getPassageiro().equals(passageiro))
-					corridasDoPassageiro.add(c);
-			}
-			return corridasDoPassageiro;
+		for (Corrida c : corridas) {
+			if (c.getPassageiro().equals(passageiro))
+				corridasDoPassageiro.add(c);
 		}
-		return null;
+		return corridasDoPassageiro;
 	}
 }

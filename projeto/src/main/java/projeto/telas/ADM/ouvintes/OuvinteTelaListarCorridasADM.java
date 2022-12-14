@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.repositorio.CentralDeInformacoes;
 import projeto.telas.ADM.TelaDetalhesDaCorridaADM;
@@ -45,10 +46,12 @@ public class OuvinteTelaListarCorridasADM implements ActionListener {
 				FabricaJOptionPane.criarMsgErro("Selecione Alguma corrida");
 			} else {
 				long idSelecionado = (long) tela.getTabelaListarCorridas().getValueAt(var, 3);
-
-				Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
-				tela.dispose();
-				new TelaDetalhesDaCorridaADM(corrida);
+				Corrida corrida;
+				try {
+					corrida = central.recuperarCorridaPeloId(idSelecionado);
+					tela.dispose();
+					new TelaDetalhesDaCorridaADM(corrida);
+				} catch (VerificacaoDeCorridaException e1) {}
 			}
 		}
 

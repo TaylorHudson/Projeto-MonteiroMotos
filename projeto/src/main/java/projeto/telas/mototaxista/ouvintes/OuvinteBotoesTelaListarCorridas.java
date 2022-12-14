@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import projeto.TelaPadrao;
 import projeto.excecoes.usuario.UsuarioNaoExisteException;
+import projeto.excecoes.usuario.VerificacaoDeCorridaException;
 import projeto.modelo.Corrida;
 import projeto.modelo.Mototaxista;
 import projeto.repositorio.CentralDeInformacoes;
@@ -61,12 +62,15 @@ public class OuvinteBotoesTelaListarCorridas implements ActionListener {
 
 			else if (mototaxista.getCorridaReivindicada() != null) {
 				long idSelecionado = (long) tela.getTabelaCorridas().getValueAt(linhaSelecionada, 3);
-				Corrida corrida = central.recuperarCorridaPeloId(idSelecionado);
-				if (mototaxista.getCorridaReivindicada().equals(corrida)) {
-					tela.dispose();
-					new TelaReivindicarCorrida(corrida);
-				} else
-					FabricaJOptionPane.criarMsgErro("Para ver detalhes da corrida voce deve reivindica-la");
+				Corrida corrida;
+				try {
+					corrida = central.recuperarCorridaPeloId(idSelecionado);
+					if (mototaxista.getCorridaReivindicada().equals(corrida)) {
+						tela.dispose();
+						new TelaReivindicarCorrida(corrida);
+					} else
+						FabricaJOptionPane.criarMsgErro("Para ver detalhes da corrida voce deve reivindica-la");
+				} catch (VerificacaoDeCorridaException e1) {}
 			} else
 				FabricaJOptionPane.criarMsgErro("Voce so pode ver detalhes de uma corrida reivindicada");
 		}

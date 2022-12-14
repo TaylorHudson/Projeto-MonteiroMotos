@@ -45,12 +45,4 @@ public abstract class FabricaJLabel {
 		return lbl;
 	}
 
-	public static JLabel criarJLabel(int x, int y, int largura, int altura, ImageIcon imagem) {
-		JLabel bg = new JLabel();
-		bg.setBounds(x, y, largura, altura);
-		bg.setLayout(null);
-		bg.setIcon(imagem);
-
-		return bg;
-	}
 }
